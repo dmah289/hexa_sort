@@ -98,8 +98,8 @@ namespace HexaSort.Scripts.Core.Mechanics
         {
             Vector3 mousePos = Input.mousePosition;
             // Avoid z-fitting issue on ScreenToWorldPoint
-            mousePos.z = gameplayCam.WorldToScreenPoint(currStack.transform.position).z + 1.2f;
-            return gameplayCam.ScreenToWorldPoint(mousePos).With(z: ConstantKey.STACK_LIFTING_OFFSET_Z);
+            mousePos.z = gameplayCam.WorldToScreenPoint(currStack.transform.position).z + 1.5f;
+            return gameplayCam.ScreenToWorldPoint(mousePos).With(z: -ConstantKey.STACK_LIFTING_OFFSET_Z);
         }
         
         private void HandleDragging()
@@ -140,10 +140,11 @@ namespace HexaSort.Scripts.Core.Mechanics
 
         private void HandleDropping()
         {
-            if (currStack == null) return;
+            if (!currStack) return;
 
             currTargetCell?.SetSelectedState(normalCellColor);
             currStack?.OnDropped(currTargetCell);
+            currStack = null;
         }
     }
 }

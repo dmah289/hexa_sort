@@ -31,7 +31,8 @@ namespace HexaSort.Scripts.Core.Entities
                     centerPos += pos;
                     minCellY = Mathf.Min(minCellY, pos.y);
                     maxCellX = Mathf.Max(maxCellX, pos.x);
-                    
+
+                    pos += ConstantKey.CELL_SPACING;
                     cell.transform.localPosition = pos;
 
                     activeTile++;

@@ -23,7 +23,6 @@ namespace HexaSort.Scripts.Core.Entities
             selfTransform = transform;
         }
 
-        // TODO : Refractor selectable logic
         public bool Selectable
         {
             get => pieces[0].Selectable && pieces[^1].Selectable && pieces[pieces.Count/2];
@@ -46,7 +45,10 @@ namespace HexaSort.Scripts.Core.Entities
                 );
                 pieces.Add(piece);
                 
-                piece.transform.localPosition = i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back;
+                int colorIdx = Random.Range(0, System.Enum.GetValues(typeof(ColorType)).Length);
+                piece.ColorType = (ColorType)colorIdx;
+                
+                piece.transform.localPosition = i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back;
             }
             Selectable = true;
             

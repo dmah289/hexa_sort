@@ -1,0 +1,932 @@
+fileFormatVersion: 2
+guid: a706f59e06ae73844925eaa37d3956a9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 436
+        width: 108
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b6b02b2c5c2cc499ff709a6b384ccf
+      internalID: -960186399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 436
+        width: 98
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74cab268320d2f6498a5d3f97587d43e
+      internalID: 1653727178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_2
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 536
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00176203419861d41ac9c85fe49f07f9
+      internalID: 101460911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_3
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 436
+        width: 78
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 317554f044a4d574f8c0692620d3d582
+      internalID: -1519324742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_4
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 536
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aac3546c49094949be12799f327a1d7
+      internalID: -744112488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_5
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 436
+        width: 76
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0769cb243ba164f8939f196677140a
+      internalID: 471548959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_6
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 536
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffb4adad08c823a4c8d8096c626c836f
+      internalID: -290428359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_7
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 436
+        width: 54
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 191efdb99cf456847b84f781946417a1
+      internalID: 1491506398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_8
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 440
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07afc2ddae1ef644aa4fc0defdbc47b0
+      internalID: -125101049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_9
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 436
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22313535d96835647a16a0495cd4f507
+      internalID: -1416354583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_10
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 324
+        width: 66
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27098880a55430c40b76424e05378636
+      internalID: -1976515280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_11
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 326
+        width: 78
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 185da327cead82c43bb699f82a1b1849
+      internalID: -1534351260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_12
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 428
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18ba647f3c446cd4e911189b20620046
+      internalID: 146810058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_13
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 326
+        width: 89
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae2022089d09de439038a59e11879fd
+      internalID: -594446234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_14
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 324
+        width: 104
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0945ce3acde95f408faaf924ecd1508
+      internalID: -1238495979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_15
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 326
+        width: 111
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed52f583180b68a42b20dd2a726e3dbb
+      internalID: -1585837902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7f3d1454e3d0d64a943ec06b598053c
+      internalID: -1257929476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 216
+        width: 114
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c298db4142c346409451f9023c798ab
+      internalID: 1043740502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_18
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 216
+        width: 113
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca4e4bd9fb2e0944fa0437fe98eb253a
+      internalID: 1530094305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_19
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 218
+        width: 114
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd268c7eefcdce44b2917d0537c1579
+      internalID: 1776189542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_20
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 218
+        width: 92
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a65b6a97bb67a64ea7af62c1233e162
+      internalID: 608658599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_21
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 208
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d07cac7de331a4fa24a51832063a47
+      internalID: 700469019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_22
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 218
+        width: 78
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c152b936c65f17d459d5970a89df4509
+      internalID: -536706423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_23
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 108
+        width: 64
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a74928415a423429446c9b66aba58d
+      internalID: 1736884111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_24
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 109
+        width: 48
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644459b342310e94783aa7fdd3318109
+      internalID: 2024210780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_25
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 204
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01871be063735d24c889091f3ba1b8ce
+      internalID: 1672099081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_26
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 204
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35d529b71ec3704195db4795b2b0301
+      internalID: -1677723579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_27
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 108
+        width: 66
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eddf0e753dd7d104a974c412441c01ca
+      internalID: 1451281099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_28
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 109
+        width: 84
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 482e151e83a92dd4e8b81c58d2e61727
+      internalID: 848787015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_29
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 108
+        width: 89
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a64e6277ff6be148a95bfd0571afcaa
+      internalID: -1288857377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_30
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 120
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f47cb0859cd2564a8a3012b08355318
+      internalID: 1999849138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 108
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de11719cc004c984a925511c00459983
+      internalID: -2061631585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_32
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 115
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac5e7e0dd3cdc24b857a507833f4255
+      internalID: -426722817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_33
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 114
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7271478013c9494c86925fc879b9c4e
+      internalID: -837864419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_34
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 102
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afeb080e63b08f54d94a06cc62840cab
+      internalID: 290828723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sequence_meta_currency_spin_35
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1b327098d3faec4ca81125038ea0aed
+      internalID: -1256656498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 19c73245d745270428322912e57c8d46
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sequence_meta_currency_spin_0: -960186399
+      sequence_meta_currency_spin_1: 1653727178
+      sequence_meta_currency_spin_10: -1976515280
+      sequence_meta_currency_spin_11: -1534351260
+      sequence_meta_currency_spin_12: 146810058
+      sequence_meta_currency_spin_13: -594446234
+      sequence_meta_currency_spin_14: -1238495979
+      sequence_meta_currency_spin_15: -1585837902
+      sequence_meta_currency_spin_16: -1257929476
+      sequence_meta_currency_spin_17: 1043740502
+      sequence_meta_currency_spin_18: 1530094305
+      sequence_meta_currency_spin_19: 1776189542
+      sequence_meta_currency_spin_2: 101460911
+      sequence_meta_currency_spin_20: 608658599
+      sequence_meta_currency_spin_21: 700469019
+      sequence_meta_currency_spin_22: -536706423
+      sequence_meta_currency_spin_23: 1736884111
+      sequence_meta_currency_spin_24: 2024210780
+      sequence_meta_currency_spin_25: 1672099081
+      sequence_meta_currency_spin_26: -1677723579
+      sequence_meta_currency_spin_27: 1451281099
+      sequence_meta_currency_spin_28: 848787015
+      sequence_meta_currency_spin_29: -1288857377
+      sequence_meta_currency_spin_3: -1519324742
+      sequence_meta_currency_spin_30: 1999849138
+      sequence_meta_currency_spin_31: -2061631585
+      sequence_meta_currency_spin_32: -426722817
+      sequence_meta_currency_spin_33: -837864419
+      sequence_meta_currency_spin_34: 290828723
+      sequence_meta_currency_spin_35: -1256656498
+      sequence_meta_currency_spin_4: -744112488
+      sequence_meta_currency_spin_5: 471548959
+      sequence_meta_currency_spin_6: -290428359
+      sequence_meta_currency_spin_7: 1491506398
+      sequence_meta_currency_spin_8: -125101049
+      sequence_meta_currency_spin_9: -1416354583
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
