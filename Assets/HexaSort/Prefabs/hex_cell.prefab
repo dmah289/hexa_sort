@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6008398120826566564}
   - component: {fileID: 7753449832512816893}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6813852067048067803}
   - component: {fileID: 5070970045675002569}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hex_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0a85024750432a816e8202579ed506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &6523974011424245196
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +112,7 @@ GameObject:
   - component: {fileID: 7002018483335859330}
   - component: {fileID: 5555014079371628372}
   - component: {fileID: 1964905478952394985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

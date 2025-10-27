@@ -15,10 +15,24 @@ namespace HexaSort.Scripts.Core.Mechanics
         [Header("References")]
         [SerializeField] private Camera gameplayCam;
         
-        [Header("Raycast Config")]
+        [Header("Raycast Picking Config")]
         [SerializeField] private LayerMask pieceLayer;
-        private RaycastHit[] hits = new RaycastHit[1];
-        [SerializeField] private HexCellController targetCell;
+        private RaycastHit[] pickingHits = new RaycastHit[1];
+        [SerializeField] private HexCellController currTargetCell;
+        
+        [Header("Raycast Dragging Config")]
+        private Ray catchingRay;
+        [SerializeField] private LayerMask cellLayer;
+        private RaycastHit[] cellHits = new RaycastHit[1];
+        public Color selectedCellColor, normalCellColor;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            catchingRay = new Ray(Vector3.zero, gameplayCam.transform.forward.normalized);
+            // Debug.DrawRay(catchingRay.origin, catchingRay.direction, Color.red, 100f);
+        }
 
         private void Update()
         {
@@ -72,15 +86,15 @@ namespace HexaSort.Scripts.Core.Mechanics
             
             Ray ray = gameplayCam.ScreenPointToRay(screenTouchPos);
             Debug.DrawRay(ray.origin, ray.direction, Color.red);
-            int hitCount = Physics.RaycastNonAlloc(ray, hits, 100f, pieceLayer);
+            int hitCount = Physics.RaycastNonAlloc(ray, pickingHits, 100f, pieceLayer);
             if (hitCount > 0)
             {
-                currStack = hits[0].transform.GetComponentInParent<HexStackController>();
+                currStack = pickingHits[0].transform.GetComponentInParent<HexStackController>();
+                catchingRay.origin = currStack.transform.position;
             }
         }
 
-        // TODO : Move to SDK + Optimize this method to avoid ScreenToWorldPoint call every frame
-        private Vector3 GetMouseWorldPos()
+        private Vector3 GetDraggingMouseWorldPos()
         {
             Vector3 mousePos = Input.mousePosition;
             // Avoid z-fitting issue on ScreenToWorldPoint
@@ -92,17 +106,44 @@ namespace HexaSort.Scripts.Core.Mechanics
         {
             if (currStack == null) return;
             
-            Vector3 targetPos = GetMouseWorldPos();
+            Vector3 targetPos = GetDraggingMouseWorldPos();
             currStack.OnDragged(targetPos);
-            
-            // TODO : Use Raycast to catch target cell
+
+            HandleCatchingCellOnDragging();
+        }
+
+        private void HandleCatchingCellOnDragging()
+        {
+            catchingRay.origin = currStack.selfTransform.position;
+            Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+
+            int hitCount = Physics.RaycastNonAlloc(catchingRay, cellHits, 500, cellLayer);
+            if (hitCount > 0)
+            {
+                HexCellController newTargetCell = cellHits[0].collider.GetComponentInParent<HexCellController>();
+                if (currTargetCell != newTargetCell)
+                {
+                    currTargetCell?.SetSelectedState(normalCellColor);
+                    currTargetCell = newTargetCell;
+                    currTargetCell.SetSelectedState(selectedCellColor);
+                }
+            }
+            else
+            {
+                if (currTargetCell)
+                {
+                    currTargetCell.SetSelectedState(normalCellColor);
+                    currTargetCell = null;
+                }
+            }
         }
 
         private void HandleDropping()
         {
             if (currStack == null) return;
 
-            currStack?.OnDropped(targetCell);
+            currTargetCell?.SetSelectedState(normalCellColor);
+            currStack?.OnDropped(currTargetCell);
         }
     }
 }

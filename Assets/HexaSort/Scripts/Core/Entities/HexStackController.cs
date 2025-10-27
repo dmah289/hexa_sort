@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Scripts.Core.Entities.Piece;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -11,11 +12,27 @@ namespace HexaSort.Scripts.Core.Entities
 {
     public class HexStackController : MonoBehaviour, IPoolableObject
     {
-        [SerializeField] private Transform selfTransform;
+        [Header("Self Components")]
+        public Transform selfTransform;
+        
+        [Header("Managers")]
+        [SerializeField] private List<HexPieceController> pieces = new();
 
         private void Awake()
         {
             selfTransform = transform;
+        }
+
+        // TODO : Refractor selectable logic
+        public bool Selectable
+        {
+            get => pieces[0].Selectable && pieces[^1].Selectable && pieces[pieces.Count/2];
+            set
+            {
+                pieces[0].Selectable = value;
+                pieces[^1].Selectable = value;
+                pieces[pieces.Count/2].Selectable = value;
+            }
         }
 
         public async UniTaskVoid Setup(int idx, Vector2 spawnMidStackPos)
@@ -27,9 +44,11 @@ namespace HexaSort.Scripts.Core.Entities
                     destroyCancellationToken,
                     selfTransform
                 );
+                pieces.Add(piece);
                 
                 piece.transform.localPosition = i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back;
             }
+            Selectable = true;
             
             selfTransform.position = spawnMidStackPos + (idx-1) * new Vector2(ConstantKey.HEX_STACK_SPACING, 0);
 
@@ -53,18 +72,20 @@ namespace HexaSort.Scripts.Core.Entities
 
         public void OnDropped(HexCellController targetCell)
         {
-            if (!targetCell)
+            Vector3 targetLocalPos;
+            if (targetCell)
             {
-                selfTransform.DOKill();
-                float duration = selfTransform.localPosition.magnitude / ConstantKey.BACK_TO_HOLDER_VELOCITY;
-                selfTransform.DOLocalMove(Vector3.zero, duration)
-                    .SetEase(Ease.OutFlash)
-                    .OnKill(() => selfTransform.localPosition = Vector3.zero);
-
-                return;
+                selfTransform.SetParent(targetCell.selfTransform);
+                targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
+                Selectable = false;
             }
+            else targetLocalPos = Vector3.zero;
             
-            // TODO : Drop to cell
+            selfTransform.DOKill();
+            float duration = selfTransform.localPosition.magnitude / ConstantKey.SNAP_TO_TARGET_VELOCITY;
+            selfTransform.DOLocalMove(targetLocalPos, duration)
+                .SetEase(Ease.OutSine)
+                .OnKill(() => selfTransform.localPosition = targetLocalPos);
         }
     }
 }

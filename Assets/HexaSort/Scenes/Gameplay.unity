@@ -156,6 +156,12 @@ MonoBehaviour:
   pieceLayer:
     serializedVersion: 2
     m_Bits: 64
+  currTargetCell: {fileID: 0}
+  cellLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  selectedCellColor: {r: 0.79607844, g: 0.79607844, b: 0.79607844, a: 1}
+  normalCellColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &154602007
 Transform:
   m_ObjectHideFlags: 0
