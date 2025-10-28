@@ -115,13 +115,13 @@ namespace HexaSort.Scripts.Core.Mechanics
         private void HandleCatchingCellOnDragging()
         {
             catchingRay.origin = currStack.selfTransform.position;
-            Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+            // Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
 
             int hitCount = Physics.RaycastNonAlloc(catchingRay, cellHits, 500, cellLayer);
             if (hitCount > 0)
             {
                 HexCellController newTargetCell = cellHits[0].collider.GetComponentInParent<HexCellController>();
-                if (currTargetCell != newTargetCell)
+                if (currTargetCell != newTargetCell && !newTargetCell.IsOccupied)
                 {
                     currTargetCell?.SetSelectedState(normalCellColor);
                     currTargetCell = newTargetCell;

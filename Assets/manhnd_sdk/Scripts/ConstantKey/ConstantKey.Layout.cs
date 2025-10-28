@@ -23,7 +23,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         public const float SPAWN_POS_OFFSET_X = 3f;
         public const float HEX_STACK_SPACING = 1.05f;
         public const float SLIDE_IN_VELOCITY = 10f;
-        public const float SNAP_TO_TARGET_VELOCITY = 18f;
+        public const float SNAP_TO_TARGET_VELOCITY = 30f;
 
         #endregion
         

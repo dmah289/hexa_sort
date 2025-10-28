@@ -11,6 +11,17 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Self Components")]
         public Transform selfTransform;
         [SerializeField] private MeshRenderer meshRenderer;
+        
+        [Header("Managers")]
+        [SerializeField] private HexStackController currStack;
+        
+        public bool IsOccupied => currStack != null;
+
+        public HexStackController CurrentStack
+        {
+            get => currStack;
+            set => currStack = value;
+        }
 
         private void Awake()
         {

@@ -1,11 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
+using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Entities
 {
-    public class TrayController : MonoBehaviour
+    public class TrayController : MonoSingleton<TrayController>
     {
         [Header("Self Components")]
         [SerializeField] private Transform selfTransform;
@@ -15,10 +16,25 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Configurations")]
         [SerializeField] private Vector2 spawnMidStackPos;
-        [SerializeField] private int remainStackCnt;
+        [SerializeField] private int remainStackAmount;
 
-        private void Awake()
+        public int RemainStackAmount
         {
+            get => remainStackAmount;
+            set
+            {
+                remainStackAmount = value;
+                if (remainStackAmount == 0)
+                {
+                    SpawnHexStacks().Forget();
+                    remainStackAmount = 3;
+                }
+            }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
             selfTransform = transform;
         }
 
@@ -45,10 +61,10 @@ namespace HexaSort.Scripts.Core.Entities
                 HexStackController hexStack = await ObjectPooler.GetFromPool<HexStackController>(
                     PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
 
-                hexStack.Setup(i, spawnMidStackPos).Forget();
+                hexStack.OnSpawned(i, spawnMidStackPos).Forget();
             }
 
-            remainStackCnt = 3;
+            remainStackAmount = 3;
         }
     }
 }

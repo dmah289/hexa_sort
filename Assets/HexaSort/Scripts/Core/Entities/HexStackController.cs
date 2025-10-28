@@ -34,7 +34,7 @@ namespace HexaSort.Scripts.Core.Entities
             }
         }
 
-        public async UniTaskVoid Setup(int idx, Vector2 spawnMidStackPos)
+        public async UniTaskVoid OnSpawned(int idx, Vector2 spawnMidStackPos)
         {
             int pieceAmount = Random.Range(3, 8);
             for(int i = 0; i < pieceAmount; i++)
@@ -80,6 +80,8 @@ namespace HexaSort.Scripts.Core.Entities
                 selfTransform.SetParent(targetCell.selfTransform);
                 targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
                 Selectable = false;
+                targetCell.CurrentStack = this;
+                TrayController.Instance.RemainStackAmount--;
             }
             else targetLocalPos = Vector3.zero;
             
