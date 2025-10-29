@@ -25,6 +25,8 @@ namespace HexaSort.Scripts.Core.Mechanics
         [SerializeField] private LayerMask cellLayer;
         private RaycastHit[] cellHits = new RaycastHit[1];
         public Color selectedCellColor, normalCellColor;
+        private Collider2D[] overlapHits = new Collider2D[1];
+        private Collider2D[] cellHitColliders = new Collider2D[1];
 
         protected override void Awake()
         {
@@ -102,25 +104,52 @@ namespace HexaSort.Scripts.Core.Mechanics
             return gameplayCam.ScreenToWorldPoint(mousePos).With(z: -ConstantKey.STACK_LIFTING_OFFSET_Z);
         }
         
+        public Vector3 GetWorldTouchPosOnGrid()
+        {
+            Vector3 screenPos = Input.touchCount > 0
+                ? Input.GetTouch(0).position
+                : Input.mousePosition;
+
+            Ray ray = gameplayCam.ScreenPointToRay(screenPos);
+            Debug.DrawRay(ray.origin, ray.direction * 500f, Color.red, 3f);
+
+            // TODO : Convert to 1 plane raycast + Overlap point to optimize
+            int hitCount = Physics.RaycastNonAlloc(ray, cellHits, 500, cellLayer);
+
+            if (hitCount > 0)
+                return pickingHits[0].point;
+            
+            return Vector3.positiveInfinity;
+        }
+        
         private void HandleDragging()
         {
-            if (currStack == null) return;
+            if (!currStack) return;
             
-            Vector3 targetPos = GetDraggingMouseWorldPos();
-            currStack.OnDragged(targetPos);
-
+            currStack.OnDragged(GetDraggingMouseWorldPos());
+            
             HandleCatchingCellOnDragging();
         }
 
         private void HandleCatchingCellOnDragging()
         {
-            catchingRay.origin = currStack.selfTransform.position;
-            // Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+            Vector3 worldTouchPos = GetWorldTouchPosOnGrid();
+            Debug.Log(worldTouchPos);
+            if (worldTouchPos.Equals(Vector3.positiveInfinity)) return;
 
-            int hitCount = Physics.RaycastNonAlloc(catchingRay, cellHits, 500, cellLayer);
+            int hitCount = Physics2D.OverlapPointNonAlloc(worldTouchPos, overlapHits);
+
+            // catchingRay.origin = currStack.selfTransform.position;
+            // // Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+            //
+            // int hitCount = Physics2D.RaycastNonAlloc(currStack.selfTransform.position, 
+            //     gameplayCam.transform.forward.normalized,
+            //     cellHits,
+            //     500);
+            
             if (hitCount > 0)
             {
-                HexCellController newTargetCell = cellHits[0].collider.GetComponentInParent<HexCellController>();
+                HexCellController newTargetCell = overlapHits[0].GetComponentInParent<HexCellController>();
                 if (currTargetCell != newTargetCell)
                 {
                     currTargetCell?.SetSelectedState(normalCellColor);
