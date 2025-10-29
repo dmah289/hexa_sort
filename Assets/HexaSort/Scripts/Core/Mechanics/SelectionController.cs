@@ -121,7 +121,7 @@ namespace HexaSort.Scripts.Core.Mechanics
             if (hitCount > 0)
             {
                 HexCellController newTargetCell = cellHits[0].collider.GetComponentInParent<HexCellController>();
-                if (currTargetCell != newTargetCell && !newTargetCell.IsOccupied)
+                if (currTargetCell != newTargetCell)
                 {
                     currTargetCell?.SetSelectedState(normalCellColor);
                     currTargetCell = newTargetCell;

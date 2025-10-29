@@ -11,6 +11,7 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Self Components")]
         public Transform selfTransform;
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private Collider[] colliders;
         
         [Header("Managers")]
         [SerializeField] private HexStackController currStack;
@@ -20,7 +21,20 @@ namespace HexaSort.Scripts.Core.Entities
         public HexStackController CurrentStack
         {
             get => currStack;
-            set => currStack = value;
+            set
+            {
+                currStack = value;
+                if (value)
+                {
+                    for(int i = 0; i < colliders.Length; i++)
+                        colliders[i].enabled = false;
+                }
+                else
+                {
+                    for(int i = 0; i < colliders.Length; i++)
+                        colliders[i].enabled = true;
+                }
+            }
         }
 
         private void Awake()

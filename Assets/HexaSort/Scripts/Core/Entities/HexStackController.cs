@@ -43,12 +43,14 @@ namespace HexaSort.Scripts.Core.Entities
                     destroyCancellationToken,
                     selfTransform
                 );
-                pieces.Add(piece);
                 
                 int colorIdx = Random.Range(0, System.Enum.GetValues(typeof(ColorType)).Length);
                 piece.ColorType = (ColorType)colorIdx;
+
+                Vector3 spawnedPos = (i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back).Add(y: i*0.02f);
+                piece.transform.localPosition = spawnedPos;
                 
-                piece.transform.localPosition = i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back;
+                pieces.Add(piece);
             }
             Selectable = true;
             

@@ -27,6 +27,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2b5755f6a1e38a49a109bcfcc4af80a
+    m_Address: pooling_hex_piece
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3e564bd4aa7618f44b0c6d5b3e2d2e13, type: 2}
   m_SchemaSet:
