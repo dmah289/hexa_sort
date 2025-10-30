@@ -4,7 +4,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
 {
     public static partial class ConstantKey
     {
-        #region Grid
+        #region GridController
 
         public const float BOARD_CELL_R = 0.99f / 2;
         public const float BOARD_CELL_r = 0.9f / 2;
