@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Mechanics
+namespace HexaSort.Scripts.Core.Controllers
 {
     public class PathFinder : MonoBehaviour
     {

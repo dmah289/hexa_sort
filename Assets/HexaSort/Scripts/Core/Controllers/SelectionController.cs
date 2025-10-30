@@ -1,11 +1,10 @@
-﻿using System;
-using HexaSort.Scripts.Core.Entities;
+﻿using HexaSort.Scripts.Core.Entities;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Mechanics
+namespace HexaSort.Scripts.Core.Controllers
 {
     public class SelectionController : MonoSingleton<SelectionController>
     {

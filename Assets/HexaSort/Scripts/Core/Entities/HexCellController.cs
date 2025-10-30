@@ -1,5 +1,5 @@
 ﻿using System;
-using HexaSort.Scripts.Core.Mechanics;
+using HexaSort.Scripts.Core.Controllers;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Self Components")]
         public Transform selfTransform;
         [SerializeField] private MeshRenderer meshRenderer;
-        [SerializeField] private Collider[] colliders;
+        [SerializeField] private Collider collider;
         
         [Header("Managers")]
         [SerializeField] private HexStackController currStack;
@@ -24,16 +24,7 @@ namespace HexaSort.Scripts.Core.Entities
             set
             {
                 currStack = value;
-                if (value)
-                {
-                    for(int i = 0; i < colliders.Length; i++)
-                        colliders[i].enabled = false;
-                }
-                else
-                {
-                    for(int i = 0; i < colliders.Length; i++)
-                        colliders[i].enabled = true;
-                }
+                collider.enabled = !currStack;
             }
         }
 
