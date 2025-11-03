@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Entities
 {
-    public class HexCellController : MonoBehaviour, IPoolableObject
+    public class HexCell : MonoBehaviour, IPoolableObject
     {
         [Header("Self Components")]
         public Transform selfTransform;
@@ -40,7 +40,7 @@ namespace HexaSort.Scripts.Core.Entities
             meshRenderer.SetVertexLitColor(SelectionController.Instance.normalCellColor);
         }
 
-        public void SetSelectedState(Color color)
+        public void SetMaterialState(Color color)
         {
             meshRenderer.SetVertexLitColor(color);
         }

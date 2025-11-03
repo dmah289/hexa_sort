@@ -1,12 +1,15 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using HexaSort.Scripts.Core.Controllers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Entities
 {
-    public class TrayController : MonoSingleton<TrayController>
+    public class TrayController : MonoSingleton<TrayController>, IEventBusListener
     {
         [Header("Self Components")]
         [SerializeField] private Transform selfTransform;
@@ -18,25 +21,27 @@ namespace HexaSort.Scripts.Core.Entities
         [SerializeField] private Vector2 spawnMidStackPos;
         [SerializeField] private int remainStackAmount;
 
-        public int RemainStackAmount
-        {
-            get => remainStackAmount;
-            set
-            {
-                remainStackAmount = value;
-                if (remainStackAmount == 0)
-                {
-                    SpawnHexStacks().Forget();
-                    remainStackAmount = 3;
-                }
-            }
-        }
-
+        #region Unity Callbacks
+        
         protected override void Awake()
         {
             base.Awake();
             selfTransform = transform;
         }
+
+        private void OnEnable()
+        {
+            RegisterCallbacks();
+        }
+
+        private void OnDisable()
+        {
+            DeregisterCallbacks();
+        }
+
+        #endregion
+
+        #region API
 
         public void SetupTray(float centerPosX, float minCellY, float maxCellX, int height)
         {
@@ -54,7 +59,11 @@ namespace HexaSort.Scripts.Core.Entities
             SpawnHexStacks().Forget();
         }
 
-        public async UniTaskVoid SpawnHexStacks()
+        #endregion
+
+        #region Class Methods
+
+        private async UniTaskVoid SpawnHexStacks()
         {
             for (int i = 0; i < 3; i++)
             {
@@ -66,5 +75,31 @@ namespace HexaSort.Scripts.Core.Entities
 
             remainStackAmount = 3;
         }
+
+        #endregion
+
+        #region Stack Laid Down Listeners
+
+        public void RegisterCallbacks()
+        {
+            EventBus<LaidDownStackDTO>.Register(onEventWithoutArgs: OnStackLaidDown);
+        }
+
+        private void OnStackLaidDown()
+        {
+            remainStackAmount--;
+            if (remainStackAmount == 0)
+            {
+                SpawnHexStacks().Forget();
+                remainStackAmount = 3;
+            }
+        }
+
+        public void DeregisterCallbacks()
+        {
+            EventBus<LaidDownStackDTO>.Deregister(onEventWithoutArgs: OnStackLaidDown);
+        }
+
+        #endregion
     }
 }

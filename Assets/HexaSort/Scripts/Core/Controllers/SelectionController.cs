@@ -2,6 +2,7 @@
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Controllers
@@ -17,13 +18,15 @@ namespace HexaSort.Scripts.Core.Controllers
         [Header("Raycast Picking Config")]
         [SerializeField] private LayerMask pieceLayer;
         private RaycastHit[] pickingHits = new RaycastHit[1];
-        [SerializeField] private HexCellController currTargetCell;
+        [SerializeField] private HexCell currTargetCell;
         
         [Header("Raycast Dragging Config")]
         private Ray catchingRay;
         [SerializeField] private LayerMask cellLayer;
         private RaycastHit[] cellHits = new RaycastHit[1];
         public Color selectedCellColor, normalCellColor;
+
+        #region Unity Callbacks
 
         protected override void Awake()
         {
@@ -41,6 +44,10 @@ namespace HexaSort.Scripts.Core.Controllers
             HandleMobileSelection();
 #endif
         }
+
+        #endregion
+
+        #region Input Handlers
 
         private void HandleEditorSelection()
         {
@@ -76,7 +83,11 @@ namespace HexaSort.Scripts.Core.Controllers
                 }
             }
         }
-        
+
+        #endregion
+
+        #region Pick
+
         private void HandlePicking()
         {
             Vector3 screenTouchPos = Input.touchCount > 0 
@@ -93,12 +104,42 @@ namespace HexaSort.Scripts.Core.Controllers
             }
         }
 
+        #endregion
+
+        #region Drag
+
         private Vector3 GetDraggingMouseWorldPos()
         {
             Vector3 mousePos = Input.mousePosition;
             // Avoid z-fitting issue on ScreenToWorldPoint
             mousePos.z = gameplayCam.WorldToScreenPoint(currStack.transform.position).z + 1.5f;
             return gameplayCam.ScreenToWorldPoint(mousePos).With(z: -ConstantKey.STACK_LIFTING_OFFSET_Z);
+        }
+        
+        private void HandleCatchingCellOnDragging()
+        {
+            catchingRay.origin = currStack.selfTransform.position;
+            // Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+
+            int hitCount = Physics.RaycastNonAlloc(catchingRay, cellHits, 500, cellLayer);
+            if (hitCount > 0)
+            {
+                HexCell newTargetCell = cellHits[0].collider.GetComponentInParent<HexCell>();
+                if (currTargetCell != newTargetCell)
+                {
+                    currTargetCell?.SetMaterialState(normalCellColor);
+                    currTargetCell = newTargetCell;
+                    currTargetCell.SetMaterialState(selectedCellColor);
+                }
+            }
+            else
+            {
+                if (currTargetCell)
+                {
+                    currTargetCell.SetMaterialState(normalCellColor);
+                    currTargetCell = null;
+                }
+            }
         }
         
         private void HandleDragging()
@@ -111,39 +152,25 @@ namespace HexaSort.Scripts.Core.Controllers
             HandleCatchingCellOnDragging();
         }
 
-        private void HandleCatchingCellOnDragging()
-        {
-            catchingRay.origin = currStack.selfTransform.position;
-            // Debug.DrawRay(catchingRay.origin, catchingRay.direction * 500, Color.red);
+        #endregion
 
-            int hitCount = Physics.RaycastNonAlloc(catchingRay, cellHits, 500, cellLayer);
-            if (hitCount > 0)
-            {
-                HexCellController newTargetCell = cellHits[0].collider.GetComponentInParent<HexCellController>();
-                if (currTargetCell != newTargetCell)
-                {
-                    currTargetCell?.SetSelectedState(normalCellColor);
-                    currTargetCell = newTargetCell;
-                    currTargetCell.SetSelectedState(selectedCellColor);
-                }
-            }
-            else
-            {
-                if (currTargetCell)
-                {
-                    currTargetCell.SetSelectedState(normalCellColor);
-                    currTargetCell = null;
-                }
-            }
-        }
+        #region Drop
 
         private void HandleDropping()
         {
             if (!currStack) return;
+            
+            currStack.OnDropped(currTargetCell);
 
-            currTargetCell?.SetSelectedState(normalCellColor);
-            currStack?.OnDropped(currTargetCell);
+            if (currTargetCell)
+            {
+                currTargetCell?.SetMaterialState(normalCellColor);
+                EventBus<LaidDownStackDTO>.RaiseBoth(new LaidDownStackDTO(currTargetCell));
+            }
+            
             currStack = null;
         }
+
+        #endregion
     }
 }

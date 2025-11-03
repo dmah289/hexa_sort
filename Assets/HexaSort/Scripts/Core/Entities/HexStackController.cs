@@ -74,7 +74,7 @@ namespace HexaSort.Scripts.Core.Entities
             selfTransform.position = Vector3.Lerp(selfTransform.position, targetPos, Time.deltaTime * 20);
         }
 
-        public void OnDropped(HexCellController targetCell)
+        public void OnDropped(HexCell targetCell)
         {
             Vector3 targetLocalPos;
             if (targetCell)
@@ -83,7 +83,6 @@ namespace HexaSort.Scripts.Core.Entities
                 targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
                 Selectable = false;
                 targetCell.CurrentStack = this;
-                TrayController.Instance.RemainStackAmount--;
             }
             else targetLocalPos = Vector3.zero;
             

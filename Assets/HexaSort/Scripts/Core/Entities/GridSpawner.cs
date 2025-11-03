@@ -21,7 +21,7 @@ namespace HexaSort.Scripts.Core.Entities
             {
                 for (int j = 0; j < size; j++)
                 {
-                    HexCellController cell = await ObjectPooler.GetFromPool<HexCellController>(
+                    HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);

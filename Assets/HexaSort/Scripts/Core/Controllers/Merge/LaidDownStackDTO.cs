@@ -5,9 +5,9 @@ namespace HexaSort.Scripts.Core.Controllers
 {
     public struct LaidDownStackDTO : IEventDTO
     {
-        public HexCellController cell;
+        public HexCell cell;
         
-        public LaidDownStackDTO(HexCellController cell)
+        public LaidDownStackDTO(HexCell cell)
         {
             this.cell = cell;
         }
