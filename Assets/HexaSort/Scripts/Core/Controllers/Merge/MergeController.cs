@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using HexaSort.Scripts.Core.Entities;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
@@ -44,7 +47,7 @@ namespace HexaSort.Scripts.Core.Controllers
         
         private void OnStackLaidDown(LaidDownStackDTO dto)
         {
-            HamdleCheckingMerge(dto.cell);
+            HandleCheckingMerge(dto.cell);
         }
 
         public void DeregisterCallbacks()
@@ -56,16 +59,29 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Class Mehtods
 
-        private void HamdleCheckingMerge(HexCell cell)
+        private async UniTask HandleCheckingMerge(HexCell cell)
         {
             mergeCoordinator.WaitingMergableCells.Add(cell);
 
-            CheckSequentialMerge();
+            await CheckSequentialMerge();
         }
 
-        private void CheckSequentialMerge()
+        private async UniTask CheckSequentialMerge()
         {
-            
+            while (mergeCoordinator.WaitingMergableCells.Count > 0)
+            {
+                HexCell cell = mergeCoordinator.WaitingMergableCells.RemoveFirst();
+                if (cell.IsOccupied)
+                {
+                    await DoMerge(cell);
+                    await UniTask.Yield();
+                }
+            }
+        }
+
+        private async UniTask DoMerge(HexCell cell)
+        {
+            List<HexCell> connectedCells = pathFinder.GetConnectedCells(cell, grid);
         }
 
         #endregion

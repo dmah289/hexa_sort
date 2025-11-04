@@ -15,8 +15,15 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Managers")]
         [SerializeField] private HexStackController currStack;
+        [SerializeField] private Vector2Int gridPos;
         
         public bool IsOccupied => currStack != null;
+        
+        public Vector2Int GridPos
+        {
+            get => gridPos;
+            set => gridPos = value;
+        }
 
         public HexStackController CurrentStack
         {

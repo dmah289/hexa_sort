@@ -27,6 +27,7 @@ namespace HexaSort.Scripts.Core.Entities
                 {
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
+                    cell.GridPos = new Vector2Int(j, i);
                     gridCells[i, j] = cell;
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);

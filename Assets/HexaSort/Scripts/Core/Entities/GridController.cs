@@ -10,6 +10,11 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("References")]
         [SerializeField] private TrayController trayController;
+        
+        [Header("Path Finder Managers")]
+        [SerializeField] private bool[,] visitedCells = new bool[5, 5];
+        
+        public bool[,] VisitedCells => visitedCells;
 
         public HexCell[,] GridCells => gridSpawner.gridCells;
 
