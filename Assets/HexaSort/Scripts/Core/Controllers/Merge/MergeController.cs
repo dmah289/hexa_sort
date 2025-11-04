@@ -8,10 +8,14 @@ namespace HexaSort.Scripts.Core.Controllers
 {
     public class MergeController : MonoBehaviour, IEventBusListener
     {
+        [Header("Self Components")]
         [SerializeField] private MergeCoordinator mergeCoordinator;
         [SerializeField] private PathFinder pathFinder;
         
-        #region Unity Callbacks
+        [Header("References")]
+        [SerializeField] private GridController grid;
+        
+        #region Unity APIs
 
         private void Awake()
         {
@@ -40,7 +44,7 @@ namespace HexaSort.Scripts.Core.Controllers
         
         private void OnStackLaidDown(LaidDownStackDTO dto)
         {
-            DoCheckMerge(dto.cell);
+            HamdleCheckingMerge(dto.cell);
         }
 
         public void DeregisterCallbacks()
@@ -52,7 +56,14 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Class Mehtods
 
-        private void DoCheckMerge(HexCell dtoCell)
+        private void HamdleCheckingMerge(HexCell cell)
+        {
+            mergeCoordinator.WaitingMergableCells.Add(cell);
+
+            CheckSequentialMerge();
+        }
+
+        private void CheckSequentialMerge()
         {
             
         }

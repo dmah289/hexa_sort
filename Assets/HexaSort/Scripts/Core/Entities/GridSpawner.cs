@@ -9,13 +9,17 @@ namespace HexaSort.Scripts.Core.Entities
 {
     public class GridSpawner : MonoBehaviour
     {
+        public HexCell[,] gridCells;
+        
         public async UniTaskVoid SetupBoardLayout(TrayController tray)
         {
+            int size = 5;
+            gridCells = new HexCell[size, size];
+            
             int activeTile = 0;
             float minCellY = int.MaxValue;
             float maxCellX = int.MinValue;
             Vector2 centerPos = Vector2.zero;
-            int size = 5;
             
             for (int i = 0; i < size; i++)
             {
@@ -23,6 +27,7 @@ namespace HexaSort.Scripts.Core.Entities
                 {
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
+                    gridCells[i, j] = cell;
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);
 

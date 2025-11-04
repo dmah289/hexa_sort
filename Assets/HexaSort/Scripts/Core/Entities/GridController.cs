@@ -11,6 +11,10 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("References")]
         [SerializeField] private TrayController trayController;
 
+        public HexCell[,] GridCells => gridSpawner.gridCells;
+
+        public HexCell GetCellAtPosition(int x, int y) => gridSpawner.gridCells[x, y];
+
         private void Awake()
         {
             gridSpawner = GetComponent<GridSpawner>();

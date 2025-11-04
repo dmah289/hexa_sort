@@ -11,6 +11,8 @@ namespace HexaSort.Scripts.Core.Controllers
         [SerializeField] private bool isCheckingMerging;
         private List<HexCell> waitingMergableCells = new();
         
+        public List<HexCell> WaitingMergableCells => waitingMergableCells;
+        
         
     }
 }
