@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Controllers
 {
-    public class MergeCoordinator : MonoBehaviour
+    public class MergeSequenceExecutor : MonoBehaviour
     {
         [Header("Merge Tracking")]
         [SerializeField] private bool isCheckingMerging;

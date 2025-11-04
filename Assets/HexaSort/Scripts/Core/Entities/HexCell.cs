@@ -1,5 +1,6 @@
 ﻿using System;
 using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Scripts.Core.Entities.Piece;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
@@ -15,11 +16,13 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Managers")]
         [SerializeField] private HexStackController currStack;
-        [SerializeField] private Vector2Int gridPos;
+        private (int row, int col) gridPos;
+        
+        public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
         public bool IsOccupied => currStack != null;
         
-        public Vector2Int GridPos
+        public (int row, int col) GridPos
         {
             get => gridPos;
             set => gridPos = value;

@@ -21,13 +21,14 @@ namespace HexaSort.Scripts.Core.Entities
             float maxCellX = int.MinValue;
             Vector2 centerPos = Vector2.zero;
             
+            // Root of the grid is in the bottom left corner
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
-                    cell.GridPos = new Vector2Int(j, i);
+                    cell.GridPos = (i,j);
                     gridCells[i, j] = cell;
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);

@@ -10,15 +10,13 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("References")]
         [SerializeField] private TrayController trayController;
-        
-        [Header("Path Finder Managers")]
-        [SerializeField] private bool[,] visitedCells = new bool[5, 5];
-        
-        public bool[,] VisitedCells => visitedCells;
 
         public HexCell[,] GridCells => gridSpawner.gridCells;
+        
+        public (int width, int height) GridSize
+            => (GridCells.GetLength(1), GridCells.GetLength(0));
 
-        public HexCell GetCellAtPosition(int x, int y) => gridSpawner.gridCells[x, y];
+        public HexCell GetCellAtPosition(int row, int col) => gridSpawner.gridCells[row, col];
 
         private void Awake()
         {

@@ -17,6 +17,8 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Managers")]
         [SerializeField] private List<HexPieceController> pieces = new();
+        
+        public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
 
         private void Awake()
         {

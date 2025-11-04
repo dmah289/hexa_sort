@@ -88,11 +88,9 @@ namespace HexaSort.Scripts.Core.Entities
         private void OnStackLaidDown()
         {
             remainStackAmount--;
+            
             if (remainStackAmount == 0)
-            {
                 SpawnHexStacks().Forget();
-                remainStackAmount = 3;
-            }
         }
 
         public void DeregisterCallbacks()

@@ -12,7 +12,7 @@ namespace HexaSort.Scripts.Core.Controllers
     public class MergeController : MonoBehaviour, IEventBusListener
     {
         [Header("Self Components")]
-        [SerializeField] private MergeCoordinator mergeCoordinator;
+        [SerializeField] private MergeSequenceExecutor mergeSequenceExecutor;
         [SerializeField] private PathFinder pathFinder;
         
         [Header("References")]
@@ -22,7 +22,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private void Awake()
         {
-            mergeCoordinator = GetComponent<MergeCoordinator>();
+            mergeSequenceExecutor = GetComponent<MergeSequenceExecutor>();
             pathFinder = GetComponent<PathFinder>();
         }
 
@@ -61,16 +61,16 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private async UniTask HandleCheckingMerge(HexCell cell)
         {
-            mergeCoordinator.WaitingMergableCells.Add(cell);
+            mergeSequenceExecutor.WaitingMergableCells.Add(cell);
 
             await CheckSequentialMerge();
         }
 
         private async UniTask CheckSequentialMerge()
         {
-            while (mergeCoordinator.WaitingMergableCells.Count > 0)
+            while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
             {
-                HexCell cell = mergeCoordinator.WaitingMergableCells.RemoveFirst();
+                HexCell cell = mergeSequenceExecutor.WaitingMergableCells.RemoveFirst();
                 if (cell.IsOccupied)
                 {
                     await DoMerge(cell);
@@ -82,6 +82,8 @@ namespace HexaSort.Scripts.Core.Controllers
         private async UniTask DoMerge(HexCell cell)
         {
             List<HexCell> connectedCells = pathFinder.GetConnectedCells(cell, grid);
+            
+            
         }
 
         #endregion
