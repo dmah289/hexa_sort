@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Scripts.Core.Entities.Piece;
@@ -19,6 +20,7 @@ namespace HexaSort.Scripts.Core.Entities
         [SerializeField] private List<HexPieceController> pieces = new();
         
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
+        public List<HexPieceController> Pieces => pieces;
 
         private void Awake()
         {
@@ -49,7 +51,7 @@ namespace HexaSort.Scripts.Core.Entities
                 int colorIdx = Random.Range(0, System.Enum.GetValues(typeof(ColorType)).Length);
                 piece.ColorType = (ColorType)colorIdx;
 
-                Vector3 spawnedPos = (i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back).Add(y: i*0.02f);
+                Vector3 spawnedPos = (i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
                 piece.transform.localPosition = spawnedPos;
                 
                 pieces.Add(piece);
@@ -93,6 +95,23 @@ namespace HexaSort.Scripts.Core.Entities
             selfTransform.DOLocalMove(targetLocalPos, duration)
                 .SetEase(Ease.OutSine)
                 .OnKill(() => selfTransform.localPosition = targetLocalPos);
+        }
+
+        public async UniTask AttractPiece(HexPieceController newPiece)
+        {
+            pieces.Add(newPiece);
+            newPiece.selfTransform.SetParent(selfTransform);
+            
+            Vector3 targetLocalPos = ((pieces.Count - 1) * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back)
+                .Add(y: (pieces.Count - 1) * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
+            
+            await newPiece.OverturnToLocalPos(targetLocalPos);
+            
+        }
+
+        public void CollectLastPiece()
+        {
+            pieces.RemoveLast().OnCollected();
         }
     }
 }

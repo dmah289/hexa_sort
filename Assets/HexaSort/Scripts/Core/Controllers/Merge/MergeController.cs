@@ -81,9 +81,11 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private async UniTask DoMerge(HexCell cell)
         {
-            List<HexCell> connectedCells = pathFinder.GetConnectedCells(cell, grid);
-            
-            
+            bool hasMerge = pathFinder.GetConnectedCells(cell, grid);
+            if (hasMerge)
+            {
+                 await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
+            }
         }
 
         #endregion
