@@ -64,18 +64,18 @@ namespace HexaSort.Scripts.Core.Entities.Piece
             
             float duration = Vector3.Distance(selfTransform.localPosition, targetLocalPos) / ConstantKey.ATTRACTION_VELOCITY;
             
-            sequence.Join(transform.DOLocalJump(targetLocalPos, 1.8f, 1, duration)
-                .SetEase(Ease.OutCirc));
-    
-            Vector3 direction = (targetLocalPos - selfTransform.localPosition).With(y: 0).normalized;
-            Vector3 rotationAxis = Vector3.Cross(Vector3.up, direction);
-    
-            Quaternion correctedRotation = Quaternion.Euler(selfTransform.localRotation.eulerAngles.With(y: 0));
-    
+            sequence.Join(transform.DOLocalJump(targetLocalPos, 1f, 1, duration)
+                .SetEase(Ease.Linear));
+        
+            Vector3 direction = (targetLocalPos - selfTransform.localPosition).normalized;
+            Vector3 rotationAxis = Vector3.Cross(Vector3.back, direction);
+        
+            Quaternion correctedRotation = Quaternion.Euler(selfTransform.localRotation.eulerAngles.With(z: 0));
+        
             sequence.Join(DOTween.To(() => 0f, value => {
                 selfTransform.localRotation = correctedRotation * Quaternion.AngleAxis(value, rotationAxis);
             }, 180f, duration).SetEase(Ease.OutFlash));
-    
+        
             // sequence.OnComplete(() => selfTransform.localRotation = Quaternion.identity)
             //     .OnKill(() => selfTransform.localRotation = Quaternion.identity);
             //
@@ -89,10 +89,10 @@ namespace HexaSort.Scripts.Core.Entities.Piece
                 tcs.TrySetResult();
             }
             sequence.OnComplete(SetEndState).OnKill(SetEndState);
-
+        
             await tcs.Task.AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
         }
-
+        
         public void OnCollected()
         {
             selfTransform.DOKill();

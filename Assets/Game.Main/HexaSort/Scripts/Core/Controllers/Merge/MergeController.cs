@@ -18,6 +18,9 @@ namespace HexaSort.Scripts.Core.Controllers
         [Header("References")]
         [SerializeField] private GridController grid;
         
+        [Header("State Managers")]
+        [SerializeField] private bool isCheckingSequentialToMerge;
+        
         #region Unity APIs
 
         private void Awake()
@@ -61,31 +64,35 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private async UniTask HandleCheckingMerge(HexCell cell)
         {
+            await UniTask.WaitUntil(() => !mergeSequenceExecutor.IsBusy);
+            
             mergeSequenceExecutor.WaitingMergableCells.Add(cell);
-
-            await CheckSequentialMerge();
+            
+            if(!isCheckingSequentialToMerge) CheckSequentialMerge();
+            else mergeSequenceExecutor.NewStackLaidDown = true;
         }
 
         private async UniTask CheckSequentialMerge()
         {
+            isCheckingSequentialToMerge = true;
+            
             while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
             {
                 HexCell cell = mergeSequenceExecutor.WaitingMergableCells.RemoveFirst();
                 if (cell.IsOccupied)
                 {
-                    await DoMerge(cell);
+                    await HandleMergeSequence(cell);
                     await UniTask.Yield();
                 }
             }
+
+            isCheckingSequentialToMerge = false;
         }
 
-        private async UniTask DoMerge(HexCell cell)
+        private async UniTask HandleMergeSequence(HexCell cell)
         {
-            bool hasMerge = pathFinder.GetConnectedCells(cell, grid);
-            if (hasMerge)
-            {
-                 await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
-            }
+            pathFinder.GetConnectedCells(cell, grid);
+            await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
         }
 
         #endregion

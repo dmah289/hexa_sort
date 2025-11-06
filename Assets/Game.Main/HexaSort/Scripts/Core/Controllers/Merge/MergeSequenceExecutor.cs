@@ -15,7 +15,7 @@ namespace HexaSort.Scripts.Core.Controllers
         [SerializeField] private bool isCheckingMerging;
         private List<HexCell> waitingMergableCells = new();
         
-        [SerializeField] private bool isMerging;
+        [SerializeField] private bool isPairMerging;
         [SerializeField] private bool isCollectingPieces;
         [SerializeField] private bool newStackLaidDown;
         
@@ -24,8 +24,9 @@ namespace HexaSort.Scripts.Core.Controllers
         
         
         public List<HexCell> WaitingMergableCells => waitingMergableCells;
-        public bool IsMerging => isMerging;
+        public bool IsPairMerging => isPairMerging;
         public bool IsCollectingPieces => isCollectingPieces;
+        public bool IsBusy => isPairMerging || isCollectingPieces;
 
         public bool NewStackLaidDown
         {
@@ -67,7 +68,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private async UniTask DoPairMerge(HexCell startCell, HexCell endCell)
         {
-            isMerging = true;
+            isPairMerging = true;
 
             ColorType sharedColor = endCell.ColorOnTop;
 
@@ -79,7 +80,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
             CheckIfCanContinueCollecting(startCell);
             
-            isMerging = false;
+            isPairMerging = false;
         }
 
         private void CheckIfCanContinueCollecting(HexCell cell)

@@ -49,7 +49,7 @@ namespace HexaSort.Scripts.Core.Controllers
             cellsToVisit.Clear();
         }
 
-        public bool GetConnectedCells(HexCell cell, GridController grid)
+        public void GetConnectedCells(HexCell cell, GridController grid)
         {
             InitBfsGridState(grid.GridSize);
             
@@ -71,8 +71,6 @@ namespace HexaSort.Scripts.Core.Controllers
             //     cell2.selfTransform.position = cell2.selfTransform.position.With(z: -2f);
             //     DOVirtual.DelayedCall(1f,() => cell2.selfTransform.position = cell2.selfTransform.position.With(z: 0f));
             // }
-
-            return connectedCells.Count > 1;
         }
 
         private void FindNeighbourCells(HexCell currCell, GridController grid)
