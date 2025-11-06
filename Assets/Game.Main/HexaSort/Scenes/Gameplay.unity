@@ -840,6 +840,7 @@ MonoBehaviour:
   mergeSequenceExecutor: {fileID: 0}
   pathFinder: {fileID: 0}
   grid: {fileID: 1160128950}
+  isCheckingSequentialToMerge: 0
 --- !u!114 &1944974763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,6 +854,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCheckingMerging: 0
+  isPairMerging: 0
+  isCollectingPieces: 0
+  newStackLaidDown: 0
+  dynamicThresholdForCollectingPieces: 10
 --- !u!1 &2004544972
 GameObject:
   m_ObjectHideFlags: 0
