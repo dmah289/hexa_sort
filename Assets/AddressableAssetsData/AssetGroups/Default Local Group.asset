@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: 297385c4861523d4cb672151559fc394
   m_SerializeEntries:
   - m_GUID: 2bccbb11690ee424c955f42465d62fc3
-    m_Address: Gameplay
+    m_Address: gameplay_scene
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
