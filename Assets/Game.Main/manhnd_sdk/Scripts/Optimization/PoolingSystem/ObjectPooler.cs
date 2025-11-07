@@ -100,9 +100,14 @@ namespace manhnd_sdk.Scripts.Optimization.PoolingSystem
         /// <param name="type">The enum value index-based mapping to the pool list</param>
         /// <param name="instance">Instance that need returning to pool</param>
         /// <param name="allowChecking">Allow checking if the object returned to pool has the same type with cached prefab</param>
+        /// <param name="allowChecking">Action is called if object isn't a poolable object</param>
         /// <typeparam name="T">Type of the object need returning to pool</typeparam>
         /// <exception cref="InvalidCastException">Throw if instance doesn't have the same type with objects in respectively pool</exception>
-        public static void ReturnToPool<T>(PoolingType type, T instance, CancellationToken cancellationToken, bool allowChecking = false) where T : Component
+        public static void ReturnToPool<T>(PoolingType type,
+                                            T instance,
+                                            CancellationToken cancellationToken,
+                                            Action<T> onReturnToPool = null,
+                                            bool allowChecking = false) where T : Component
         {
             if(instance == null)
                 throw new ArgumentNullException(nameof(instance), $"Cannot return a null {type} instance to the pool.");
@@ -123,6 +128,10 @@ namespace manhnd_sdk.Scripts.Optimization.PoolingSystem
             instance.gameObject.SetActive(false);
             instance.transform.SetParent(type > PoolingType.Separator ? uiPoolParent : gameplayPoolParent);
             poolLists[(byte)type].Add(instance);
+            
+            if (instance is IPoolableObject poolable)
+                poolable.OnReturnToPool();
+            else onReturnToPool?.Invoke(instance);
         }
         
         /// <summary>

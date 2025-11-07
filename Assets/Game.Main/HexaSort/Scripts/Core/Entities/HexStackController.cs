@@ -18,9 +18,12 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Managers")]
         [SerializeField] private List<HexPieceController> pieces = new();
+        [SerializeField] private HexCell parentCell;
+        [SerializeField] private bool isOnGrid;
         
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
         public List<HexPieceController> Pieces => pieces;
+        public bool IsOnGrid => isOnGrid;
 
         private void Awake()
         {
@@ -68,10 +71,22 @@ namespace HexaSort.Scripts.Core.Entities
                 .OnKill(() => selfTransform.localPosition = Vector3.zero);
         }
 
+        #region Object Pooling Callbacks
+
         public void OnGetFromPool()
         {
+            parentCell = null;
+            isOnGrid = false;
             selfTransform.Reset();
         }
+
+        public void OnReturnToPool()
+        {
+            parentCell = null;
+            isOnGrid = false;
+        }
+
+        #endregion
 
         public void OnDragged(Vector3 targetPos)
         {
@@ -84,6 +99,8 @@ namespace HexaSort.Scripts.Core.Entities
             if (targetCell)
             {
                 selfTransform.SetParent(targetCell.selfTransform);
+                parentCell = targetCell;
+                
                 targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
                 Selectable = false;
                 targetCell.CurrentStack = this;
@@ -94,10 +111,14 @@ namespace HexaSort.Scripts.Core.Entities
             float duration = selfTransform.localPosition.magnitude / ConstantKey.SNAP_TO_TARGET_VELOCITY;
             selfTransform.DOLocalMove(targetLocalPos, duration)
                 .SetEase(Ease.OutSine)
-                .OnKill(() => selfTransform.localPosition = targetLocalPos);
+                .OnKill(() => selfTransform.localPosition = targetLocalPos)
+                .OnComplete(() =>
+                {
+                    if (targetCell) isOnGrid = true;
+                });
         }
 
-        public async UniTask AttractPiece(HexPieceController newPiece)
+        public void AttractPiece(HexPieceController newPiece, Vector3 direction)
         {
             pieces.Add(newPiece);
             newPiece.selfTransform.SetParent(selfTransform);
@@ -105,7 +126,7 @@ namespace HexaSort.Scripts.Core.Entities
             Vector3 targetLocalPos = ((pieces.Count - 1) * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back)
                 .Add(y: (pieces.Count - 1) * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
             
-            await newPiece.OverturnToLocalPos(targetLocalPos);
+            newPiece.OverturnToLocalPos(targetLocalPos, direction);
             
         }
 

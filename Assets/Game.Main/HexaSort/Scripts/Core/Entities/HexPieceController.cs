@@ -50,12 +50,18 @@ namespace HexaSort.Scripts.Core.Entities.Piece
             }
         }
 
+        #region Object Pooling Callbacks
+
         public void OnGetFromPool()
         {
             // Not all pieces are selectable when spawned
             selfTransform.localScale = Vector3.one * ConstantKey.INITIAL_PIECE_SCALE;
             Selectable = false;
         }
+
+        public void OnReturnToPool() { }
+
+        #endregion
 
         // public async UniTask OverturnToLocalPos(Vector3 targetLocalPos)
         // {
@@ -93,7 +99,8 @@ namespace HexaSort.Scripts.Core.Entities.Piece
         //     await tcs.Task.AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
         // }
 
-        public async UniTask OverturnToLocalPos(Vector3 targetLocalPos)
+        // TODO : Using DOTS + dynamic parabola height base on max height of 2 stacks
+        public void OverturnToLocalPos(Vector3 targetLocalPos, Vector3 _direction)
         {
             selfTransform.DOKill();
     
@@ -111,14 +118,14 @@ namespace HexaSort.Scripts.Core.Entities.Piece
             }
 
             // Direction on X-Y plane
-            Vector3 direction = (targetLocalPos - start).With(z: 0f);
+            Vector3 direction = _direction;
             if (direction.sqrMagnitude < 0.001f) direction = Vector3.right;
             direction.Normalize();
 
             // Rotation axis perpendicular to both movement direction and -Z
             Vector3 rotationAxis = Vector3.Cross(Vector3.back, direction).normalized;
 
-            float jumpHeight = 1.5f;
+            float jumpHeight = 1.8f;
 
             // Position tween with parabola on -Z
             sequence.Join(DOTween.To(() => 0f, t =>
@@ -134,17 +141,17 @@ namespace HexaSort.Scripts.Core.Entities.Piece
                 selfTransform.localRotation = Quaternion.AngleAxis(angle, rotationAxis);
             }, 180f, duration).SetEase(Ease.Linear));
 
-            var tcs = new UniTaskCompletionSource();
+            // var tcs = new UniTaskCompletionSource();
             void SetEndState()
             {
                 selfTransform.localPosition = targetLocalPos;
                 selfTransform.localRotation = Quaternion.identity;
-                tcs.TrySetResult();
+                // tcs.TrySetResult();
             }
             sequence.OnComplete(SetEndState).OnKill(SetEndState);
             sequence.Play();
 
-            await tcs.Task.AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
+            // await tcs.Task.AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
         }
 
         

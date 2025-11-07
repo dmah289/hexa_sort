@@ -50,6 +50,8 @@ namespace HexaSort.Scripts.Core.Entities
             meshRenderer.SetVertexLitColor(SelectionController.Instance.normalCellColor);
         }
 
+        public void OnReturnToPool() { }
+
         public void SetMaterialState(Color color)
         {
             meshRenderer.SetVertexLitColor(color);

@@ -3,5 +3,6 @@
     public interface IPoolableObject
     {
         public void OnGetFromPool();
+        public void OnReturnToPool();
     }
 }
