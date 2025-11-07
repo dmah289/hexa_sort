@@ -29,7 +29,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         
         #region Stack & Pieces
         
-        public const float HEX_PIECE_THICKNESS = 0.12f;
+        public const float HEX_PIECE_THICKNESS = 0.13f;
         public static float INITIAL_PIECE_SCALE = 0.95f;
 
         #endregion

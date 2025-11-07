@@ -54,7 +54,7 @@ namespace HexaSort.Scripts.Core.Entities
                 int colorIdx = Random.Range(0, 2);
                 piece.ColorType = (ColorType)colorIdx;
 
-                Vector3 spawnedPos = (i * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
+                Vector3 spawnedPos = (i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
                 piece.transform.localPosition = spawnedPos;
                 
                 pieces.Add(piece);
@@ -118,15 +118,15 @@ namespace HexaSort.Scripts.Core.Entities
                 });
         }
 
-        public void AttractPiece(HexPieceController newPiece, Vector3 direction)
+        public void AttractPiece(HexPieceController newPiece, Vector3 overturnDir)
         {
             pieces.Add(newPiece);
             newPiece.selfTransform.SetParent(selfTransform);
             
-            Vector3 targetLocalPos = ((pieces.Count - 1) * (ConstantKey.HEX_PIECE_THICKNESS + 0.01f) * Vector3.back)
+            Vector3 targetLocalPos = ((pieces.Count - 1) * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back)
                 .Add(y: (pieces.Count - 1) * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
             
-            newPiece.OverturnToLocalPos(targetLocalPos, direction);
+            newPiece.OverturnToLocalPos(targetLocalPos, overturnDir);
             
         }
 

@@ -50,10 +50,10 @@ namespace HexaSort.Scripts.Core.Controllers
                 HexCell parent = parents[connectedCells[i].GridPos.row, connectedCells[i].GridPos.col];
                 await DoPairMerge(connectedCells[i], parent);
                 
-                await UniTask.Delay(1000);
+                await UniTask.Delay(300);
             }
             
-            await UniTask.Delay(100);
+            await UniTask.Delay(200);
             
             // Check new block placed during merging
             if (newStackLaidDown)
@@ -76,10 +76,8 @@ namespace HexaSort.Scripts.Core.Controllers
 
             while (startCell.CurrentStack.Pieces.Count > 0 && startCell.ColorOnTop == sharedColor)
             {
-                //TODO : await startCell on grid
-                
-                Vector3 direction = (endCell.selfTransform.position - startCell.selfTransform.position).normalized;
-                endCell.CurrentStack.AttractPiece(startCell.CurrentStack.Pieces.RemoveLast(), direction);
+                Vector3 overturnDir = (endCell.selfTransform.position - startCell.selfTransform.position).normalized;
+                endCell.CurrentStack.AttractPiece(startCell.CurrentStack.Pieces.RemoveLast(), overturnDir);
                 await UniTask.Delay(300);
             }
 
@@ -115,7 +113,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 for (int i = 0; i < sameColorCount; i++)
                 {
                     cell.CurrentStack.CollectLastPiece();
-                    await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.25f * 1000f));
+                    await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.3f * 1000f));
                 }
             }
             

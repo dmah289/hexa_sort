@@ -19,7 +19,7 @@ namespace HexaSort.Scripts.Core.Controllers
         [SerializeField] private GridController grid;
         
         [Header("State Managers")]
-        [SerializeField] private bool isCheckingSequentialToMerge;
+        [SerializeField] private bool isCheckingMergeSequence;
         
         #region Unity APIs
 
@@ -62,19 +62,19 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Class Mehtods
 
-        private async UniTask HandleCheckingMerge(HexCell cell)
+        private async UniTaskVoid HandleCheckingMerge(HexCell cell)
         {
             await UniTask.WaitUntil(() => !mergeSequenceExecutor.IsBusy);
             
             mergeSequenceExecutor.WaitingMergableCells.Add(cell);
             
-            if(!isCheckingSequentialToMerge) CheckSequentialMerge();
+            if(!isCheckingMergeSequence) CheckMergeSequence();
             else mergeSequenceExecutor.NewStackLaidDown = true;
         }
 
-        private async UniTask CheckSequentialMerge()
+        private async UniTaskVoid CheckMergeSequence()
         {
-            isCheckingSequentialToMerge = true;
+            isCheckingMergeSequence = true;
             
             while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
             {
@@ -86,7 +86,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 }
             }
 
-            isCheckingSequentialToMerge = false;
+            isCheckingMergeSequence = false;
         }
 
         private async UniTask HandleMergeSequence(HexCell cell)
