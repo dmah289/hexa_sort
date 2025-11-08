@@ -1,16 +1,26 @@
+using System;
 using Cysharp.Threading.Tasks;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HexaSort.Scripts.UI
 {
     public abstract class ALoadingScreen : MonoBehaviour
     {
+        private static readonly int MaskTexSt = Shader.PropertyToID("_MaskTex_ST");
+
         [Header("Shared Fields")]
         [SerializeField] private RectTransform fillRectTransform;
         [SerializeField] private float fillDuration = 3.5f;
         [SerializeField] private float maxFillWidth = 825f;
         [SerializeField] private float fillHeight = 55f;
-        
+
+        private void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
+
         protected abstract UniTask OnFullFillAmount();
 
         // Loading using sizeDelta to simulate fill amount

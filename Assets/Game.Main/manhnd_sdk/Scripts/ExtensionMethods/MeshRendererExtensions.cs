@@ -10,6 +10,7 @@ namespace manhnd_sdk.Scripts.ExtensionMethods
         // Property ID
         private static readonly int VertexLitColor = Shader.PropertyToID("_Color");
         private static readonly int VertexLitMainTexSt = Shader.PropertyToID("_MainTex_ST");
+        private static readonly int MaskTexSt = Shader.PropertyToID("_MaskTex_ST");
         
         // Config
         private const float OffsetUnit = 0.25f;
