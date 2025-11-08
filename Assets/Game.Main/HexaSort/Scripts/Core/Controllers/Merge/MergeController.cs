@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using HexaSort.Scripts.Core.Entities;
+using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -85,6 +86,10 @@ namespace HexaSort.Scripts.Core.Controllers
                     await UniTask.Yield();
                 }
             }
+
+            // TODO : Refactor level fail condition
+            if (grid.IsOutOfSpace)
+                LevelManager.Instance.CurrentLevelState = LevelState.Failed;
 
             isCheckingMergeSequence = false;
         }

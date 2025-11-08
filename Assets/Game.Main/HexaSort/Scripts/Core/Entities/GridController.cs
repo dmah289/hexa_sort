@@ -1,4 +1,7 @@
-﻿using manhnd_sdk.Scripts.Helpers;
+﻿using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Scripts.Managers;
+using manhnd_sdk.Scripts.Helpers;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Entities
@@ -15,8 +18,25 @@ namespace HexaSort.Scripts.Core.Entities
         
         public (int width, int height) GridSize
             => (GridCells.GetLength(1), GridCells.GetLength(0));
+        
+        public bool IsOutOfSpace
+        {
+            get
+            {
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (!GridCells[i, j].IsOccupied)
+                            return false;
+                    }
+                }
 
-        public HexCell GetCellAtPosition(int row, int col) => gridSpawner.gridCells[row, col];
+                return true;
+            }
+        }
+        
+        #region Unity APIs
 
         private void Awake()
         {
@@ -25,9 +45,19 @@ namespace HexaSort.Scripts.Core.Entities
             SetupLevel();
         }
 
+        #endregion
+
+        #region Class Mehtods
+
         public void SetupLevel()
         {
             gridSpawner.SetupBoardLayout(trayController).Forget();
         }
+        
+        #endregion
+        
+        
+        
+        
     }
 }

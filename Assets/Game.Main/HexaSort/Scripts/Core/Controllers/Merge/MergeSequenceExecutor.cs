@@ -11,6 +11,10 @@ namespace HexaSort.Scripts.Core.Controllers
 {
     public class MergeSequenceExecutor : MonoBehaviour
     {
+        private const int MergeDelayBeforeNewExecution = 100;
+        private const int MergeDelayBetween2PairMerge = 600;
+        private const int CheckCollectingDelay = 300;
+        
         [Header("Merge Tracking")]
         [SerializeField] private bool isCheckingMerging;
         private List<HexCell> waitingMergableCells = new();
@@ -44,22 +48,24 @@ namespace HexaSort.Scripts.Core.Controllers
                 {
                     newStackLaidDown = false;
                     waitingMergableCells.Add(connectedCells[i]);
+                    await UniTask.Delay(MergeDelayBeforeNewExecution);
                     return;
                 }
                 
                 HexCell parent = parents[connectedCells[i].GridPos.row, connectedCells[i].GridPos.col];
                 await DoPairMerge(connectedCells[i], parent);
                 
-                await UniTask.Delay(300);
+                await UniTask.Delay(MergeDelayBetween2PairMerge);
             }
             
-            await UniTask.Delay(200);
+            await UniTask.Delay(CheckCollectingDelay);
             
             // Check new block placed during merging
             if (newStackLaidDown)
             {
                 newStackLaidDown = false;
                 waitingMergableCells.Add(connectedCells[0]);
+                await UniTask.Delay(MergeDelayBeforeNewExecution);
                 return;
             }
 
@@ -77,8 +83,11 @@ namespace HexaSort.Scripts.Core.Controllers
             while (startCell.CurrentStack.Pieces.Count > 0 && startCell.ColorOnTop == sharedColor)
             {
                 Vector3 overturnDir = (endCell.selfTransform.position - startCell.selfTransform.position).normalized;
-                endCell.CurrentStack.AttractPiece(startCell.CurrentStack.Pieces.RemoveLast(), overturnDir);
-                await UniTask.Delay(300);
+                
+                float maxHeight = Mathf.Max(startCell.CurrentStack.Height, endCell.CurrentStack.Height);
+
+                endCell.CurrentStack.AttractPiece(startCell.CurrentStack.Pieces.RemoveLast(), overturnDir, maxHeight);
+                await UniTask.Delay((int)(0.07f * HexPieceController.OverturnDuration * 1000f));
             }
 
             CheckIfCanContinueCollecting(startCell);
@@ -113,7 +122,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 for (int i = 0; i < sameColorCount; i++)
                 {
                     cell.CurrentStack.CollectLastPiece();
-                    await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.3f * 1000f));
+                    await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
                 }
             }
             

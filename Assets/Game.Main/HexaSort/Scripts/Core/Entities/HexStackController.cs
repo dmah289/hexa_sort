@@ -24,6 +24,7 @@ namespace HexaSort.Scripts.Core.Entities
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
         public List<HexPieceController> Pieces => pieces;
         public bool IsOnGrid => isOnGrid;
+        public float Height => pieces.Count * ConstantKey.HEX_PIECE_THICKNESS;
 
         private void Awake()
         {
@@ -118,7 +119,7 @@ namespace HexaSort.Scripts.Core.Entities
                 });
         }
 
-        public void AttractPiece(HexPieceController newPiece, Vector3 overturnDir)
+        public void AttractPiece(HexPieceController newPiece, Vector3 overturnDir, float maxHeight)
         {
             pieces.Add(newPiece);
             newPiece.selfTransform.SetParent(selfTransform);
@@ -126,7 +127,7 @@ namespace HexaSort.Scripts.Core.Entities
             Vector3 targetLocalPos = ((pieces.Count - 1) * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back)
                 .Add(y: (pieces.Count - 1) * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
             
-            newPiece.OverturnToLocalPos(targetLocalPos, overturnDir);
+            newPiece.OverturnToLocalPos(targetLocalPos, overturnDir, maxHeight);
             
         }
 

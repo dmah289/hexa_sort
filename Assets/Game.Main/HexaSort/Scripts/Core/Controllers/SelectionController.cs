@@ -169,6 +169,7 @@ namespace HexaSort.Scripts.Core.Controllers
             }
             
             currStack = null;
+            currTargetCell = null;
         }
 
         #endregion

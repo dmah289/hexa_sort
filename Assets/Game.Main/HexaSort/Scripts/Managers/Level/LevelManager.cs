@@ -4,6 +4,7 @@ using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Helpers;
 using manhnd_sdk.Scripts.SystemDesign;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Managers
@@ -15,6 +16,26 @@ namespace HexaSort.Scripts.Managers
         
         [Header("References")]
         [SerializeField] private Camera gameplayCam;
+        
+        [Header("State Management")]
+        [SerializeField] private LevelState currentLevelState;
+        
+        public LevelState CurrentLevelState
+        {
+            get => currentLevelState;
+            set
+            {
+                if (currentLevelState == value) return;
+                currentLevelState = value;
+
+                switch (currentLevelState)
+                {
+                    case LevelState.OutOfSpace:
+                        EventBus<LevelOutOfSpaceDTO>.Raise();
+                        break;
+                }
+            }
+        }
 
         protected override void Awake()
         {
