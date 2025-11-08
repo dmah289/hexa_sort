@@ -8,8 +8,6 @@ namespace HexaSort.Scripts.UI
 {
     public abstract class ALoadingScreen : MonoBehaviour
     {
-        private static readonly int MaskTexSt = Shader.PropertyToID("_MaskTex_ST");
-
         [Header("Shared Fields")]
         [SerializeField] private RectTransform fillRectTransform;
         [SerializeField] private float fillDuration = 3.5f;
