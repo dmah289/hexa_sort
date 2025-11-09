@@ -1,4 +1,5 @@
 ﻿using System;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Controllers;
 using HexaSort.Scripts.Core.Entities.Piece;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -37,6 +38,8 @@ namespace HexaSort.Scripts.Core.Entities
                 collider.enabled = !currStack;
             }
         }
+        
+        public int PiecesCount => IsOccupied ? currStack.PiecesCount : 0;
 
         private void Awake()
         {
@@ -55,6 +58,12 @@ namespace HexaSort.Scripts.Core.Entities
         public void SetMaterialState(Color color)
         {
             meshRenderer.SetVertexLitColor(color);
+        }
+
+        // TODO : Show sighting target effect on top of stack
+        public void ShowSightingTarget()
+        {
+            
         }
     }
 }

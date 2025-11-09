@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Controllers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;

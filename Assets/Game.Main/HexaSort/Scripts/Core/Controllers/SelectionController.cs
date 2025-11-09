@@ -1,4 +1,5 @@
-﻿using HexaSort.Scripts.Core.Entities;
+﻿using HexaSort.Core.Entities;
+using HexaSort.Scripts.Core.Entities;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;

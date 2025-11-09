@@ -1,19 +1,24 @@
-﻿using HexaSort.Scripts.Core.Controllers;
+﻿using System;
+using System.Linq;
+using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
-using manhnd_sdk.Scripts.Helpers;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities
 {
-    public class GridController : MonoBehaviour
+    public class GridController : MonoBehaviour, IEventBusListener
     {
         [Header("Self Components")]
         [SerializeField] private GridSpawner gridSpawner;
         
         [Header("References")]
         [SerializeField] private TrayController trayController;
-
+        
+        [Header("UI References")]
+        [SerializeField] private WinPanel winPanel;
+        
         public HexCell[,] GridCells => gridSpawner.gridCells;
         
         public (int width, int height) GridSize
@@ -41,6 +46,8 @@ namespace HexaSort.Scripts.Core.Entities
         private void Awake()
         {
             gridSpawner = GetComponent<GridSpawner>();
+            
+            RegisterCallbacks();
         }
 
         #endregion
@@ -53,5 +60,30 @@ namespace HexaSort.Scripts.Core.Entities
         }
         
         #endregion
+
+        public void RegisterCallbacks()
+        {
+            EventBus<OutOfSpaceEventDTO>.Register(onEventWithoutArgs: OnGridOutOfSpace);
+        }
+
+        private void OnGridOutOfSpace()
+        {
+            var top3HighestCells = GridCells
+                .Cast<HexCell>()
+                .Where(cell => cell.IsOccupied)
+                .OrderByDescending(cell => cell.PiecesCount)
+                .Take(3)
+                .ToList();
+
+            for (int i = 0; i < top3HighestCells.Count; i++)
+            {
+                top3HighestCells[i].ShowSightingTarget();
+            }
+        }
+
+        public void DeregisterCallbacks()
+        {
+            EventBus<OutOfSpaceEventDTO>.Register(onEventWithoutArgs: OnGridOutOfSpace);
+        }
     }
 }

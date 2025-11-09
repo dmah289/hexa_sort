@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Core.Entities.Piece;
 using manhnd_sdk.Scripts.ExtensionMethods;

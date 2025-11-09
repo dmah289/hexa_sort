@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -87,9 +88,8 @@ namespace HexaSort.Scripts.Core.Controllers
                 }
             }
 
-            // TODO : Refactor level fail condition
             if (grid.IsOutOfSpace)
-                LevelManager.Instance.CurrentLevelState = eLevelState.Failed;
+                LevelManager.Instance.CurrentLevelState = eLevelState.OutOfSpace;
 
             isCheckingMergeSequence = false;
         }

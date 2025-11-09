@@ -11,7 +11,7 @@ namespace HexaSort.UI.Loading.MainMenu.Footer
         
         private float minSelectionPosX;
         private float maxSelectionPosX;
-        private float speed = 4f;
+        private float speed = 3f;
         private float targetRatio;
         private float normDirection;
 

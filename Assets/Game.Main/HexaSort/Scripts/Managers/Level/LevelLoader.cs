@@ -1,4 +1,5 @@
 ﻿using System;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
 using manhnd_sdk.Scripts.Helpers;
 using UnityEngine;

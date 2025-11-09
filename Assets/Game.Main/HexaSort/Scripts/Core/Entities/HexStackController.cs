@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Core.Entities.Piece;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -9,7 +9,7 @@ using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities
 {
     public class HexStackController : MonoBehaviour, IPoolableObject
     {
@@ -25,6 +25,7 @@ namespace HexaSort.Scripts.Core.Entities
         public List<HexPieceController> Pieces => pieces;
         public bool IsOnGrid => isOnGrid;
         public float Height => pieces.Count * ConstantKey.HEX_PIECE_THICKNESS;
+        public int PiecesCount => pieces.Count;
 
         private void Awake()
         {

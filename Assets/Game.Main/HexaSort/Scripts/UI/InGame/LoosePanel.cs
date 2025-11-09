@@ -11,8 +11,7 @@ namespace HexaSort.UI.Loading.InGame
 {
     public enum eLooseReason
     {
-        TimeOut,
-        KettleExplosion
+        OutOfSpace
     }
     
     public class LoosePanel : MonoBehaviour
@@ -33,8 +32,8 @@ namespace HexaSort.UI.Loading.InGame
             
             gameObject.SetActive(true);
             
-            revievePanel.SetActive(reason == eLooseReason.TimeOut);
-            failLevelPanel.gameObject.SetActive(reason != eLooseReason.TimeOut);
+            revievePanel.SetActive(reason == eLooseReason.OutOfSpace);
+            failLevelPanel.gameObject.SetActive(reason != eLooseReason.OutOfSpace);
         }
 
         public void OnNoBtnClicked()

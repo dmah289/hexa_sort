@@ -65,6 +65,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
         private void Awake()
         {
             LoadLifeData();
+            RegisterCallbacks();
         }
         
         private void Update()
@@ -151,7 +152,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         #endregion
         
-        #region Life Changed Event Bus
+        #region Event Bus
 
         public void RegisterCallbacks()
         {
@@ -171,7 +172,5 @@ namespace HexaSort.UI.MainMenu.SharedUI
         }
 
         #endregion
-
-        
     }
 }

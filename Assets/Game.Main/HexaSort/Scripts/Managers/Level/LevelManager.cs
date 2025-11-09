@@ -1,13 +1,18 @@
 ﻿using System;
 using DG.Tweening;
+using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Managers
 {
+    public struct LevelFailEventDTO : IEventDTO { }
+    public struct OutOfSpaceEventDTO : IEventDTO { }
+    
     public class LevelManager : MonoSingleton<LevelManager>
     {
         [Header("Self Components")]
@@ -28,12 +33,12 @@ namespace HexaSort.Scripts.Managers
                 if (currentLevelState == value) return;
                 currentLevelState = value;
 
-                // switch (currentLevelState)
-                // {
-                //     case LevelState.OutOfSpace:
-                //         EventBus<LevelOutOfSpaceDTO>.Raise();
-                //         break;
-                // }
+                switch (currentLevelState)
+                {
+                    case eLevelState.OutOfSpace:
+                        EventBus<OutOfSpaceEventDTO>.Raise();
+                        break;
+                }
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.UI.Loading.MainMenu.SharedUI;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -14,7 +15,6 @@ namespace HexaSort.UI.Loading.InGame
         [Header("UI Elements")]
         [SerializeField] private RectTransform selfRect;
         [SerializeField] private RectTransform visualRect;
-        [SerializeField] private RectTransform bg_icon;
         [SerializeField] private RectTransform target;
         
         [Header("Claim Button Elements")]
@@ -25,7 +25,6 @@ namespace HexaSort.UI.Loading.InGame
         [Header("Manager")]
         [SerializeField] private RectTransform coinPrefabs;
         [SerializeField] private RectTransform[] coins;
-        [SerializeField] private CoinSystem coinSystem;
         [SerializeField] private int coinAmount;
 
         private void Awake()
@@ -37,13 +36,6 @@ namespace HexaSort.UI.Loading.InGame
                 coins[i].transform.SetParent(claimBtn);
                 coins[i].gameObject.SetActive(false);
             }
-        }
-
-        private void Update()
-        {
-            Vector3 curRot = bg_icon.rotation.eulerAngles;
-            curRot.z += 20 * Time.deltaTime;
-            bg_icon.rotation = Quaternion.Euler(curRot);
         }
 
         public async UniTask Show()
@@ -64,7 +56,7 @@ namespace HexaSort.UI.Loading.InGame
         
         public async UniTask OnClaimBtnClickedAsync()
         {
-            coinSystem.CoinCounter += coinAmount;
+            EventBus<CoinChangedEventDTO>.Raise(new CoinChangedEventDTO(coinAmount));
             
             SpawnCoins();
             await CollectCoins();
