@@ -1,10 +1,13 @@
-using Coffee_Rush.UI.BaseSystem;
-using Coffee_Rush.UI.MainMenu.Home;
+using HexaSort.UI.Loading.BaseSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.UI.MainMenu.SharedUI;
+using HexaSort.UI.Loading.MainMenu.Home;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Coffee_Rush.UI.InGame
+namespace HexaSort.UI.Loading.InGame
 {
     public enum eLooseReason
     {
@@ -45,7 +48,8 @@ namespace Coffee_Rush.UI.InGame
 
         public void OnContinueBtnClicked()
         {
-            LifeSystem.Instance.DecreaseOnLifeLost();
+            // TODO : review this logic
+            EventBus<LifeChangedEventDTO>.Raise(new  LifeChangedEventDTO(-1));
             //LevelManager.Instance.FailLevel().Forget();
             gameObject.SetActive(false);
         }

@@ -1,10 +1,10 @@
-
-using Coffee_Rush.UI.BaseSystem;
 using Cysharp.Threading.Tasks;
+using HexaSort.UI.BaseSystem;
+using HexaSort.UI.Loading.BaseSystem;
 
-namespace Coffee_Rush.UI
+namespace HexaSort.UI.Loading
 {
-    public class LoadingLevel : ALoadingPage, IPage
+    public class LoadingLevel : ALoadingScreen, IPage
     {
         private ePageType nextPage;
         public ePageType NextPage
@@ -12,7 +12,7 @@ namespace Coffee_Rush.UI
             set => nextPage = value;
         }
         
-        protected override async UniTaskVoid OnFullFillAmount()
+        protected override async UniTask OnFullFillAmount()
         {
             CanvasManager.Instance.CurPage = nextPage;
             
@@ -25,7 +25,7 @@ namespace Coffee_Rush.UI
             if (!gameObject.activeSelf)
             {
                 gameObject.SetActive(true);
-                StartLoading().Forget();
+                DoLoading().Forget();
             }
         }
 

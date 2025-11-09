@@ -1,6 +1,6 @@
 using System;
 
-namespace Coffee_Rush.UI.BaseSystem
+namespace HexaSort.UI.Loading.BaseSystem
 {
     public enum ePageType : byte
     {

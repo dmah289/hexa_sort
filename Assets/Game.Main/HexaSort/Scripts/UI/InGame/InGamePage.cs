@@ -1,9 +1,11 @@
-using Coffee_Rush.UI.BaseSystem;
+using HexaSort.UI.Loading.BaseSystem;
 using Framework;
+using HexaSort.UI.BaseSystem;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.InGame
+namespace HexaSort.UI.Loading.InGame
 {
     public class InGamePage : MonoBehaviour, IPage
     {
@@ -15,7 +17,7 @@ namespace Coffee_Rush.UI.InGame
             {
                 gameObject.SetActive(true);
 
-                levelIndex.text = $"LEVEL {PlayerPrefs.GetInt(KeySave.LevelIndexKey) + 1,0}";
+                levelIndex.text = $"LEVEL {PlayerPrefs.GetInt(ConstantKey.LevelIndexKey) + 1,0}";
             }
         }
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.MainMenu.Footer
+namespace HexaSort.UI.Loading.MainMenu.Footer
 {
     public class FooterButton : MonoBehaviour
     {

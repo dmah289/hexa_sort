@@ -1,27 +1,22 @@
-using System;
-using Coffee_Rush.UI.BaseSystem;
-using Coffee_Rush.UI.MainMenu.Home;
 using Framework;
+using HexaSort.UI.MainMenu.SharedUI;
+using HexaSort.UI.Loading;
+using HexaSort.UI.Loading.BaseSystem;
+using HexaSort.UI.Loading.MainMenu.Home;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.MainMenu
+namespace HexaSort.UI.MainMenu.Home
 {
     public class HomeTabManager : MonoBehaviour
     {
-        [Header("Level Path")]
+        [Header("Self Components")]
         [SerializeField] private Text[] levelIndexTexts;
-        [SerializeField] private LoadingLevel loadingLevel;
         
-        public void OnPlayBtnClicked()
-        {
-            if (LifeSystem.Instance.CanPlay)
-            {
-                loadingLevel.NextPage = ePageType.InGame;
-                CanvasManager.Instance.CurPage = ePageType.LoadingLevel;
-            }
-            else LifeSystem.Instance.FlashOnOutOfLife();
-        }
+        [Header("References")]
+        [SerializeField] private LoadingLevel loadingLevel;
+        [SerializeField] private LifeSystem lifeSystem;
 
         private void OnEnable()
         {
@@ -30,11 +25,21 @@ namespace Coffee_Rush.UI.MainMenu
 
         private void SetupLevelPath()
         {
-            int curLevelIndex = PlayerPrefs.GetInt(KeySave.LevelIndexKey, 0);
+            int curLevelIndex = PlayerPrefs.GetInt(ConstantKey.LevelIndexKey, 0);
             for (int i = 0; i < levelIndexTexts.Length; i++)
             {
                 levelIndexTexts[i].text = $"{curLevelIndex + i + 1}";
             }
+        }
+        
+        public void OnPlayBtnClicked()
+        {
+            if (lifeSystem.CanPlay)
+            {
+                loadingLevel.NextPage = ePageType.InGame;
+                CanvasManager.Instance.CurPage = ePageType.LoadingLevel;
+            }
+            else lifeSystem.FlashOnOutOfLife();
         }
     }
 }

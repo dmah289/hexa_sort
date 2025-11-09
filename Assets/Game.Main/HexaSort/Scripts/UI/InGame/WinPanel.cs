@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Coffee_Rush.UI.MainMenu.SharedUI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.UI.Loading.MainMenu.SharedUI;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Coffee_Rush.UI.InGame
+namespace HexaSort.UI.Loading.InGame
 {
     public class WinPanel : MonoBehaviour
     {

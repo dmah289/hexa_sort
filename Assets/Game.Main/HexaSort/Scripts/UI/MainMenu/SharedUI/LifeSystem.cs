@@ -1,14 +1,27 @@
 using System;
 using DG.Tweening;
-using Framework;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.MainMenu.Home
+namespace HexaSort.UI.MainMenu.SharedUI
 {
-    public class LifeSystem : MonoSingleton<LifeSystem>
+    public struct LifeChangedEventDTO : IEventDTO
     {
+        public int amount;
+        public LifeChangedEventDTO(int amount)
+        {
+            this.amount = amount;
+        }
+    }
+    
+    public class LifeSystem : MonoBehaviour, IEventBusListener
+    {
+        private const int MAX_LIVES = 5;
+        private static string MaxLifeKey = "MAX";
+        
         [Header("Self Components")]
         [SerializeField] private Text counter;
         [SerializeField] private Text timer;
@@ -23,20 +36,17 @@ namespace Coffee_Rush.UI.MainMenu.Home
         private float countdownRemaining;
         private DateTime lastSaveTime;
         [SerializeField] private bool isTimerRunning;
-        [SerializeField] private float timeForOneLife = 10;
-        private int maxLives = 5;
-        
+        [SerializeField] private float timeForOneLife;
         
         public int CurLife
         {
             get => curLife;
             set
             {
-                curLife = Mathf.Clamp(value, 0, maxLives);
+                curLife = Mathf.Clamp(value, 0, MAX_LIVES);
                 UpdateLifeCounterDisplay();
             }
         }
-
         
         public float CurCountdown
         {
@@ -50,10 +60,10 @@ namespace Coffee_Rush.UI.MainMenu.Home
         
         public bool CanPlay => CurLife > 0;
 
-        protected override void Awake()
+        #region Unity APIs
+
+        private void Awake()
         {
-            base.Awake();
-            
             LoadLifeData();
         }
         
@@ -66,33 +76,37 @@ namespace Coffee_Rush.UI.MainMenu.Home
                 if (countdownRemaining <= 0)
                 {
                     CurLife++;
-                    if(CurLife < maxLives) CurCountdown = timeForOneLife;
+                    if(CurLife < MAX_LIVES) CurCountdown = timeForOneLife;
                 }
             }
         }
         
         private void OnApplicationQuit()
         {
-            PlayerPrefs.SetInt(KeySave.curLifeKey, curLife);
-            PlayerPrefs.SetString(KeySave.lastSaveTimeKey, DateTime.Now.ToString());
-            PlayerPrefs.SetFloat(KeySave.lastCountdownRemaining, countdownRemaining);
+            PlayerPrefs.SetInt(ConstantKey.CurLifeKey, curLife);
+            PlayerPrefs.SetString(ConstantKey.LastSaveTimeKey, DateTime.Now.ToString());
+            PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, countdownRemaining);
             PlayerPrefs.Save();
         }
-        
+
+        #endregion
+
+        #region Class Methods
+
         private void LoadLifeData()
         {
             CurLife = 5;
             CurCountdown = 0;
-            if (PlayerPrefs.HasKey(KeySave.lastSaveTimeKey))
+            if (PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
             {
-                DateTime savedTime = DateTime.Parse(PlayerPrefs.GetString(KeySave.lastSaveTimeKey));
+                DateTime savedTime = DateTime.Parse(PlayerPrefs.GetString(ConstantKey.LastSaveTimeKey));
                 TimeSpan elapsedTime = DateTime.Now - savedTime;
-                countdownRemaining = PlayerPrefs.GetFloat(KeySave.lastCountdownRemaining);
+                countdownRemaining = PlayerPrefs.GetFloat(ConstantKey.LastCountdownRemainingKey);
                 
                 float totalSecondsElapsed = (float)elapsedTime.TotalSeconds;
                 int livesToAdd = Mathf.FloorToInt(totalSecondsElapsed / timeForOneLife);
 
-                CurLife = PlayerPrefs.GetInt(KeySave.curLifeKey);
+                CurLife = PlayerPrefs.GetInt(ConstantKey.CurLifeKey);
                 if (livesToAdd > 0)
                 {
                     CurLife += livesToAdd;
@@ -109,17 +123,17 @@ namespace Coffee_Rush.UI.MainMenu.Home
         {
             counter.text = $"{curLife}";
 
-            if (curLife == maxLives)
+            if (curLife == MAX_LIVES)
             {
                 isTimerRunning = false;
-                timer.text = KeySave.maxKey;
+                timer.text = MaxLifeKey;
             }
             else isTimerRunning = true;
         }
 
         private void UpdateTimerDisplay()
         {
-            if (curLife < maxLives)
+            if (curLife < MAX_LIVES)
             {
                 int minutes = Mathf.FloorToInt(countdownRemaining / 60);
                 int seconds = Mathf.FloorToInt(countdownRemaining % 60);
@@ -135,10 +149,29 @@ namespace Coffee_Rush.UI.MainMenu.Home
             counter.DOFade(1, animDuration).From(0.3f).SetLoops(3, LoopType.Yoyo);
         }
 
-        public void DecreaseOnLifeLost()
+        #endregion
+        
+        #region Life Changed Event Bus
+
+        public void RegisterCallbacks()
         {
-            CurLife--;
-            CurCountdown = timeForOneLife;
+            EventBus<LifeChangedEventDTO>.Register(onEventWithArgs: OnLifeChanged);
         }
+        
+        public void OnLifeChanged(LifeChangedEventDTO dto)
+        {
+            CurLife += dto.amount;
+            
+            if(dto.amount < 0) CurCountdown = timeForOneLife;
+        }
+
+        public void DeregisterCallbacks()
+        {
+            EventBus<LifeChangedEventDTO>.Deregister(onEventWithArgs: OnLifeChanged);
+        }
+
+        #endregion
+
+        
     }
 }

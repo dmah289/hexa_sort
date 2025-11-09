@@ -1,28 +1,16 @@
-using Coffee_Rush.UI.BaseSystem;
+using HexaSort.UI.BaseSystem;
+using HexaSort.UI.Loading.BaseSystem;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
-namespace Coffee_Rush.UI
+namespace HexaSort.UI.Loading
 {
     public class CanvasManager : MonoSingleton<CanvasManager>
     {
-        [Header("Self References")]
+        // Self References
         private IPage[] pages;
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            pages = GetComponentsInChildren<IPage>();
-            Application.targetFrameRate = 60;
-        }
-
-        private void OnEnable()
-        {
-            CurPage = ePageType.MainMenu;
-        }
-
         private ePageType curPage;
+        
         public ePageType CurPage
         {
             get => curPage;
@@ -31,6 +19,14 @@ namespace Coffee_Rush.UI
                 curPage = value;
                 OnPageChanged();
             }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            pages = GetComponentsInChildren<IPage>();
+            CurPage = ePageType.MainMenu;
         }
 
         private void OnPageChanged()

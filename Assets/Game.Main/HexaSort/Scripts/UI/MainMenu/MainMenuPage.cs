@@ -1,9 +1,7 @@
-using System;
-using Coffee_Rush.UI.BaseSystem;
-using DG.Tweening;
+using HexaSort.UI.BaseSystem;
 using UnityEngine;
 
-namespace Coffee_Rush.UI.MainMenu
+namespace HexaSort.UI.MainMenu
 {
     public class MainMenuPage : MonoBehaviour, IPage
     {

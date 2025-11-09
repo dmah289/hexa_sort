@@ -1,4 +1,4 @@
-namespace Coffee_Rush.UI.BaseSystem
+namespace HexaSort.UI.BaseSystem
 {
     public interface IPage
     {

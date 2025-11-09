@@ -1,10 +1,7 @@
-using System;
 using Cysharp.Threading.Tasks;
-using manhnd_sdk.Scripts.ExtensionMethods;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace HexaSort.Scripts.UI
+namespace HexaSort.UI.Loading
 {
     public abstract class ALoadingScreen : MonoBehaviour
     {

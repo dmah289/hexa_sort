@@ -1,14 +1,13 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Coffee_Rush.UI.MainMenu.Footer
+namespace HexaSort.UI.Loading.MainMenu.Footer
 {
     public class FooterManager : MonoBehaviour
     {
         [SerializeField] private RectTransform selection;
         [SerializeField] private FooterButton[] footerButtons;
         [SerializeField] private RectTransform tabsParent;
-        
         
         private float minSelectionPosX;
         private float maxSelectionPosX;
@@ -18,9 +17,9 @@ namespace Coffee_Rush.UI.MainMenu.Footer
 
         [SerializeField] private Vector2 upperMinMaxAnchorX;
         [SerializeField] private Vector2 lowerMinMaxAnchorX;
-        
-
         [SerializeField] private float curRatio;
+        
+        
         public float LerpRatio
         {
             get => curRatio;

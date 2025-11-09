@@ -2,7 +2,7 @@ using Framework.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Coffee_Rush.UI.InGame
+namespace HexaSort.UI.Loading.InGame
 {
     public enum eRestartButton
     {

@@ -1,8 +1,9 @@
-
-using Coffee_Rush.UI.MainMenu.Home;
 using Cysharp.Threading.Tasks;
+using HexaSort.UI.MainMenu.SharedUI;
+using HexaSort.UI.Loading.MainMenu.Home;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 
-namespace Coffee_Rush.UI.InGame
+namespace HexaSort.UI.Loading.InGame
 {
     public class RestartPopup : APopup
     {
@@ -22,7 +23,8 @@ namespace Coffee_Rush.UI.InGame
         {
             bgClickHandler.OnBackgroundHiden?.Invoke();
             
-            LifeSystem.Instance.DecreaseOnLifeLost();
+            EventBus<LifeChangedEventDTO>.Raise(new  LifeChangedEventDTO(-1));
+            // LifeSystem.Instance.OnLifeChanged();
             // LevelManager.Instance.StopGameplay();
             
             RestartPanel restartPanel = bgClickHandler as RestartPanel;

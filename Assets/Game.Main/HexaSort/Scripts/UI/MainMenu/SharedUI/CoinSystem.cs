@@ -1,8 +1,9 @@
 using Framework;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.MainMenu.SharedUI
+namespace HexaSort.UI.Loading.MainMenu.SharedUI
 {
     public class CoinSystem : MonoBehaviour
     {
@@ -16,14 +17,14 @@ namespace Coffee_Rush.UI.MainMenu.SharedUI
             set
             {
                 coinCount = value;
-                PlayerPrefs.SetInt(KeySave.CoinCountKey, coinCount);
+                PlayerPrefs.SetInt(ConstantKey.CoinCountKey, coinCount);
                 counterTxt.text = $"{coinCount}";
             }
         }
 
         private void OnEnable()
         {
-            CoinCounter = PlayerPrefs.GetInt(KeySave.CoinCountKey, 0);
+            CoinCounter = PlayerPrefs.GetInt(ConstantKey.CoinCountKey, 0);
         }
     }
 }

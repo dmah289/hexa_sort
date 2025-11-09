@@ -5,7 +5,7 @@ using Framework.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Coffee_Rush.UI.MainMenu.Home
+namespace HexaSort.UI.Loading.MainMenu.Home
 {
     public abstract class APopup : MonoBehaviour
     {

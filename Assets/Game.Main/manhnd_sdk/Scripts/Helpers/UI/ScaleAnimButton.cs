@@ -16,7 +16,7 @@ namespace Framework.UI
         [SerializeField] protected float animDuration = 0.1f;
         [SerializeField] protected float clickIntervalThreshold;
         [SerializeField] protected float actionDelay;
-        [SerializeField] protected float lastClickTime;
+        protected float lastClickTime;
         
         [SerializeField] protected UnityEvent OnScaleAnimDone;
 
