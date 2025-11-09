@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8449694735882799189, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -595,6 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelLoader: {fileID: 0}
   gameplayCam: {fileID: 963194227}
+  grid: {fileID: 1160128950}
   currentLevelState: 0
 --- !u!4 &1017770902
 Transform:

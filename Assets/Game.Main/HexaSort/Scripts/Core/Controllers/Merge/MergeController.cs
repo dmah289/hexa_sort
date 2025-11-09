@@ -89,7 +89,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
             // TODO : Refactor level fail condition
             if (grid.IsOutOfSpace)
-                LevelManager.Instance.CurrentLevelState = LevelState.Failed;
+                LevelManager.Instance.CurrentLevelState = eLevelState.Failed;
 
             isCheckingMergeSequence = false;
         }

@@ -41,8 +41,6 @@ namespace HexaSort.Scripts.Core.Entities
         private void Awake()
         {
             gridSpawner = GetComponent<GridSpawner>();
-            
-            SetupLevel();
         }
 
         #endregion
@@ -55,9 +53,5 @@ namespace HexaSort.Scripts.Core.Entities
         }
         
         #endregion
-        
-        
-        
-        
     }
 }

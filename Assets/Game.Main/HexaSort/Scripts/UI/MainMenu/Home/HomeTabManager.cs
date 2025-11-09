@@ -36,8 +36,8 @@ namespace HexaSort.UI.MainMenu.Home
         {
             if (lifeSystem.CanPlay)
             {
-                loadingLevel.NextPage = ePageType.InGame;
-                CanvasManager.Instance.CurPage = ePageType.LoadingLevel;
+                loadingLevel.NextScreen = eScreenType.InGame;
+                CanvasManager.Instance.CurScreen = eScreenType.LoadingLevel;
             }
             else lifeSystem.FlashOnOutOfLife();
         }

@@ -9,14 +9,14 @@ namespace HexaSort.UI.Loading
     {
         // Self References
         private IPage[] pages;
-        private ePageType curPage;
+        private eScreenType curScreen;
         
-        public ePageType CurPage
+        public eScreenType CurScreen
         {
-            get => curPage;
+            get => curScreen;
             set
             {
-                curPage = value;
+                curScreen = value;
                 OnPageChanged();
             }
         }
@@ -26,14 +26,14 @@ namespace HexaSort.UI.Loading
             base.Awake();
 
             pages = GetComponentsInChildren<IPage>();
-            CurPage = ePageType.MainMenu;
+            CurScreen = eScreenType.MainMenu;
         }
 
         private void OnPageChanged()
         {
             for (int i = 0; i < pages.Length; i++)
             {
-                if((byte)curPage == i) pages[i].Show();
+                if((byte)curScreen == i) pages[i].Show();
                 else pages[i].Hide();
             }
         }

@@ -1,10 +1,9 @@
 ﻿using System;
 using DG.Tweening;
+using HexaSort.Scripts.Core.Entities;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
-using manhnd_sdk.Scripts.Helpers;
 using manhnd_sdk.Scripts.SystemDesign;
-using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Managers
@@ -16,11 +15,12 @@ namespace HexaSort.Scripts.Managers
         
         [Header("References")]
         [SerializeField] private Camera gameplayCam;
+        [SerializeField] private GridController grid;
         
         [Header("State Management")]
-        [SerializeField] private LevelState currentLevelState;
+        [SerializeField] private eLevelState currentLevelState;
         
-        public LevelState CurrentLevelState
+        public eLevelState CurrentLevelState
         {
             get => currentLevelState;
             set
@@ -28,12 +28,12 @@ namespace HexaSort.Scripts.Managers
                 if (currentLevelState == value) return;
                 currentLevelState = value;
 
-                switch (currentLevelState)
-                {
-                    case LevelState.OutOfSpace:
-                        EventBus<LevelOutOfSpaceDTO>.Raise();
-                        break;
-                }
+                // switch (currentLevelState)
+                // {
+                //     case LevelState.OutOfSpace:
+                //         EventBus<LevelOutOfSpaceDTO>.Raise();
+                //         break;
+                // }
             }
         }
 
@@ -44,9 +44,9 @@ namespace HexaSort.Scripts.Managers
             levelLoader = GetComponent<LevelLoader>();
         }
 
-        public void EnterLevel()
+        public void EnterGameplay()
         {
-            levelLoader.SetupLevel();
+            levelLoader.SetupLevel(grid);
         }
 
         public void ZoomInCamera(int width, Vector2 centerPos)
