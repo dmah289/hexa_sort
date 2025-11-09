@@ -73,5 +73,30 @@ namespace HexaSort.UI.Loading.MainMenu.Footer
             tabsParent.anchorMin = new Vector2(res.x, 0);
             tabsParent.anchorMax = new Vector2(res.y, 1);
         }
+        
+        public void SyncFromPage(float ratio)
+        {
+            // Chặn giá trị ratio trong khoảng [0, 1]
+            curRatio = Mathf.Clamp01(ratio);
+            UpdateSelectionPosition();
+    
+            for (int i = 0; i < footerButtons.Length; i++)
+            {
+                footerButtons[i].OnLerpRatioChanged(curRatio);
+            }
+        }
+
+        public void SnapToTab(int index)
+        {
+            targetRatio = Mathf.Clamp01((float)index / 2);
+            normDirection = Mathf.Sign(targetRatio - curRatio);
+        }
+        
+        public void StopAnimation()
+        {
+            // Reset target về giá trị hiện tại để dừng animation
+            targetRatio = curRatio;
+            normDirection = 0;
+        }
     }
 }
