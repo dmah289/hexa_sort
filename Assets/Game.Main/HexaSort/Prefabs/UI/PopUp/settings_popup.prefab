@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfRectTransform: {fileID: 0}
   targetScale: 1.05
-  animDuration: 0.1
+  animDuration: 0.15
   clickIntervalThreshold: 0.3
   actionDelay: 0
   OnScaleAnimDone:
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfRectTransform: {fileID: 0}
   targetScale: 1.05
-  animDuration: 0.1
+  animDuration: 0.15
   clickIntervalThreshold: 0.3
   actionDelay: 0
   OnScaleAnimDone:
@@ -450,10 +450,10 @@ RectTransform:
   - {fileID: 9050678613585445945}
   m_Father: {fileID: 5108044893328618083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 325, y: -375}
+  m_SizeDelta: {x: 650, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2509726223881145342
 GameObject:
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selfRectTransform: {fileID: 0}
   targetScale: 1.05
-  animDuration: 0.1
+  animDuration: 0.15
   clickIntervalThreshold: 0.3
   actionDelay: 0
   OnScaleAnimDone:
@@ -572,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1882927441108560450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1053,10 +1053,10 @@ RectTransform:
   - {fileID: 2414587889538534128}
   m_Father: {fileID: 5108044893328618083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 325, y: -75}
+  m_SizeDelta: {x: 650, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5233687583132713414
 GameObject:
@@ -1320,10 +1320,10 @@ RectTransform:
   - {fileID: 4227258812309474677}
   m_Father: {fileID: 5108044893328618083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 325, y: -225}
+  m_SizeDelta: {x: 650, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8357041884417935870
 GameObject:
@@ -1496,12 +1496,7 @@ MonoBehaviour:
   bgClickHandler: {fileID: 0}
   selfRectTransform: {fileID: 0}
   popUpImg: {fileID: 0}
-  hidenPos: {x: 0, y: -1500}
-  shownPos: {x: 0, y: 150}
-  animDuration: 0.7
-  easeType: 24
-  amplitude: 0.01
-  period: 0.5
+  shownPos: {x: 0, y: 50}
 --- !u!1 &8894799735445818175
 GameObject:
   m_ObjectHideFlags: 0

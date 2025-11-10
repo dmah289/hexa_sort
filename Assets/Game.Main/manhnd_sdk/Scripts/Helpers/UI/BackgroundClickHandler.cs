@@ -1,5 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Framework.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -9,23 +11,22 @@ namespace Framework.UI
 {
     public class BackgroundClickHandler : MonoBehaviour, IPointerClickHandler
     {
-        public static float FadeDuration = 0.2f;
+        private const float FadeDuration = 0.2f;
+        private const float TargetAlpha = 200/255f;
+        private const float ClickIntervalThreshold = 1.5f;
         
         [SerializeField] private Image selfImg;
-        [SerializeField] private float targetAlpha = 200/255f;
-        
-        [SerializeField] protected float clickIntervalThreshold;
-        [SerializeField] protected float lastClickTime;
+        private float lastClickTime;
         
         public UnityEvent OnBackgroundHiden;
         public UnityEvent OnBackgroundShown;
-        
-        protected bool CanClick
+
+        private bool CanClick
         {
             get
             {
                 float timeSinceLastClick = Time.time - lastClickTime;
-                if (timeSinceLastClick >= clickIntervalThreshold)
+                if (timeSinceLastClick >= ClickIntervalThreshold)
                 {
                     lastClickTime = Time.time;
                     return true;
@@ -50,18 +51,18 @@ namespace Framework.UI
             if (eventData.pointerCurrentRaycast.gameObject == gameObject && CanClick)
                 HideBackground();
         }
-
-        public void HideBackground()
-        {
-            // selfImg.FadeAlphaToTarget(FadeDuration).Forget();
-            OnBackgroundHiden?.Invoke();
-        }
         
         public virtual void ShowBackground()
         {
             gameObject.SetActive(true);
-            // selfImg.SetAlpha(targetAlpha);
+            selfImg.SetAlpha(TargetAlpha);
             OnBackgroundShown?.Invoke();
+        }
+        
+        public void HideBackground()
+        {
+            selfImg.DOFade(0, FadeDuration);
+            OnBackgroundHiden?.Invoke();
         }
     }
 }

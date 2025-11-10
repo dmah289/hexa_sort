@@ -6,7 +6,7 @@ namespace Framework.Extensions
 {
     public static class ImageExtensions
     {
-        public static async UniTask FadeAlphaToTarget(this Image image, float fadeDuration, float targetAlpha = 0)
+        public static async UniTask FadeAlphaToTarget(this Image image, float fadeDuration, float targetAlpha)
         {
             float timer = 0;
             float curAlpha = image.color.a;
