@@ -1,3 +1,4 @@
+using System;
 using Framework;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -32,10 +33,21 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
             }
         }
 
-        private void OnEnable()
+        #region Unity APIs
+
+        private void Awake()
         {
-            CoinCounter = PlayerPrefs.GetInt(ConstantKey.CoinCountKey, 0);
+            RegisterCallbacks();
         }
+
+        // private void OnEnable()
+        // {
+        //     CoinCounter = PlayerPrefs.GetInt(ConstantKey.CoinCountKey, 0);
+        // }
+
+        #endregion
+
+        
 
         #region Coin Change Event
 

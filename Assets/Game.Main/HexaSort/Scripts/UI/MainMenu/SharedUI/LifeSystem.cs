@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using DG.Tweening;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign;
@@ -64,8 +65,12 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         private void Awake()
         {
-            LoadLifeData();
             RegisterCallbacks();
+        }
+
+        private void OnEnable()
+        {
+            LoadLifeData();
         }
         
         private void Update()
@@ -85,7 +90,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
         private void OnApplicationQuit()
         {
             PlayerPrefs.SetInt(ConstantKey.CurLifeKey, curLife);
-            PlayerPrefs.SetString(ConstantKey.LastSaveTimeKey, DateTime.Now.ToString());
+            PlayerPrefs.SetString(ConstantKey.LastSaveTimeKey, DateTime.Now.ToString(CultureInfo.InvariantCulture));
             PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, countdownRemaining);
             PlayerPrefs.Save();
         }
@@ -96,7 +101,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         private void LoadLifeData()
         {
-            CurLife = 5;
+            CurLife = MAX_LIVES;
             CurCountdown = 0;
             if (PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
             {
