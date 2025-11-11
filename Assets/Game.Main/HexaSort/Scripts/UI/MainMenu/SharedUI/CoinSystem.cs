@@ -1,5 +1,6 @@
 using System;
 using Framework;
+using Game.Main.HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
 {
     public struct CoinChangedEventDTO : IEventDTO
     {
-        public int amount;
-        public CoinChangedEventDTO(int amount)
+        public float amount;
+        public CoinChangedEventDTO(float amount)
         {
             this.amount = amount;
         }
@@ -21,14 +22,14 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
         [SerializeField] private Text counterTxt;
         
 
-        [SerializeField] private int coinCount;
-        public int CoinCounter
+        [SerializeField] private float coinCount;
+        public float CoinCounter
         {
             get => coinCount;
             set
             {
                 coinCount = value;
-                PlayerPrefs.SetInt(ConstantKey.CoinCountKey, coinCount);
+                LocalDataManager.CoinAmount = coinCount;
                 counterTxt.text = $"{coinCount}";
             }
         }
