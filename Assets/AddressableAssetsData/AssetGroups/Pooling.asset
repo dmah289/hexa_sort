@@ -17,8 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: d6a7c38b1477e2f49800609584985f01
   m_SerializeEntries:
+  - m_GUID: 12ea9da7624d7ae41b8231b3649c2b17
+    m_Address: pooling_toast
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a682e7fccd8d1a489ca2fcdec6ac2d1
     m_Address: pooling_hex_stack
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e47dd55caa1c10478595c36d928c311
+    m_Address: pooling_life_fly
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -34,6 +44,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b85fe38793c97f947a6347c4f12a95e8
     m_Address: pooling_hex_piece
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcd9a399a400d7c4b83772a3bd686436
+    m_Address: pooling_coin_fly
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

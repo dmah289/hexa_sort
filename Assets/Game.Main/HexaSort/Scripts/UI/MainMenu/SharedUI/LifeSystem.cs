@@ -34,7 +34,6 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         
         [Header("Life System Config")]
-        [SerializeField] private int curLife;
         private float countdownRemaining;
         private DateTime lastSaveTime;
         [SerializeField] private bool isTimerRunning;
@@ -42,10 +41,10 @@ namespace HexaSort.UI.MainMenu.SharedUI
         
         public int CurLife
         {
-            get => curLife;
+            get => LocalDataManager.CurrentLife;
             set
             {
-                curLife = Mathf.Clamp(value, 0, MAX_LIVES);
+                LocalDataManager.CurrentLife = Mathf.Clamp(value, 0, MAX_LIVES);
                 UpdateLifeCounterDisplay();
             }
         }
@@ -61,6 +60,8 @@ namespace HexaSort.UI.MainMenu.SharedUI
         }
         
         public bool CanPlay => CurLife > 0;
+        
+        public RectTransform TargetRectTransform => counter.rectTransform;
 
         #region Unity APIs
 
@@ -102,11 +103,14 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         #region Class Methods
 
-        private void LoadLifeData()
+        public void LoadLifeData()
         {
-            CurLife = MAX_LIVES;
-            CurCountdown = 0;
-            if (PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
+            if (!PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
+            {
+                CurLife = MAX_LIVES;
+                CurCountdown = 0;
+            }
+            else
             {
                 DateTime savedTime = DateTime.Parse(LocalDataManager.LastLifeSaveTime);
                 TimeSpan elapsedTime = DateTime.Now - savedTime;
@@ -130,9 +134,9 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         private void UpdateLifeCounterDisplay()
         {
-            counter.text = $"{curLife}";
+            counter.text = $"{LocalDataManager.CurrentLife}";
 
-            if (curLife == MAX_LIVES)
+            if (LocalDataManager.CurrentLife == MAX_LIVES)
             {
                 isTimerRunning = false;
                 timer.text = MaxLifeKey;
@@ -142,7 +146,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
 
         private void UpdateTimerDisplay()
         {
-            if (curLife < MAX_LIVES)
+            if (LocalDataManager.CurrentLife < MAX_LIVES)
             {
                 int minutes = Mathf.FloorToInt(countdownRemaining / 60);
                 int seconds = Mathf.FloorToInt(countdownRemaining % 60);
@@ -160,7 +164,6 @@ namespace HexaSort.UI.MainMenu.SharedUI
         
         private void SaveCounterConfigs()
         {
-            LocalDataManager.CurrentLife = curLife;
             LocalDataManager.LastLifeSaveTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             LocalDataManager.LastCountdownRemaining = countdownRemaining;
         }

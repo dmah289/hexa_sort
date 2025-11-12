@@ -1,10 +1,9 @@
-using Framework;
+using DG.Tweening;
+using Framework.UI;
 using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.BaseSystem;
-using HexaSort.UI.Loading.MainMenu.Home;
-using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,10 +17,17 @@ namespace HexaSort.UI.MainMenu.Home
         [Header("References")]
         [SerializeField] private LoadingLevel loadingLevel;
         [SerializeField] private LifeSystem lifeSystem;
+        [SerializeField] private BackgroundClickHandler getMoreLifePanel;
 
         private void OnEnable()
         {
             SetupLevelPath();
+            DOVirtual.DelayedCall(1f,() =>
+            {
+                LocalDataManager.CurrentLife = 0;
+                LocalDataManager.CoinAmount = 1000;
+                lifeSystem.LoadLifeData();
+            });
         }
 
         private void SetupLevelPath()
@@ -40,7 +46,11 @@ namespace HexaSort.UI.MainMenu.Home
                 loadingLevel.NextScreen = eScreenType.InGame;
                 CanvasManager.Instance.CurScreen = eScreenType.LoadingLevel;
             }
-            else lifeSystem.FlashOnOutOfLife();
+            else
+            {
+                lifeSystem.FlashOnOutOfLife();
+                getMoreLifePanel.ShowBackground();
+            }
         }
     }
 }

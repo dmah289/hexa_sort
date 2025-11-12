@@ -10,5 +10,8 @@
         Separator,
         
         // UI Pooling Types
+        Toast,
+        CoinFly,
+        LifeFly,
     }
 }

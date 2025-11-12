@@ -21,16 +21,13 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
     {
         [SerializeField] private Text counterTxt;
         
-
-        [SerializeField] private float coinCount;
         public float CoinCounter
         {
-            get => coinCount;
+            get => LocalDataManager.CoinAmount;
             set
             {
-                coinCount = value;
-                LocalDataManager.CoinAmount = coinCount;
-                counterTxt.text = $"{coinCount}";
+                LocalDataManager.CoinAmount = value;
+                counterTxt.text = $"{LocalDataManager.CoinAmount}";
             }
         }
 
@@ -41,15 +38,13 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
             RegisterCallbacks();
         }
 
-        // private void OnEnable()
-        // {
-        //     CoinCounter = PlayerPrefs.GetInt(ConstantKey.CoinCountKey, 0);
-        // }
+        private void OnEnable()
+        {
+            counterTxt.text = $"{LocalDataManager.CoinAmount}";
+        }
 
         #endregion
-
         
-
         #region Coin Change Event
 
         public void RegisterCallbacks()
