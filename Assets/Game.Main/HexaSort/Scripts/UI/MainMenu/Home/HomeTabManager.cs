@@ -1,5 +1,4 @@
 using Framework;
-using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.BaseSystem;
@@ -26,7 +25,7 @@ namespace HexaSort.UI.MainMenu.Home
 
         private void SetupLevelPath()
         {
-            int curLevelIndex = LocalDataManager.LevelIndex;
+            int curLevelIndex = PlayerPrefs.GetInt(ConstantKey.LevelIndexKey, 0);
             for (int i = 0; i < levelIndexTexts.Length; i++)
             {
                 levelIndexTexts[i].text = $"{curLevelIndex + i + 1}";

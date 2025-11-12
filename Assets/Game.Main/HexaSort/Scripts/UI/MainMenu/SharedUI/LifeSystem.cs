@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using DG.Tweening;
-using Game.Main.HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -21,7 +20,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
     
     public class LifeSystem : MonoBehaviour, IEventBusListener
     {
-        public const int MAX_LIVES = 5;
+        private const int MAX_LIVES = 5;
         private static string MaxLifeKey = "MAX";
         
         [Header("Self Components")]
@@ -87,15 +86,13 @@ namespace HexaSort.UI.MainMenu.SharedUI
                 }
             }
         }
-
-        private void OnDisable()
-        {
-            SaveCounterConfigs();
-        }
-
+        
         private void OnApplicationQuit()
         {
-            SaveCounterConfigs();
+            PlayerPrefs.SetInt(ConstantKey.CurLifeKey, curLife);
+            PlayerPrefs.SetString(ConstantKey.LastSaveTimeKey, DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, countdownRemaining);
+            PlayerPrefs.Save();
         }
 
         #endregion
@@ -108,14 +105,14 @@ namespace HexaSort.UI.MainMenu.SharedUI
             CurCountdown = 0;
             if (PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
             {
-                DateTime savedTime = DateTime.Parse(LocalDataManager.LastLifeSaveTime);
+                DateTime savedTime = DateTime.Parse(PlayerPrefs.GetString(ConstantKey.LastSaveTimeKey));
                 TimeSpan elapsedTime = DateTime.Now - savedTime;
-                countdownRemaining = LocalDataManager.LastCountdownRemaining;
+                countdownRemaining = PlayerPrefs.GetFloat(ConstantKey.LastCountdownRemainingKey);
                 
                 float totalSecondsElapsed = (float)elapsedTime.TotalSeconds;
                 int livesToAdd = Mathf.FloorToInt(totalSecondsElapsed / timeForOneLife);
 
-                CurLife = LocalDataManager.CurrentLife;
+                CurLife = PlayerPrefs.GetInt(ConstantKey.CurLifeKey);
                 if (livesToAdd > 0)
                 {
                     CurLife += livesToAdd;
@@ -156,13 +153,6 @@ namespace HexaSort.UI.MainMenu.SharedUI
             counter.rectTransform.DOScale(targetScale, animDuration).From(1).SetLoops(4, LoopType.Yoyo)
                 .OnComplete(() => counter.rectTransform.localScale = Vector3.one);
             counter.DOFade(1, animDuration).From(0.3f).SetLoops(3, LoopType.Yoyo);
-        }
-        
-        private void SaveCounterConfigs()
-        {
-            LocalDataManager.CurrentLife = curLife;
-            LocalDataManager.LastLifeSaveTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-            LocalDataManager.LastCountdownRemaining = countdownRemaining;
         }
 
         #endregion

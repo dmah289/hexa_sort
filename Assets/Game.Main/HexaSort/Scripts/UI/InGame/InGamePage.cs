@@ -1,6 +1,5 @@
 using HexaSort.UI.Loading.BaseSystem;
 using Framework;
-using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.BaseSystem;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace HexaSort.UI.Loading.InGame
             {
                 gameObject.SetActive(true);
 
-                levelIndex.text = $"LEVEL {LocalDataManager.LevelIndex + 1,0}";
+                levelIndex.text = $"LEVEL {PlayerPrefs.GetInt(ConstantKey.LevelIndexKey) + 1,0}";
             }
         }
 

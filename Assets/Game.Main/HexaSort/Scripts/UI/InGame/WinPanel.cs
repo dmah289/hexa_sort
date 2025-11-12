@@ -25,7 +25,7 @@ namespace HexaSort.UI.Loading.InGame
         [Header("Manager")]
         [SerializeField] private RectTransform coinPrefabs;
         [SerializeField] private RectTransform[] coins;
-        [SerializeField] private float coinAmount;
+        [SerializeField] private int coinAmount;
 
         private void Awake()
         {
