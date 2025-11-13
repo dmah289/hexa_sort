@@ -1,8 +1,8 @@
 ﻿using manhnd_sdk.Scripts.Optimization.PoolingSystem;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace Runtime.Manager.Toast
+namespace manhnd_sdk.UITools.Toast
 {
 	public class Toast : MonoBehaviour
 	{

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
@@ -65,6 +66,16 @@ namespace HexaSort.Scripts.Managers
             gameplayCam.DOOrthoSize(targetOrthoSize, 1.5f)
                 .SetEase(Ease.OutSine)
                 .OnKill(() => gameplayCam.orthographicSize = targetOrthoSize);
+        }
+
+        public async UniTask ReplayLevelAsync()
+        {
+            
+        }
+
+        public async UniTask FailLevel()
+        {
+            
         }
     }
 }

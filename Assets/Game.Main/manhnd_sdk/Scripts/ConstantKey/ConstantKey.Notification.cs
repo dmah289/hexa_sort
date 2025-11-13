@@ -4,5 +4,6 @@
     {
         // Toast Notification Keys
         public static string InsufficentCoins = "Insufficient coins!";
+        public static string InsufficentLives = "Insufficient lives!";
     }
 }

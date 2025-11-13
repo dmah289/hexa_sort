@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace HexaSort.UI.Loading.InGame
 {
-    public class RestartButton : ScaleAnimButton
+    public class ExitButton : ScaleAnimButton
     {
         [SerializeField] private eRestartButton btnType;
         public UnityEvent<eRestartButton> OnRestartButtonClicked;

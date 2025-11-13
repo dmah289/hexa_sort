@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace HexaSort.UI.Loading.MainMenu.Home
 {
-    public abstract class APopup : MonoBehaviour
+    public class APopup : MonoBehaviour
     {
         public const float MoveSpeed = 2870f;
         

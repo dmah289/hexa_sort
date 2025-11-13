@@ -35,5 +35,7 @@ namespace Game.Main.HexaSort.Scripts.Managers
             get => PlayerPrefs.GetFloat(ConstantKey.LastCountdownRemainingKey, 0);
             set => PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, value);
         }
+
+        public static bool IsEnoughLives => CurrentLife > 0;
     }
 }

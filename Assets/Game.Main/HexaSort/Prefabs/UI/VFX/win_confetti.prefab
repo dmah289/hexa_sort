@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 1608030071064994235}
   - component: {fileID: 1748664539972014483}
   - component: {fileID: 1315173391530051795}
-  - component: {fileID: 2448101552634566871}
   m_Layer: 0
-  m_Name: Win_Confetti
+  m_Name: win_confetti
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +28,8 @@ RectTransform:
   m_GameObject: {fileID: 3351807094963976066}
   m_LocalRotation: {x: -0.24779011, y: -0.6622689, z: -0.24779011, w: 0.6622689}
   m_LocalPosition: {x: 0, y: 0, z: 148.00014}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8381484001100288602}
   m_Father: {fileID: 0}
@@ -4851,7 +4850,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6322510a50f5bbb4dba68cad9e0e37b4, type: 2}
+  - {fileID: 2100000, guid: 87a8267357e596e47b783b48bf087f6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4869,9 +4868,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1192524783
   m_SortingLayer: 0
-  m_SortingOrder: 92
+  m_SortingOrder: 116
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4912,43 +4911,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3351807094963976066}
   m_CullTransparentMesh: 1
---- !u!114 &2448101552634566871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351807094963976066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16f0b0b6d0b7542bfbd20a3e05b04ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_IsTrail: 0
-  m_IgnoreCanvasScaler: 0
-  m_AbsoluteMode: 0
-  m_Scale3D: {x: 10, y: 10, z: 10}
-  m_AnimatableProperties: []
-  m_Particles:
-  - {fileID: 1608030071064994235}
-  - {fileID: 5973139502976072100}
-  m_MeshSharing: 0
-  m_GroupId: 0
-  m_GroupMaxId: 0
-  m_PositionMode: 0
-  m_AutoScaling: 0
-  m_AutoScalingMode: 2
-  m_UseCustomView: 0
-  m_CustomViewSize: 10
-  m_TimeScaleMultiplier: 1
 --- !u!1 &8136954711168304877
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
-namespace Runtime.Manager.Toast
+namespace manhnd_sdk.UITools.Toast
 {
 	public class ToastManager : MonoSingleton<ToastManager>
 	{

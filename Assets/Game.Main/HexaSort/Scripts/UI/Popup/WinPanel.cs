@@ -16,6 +16,8 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] private RectTransform selfRect;
         [SerializeField] private RectTransform visualRect;
         [SerializeField] private RectTransform target;
+        [SerializeField] private ParticleSystem[] confetti;
+        
         
         [Header("Claim Button Elements")]
         [SerializeField] private Text coinAmountTxt;
@@ -42,7 +44,10 @@ namespace HexaSort.UI.Loading.InGame
         {
             //LevelManager.Instance.StopGameplay();
             
-            await UniTask.Delay(2500);
+            await UniTask.Delay(1500);
+            
+            for(int i = 0; i < confetti.Length; i++)
+                confetti[i].Play();
             
             gameObject.SetActive(true);
             //coinAmount = LevelManager.Instance.levelLoader.currLevelData.coinAmount;

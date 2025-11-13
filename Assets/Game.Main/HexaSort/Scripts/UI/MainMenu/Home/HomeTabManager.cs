@@ -22,12 +22,6 @@ namespace HexaSort.UI.MainMenu.Home
         private void OnEnable()
         {
             SetupLevelPath();
-            DOVirtual.DelayedCall(1f,() =>
-            {
-                LocalDataManager.CurrentLife = 0;
-                LocalDataManager.CoinAmount = 1000;
-                lifeSystem.LoadLifeData();
-            });
         }
 
         private void SetupLevelPath()

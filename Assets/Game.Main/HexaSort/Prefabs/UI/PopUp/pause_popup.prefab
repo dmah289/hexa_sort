@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: 1216779279425315796}
   - component: {fileID: 4327464388009915805}
   - component: {fileID: 6912269316512380280}
+  - component: {fileID: 2197869043866488041}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -419,6 +420,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2197869043866488041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783036127279130429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb8b3a701d84f798fc331204e4a084b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfRectTransform: {fileID: 0}
+  targetScale: 1.1
+  animDuration: 0.1
+  clickIntervalThreshold: 0.3
+  actionDelay: 0
+  OnScaleAnimDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8625197338138432052}
+        m_TargetAssemblyTypeName: Framework.UI.BackgroundClickHandler, Assembly-CSharp
+        m_MethodName: HideBackground
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1964814448750184888
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +731,7 @@ GameObject:
   - component: {fileID: 7329199555765925139}
   - component: {fileID: 462269753088686747}
   - component: {fileID: 8558024039271144995}
+  - component: {fileID: 1757153181815078245}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -763,6 +797,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1757153181815078245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247884340999167070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c12a2b1bfa4d3a976ecd5b624bd850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfRectTransform: {fileID: 0}
+  targetScale: 1.1
+  animDuration: 0.1
+  clickIntervalThreshold: 0.3
+  actionDelay: 0
+  OnScaleAnimDone:
+    m_PersistentCalls:
+      m_Calls: []
+  btnType: 1
+  OnRestartButtonClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HexaSort.UI.Loading.InGame.RestartPanel, Assembly-CSharp
+        m_MethodName: ShowBackgroundByButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3041601591162288376
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +996,7 @@ GameObject:
   - component: {fileID: 2016127445438177624}
   - component: {fileID: 1322195345850670665}
   - component: {fileID: 2875488135787148412}
+  - component: {fileID: 7124346606489397439}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -990,6 +1061,38 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7124346606489397439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188037290225542654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb8b3a701d84f798fc331204e4a084b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfRectTransform: {fileID: 0}
+  targetScale: 1.1
+  animDuration: 0.1
+  clickIntervalThreshold: 0
+  actionDelay: 0.3
+  OnScaleAnimDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8625197338138432052}
+        m_TargetAssemblyTypeName: Framework.UI.BackgroundClickHandler, Assembly-CSharp
+        m_MethodName: HideBackground
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4166037434877611090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,6 +2080,7 @@ GameObject:
   - component: {fileID: 1366643586930564916}
   - component: {fileID: 3023136497692747720}
   - component: {fileID: 3781221440188880665}
+  - component: {fileID: 7687248676164551829}
   m_Layer: 5
   m_Name: container
   m_TagString: Untagged
@@ -2004,7 +2108,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 1001.1827}
+  m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3023136497692747720
 CanvasRenderer:
@@ -2044,6 +2148,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7687248676164551829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667335607791854493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d8c4df4c014dc79056d84d3aa162f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgClickHandler: {fileID: 0}
+  selfRectTransform: {fileID: 0}
+  popUpImg: {fileID: 0}
+  shownPos: {x: 0, y: 0}
 --- !u!1 &8444788145805001441
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2173,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5598369469160963583}
+  - component: {fileID: 1567548975651167061}
+  - component: {fileID: 4666999784778496967}
+  - component: {fileID: 8625197338138432052}
   m_Layer: 5
   m_Name: pause_popup
   m_TagString: Untagged
@@ -2080,6 +2203,87 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1567548975651167061
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444788145805001441}
+  m_CullTransparentMesh: 1
+--- !u!114 &4666999784778496967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444788145805001441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8625197338138432052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444788145805001441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630c451b53be4513abf058b8b84e60e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfImg: {fileID: 0}
+  OnBackgroundHiden:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7687248676164551829}
+        m_TargetAssemblyTypeName: HexaSort.UI.Loading.MainMenu.Home.APopup, Assembly-CSharp
+        m_MethodName: HidePopup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnBackgroundShown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7687248676164551829}
+        m_TargetAssemblyTypeName: HexaSort.UI.Loading.MainMenu.Home.APopup, Assembly-CSharp
+        m_MethodName: ShowPopup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8813716864449911543
 GameObject:
   m_ObjectHideFlags: 0
