@@ -27,6 +27,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
         [Header("Self Components")]
         [SerializeField] private Text counter;
         [SerializeField] private Text timer;
+        [SerializeField] private ParticleSystem coinHitEffect;
 
         [Header("Settings")] 
         [SerializeField] private float targetScale;
@@ -166,6 +167,11 @@ namespace HexaSort.UI.MainMenu.SharedUI
         {
             LocalDataManager.LastLifeSaveTime = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             LocalDataManager.LastCountdownRemaining = countdownRemaining;
+        }
+
+        public void PlayCoinHitEffect()
+        {
+            coinHitEffect.Play();
         }
 
         #endregion

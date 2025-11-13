@@ -51,7 +51,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
             life.DOAnchorPos(Vector2.zero, 0.75f).OnComplete(() =>
             {
                 ObjectPooler.ReturnToPool(PoolingType.LifeFly, life, destroyCancellationToken);
-                //TODO : Play VFX in life panel
+                lifeSystem.PlayCoinHitEffect();
             });
             
         }

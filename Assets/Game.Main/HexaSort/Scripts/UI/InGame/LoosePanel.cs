@@ -26,8 +26,6 @@ namespace HexaSort.UI.Loading.InGame
 
         public async UniTaskVoid Show(eLooseReason reason)
         {
-            // LevelManager.Instance.StopGameplay();
-
             await UniTask.Delay(500);
             
             gameObject.SetActive(true);
@@ -36,7 +34,7 @@ namespace HexaSort.UI.Loading.InGame
             failLevelPanel.gameObject.SetActive(reason != eLooseReason.OutOfSpace);
         }
 
-        public void OnNoBtnClicked()
+        public void OnCloseRevivePopupClicked()
         {
             revievePanel.SetActive(false);
             failLevelPanel.gameObject.SetActive(true);
@@ -45,7 +43,7 @@ namespace HexaSort.UI.Loading.InGame
             failLevelPanel.DOScale(Vector3.one, 0.2f);
         }
 
-        public void OnContinueBtnClicked()
+        public void OnContinueBtnFailClicked()
         {
             // TODO : review this logic
             EventBus<LifeChangedEventDTO>.Raise(new  LifeChangedEventDTO(-1));

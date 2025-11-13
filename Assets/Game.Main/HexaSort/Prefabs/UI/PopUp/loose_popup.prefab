@@ -1418,7 +1418,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 720008106043488131}
         m_TargetAssemblyTypeName: Coffee_Rush.UI.InGame.LoosePanel, Assembly-CSharp
-        m_MethodName: OnContinueBtnClicked
+        m_MethodName: OnContinueBtnFailClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1907,7 +1907,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 720008106043488131}
         m_TargetAssemblyTypeName: Coffee_Rush.UI.InGame.LoosePanel, Assembly-CSharp
-        m_MethodName: OnNoBtnClicked
+        m_MethodName: OnCloseRevivePopupClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
