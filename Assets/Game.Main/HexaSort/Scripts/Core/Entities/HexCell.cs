@@ -53,7 +53,11 @@ namespace HexaSort.Scripts.Core.Entities
             meshRenderer.SetVertexLitColor(SelectionController.Instance.normalCellColor);
         }
 
-        public void OnReturnToPool() { }
+        public void OnReturnToPool()
+        {
+            if(currStack)
+                ObjectPooler.ReturnToPool(PoolingType.HexStack, currStack, destroyCancellationToken);
+        }
 
         public void SetMaterialState(Color color)
         {

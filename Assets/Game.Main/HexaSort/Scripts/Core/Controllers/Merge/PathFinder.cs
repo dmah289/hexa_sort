@@ -30,7 +30,7 @@ namespace HexaSort.Scripts.Core.Controllers
             cellsToVisit = new ();
         }
         
-        private void InitBfsGridState((int width, int height) gridSize)
+        private void ResetBfsGridState((int width, int height) gridSize)
         {
             if(visitedCells == null) visitedCells = new bool[gridSize.height, gridSize.width];
             Array.Clear(visitedCells, 0, visitedCells.Length);
@@ -52,7 +52,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
         public void GetConnectedCells(HexCell cell, GridController grid)
         {
-            InitBfsGridState(grid.GridSize);
+            ResetBfsGridState(grid.GridSize);
             
             cellsToVisit.Add(cell);
             connectedCells.Add(cell);

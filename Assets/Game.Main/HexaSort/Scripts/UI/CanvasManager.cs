@@ -1,3 +1,4 @@
+using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Loading.BaseSystem;
 using manhnd_sdk.Scripts.SystemDesign;
@@ -9,7 +10,12 @@ namespace HexaSort.UI.Loading
     {
         // Self References
         private IPage[] pages;
-        private eScreenType curScreen;
+        
+        [Header("References")]
+        [SerializeField] private LoadingLevel loadingLevel;
+        
+        [Header("State Management")]
+        [SerializeField] private eScreenType curScreen;
         
         public eScreenType CurScreen
         {
@@ -26,6 +32,7 @@ namespace HexaSort.UI.Loading
             base.Awake();
 
             pages = GetComponentsInChildren<IPage>();
+            Debug.Log(pages.Length);
             CurScreen = eScreenType.MainMenu;
         }
 
@@ -36,6 +43,13 @@ namespace HexaSort.UI.Loading
                 if((byte)curScreen == i) pages[i].Show();
                 else pages[i].Hide();
             }
+        }
+
+        public void ShowLoadingScreen(eScreenType nextScreen)
+        {
+            PopupManager.Instance.DisableAllPopups();
+            loadingLevel.NextScreen = nextScreen;
+            CurScreen = eScreenType.LoadingLevel;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
 using HexaSort.UI.Loading.InGame;
+using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
@@ -18,8 +19,12 @@ namespace HexaSort.Core.Entities
         
         [Header("UI References")]
         [SerializeField] private WinPanel winPanel;
-        
-        public HexCell[,] GridCells => gridSpawner.gridCells;
+
+        public HexCell[,] GridCells
+        {
+            get => gridSpawner.gridCells;
+            set => gridSpawner.gridCells = value;
+        }
         
         public (int width, int height) GridSize
             => (GridCells.GetLength(1), GridCells.GetLength(0));
@@ -84,6 +89,11 @@ namespace HexaSort.Core.Entities
         public void DeregisterCallbacks()
         {
             EventBus<OutOfSpaceEventDTO>.Register(onEventWithoutArgs: OnGridOutOfSpace);
+        }
+
+        public void CleanUp()
+        {
+            gridSpawner.CleanUp();
         }
     }
 }

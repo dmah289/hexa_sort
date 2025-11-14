@@ -17,6 +17,7 @@ namespace HexaSort.Scripts.Core.Entities
         
         [Header("Self references")]
         [SerializeField] private Transform[] hexStackHolders;
+        [SerializeField] private HexStackController[] hexStacks = new HexStackController[3];
         
         [Header("Configurations")]
         [SerializeField] private Vector2 spawnMidStackPos;
@@ -46,6 +47,8 @@ namespace HexaSort.Scripts.Core.Entities
 
         public void SetupTray(float centerPosX, float minCellY, float maxCellX, int height)
         {
+            gameObject.SetActive(true);
+            
             float trayToGridOffsetY = 0.157f * height + 0.314f;
             
             Vector2 targetPos= new Vector2(
@@ -59,6 +62,16 @@ namespace HexaSort.Scripts.Core.Entities
             selfTransform.position = targetPos;
             SpawnHexStacks().Forget();
         }
+        
+        public void CleanUp()
+        {
+            for (int i = 0; i < hexStackHolders.Length; i++)
+            {
+                ObjectPooler.ReturnToPool(PoolingType.HexStack, hexStacks[i], destroyCancellationToken);
+            }
+            
+            gameObject.SetActive(false);
+        }
 
         #endregion
 
@@ -68,10 +81,10 @@ namespace HexaSort.Scripts.Core.Entities
         {
             for (int i = 0; i < 3; i++)
             {
-                HexStackController hexStack = await ObjectPooler.GetFromPool<HexStackController>(
+                hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
                     PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
-
-                hexStack.OnSpawned(i, spawnMidStackPos).Forget();
+                
+                hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos).Forget();
             }
 
             remainStackAmount = 3;
@@ -100,5 +113,7 @@ namespace HexaSort.Scripts.Core.Entities
         }
 
         #endregion
+
+        
     }
 }

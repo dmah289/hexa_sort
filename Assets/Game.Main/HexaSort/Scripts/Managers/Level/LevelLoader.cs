@@ -12,5 +12,11 @@ namespace HexaSort.Scripts.Managers
         {
             grid.SetupLevel();
         }
+
+        public void CleanUpLevel(GridController grid, TrayController tray)
+        {
+            grid.CleanUp();
+            tray.CleanUp();
+        }
     }
 }

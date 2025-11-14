@@ -54,15 +54,21 @@ namespace Framework.UI
         
         public virtual void ShowBackground()
         {
-            gameObject.SetActive(true);
-            selfImg.SetAlpha(TargetAlpha);
-            OnBackgroundShown?.Invoke();
+            if (!gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+                selfImg.SetAlpha(TargetAlpha);
+                OnBackgroundShown?.Invoke();
+            }
         }
         
         public void HideBackground()
         {
-            selfImg.DOFade(0, FadeDuration);
-            OnBackgroundHiden?.Invoke();
+            if (gameObject.activeSelf)
+            {
+                selfImg.DOFade(0, FadeDuration);
+                OnBackgroundHiden?.Invoke();
+            }
         }
     }
 }

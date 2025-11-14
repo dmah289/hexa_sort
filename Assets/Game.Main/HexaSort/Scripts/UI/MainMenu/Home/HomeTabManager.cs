@@ -36,10 +36,7 @@ namespace HexaSort.UI.MainMenu.Home
         public void OnPlayBtnClicked()
         {
             if (lifeSystem.CanPlay)
-            {
-                loadingLevel.NextScreen = eScreenType.InGame;
-                CanvasManager.Instance.CurScreen = eScreenType.LoadingLevel;
-            }
+                CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
             else
             {
                 lifeSystem.FlashOnOutOfLife();

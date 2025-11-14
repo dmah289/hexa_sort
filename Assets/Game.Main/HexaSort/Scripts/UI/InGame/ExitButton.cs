@@ -7,8 +7,8 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class ExitButton : ScaleAnimButton
     {
-        [SerializeField] private eRestartButton btnType;
-        public UnityEvent<eRestartButton> OnRestartButtonClicked;
+        [SerializeField] private eGiveUpButton btnType;
+        public UnityEvent<eGiveUpButton> OnRestartButtonClicked;
 
         protected override void OnButtonClicked()
         {

@@ -43,7 +43,7 @@ namespace HexaSort.Core.Entities
             }
         }
 
-        public async UniTaskVoid OnSpawned(int idx, Vector2 spawnMidStackPos)
+        public async UniTaskVoid OnSpawningOnTray(int idx, Vector2 spawnMidStackPos)
         {
             int pieceAmount = Random.Range(3, 8);
             for(int i = 0; i < pieceAmount; i++)
@@ -86,6 +86,12 @@ namespace HexaSort.Core.Entities
         {
             parentCell = null;
             isOnGrid = false;
+            
+            for (int i = pieces.Count - 1; i >= 0; i--)
+            {
+                ObjectPooler.ReturnToPool(PoolingType.HexPiece, pieces[i], destroyCancellationToken);
+                pieces.RemoveAt(i);
+            }
         }
 
         #endregion

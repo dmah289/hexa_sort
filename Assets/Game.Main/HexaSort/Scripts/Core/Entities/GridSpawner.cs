@@ -50,5 +50,29 @@ namespace HexaSort.Scripts.Core.Entities
             tray.SetupTray(centerPos.x, minCellY, maxCellX, size);
             LevelManager.Instance.ZoomInCamera(size, centerPos);
         }
+        
+        public void CleanUp()
+        {
+            if (gridCells == null) return;
+        
+            int rows = gridCells.GetLength(0);
+            int cols = gridCells.GetLength(1);
+        
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (gridCells[i, j] != null)
+                    {
+                        ObjectPooler.ReturnToPool(PoolingType.HexCell, gridCells[i, j], destroyCancellationToken);
+                        gridCells[i, j] = null;
+                    }
+                }
+            }
+        
+            gridCells = null;
+        }
     }
+    
+    
 }

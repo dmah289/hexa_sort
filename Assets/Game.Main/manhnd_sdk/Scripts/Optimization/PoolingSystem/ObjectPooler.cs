@@ -100,7 +100,7 @@ namespace manhnd_sdk.Scripts.Optimization.PoolingSystem
         /// <param name="type">The enum value index-based mapping to the pool list</param>
         /// <param name="instance">Instance that need returning to pool</param>
         /// <param name="allowChecking">Allow checking if the object returned to pool has the same type with cached prefab</param>
-        /// <param name="allowChecking">Action is called if object isn't a poolable object</param>
+        /// <param name="onReturnToPool">Action is called if object isn't a poolable object</param>
         /// <typeparam name="T">Type of the object need returning to pool</typeparam>
         /// <exception cref="InvalidCastException">Throw if instance doesn't have the same type with objects in respectively pool</exception>
         public static void ReturnToPool<T>(PoolingType type,

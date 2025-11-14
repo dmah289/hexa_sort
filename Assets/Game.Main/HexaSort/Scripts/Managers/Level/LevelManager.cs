@@ -3,6 +3,8 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
+using HexaSort.UI.Loading;
+using HexaSort.UI.Loading.BaseSystem;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
@@ -22,6 +24,7 @@ namespace HexaSort.Scripts.Managers
         [Header("References")]
         [SerializeField] private Camera gameplayCam;
         [SerializeField] private GridController grid;
+        [SerializeField] private TrayController tray;
         
         [Header("State Management")]
         [SerializeField] private eLevelState currentLevelState;
@@ -70,6 +73,7 @@ namespace HexaSort.Scripts.Managers
 
         public async UniTask ReplayLevelAsync()
         {
+            levelLoader.CleanUpLevel(grid, tray);
             
         }
 

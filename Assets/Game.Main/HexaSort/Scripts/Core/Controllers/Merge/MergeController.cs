@@ -23,6 +23,8 @@ namespace HexaSort.Scripts.Core.Controllers
         [Header("State Managers")]
         [SerializeField] private bool isCheckingMergeSequence;
         
+        public bool IsCheckingMergeSequence => isCheckingMergeSequence;
+        
         #region Unity APIs
 
         private void Awake()
@@ -52,7 +54,7 @@ namespace HexaSort.Scripts.Core.Controllers
         
         private void OnStackLaidDown(LaidDownStackDTO dto)
         {
-            HandleCheckingMerge(dto.cell);
+            HandleCheckingMerge(dto.cell).Forget();
         }
 
         public void DeregisterCallbacks()
@@ -64,28 +66,30 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Class Mehtods
 
-        private async UniTaskVoid HandleCheckingMerge(HexCell cell)
+        private async UniTask HandleCheckingMerge(HexCell cell)
         {
             await UniTask.WaitUntil(() => !mergeSequenceExecutor.IsBusy);
             
             mergeSequenceExecutor.WaitingMergableCells.Add(cell);
             
-            if(!isCheckingMergeSequence) CheckMergeSequence();
+            if(!isCheckingMergeSequence) await CheckMergeSequence();
             else mergeSequenceExecutor.NewStackLaidDown = true;
         }
 
-        private async UniTaskVoid CheckMergeSequence()
+        private async UniTask CheckMergeSequence()
         {
             isCheckingMergeSequence = true;
-            
+
             while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
             {
+                Debug.Log($"fi - {mergeSequenceExecutor.WaitingMergableCells.Count}");
                 HexCell cell = mergeSequenceExecutor.WaitingMergableCells.RemoveFirst();
                 if (cell.IsOccupied)
                 {
                     await HandleMergeSequence(cell);
                     await UniTask.Yield();
                 }
+                Debug.Log($"se - {mergeSequenceExecutor.WaitingMergableCells.Count}");
             }
 
             if (grid.IsOutOfSpace)
