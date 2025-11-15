@@ -1,18 +1,27 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Game.Main.LevelEditor.Scripts.LevelData;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Core.Entities.Piece;
+using HexaSort.UI.Gameplay.Goals;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HexaSort.Scripts.Core.Controllers
 {
     public class MergeSequenceExecutor : MonoBehaviour
     {
-        private const int MergeDelayBeforeNewExecution = 100;
-        private const int MergeDelayBetween2PairMerge = 300;
+        private const int MergeDelayBeforeNewExecution = 300;
+        private const int MergeDelayBetween2PairMerge = 500;
         private const int CheckCollectingDelay = 300;
+        
+        [Header("References")]
+        [SerializeField] private RectTransform piecesGoalTargetPanel;
+        [SerializeField] private Camera mainCam;
         
         [Header("Merge Tracking")]
         [SerializeField] private bool isCheckingMerging;
@@ -27,18 +36,8 @@ namespace HexaSort.Scripts.Core.Controllers
         
         
         public List<HexCell> WaitingMergableCells => waitingMergableCells;
-        
-        // Add a safe enqueue method to avoid duplicate entries which cause re-processing
-        public void EnqueueWaitingMergableCell(HexCell cell)
-        {
-            if (cell == null) return;
-            if (!waitingMergableCells.Contains(cell))
-                waitingMergableCells.Add(cell);
-        }
-        
-        public bool IsPairMerging => isPairMerging;
-        public bool IsCheckingCollecting => isCheckingCollecting;
         public bool IsBusy => isPairMerging || isCheckingCollecting;
+        
 
         public bool NewStackLaidDown
         {
@@ -48,6 +47,8 @@ namespace HexaSort.Scripts.Core.Controllers
 
         public async UniTask ExecuteMergeSequence(List<HexCell> connectedCells, HexCell[,] parents)
         {
+            await UniTask.Delay(MergeDelayBeforeNewExecution);
+            
             if (connectedCells.Count <= 1)
                 return;
             
@@ -114,7 +115,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 cell.CurrentStack = null;
             }
             else waitingMergableCells.Add(cell);
-        } 
+        }
         
         private async UniTask CheckCollectingPieces(HexCell cell)
         {
@@ -133,15 +134,42 @@ namespace HexaSort.Scripts.Core.Controllers
                 for (int i = 0; i < sameColorCount; i++)
                 {
                     cell.CurrentStack.CollectLastPiece();
+                    
+                    if(i == sameColorCount-2)
+                        await PlayVFXToPieceGoalPanel(cell, sameColorCount);
+                    
                     await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
                 }
+                
+                CheckIfCanContinueMerging(cell);
             }
             
-            // TODO : Raise event piece collected
-            
-            CheckIfCanContinueMerging(cell);
-            
             isCheckingCollecting = false;
+        }
+
+        private async UniTask PlayVFXToPieceGoalPanel(HexCell cell, int sameColorCount)
+        {
+            RectTransform starTrail = await ObjectPooler.GetFromPool<RectTransform>(PoolingType.StarTrail, destroyCancellationToken, piecesGoalTargetPanel);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(piecesGoalTargetPanel,
+                mainCam.WorldToScreenPoint(cell.selfTransform.position),
+                null,
+                out Vector2 localPos);
+            starTrail.anchoredPosition = localPos;
+
+            eGoalCollectedDTO piecesCollectedDTO = new eGoalCollectedDTO(eLevelGoalType.Piece, sameColorCount);
+                
+            for (int i = 0; i < starTrail.childCount; i++)
+            {
+                Image image = starTrail.GetChild(i).GetComponent<Image>();
+                if (image != null)
+                    image.enabled = i == (int)piecesCollectedDTO.goalType;
+            }
+                
+            starTrail.DOAnchorPos(Vector2.zero, 0.75f).SetEase(Ease.InOutSine).OnComplete(() =>
+            {
+                ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
+                //EventBus<eGoalCollectedDTO>.Raise(piecesCollectedDTO);
+            });
         }
     }
 }

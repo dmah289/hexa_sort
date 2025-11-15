@@ -47,6 +47,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5e0086d81e5abc45a45471889787985
+    m_Address: pooling_star_trail
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fcd9a399a400d7c4b83772a3bd686436
     m_Address: pooling_coin_fly
     m_ReadOnly: 0

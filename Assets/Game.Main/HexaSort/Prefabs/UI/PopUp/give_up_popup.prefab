@@ -843,9 +843,9 @@ MonoBehaviour:
   OnScaleAnimDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HexaSort.UI.Loading.MainMenu.Home.APopup, Assembly-CSharp
-        m_MethodName: HidePopup
+      - m_Target: {fileID: 8223691380829560709}
+        m_TargetAssemblyTypeName: Framework.UI.BackgroundClickHandler, Assembly-CSharp
+        m_MethodName: HideBackground
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

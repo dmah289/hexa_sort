@@ -1,14 +1,29 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Main.LevelEditor.Scripts.LevelData;
 using manhnd_sdk.ExtensionMethods;
 using HexaSort.Scripts.Managers;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace HexaSort.UI.Gameplay.Goals
 {
-    public class GoalTrackerManager : MonoBehaviour
+    public struct eGoalCollectedDTO : IEventDTO
+    {
+        public eLevelGoalType goalType;
+        public int collectedAmount;
+        
+        public eGoalCollectedDTO(eLevelGoalType goalType, int collectedAmount)
+        {
+            this.goalType = goalType;
+            this.collectedAmount = collectedAmount;
+        }
+    }
+    
+    public class GoalTrackerManager : MonoBehaviour, IEventBusListener
     {
         private const float SlideSpeed = 850f;
         
@@ -20,14 +35,27 @@ namespace HexaSort.UI.Gameplay.Goals
         [SerializeField] private TextMeshProUGUI titleTxt;
         public GoalTrackerPanel[] goalTrackerPanels;
 
+        #region Unity APIs
+
+        private void Awake()
+        {
+            goalTrackerPanels = GetComponentsInChildren<GoalTrackerPanel>();
+        }
+
         private void OnEnable()
         {
+            RegisterCallbacks();
+            
             SetLevelGoalData();
             
             ResetUIStates();
 
             AnimateSlidingIn().Forget();
         }
+
+        #endregion
+
+        #region Class Methods
 
         private void ResetUIStates()
         {
@@ -71,5 +99,28 @@ namespace HexaSort.UI.Gameplay.Goals
             
             Canvas.ForceUpdateCanvases();
         }
+
+        #endregion
+
+        #region On Goal Collected Listeners
+
+        public void RegisterCallbacks()
+        {
+            EventBus<eGoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
+        }
+
+        private void OnGoalCollected(eGoalCollectedDTO dto)
+        {
+            goalTrackerPanels[(int)dto.goalType].OnGoalCollected(dto.collectedAmount);
+        }
+
+        public void DeregisterCallbacks()
+        {
+            EventBus<eGoalCollectedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
+        }
+
+        #endregion
+
+        
     }
 }

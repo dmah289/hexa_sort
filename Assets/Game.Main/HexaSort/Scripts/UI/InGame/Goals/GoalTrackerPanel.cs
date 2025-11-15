@@ -63,5 +63,10 @@ namespace HexaSort.UI.Gameplay.Goals
 
             await Task.Delay((int)(ScaleDuration * count * 1000));
         }
+
+        public void OnGoalCollected(int dtoCollectedAmount)
+        {
+            
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
             {PoolingType.HexPiece, "pooling_hex_piece"},
             {PoolingType.Toast, "pooling_toast"},
             {PoolingType.CoinFly, "pooling_coin_fly"},
-            {PoolingType.LifeFly, "pooling_life_fly"}
+            {PoolingType.LifeFly, "pooling_life_fly"},
+            {PoolingType.StarTrail, "pooling_star_trail"},
         };
         
         

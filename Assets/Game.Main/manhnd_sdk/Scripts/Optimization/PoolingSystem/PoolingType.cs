@@ -13,5 +13,6 @@
         Toast,
         CoinFly,
         LifeFly,
+        StarTrail
     }
 }

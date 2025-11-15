@@ -82,14 +82,12 @@ namespace HexaSort.Scripts.Core.Controllers
 
             while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
             {
-                Debug.Log($"fi - {mergeSequenceExecutor.WaitingMergableCells.Count}");
                 HexCell cell = mergeSequenceExecutor.WaitingMergableCells.RemoveFirst();
                 if (cell.IsOccupied)
                 {
                     await HandleMergeSequence(cell);
                     await UniTask.Yield();
                 }
-                Debug.Log($"se - {mergeSequenceExecutor.WaitingMergableCells.Count}");
             }
 
             if (grid.IsOutOfSpace)
