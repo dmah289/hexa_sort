@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Framework.Extensions;
 using Framework.UI;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,11 @@ namespace HexaSort.UI.Loading.MainMenu.Home
         public virtual void ShowPopup()
         {
             popUpImg.DOKill();
-            popUpImg.SetAlpha(1);
+            if (popUpImg == null)
+            {
+                Debug.Log(gameObject.Path());
+            }
+            else popUpImg.SetAlpha(1);
             selfRectTransform.localScale = Vector3.one;
             
             selfRectTransform.DOKill();

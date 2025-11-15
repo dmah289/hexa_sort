@@ -13,8 +13,6 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class GiveUpPopup : APopup
     {
-        
-        
         public void OnGiveUpClicked()
         {
             GiveUpPanel giveUpPanel = bgClickHandler as GiveUpPanel;
@@ -24,8 +22,7 @@ namespace HexaSort.UI.Loading.InGame
                 {
                     EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
                     CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
-                    
-                    LevelManager.Instance.ReplayLevelAsync().Forget();
+                    LevelManager.Instance.CleanUpLevel().Forget();
                 }
                 else
                 {
@@ -37,7 +34,7 @@ namespace HexaSort.UI.Loading.InGame
             {
                 EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
-                
+                LevelManager.Instance.CleanUpLevel().Forget();
             }
             
             bgClickHandler.OnBackgroundHiden?.Invoke();

@@ -98,5 +98,10 @@ namespace HexaSort.UI.Loading.MainMenu.Footer
             targetRatio = curRatio;
             normDirection = 0;
         }
+
+        public void ShowMenuShop()
+        {
+            OnFooterButtonClicked(0);
+        }
     }
 }

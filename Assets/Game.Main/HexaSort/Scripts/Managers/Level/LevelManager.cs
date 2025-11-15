@@ -71,7 +71,7 @@ namespace HexaSort.Scripts.Managers
                 .OnKill(() => gameplayCam.orthographicSize = targetOrthoSize);
         }
 
-        public async UniTask ReplayLevelAsync()
+        public async UniTask CleanUpLevel()
         {
             levelLoader.CleanUpLevel(grid, tray);
             

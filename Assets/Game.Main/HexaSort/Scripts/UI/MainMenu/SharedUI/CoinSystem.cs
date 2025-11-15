@@ -1,6 +1,8 @@
 using System;
 using Framework;
 using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.UI.Loading.BaseSystem;
+using HexaSort.UI.Loading.MainMenu.Footer;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -20,6 +22,7 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
     public class CoinSystem : MonoBehaviour, IEventBusListener
     {
         [SerializeField] private Text counterTxt;
+        [SerializeField] private FooterManager footer;
         
         public float CoinCounter
         {
@@ -63,5 +66,13 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
         }
 
         #endregion
+
+        public void OnCoinBtnClicked()
+        {
+            if (CanvasManager.Instance.CurScreen == eScreenType.MainMenu)
+            {
+                footer.ShowMenuShop();
+            }
+        }
     }
 }

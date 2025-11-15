@@ -28,6 +28,9 @@ namespace HexaSort.Scripts.Core.Entities
                 {
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
+#if UNITY_EDITOR
+                    cell.gameObject.name = $"cell_[{i}][{j}]";
+#endif
                     cell.GridPos = (i,j);
                     gridCells[i, j] = cell;
 
