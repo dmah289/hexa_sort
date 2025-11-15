@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Framework.Extensions;
 using Framework.UI;
+using manhnd_sdk.ExtensionMethods;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using UnityEngine;
 using UnityEngine.UI;

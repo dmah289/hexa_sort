@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Main.HexaSort.Scripts.LevelData
+namespace Game.Main.LevelEditor.Scripts.LevelData
 {
     public class LevelDB : ScriptableObject
     {

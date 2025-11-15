@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillRectTransform: {fileID: 4371611298242303276}
-  fillDuration: 3.5
+  fillDuration: 2.3
   maxFillWidth: 825
   fillHeight: 55
   newSceneName: gameplay_scene

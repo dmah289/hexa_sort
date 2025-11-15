@@ -1,0 +1,75 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using manhnd_sdk.ExtensionMethods;
+using HexaSort.Scripts.Managers;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace HexaSort.UI.Gameplay.Goals
+{
+    public class GoalTrackerManager : MonoBehaviour
+    {
+        private const float SlideSpeed = 850f;
+        
+        [Header("Self Components")]
+        [SerializeField] private RectTransform containerRt;
+        
+        [Header("References")]
+        [SerializeField] private RectTransform panelRt;
+        [SerializeField] private TextMeshProUGUI titleTxt;
+        public GoalTrackerPanel[] goalTrackerPanels;
+
+        private void OnEnable()
+        {
+            SetLevelGoalData();
+            
+            ResetUIStates();
+
+            AnimateSlidingIn().Forget();
+        }
+
+        private void ResetUIStates()
+        {
+            panelRt.anchoredPosition = new Vector2((int)(Screen.width / 2) + panelRt.rect.width / 2f + 155f,
+                (int)(-Screen.height / 2) + panelRt.rect.height / 2 + 31f);
+            panelRt.GetComponent<Image>().SetAlpha(1);
+            
+            titleTxt.gameObject.SetActive(true);
+            titleTxt.alpha = 1;
+            titleTxt.transform.localScale = Vector3.one;
+            
+            containerRt.GetComponent<Image>().SetAlpha(1);
+        }
+
+        private async UniTask AnimateSlidingIn()
+        {
+            await panelRt.DOAnchorPosX(0, panelRt.anchoredPosition.x / 900f)
+                .SetEase(Ease.OutBack)
+                .ToUniTask();
+            
+            await UniTask.Delay(1000);
+            
+            float duration = Mathf.Abs(panelRt.anchoredPosition.y) / SlideSpeed;
+            
+            panelRt.DOAnchorPosY(0, duration);
+            panelRt.GetComponent<Image>().DOFade(0, duration);
+            
+            titleTxt.DOFade(0, duration);
+            titleTxt.transform.DOScale(0, 0.2f * duration).OnComplete(() =>
+            {
+                titleTxt.gameObject.SetActive(false);
+            });
+
+            if (LevelManager.Instance.LevelGoalCount <= 1)
+                containerRt.GetComponent<Image>().DOFade(0, duration);
+        }
+
+        private void SetLevelGoalData()
+        {
+            
+            
+            Canvas.ForceUpdateCanvases();
+        }
+    }
+}

@@ -7,7 +7,7 @@ namespace HexaSort.UI.Loading
     {
         [Header("Shared Fields")]
         [SerializeField] private RectTransform fillRectTransform;
-        [SerializeField] private float fillDuration = 3.5f;
+        [SerializeField] private float fillDuration = 2.3f;
         [SerializeField] private float maxFillWidth = 825f;
         [SerializeField] private float fillHeight = 55f;
 

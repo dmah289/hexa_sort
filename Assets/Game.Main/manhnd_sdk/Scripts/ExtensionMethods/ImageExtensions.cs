@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Framework.Extensions
+namespace manhnd_sdk.ExtensionMethods
 {
     public static class ImageExtensions
     {

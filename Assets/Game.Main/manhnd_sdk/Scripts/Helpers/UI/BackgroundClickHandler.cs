@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Framework.Extensions;
+using manhnd_sdk.ExtensionMethods;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;

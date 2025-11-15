@@ -10,15 +10,11 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class InGamePage : MonoBehaviour, IPage
     {
-        [SerializeField] private Text levelIndex; 
-        
         public void Show()
         {
             if (!gameObject.activeSelf)
             {
                 gameObject.SetActive(true);
-
-                levelIndex.text = $"LEVEL {LocalDataManager.LevelIndex + 1,0}";
             }
         }
 
