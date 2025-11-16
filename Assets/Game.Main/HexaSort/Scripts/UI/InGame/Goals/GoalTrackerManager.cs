@@ -67,7 +67,8 @@ namespace HexaSort.UI.Gameplay.Goals
             
             panelRt.anchoredPosition = new Vector2((int)(Screen.width / 2) + panelRt.rect.width / 2f + 155f,
                 (int)(-Screen.height / 2) + panelRt.rect.height / 2 + 31f);
-           //Debug.Log(panelRt.anchoredPosition);
+            //Debug.Log(panelRt.anchoredPosition);
+            panelRt.sizeDelta = new Vector2(1000f, panelRt.sizeDelta.y);
             panelRt.GetComponent<Image>().SetAlpha(1);
             
             titleTxt.gameObject.SetActive(true);
@@ -93,6 +94,7 @@ namespace HexaSort.UI.Gameplay.Goals
             
             panelRt.DOAnchorPosY(0, duration);
             panelRt.GetComponent<Image>().DOFade(0, duration);
+            panelRt.DOSizeDelta(new Vector2(containerRt.sizeDelta.x, panelRt.anchoredPosition.y), duration);
             
             titleTxt.DOFade(0, duration);
             titleTxt.transform.DOScale(0, 0.2f * duration).OnComplete(() =>
@@ -131,7 +133,6 @@ namespace HexaSort.UI.Gameplay.Goals
         }
 
         #endregion
-
         
     }
 }
