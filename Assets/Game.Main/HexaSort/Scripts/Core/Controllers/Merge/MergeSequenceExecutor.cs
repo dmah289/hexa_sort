@@ -168,7 +168,7 @@ namespace HexaSort.Scripts.Core.Controllers
             starTrail.DOAnchorPos(Vector2.zero, 0.75f).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
-                //EventBus<eGoalCollectedDTO>.Raise(piecesCollectedDTO);
+                // EventBus<eGoalCollectedDTO>.Raise(piecesCollectedDTO);
             });
         }
     }

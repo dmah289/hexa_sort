@@ -1,4 +1,4 @@
-﻿using manhnd_sdk.Scripts.SystemDesign.EventBus;
+﻿using System;
 
 namespace Game.Main.LevelEditor.Scripts.LevelData
 {
@@ -8,6 +8,7 @@ namespace Game.Main.LevelEditor.Scripts.LevelData
         Wood
     }
     
+    [Serializable]
     public struct LevelGoal
     {
         public eLevelGoalType type;

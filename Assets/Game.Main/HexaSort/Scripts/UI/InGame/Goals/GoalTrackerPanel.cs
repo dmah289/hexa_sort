@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using DG.Tweening;
+using Game.Main.LevelEditor.Scripts.LevelData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,66 +7,22 @@ namespace HexaSort.UI.Gameplay.Goals
 {
     public abstract class GoalTrackerPanel : MonoBehaviour
     {
-        [SerializeField] private Text targetTxt;
+        private const float TargetScale = 1.1f;
+        private const float ScaleDuration = 0.05f;
         
-        [SerializeField] private Text progressTxt;
-
-        [SerializeField] private RectTransform icon;
-
-        [SerializeField] private Image progressBar;
+        [Header("Config")]
+        [SerializeField] protected LevelGoal goal;
+        [SerializeField] protected int currCollectedAmount;
         
-        [SerializeField] private RectTransform background;
+        [Header("Self Components")]
+        [SerializeField] protected Text counter;
+        [SerializeField] protected RectTransform icon;
 
-        public static float ScaleDuration = 0.05f;
+        public abstract void SetUp(LevelGoal goal);
 
-        public static Vector2 TargetScale = new(1.08f, 1.08f);
-        
-        [SerializeField] private Ease scaleEase;
-
-        public static float stdWidth = 300f;
-
-        public static float onBannerWidth = 220f;
-
-        public void SetUp(int target)
+        public virtual void OnGoalCollected(int collectedAmount)
         {
-            targetTxt.text = $"/{target}";
-            progressTxt.text = "0";
-            progressBar.fillAmount = 0f;
-        }
-
-        public async Task OnScoreGoalUpdate(int target, float percentage)
-        {
-            if (target == 0)
-            {
-                progressTxt.text = "0";
-                progressBar.fillAmount = 0f;
-                return;
-            }
-            
-            Sequence sequence = DOTween.Sequence();
-
-            int count = target - int.Parse(progressTxt.text);
-            
-            for (int i = 0; i < count; i++)
-            {
-                sequence.Append(icon.DOScale(TargetScale, ScaleDuration).SetEase(scaleEase).OnComplete(() =>
-                {
-                    int num = int.Parse(progressTxt.text);
-                    num++;
-                    progressTxt.text = num.ToString();
-                    icon.localScale = Vector3.one;
-                }));
-            }
-
-            progressBar.DOFillAmount(percentage, ScaleDuration * count)
-                .SetEase(scaleEase);
-
-            await Task.Delay((int)(ScaleDuration * count * 1000));
-        }
-
-        public void OnGoalCollected(int dtoCollectedAmount)
-        {
-            
+            icon.DOScale(TargetScale, ScaleDuration).SetEase(Ease.Linear);
         }
     }
 }

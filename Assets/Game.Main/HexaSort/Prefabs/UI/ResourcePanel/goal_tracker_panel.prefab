@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 2641651469089184845}
   - component: {fileID: 532434473716783916}
   - component: {fileID: 7681444768285254732}
+  - component: {fileID: 7588566086919806202}
   m_Layer: 5
   m_Name: goal_tracker_panel
   m_TagString: Untagged
@@ -541,6 +542,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &7588566086919806202
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618527735499337931}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5043681170139180490
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +665,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 270, y: 110.8}
+  m_SizeDelta: {x: 270, y: 110}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4931710312289403383
 CanvasRenderer:

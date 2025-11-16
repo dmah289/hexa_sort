@@ -40,27 +40,34 @@ namespace HexaSort.UI.Gameplay.Goals
         private void Awake()
         {
             goalTrackerPanels = GetComponentsInChildren<GoalTrackerPanel>();
+            RegisterCallbacks();
         }
 
         private void OnEnable()
         {
-            RegisterCallbacks();
-            
-            SetLevelGoalData();
-            
-            ResetUIStates();
+            PlayStartLevelAnim().Forget();
+        }
 
-            AnimateSlidingIn().Forget();
+        private async UniTask PlayStartLevelAnim()
+        {
+            SetLevelGoalData();
+            await ResetUIStates();
+            await AnimateSlidingIn();
         }
 
         #endregion
 
         #region Class Methods
 
-        private void ResetUIStates()
+        private async UniTask ResetUIStates()
         {
+            panelRt.GetComponent<CanvasGroup>().alpha = 0;
+            
+            await UniTask.DelayFrame(1);
+            
             panelRt.anchoredPosition = new Vector2((int)(Screen.width / 2) + panelRt.rect.width / 2f + 155f,
                 (int)(-Screen.height / 2) + panelRt.rect.height / 2 + 31f);
+           //Debug.Log(panelRt.anchoredPosition);
             panelRt.GetComponent<Image>().SetAlpha(1);
             
             titleTxt.gameObject.SetActive(true);
@@ -68,6 +75,10 @@ namespace HexaSort.UI.Gameplay.Goals
             titleTxt.transform.localScale = Vector3.one;
             
             containerRt.GetComponent<Image>().SetAlpha(1);
+            
+            await UniTask.DelayFrame(1);
+            
+            panelRt.GetComponent<CanvasGroup>().alpha = 1;
         }
 
         private async UniTask AnimateSlidingIn()
@@ -95,7 +106,7 @@ namespace HexaSort.UI.Gameplay.Goals
 
         private void SetLevelGoalData()
         {
-            
+            // TODO : Set from Level Data
             
             Canvas.ForceUpdateCanvases();
         }
