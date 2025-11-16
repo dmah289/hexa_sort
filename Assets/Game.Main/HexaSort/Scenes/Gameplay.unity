@@ -130,6 +130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71287836594519964, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 196750370794148275, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -213,6 +217,14 @@ PrefabInstance:
     - target: {fileID: 1028669531517724296, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028669531517724296, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1215
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028669531517724296, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -929
       objectReference: {fileID: 0}
     - target: {fileID: 2206492339919864544, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
@@ -722,6 +734,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0c050188fd412daace289742c088a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currLevelCurveVersion: {fileID: 0}
+  currGridLayoutVersion: {fileID: 0}
 --- !u!1001 &1083937321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,6 +787,10 @@ PrefabInstance:
     - target: {fileID: 4514485019827829392, guid: 8effd3d259501474b99025236212c5fd, type: 3}
       propertyPath: m_Name
       value: tray
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514485019827829392, guid: 8effd3d259501474b99025236212c5fd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

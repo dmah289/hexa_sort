@@ -1,5 +1,7 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using HexaSort.Scripts.Managers;
+using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -11,21 +13,25 @@ namespace HexaSort.Scripts.Core.Entities
     {
         public HexCell[,] gridCells;
         
-        public async UniTaskVoid SetupBoardLayout(TrayController tray)
+        public async UniTaskVoid SetupBoardLayout(TrayController tray, GridLayoutSO currLayout)
         {
-            int size = 5;
-            gridCells = new HexCell[size, size];
+            int width = currLayout.width;
+            int height = currLayout.height;
+            gridCells = new HexCell[height, width];
             
             int activeTile = 0;
             float minCellY = int.MaxValue;
             float maxCellX = int.MinValue;
             Vector2 centerPos = Vector2.zero;
             
-            // Root of the grid is in the bottom left corner
-            for (int i = 0; i < size; i++)
+            // Root of the grid is the bottom left corner
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < size; j++)
+                for (int j = 0; j < width; j++)
                 {
+                    if (currLayout.inactiveCells.Length > 0 && currLayout.inactiveCells.Contains(i * width + j))
+                        continue;
+                    
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
                         PoolingType.HexCell, destroyCancellationToken, transform);
 #if UNITY_EDITOR
@@ -50,8 +56,8 @@ namespace HexaSort.Scripts.Core.Entities
             }
             centerPos /= activeTile;
         
-            tray.SetupTray(centerPos.x, minCellY, maxCellX, size);
-            LevelManager.Instance.ZoomInCamera(size, centerPos);
+            tray.SetupTray(centerPos.x, minCellY, maxCellX, height);
+            LevelManager.Instance.ZoomInCamera(width, centerPos);
         }
         
         public void CleanUp()

@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Game.Main.LevelEditor.Scripts.LevelData;
+using LevelEditor.LevelData;
 using manhnd_sdk.ExtensionMethods;
 using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -63,7 +63,7 @@ namespace HexaSort.UI.Gameplay.Goals
         {
             panelRt.GetComponent<CanvasGroup>().alpha = 0;
             
-            await UniTask.DelayFrame(1);
+            await UniTask.DelayFrame(3);
             
             panelRt.anchoredPosition = new Vector2((int)(Screen.width / 2) + panelRt.rect.width / 2f + 155f,
                 (int)(-Screen.height / 2) + panelRt.rect.height / 2 + 31f);

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Game.Main.LevelEditor.Scripts.LevelData;
+using LevelEditor.LevelData;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Core.Entities.Piece;
 using HexaSort.UI.Gameplay.Goals;
@@ -164,8 +164,10 @@ namespace HexaSort.Scripts.Core.Controllers
                 if (image != null)
                     image.enabled = i == (int)piecesCollectedDTO.goalType;
             }
+
+            await UniTask.Delay(155);
                 
-            starTrail.DOAnchorPos(Vector2.zero, 0.75f).SetEase(Ease.InOutSine).OnComplete(() =>
+            starTrail.DOAnchorPos(Vector2.zero, 0.7f).SetEase(Ease.OutSine).OnComplete(() =>
             {
                 ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
                 // EventBus<eGoalCollectedDTO>.Raise(piecesCollectedDTO);

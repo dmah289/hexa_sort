@@ -27,6 +27,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cdaa1774cf89da4b9363412e8aee8b0
+    m_Address: level_curve_default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb3cc5e4217a4d24fbd7da3894955933
+    m_Address: grid_layout_default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3e564bd4aa7618f44b0c6d5b3e2d2e13, type: 2}
   m_SchemaSet:

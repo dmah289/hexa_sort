@@ -1,5 +1,5 @@
 using DG.Tweening;
-using Game.Main.LevelEditor.Scripts.LevelData;
+using LevelEditor.LevelData;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,4 +1,4 @@
-﻿using Game.Main.LevelEditor.Scripts.LevelData;
+﻿using LevelEditor.LevelData;
 using UnityEngine;
 
 namespace HexaSort.UI.Gameplay.Goals

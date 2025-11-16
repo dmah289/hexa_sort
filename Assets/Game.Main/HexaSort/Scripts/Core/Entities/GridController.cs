@@ -3,6 +3,7 @@ using System.Linq;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
 using HexaSort.UI.Loading.InGame;
+using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace HexaSort.Core.Entities
                 {
                     for(int j = 0; j < GridSize.width; j++)
                     {
-                        if (!GridCells[i, j].IsOccupied)
+                        if (GridCells[i, j] && !GridCells[i, j].IsOccupied)
                             return false;
                     }
                 }
@@ -59,9 +60,9 @@ namespace HexaSort.Core.Entities
 
         #region Class Mehtods
 
-        public void SetupLevel()
+        public void SetupLevel(LevelDataSO currLevelData, GridLayoutSO currLayout)
         {
-            gridSpawner.SetupBoardLayout(trayController).Forget();
+            gridSpawner.SetupBoardLayout(trayController, currLayout).Forget();
         }
         
         #endregion

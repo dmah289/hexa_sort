@@ -14,8 +14,8 @@ namespace Game.Main.HexaSort.Scripts.Managers
         
         public static int LevelIndex
         {
-            get => PlayerPrefs.GetInt(ConstantKey.LevelIndexKey, 0);
-            set => PlayerPrefs.SetInt(ConstantKey.LevelIndexKey, value);
+            get => PlayerPrefs.GetInt(ConstantKey.LevelIndexKey, 0) % ConstantKey.MAX_LEVEL;
+            set => PlayerPrefs.SetInt(ConstantKey.LevelIndexKey, value % ConstantKey.MAX_LEVEL);
         }
         
         public static int CurrentLife

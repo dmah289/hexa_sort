@@ -88,6 +88,8 @@ namespace HexaSort.Scripts.Core.Controllers
                 
                 HexCell neighbour = grid.GridCells[newRow, newCol];
                 
+                if(!neighbour) continue;
+                
                 // neighbour.selfTransform.position = neighbour.selfTransform.position.With(z: -1f);
                 // DOVirtual.DelayedCall(1f,() => neighbour.selfTransform.position = neighbour.selfTransform.position.With(z: 0f));
                 
