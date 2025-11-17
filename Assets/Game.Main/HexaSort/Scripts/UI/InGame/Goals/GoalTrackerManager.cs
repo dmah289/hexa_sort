@@ -11,15 +11,27 @@ using UnityEngine.UI;
 
 namespace HexaSort.UI.Gameplay.Goals
 {
-    public struct eGoalCollectedDTO : IEventDTO
+    public struct GoalCollectedDTO : IEventDTO
     {
         public eLevelGoalType goalType;
         public int collectedAmount;
         
-        public eGoalCollectedDTO(eLevelGoalType goalType, int collectedAmount)
+        public GoalCollectedDTO(eLevelGoalType goalType, int collectedAmount)
         {
             this.goalType = goalType;
             this.collectedAmount = collectedAmount;
+        }
+    }
+    
+    public struct TotalGoalCollectedDTO : IEventDTO
+    {
+        public eLevelGoalType goalType;
+        public int totalCollectedAmount;
+        
+        public TotalGoalCollectedDTO(eLevelGoalType goalType, int totalCollectedAmount)
+        {
+            this.goalType = goalType;
+            this.totalCollectedAmount = totalCollectedAmount;
         }
     }
     
@@ -119,17 +131,17 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public void RegisterCallbacks()
         {
-            EventBus<eGoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
+            EventBus<GoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
         }
 
-        private void OnGoalCollected(eGoalCollectedDTO dto)
+        private void OnGoalCollected(GoalCollectedDTO dto)
         {
             goalTrackerPanels[(int)dto.goalType].OnGoalCollected(dto.collectedAmount);
         }
 
         public void DeregisterCallbacks()
         {
-            EventBus<eGoalCollectedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
+            EventBus<GoalCollectedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
         }
 
         #endregion

@@ -60,9 +60,9 @@ namespace HexaSort.Core.Entities
 
         #region Class Mehtods
 
-        public void SetupLevel(LevelDataSO currLevelData, GridLayoutSO currLayout)
+        public void SetupLevel(LevelDataSO currLevelData)
         {
-            gridSpawner.SetupBoardLayout(trayController, currLayout).Forget();
+            gridSpawner.SetupBoardLayout(trayController, currLevelData).Forget();
         }
         
         #endregion

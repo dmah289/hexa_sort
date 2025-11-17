@@ -1,4 +1,6 @@
 ﻿using LevelEditor.LevelData;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace HexaSort.UI.Gameplay.Goals
@@ -11,10 +13,10 @@ namespace HexaSort.UI.Gameplay.Goals
         [Header("Self References")]
         [SerializeField] private RectTransform fillRT;
         
-        public override void SetUp(LevelGoal goal)
+        public override void SetUp(LevelGoalData goalData)
         {
-            this.goal = goal;
-            counter.text = $"0/{goal.targetAmount}";
+            this.goalData = goalData;
+            counter.text = $"0/{goalData.targetAmount}";
             fillRT.sizeDelta = new Vector2(0, FillHeight);
         }
         
@@ -22,11 +24,13 @@ namespace HexaSort.UI.Gameplay.Goals
         {
             base.OnGoalCollected(collectedAmount);
 
-            currCollectedAmount += collectedAmount;
-            counter.text = $"{currCollectedAmount} / {goal.targetAmount}";
+            totalCollectedAmount += collectedAmount;
+            counter.text = $"{totalCollectedAmount} / {goalData.targetAmount}";
             
-            float fillWidth = (currCollectedAmount / (float)goal.targetAmount) * MaxFillWidth;
+            float fillWidth = (totalCollectedAmount / (float)goalData.targetAmount) * MaxFillWidth;
             fillRT.sizeDelta = new Vector2(fillWidth, FillHeight);
+            
+            EventBus<TotalGoalCollectedDTO>.Raise(new TotalGoalCollectedDTO(eLevelGoalType.Piece, totalCollectedAmount));
         }
     }
 }

@@ -19,6 +19,5 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         #endregion
 
         public const string LevelCurveVersion = "level_curve_default";
-        public const string GridLayoutVersion = "grid_layout_default";
     }
 }

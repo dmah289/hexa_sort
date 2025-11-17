@@ -13,10 +13,10 @@ namespace HexaSort.Scripts.Core.Entities
     {
         public HexCell[,] gridCells;
         
-        public async UniTaskVoid SetupBoardLayout(TrayController tray, GridLayoutSO currLayout)
+        public async UniTaskVoid SetupBoardLayout(TrayController tray, LevelDataSO levelData)
         {
-            int width = currLayout.width;
-            int height = currLayout.height;
+            int width = levelData.Width;
+            int height = levelData.Height;
             gridCells = new HexCell[height, width];
             
             int activeTile = 0;
@@ -29,7 +29,8 @@ namespace HexaSort.Scripts.Core.Entities
             {
                 for (int j = 0; j < width; j++)
                 {
-                    if (currLayout.inactiveCells.Length > 0 && currLayout.inactiveCells.Contains(i * width + j))
+                    CellData cellData = levelData.GetCellData(i, j);
+                    if (!cellData.IsActive)
                         continue;
                     
                     HexCell cell = await ObjectPooler.GetFromPool<HexCell>(
@@ -38,6 +39,7 @@ namespace HexaSort.Scripts.Core.Entities
                     cell.gameObject.name = $"cell_[{i}][{j}]";
 #endif
                     cell.GridPos = (i,j);
+                    cell.SpawnObjects(cellData);
                     gridCells[i, j] = cell;
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);

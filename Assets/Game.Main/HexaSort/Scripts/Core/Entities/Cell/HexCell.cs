@@ -1,7 +1,9 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Controllers;
 using HexaSort.Scripts.Core.Entities.Piece;
+using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
@@ -19,6 +21,10 @@ namespace HexaSort.Scripts.Core.Entities
         [SerializeField] private HexStackController currStack;
         private (int row, int col) gridPos;
         
+        [Header("Mechanics")]
+        [SerializeField] private CellLock cellLock;
+        [SerializeField] private CellWood cellWood;
+        
         public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
         public bool IsOccupied => currStack != null;
@@ -35,8 +41,14 @@ namespace HexaSort.Scripts.Core.Entities
             set
             {
                 currStack = value;
-                collider.enabled = !currStack;
+                Selectable = !currStack;
             }
+        }
+
+        public bool Selectable
+        {
+            get => collider.enabled;
+            set => collider.enabled = value;
         }
         
         public int PiecesCount => IsOccupied ? currStack.PiecesCount : 0;
@@ -69,5 +81,37 @@ namespace HexaSort.Scripts.Core.Entities
         {
             
         }
+
+        #region Spawn Objects
+
+        public void SpawnObjects(CellData cellData)
+        {
+            if (cellData.HasWood) 
+                SpawnWoods();
+            else if (cellData.UnlockValue > 0) 
+                SpawnLock(cellData.UnlockValue).Forget();
+            else if(cellData.HidenColorBelowIce != ColorType.None)
+                SpawnIce(cellData.HidenColorBelowIce);
+        }
+
+        private void SpawnIce(ColorType cellDataHidenColorBelowIce)
+        {
+            
+        }
+
+        private async UniTask SpawnLock(int unlockValue)
+        {
+            cellLock = await ObjectPooler.GetFromPool<CellLock>(PoolingType.CellLock, destroyCancellationToken, selfTransform);
+            cellLock.Setup(unlockValue, this);
+        }
+
+        private void SpawnWoods()
+        {
+            
+        }
+
+        #endregion
+
+        
     }
 }

@@ -11,14 +11,14 @@ namespace HexaSort.UI.Gameplay.Goals
         private const float ScaleDuration = 0.05f;
         
         [Header("Config")]
-        [SerializeField] protected LevelGoal goal;
-        [SerializeField] protected int currCollectedAmount;
+        [SerializeField] protected LevelGoalData goalData;
+        [SerializeField] protected int totalCollectedAmount;
         
         [Header("Self Components")]
         [SerializeField] protected Text counter;
         [SerializeField] protected RectTransform icon;
 
-        public abstract void SetUp(LevelGoal goal);
+        public abstract void SetUp(LevelGoalData goalData);
 
         public virtual void OnGoalCollected(int collectedAmount)
         {

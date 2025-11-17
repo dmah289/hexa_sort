@@ -6,6 +6,7 @@
         HexCell,
         HexStack,
         HexPiece,
+        CellLock,
         
         Separator,
         

@@ -22,6 +22,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
             {PoolingType.CoinFly, "pooling_coin_fly"},
             {PoolingType.LifeFly, "pooling_life_fly"},
             {PoolingType.StarTrail, "pooling_star_trail"},
+            {PoolingType.CellLock, "pooling_lock_cell"}
         };
         
         

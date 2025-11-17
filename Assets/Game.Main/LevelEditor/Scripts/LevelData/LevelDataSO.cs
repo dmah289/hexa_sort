@@ -1,4 +1,5 @@
 ﻿using System;
+using HexaSort.Scripts.Core.Entities.Piece;
 using UnityEngine;
 
 namespace LevelEditor.LevelData
@@ -10,16 +11,29 @@ namespace LevelEditor.LevelData
     }
     
     [Serializable]
-    public struct LevelGoal
+    public struct LevelGoalData
     {
         public eLevelGoalType type;
         public int targetAmount;
     }
+
+    [Serializable]
+    public struct CellData
+    {
+        public bool IsActive;
+        public int UnlockValue;
+        public bool HasWood;
+        public ColorType HidenColorBelowIce;
+    }
     
-    [CreateAssetMenu(fileName = "level_data_", menuName = "Level Editor/Level Data", order = 3)]
+    [CreateAssetMenu(fileName = "lv_", menuName = "Level Editor/Level Data", order = 3)]
     public class LevelDataSO : ScriptableObject
     {
-        public int GridLayoutID;
-        public LevelGoal[] Goal;
+        public int Width, Height;
+        public CellData[] cells;
+        public LevelGoalData[] Goal;
+
+        public CellData GetCellData(int i, int j)
+            => cells[i * Width + j];
     }
 }

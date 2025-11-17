@@ -156,7 +156,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 out Vector2 localPos);
             starTrail.anchoredPosition = localPos;
 
-            eGoalCollectedDTO piecesCollectedDTO = new eGoalCollectedDTO(eLevelGoalType.Piece, sameColorCount);
+            GoalCollectedDTO piecesCollectedDTO = new GoalCollectedDTO(eLevelGoalType.Piece, sameColorCount);
                 
             for (int i = 0; i < starTrail.childCount; i++)
             {

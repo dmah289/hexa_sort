@@ -19,7 +19,8 @@ namespace HexaSort.Scripts.Core.Entities.Piece
         Purple,
         Red,
         Yellow,
-        White
+        White,
+        None
     }
     
     public class HexPieceController : MonoBehaviour, IPoolableObject
@@ -90,7 +91,9 @@ namespace HexaSort.Scripts.Core.Entities.Piece
             sequence.Join(DOTween.To(() => 0f, angle =>
             {
                 selfTransform.localRotation = Quaternion.AngleAxis(angle, rotationAxis);
-            }, 180f, OverturnDuration).SetEase(Ease.OutFlash));
+            }, 180f, 0.9f * OverturnDuration)
+                .SetEase(Ease.OutFlash)
+                .SetDelay(0.1f * OverturnDuration));
 
             void SetEndState()
             {

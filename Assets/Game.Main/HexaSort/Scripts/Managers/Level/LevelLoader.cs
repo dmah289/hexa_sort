@@ -14,7 +14,6 @@ namespace HexaSort.Scripts.Managers
     public class LevelLoader : MonoBehaviour
     {
         [SerializeField] private LevelCurveVersion currLevelCurveVersion;
-        [SerializeField] private GridLayoutVersion currGridLayoutVersion;
         
         public async UniTask<LevelDataSO> GetCurrLevelData()
         {
@@ -27,25 +26,10 @@ namespace HexaSort.Scripts.Managers
             return currLevelCurveVersion.levelDatas[LocalDataManager.LevelIndex];
         }
         
-        public async UniTask<GridLayoutSO> GetCurrGridLayout()
-        {
-            if (currGridLayoutVersion == null)
-            {
-                currGridLayoutVersion = await Addressables.LoadAssetAsync<GridLayoutVersion>(ConstantKey.GridLayoutVersion)
-                    .ToUniTask(cancellationToken: destroyCancellationToken);
-            }
-
-            LevelDataSO currLevelData = await GetCurrLevelData();
-            GridLayoutSO currLayout = currGridLayoutVersion.gridLayouts[currLevelData.GridLayoutID];
-            
-            return currLayout;
-        }
-        
         public async UniTask SetupLevel(GridController grid)
         {
             LevelDataSO currLevelData = await GetCurrLevelData();
-            GridLayoutSO currGridLayout = await GetCurrGridLayout();
-            grid.SetupLevel(currLevelData, currGridLayout);
+            grid.SetupLevel(currLevelData);
         }
 
         public void CleanUpLevel(GridController grid, TrayController tray)
