@@ -11,9 +11,9 @@ namespace HexaSort.Scripts.Core.Controllers
 {
     public class PathFinder : MonoBehaviour
     {
-        private static readonly int[] colOffsets = { -1, 0, 1, 1, 0, -1 };
+        public static readonly int[] colOffsets = { -1, 0, 1, 1, 0, -1 };
         // Odd -> even
-        private static readonly int[] rowOffsets = { 1, 1, 1, 0, -1, 0, 0, 1, 0, -1, -1, -1 };
+        public static readonly int[] rowOffsets = { 1, 1, 1, 0, -1, 0, 0, 1, 0, -1, -1, -1 };
         
         [Header("Path Finding Settings")]
         private bool[,] visitedCells;
@@ -93,7 +93,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 // neighbour.selfTransform.position = neighbour.selfTransform.position.With(z: -1f);
                 // DOVirtual.DelayedCall(1f,() => neighbour.selfTransform.position = neighbour.selfTransform.position.With(z: 0f));
                 
-                if (neighbour.IsOccupied && neighbour.ColorOnTop == currCell.ColorOnTop &&
+                if (neighbour.IsMergable && neighbour.ColorOnTop == currCell.ColorOnTop &&
                     !visitedCells[newRow, newCol])
                 {
                     visitedCells[newRow, newCol] = true;
@@ -102,8 +102,6 @@ namespace HexaSort.Scripts.Core.Controllers
                     connectedCells.Add(neighbour);
                     cellsToVisit.Add(neighbour);
                 }
-
-
             }
         }
     }

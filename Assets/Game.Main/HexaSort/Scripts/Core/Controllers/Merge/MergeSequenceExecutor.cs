@@ -37,8 +37,6 @@ namespace HexaSort.Scripts.Core.Controllers
         
         public List<HexCell> WaitingMergableCells => waitingMergableCells;
         public bool IsBusy => isPairMerging || isCheckingCollecting;
-        
-
         public bool NewStackLaidDown
         {
             get => newStackLaidDown;
@@ -156,13 +154,13 @@ namespace HexaSort.Scripts.Core.Controllers
                 out Vector2 localPos);
             starTrail.anchoredPosition = localPos;
 
-            GoalCollectedDTO piecesCollectedDTO = new GoalCollectedDTO(eLevelGoalType.Piece, sameColorCount);
+            GoalCollectedDTO piecesCollectedDTO = new GoalCollectedDTO(eLevelGoalType.Piece, sameColorCount, cell.GridPos);
                 
             for (int i = 0; i < starTrail.childCount; i++)
             {
                 Image image = starTrail.GetChild(i).GetComponent<Image>();
                 if (image != null)
-                    image.enabled = i == (int)piecesCollectedDTO.goalType;
+                    image.enabled = i == (int)piecesCollectedDTO.GoalType;
             }
 
             await UniTask.Delay(155);
@@ -170,7 +168,7 @@ namespace HexaSort.Scripts.Core.Controllers
             starTrail.DOAnchorPos(Vector2.zero, 0.7f).SetEase(Ease.OutSine).OnComplete(() =>
             {
                 ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
-                // EventBus<eGoalCollectedDTO>.Raise(piecesCollectedDTO);
+                EventBus<GoalCollectedDTO>.Raise(piecesCollectedDTO);
             });
         }
     }

@@ -25,21 +25,21 @@ namespace LevelEditor.LevelData
     }
     
     [Serializable]
-    public struct LockedStackData
+    public struct PackedStackData
     {
         public int UnlockValue;
         public ColorLayerData[] ColorLayers;
         
-        public bool IsValid() => UnlockValue > 0;
+        public bool IsValid() => UnlockValue > 0 && ColorLayers != null && ColorLayers.Length > 0;
     }
 
     [Serializable]
     public struct CellData
     {
         public bool IsActive;
-        public int UnlockValue;
+        public int UnlockCellValue;
         public bool HasWood;
-        public LockedStackData LockedStack;
+        public PackedStackData packedStack;
     }
     
     [CreateAssetMenu(fileName = "lv_", menuName = "Level Editor/Level Data", order = 3)]

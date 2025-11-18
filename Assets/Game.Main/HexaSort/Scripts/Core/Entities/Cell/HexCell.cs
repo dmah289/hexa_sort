@@ -24,6 +24,11 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Mechanics")]
         [SerializeField] private CellLock cellLock;
         [SerializeField] private CellWood cellWood;
+        [SerializeField] private PackedCell packedCell;
+
+        public bool IsMergable => IsOccupied && !cellWood.gameObject.activeSelf
+                                             && !packedCell.gameObject.activeSelf
+                                             && !cellLock.gameObject.activeSelf;
         
         public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
@@ -96,39 +101,47 @@ namespace HexaSort.Scripts.Core.Entities
             
         }
         
+        public bool IsNeighborOf((int row, int col) sourceCellGridPos)
+        {
+            int startIdx = (gridPos.col & 1) == 1 ? 0 : 6;
+
+            for (int i = startIdx; i < startIdx + 6; i++)
+            {
+                int newCol = gridPos.col + PathFinder.colOffsets[i % 6];
+                int newRow = gridPos.row + PathFinder.rowOffsets[i];
+
+                if (newCol == sourceCellGridPos.col && newRow == sourceCellGridPos.row)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
         #endregion
 
         #region Spawn Objects
-
-        // TODO : Spawn Objects
+        
         public void SpawnObjects(CellData cellData)
         {
+            DisableAllMechanics();
+
             if (cellData.HasWood)
-                SpawnWoods();
-            else if (cellData.UnlockValue > 0) 
-                SpawnLock(cellData.UnlockValue).Forget();
-            else if(cellData.LockedStack.IsValid())
-                SpawnLockedStack(cellData.LockedStack);
+                cellWood.Setup();
+            else if (cellData.UnlockCellValue > 0)
+                cellLock.Setup(cellData.UnlockCellValue);
+            else if(cellData.packedStack.IsValid())
+                packedCell.Setup(cellData.packedStack);
         }
 
-        private void SpawnLockedStack(LockedStackData lockedStackData)
+        private void DisableAllMechanics()
         {
-            
-        }
-
-        private async UniTask SpawnLock(int unlockValue)
-        {
-            // cellLock = await ObjectPooler.GetFromPool<CellLock>(PoolingType.CellLock, destroyCancellationToken, selfTransform);
-            // cellLock.Setup(unlockValue, this);
-        }
-
-        private void SpawnWoods()
-        {
-            
+            cellLock.gameObject.SetActive(false);
+            cellWood.gameObject.SetActive(false);
+            packedCell.gameObject.SetActive(false);
         }
 
         #endregion
-
-        
     }
 }

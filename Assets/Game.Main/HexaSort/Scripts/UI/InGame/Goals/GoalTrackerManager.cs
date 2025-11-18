@@ -13,22 +13,24 @@ namespace HexaSort.UI.Gameplay.Goals
 {
     public struct GoalCollectedDTO : IEventDTO
     {
-        public eLevelGoalType goalType;
-        public int collectedAmount;
+        public eLevelGoalType GoalType;
+        public int CollectedAmount;
+        public (int row, int col) SourceCellGridPos;
         
-        public GoalCollectedDTO(eLevelGoalType goalType, int collectedAmount)
+        public GoalCollectedDTO(eLevelGoalType goalType, int collectedAmount, (int row, int col) sourceCellGridPos)
         {
-            this.goalType = goalType;
-            this.collectedAmount = collectedAmount;
+            GoalType = goalType;
+            CollectedAmount = collectedAmount;
+            SourceCellGridPos = sourceCellGridPos;
         }
     }
     
-    public struct TotalGoalCollectedDTO : IEventDTO
+    public struct TotalGoalGainedDTO : IEventDTO
     {
         public eLevelGoalType goalType;
         public int totalCollectedAmount;
         
-        public TotalGoalCollectedDTO(eLevelGoalType goalType, int totalCollectedAmount)
+        public TotalGoalGainedDTO(eLevelGoalType goalType, int totalCollectedAmount)
         {
             this.goalType = goalType;
             this.totalCollectedAmount = totalCollectedAmount;
@@ -140,7 +142,7 @@ namespace HexaSort.UI.Gameplay.Goals
 
         private void OnGoalCollected(GoalCollectedDTO dto)
         {
-            goalTrackerPanels[(int)dto.goalType].OnGoalCollected(dto.collectedAmount);
+            goalTrackerPanels[(int)dto.GoalType].OnGoalCollected(dto.CollectedAmount);
         }
 
         public void DeregisterCallbacks()

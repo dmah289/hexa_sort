@@ -45,10 +45,10 @@ namespace HexaSort.UI.Gameplay.Goals
             totalCollectedAmount += collectedAmount;
             counter.text = $"{totalCollectedAmount} / {goalData.targetAmount}";
             
-            float fillWidth = (totalCollectedAmount / (float)goalData.targetAmount) * MaxFillWidth;
-            fillRt.sizeDelta = new Vector2(fillWidth, FillHeight);
+            float newFillWidth = (totalCollectedAmount / (float)goalData.targetAmount) * MaxFillWidth;
+            fillRt.sizeDelta = new Vector2(newFillWidth, FillHeight);
             
-            EventBus<TotalGoalCollectedDTO>.Raise(new TotalGoalCollectedDTO(eLevelGoalType.Piece, totalCollectedAmount));
+            EventBus<TotalGoalGainedDTO>.Raise(new TotalGoalGainedDTO(eLevelGoalType.Piece, totalCollectedAmount));
         }
     }
 }

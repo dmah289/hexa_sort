@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -21,39 +22,51 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Config")]
         [SerializeField] private int unlockValue;
 
-        public void Setup(int unlockValue, HexCell parentCell)
+        public void Setup(int unlockValue)
         {
             // TODO : Reset states
+            gameObject.SetActive(true);
             
             this.unlockValue = unlockValue;
-            this.parentCell = parentCell;
             parentCell.Selectable = false;
             transform.localPosition = ConstantKey.STACK_LOCAL_POS_ON_CELL;
             unlockValueText.text = unlockValue.ToString();
         }
 
+        #region Unity APIs
+
+        private void OnEnable()
+        {
+            RegisterCallbacks();
+        }
+
+        private void OnDisable()
+        {
+            DeregisterCallbacks();
+        }
+
+        #endregion
+
         #region Event Bus Callbacks
 
         public void RegisterCallbacks()
         {
-            EventBus<TotalGoalCollectedDTO>.Register(onEventWithArgs: OnTotalPieceCollected);
+            EventBus<TotalGoalGainedDTO>.Register(onEventWithArgs: OnTotalPieceCollected);
         }
 
-        private void OnTotalPieceCollected(TotalGoalCollectedDTO data)
+        private void OnTotalPieceCollected(TotalGoalGainedDTO data)
         {
             if(data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= unlockValue)
             {
-                lockIcon.DOShakePosition(0.5f, new Vector2(1f, 1f), 20).OnComplete(() =>
-                {
-                    parentCell.Selectable = true;
-                    ObjectPooler.ReturnToPool(PoolingType.CellLock, this, destroyCancellationToken);
-                });
+                lockIcon.DOShakeRotation(0.5f, 5f, 20)
+                    .SetEase(Ease.InOutSine)
+                    .OnComplete(() => gameObject.SetActive(false));
             }
         }
 
         public void DeregisterCallbacks()
         {
-            EventBus<TotalGoalCollectedDTO>.Deregister(onEventWithArgs: OnTotalPieceCollected);
+            EventBus<TotalGoalGainedDTO>.Deregister(onEventWithArgs: OnTotalPieceCollected);
         }
 
         #endregion

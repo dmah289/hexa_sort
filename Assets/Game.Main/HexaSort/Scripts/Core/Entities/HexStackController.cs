@@ -3,10 +3,12 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Core.Entities.Piece;
+using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 namespace HexaSort.Core.Entities
@@ -43,6 +45,8 @@ namespace HexaSort.Core.Entities
             }
         }
 
+        #region Spawning Methods
+
         public async UniTaskVoid OnSpawningOnTray(int idx, Vector2 spawnMidStackPos)
         {
             int pieceAmount = Random.Range(3, 8);
@@ -72,6 +76,37 @@ namespace HexaSort.Core.Entities
                 .SetDelay(idx * 0.3f)
                 .OnKill(() => selfTransform.localPosition = Vector3.zero);
         }
+        
+        public async UniTask OnSpawningOnCell(HexCell targetCell, PackedStackData packedStackData)
+        {
+            parentCell = targetCell;
+            targetCell.CurrentStack = this;
+
+            int currPieceAmount = 0;
+            for (int i = 0; i < packedStackData.ColorLayers.Length; i++)
+            {
+                for(int j = 0; j < packedStackData.ColorLayers[i].amount; j++)
+                {
+                    HexPieceController piece = await ObjectPooler.GetFromPool<HexPieceController>(PoolingType.HexPiece,
+                        destroyCancellationToken,
+                        selfTransform
+                    );
+                    piece.ColorType = packedStackData.ColorLayers[i].colorType;
+
+                    Vector3 spawnedPos = (currPieceAmount * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: currPieceAmount * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
+                    piece.transform.localPosition = spawnedPos;
+                    
+                    pieces.Add(piece);
+                    currPieceAmount++;
+                }
+            }
+            Selectable = false;
+            
+            selfTransform.localPosition = ConstantKey.STACK_LOCAL_POS_ON_CELL;
+            isOnGrid = true;
+        }
+
+        #endregion
 
         #region Object Pooling Callbacks
 
@@ -95,6 +130,8 @@ namespace HexaSort.Core.Entities
         }
 
         #endregion
+
+        #region Interaction Callbacks
 
         public void OnDragged(Vector3 targetPos)
         {
@@ -125,6 +162,10 @@ namespace HexaSort.Core.Entities
                 });
         }
 
+        #endregion
+
+        #region Merge Anim
+
         public void AttractPiece(HexPieceController newPiece, Vector3 overturnDir, float maxHeight)
         {
             pieces.Add(newPiece);
@@ -141,5 +182,9 @@ namespace HexaSort.Core.Entities
         {
             pieces.RemoveLast().OnCollected();
         }
+
+        #endregion
+
+        
     }
 }
