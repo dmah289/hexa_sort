@@ -53,23 +53,37 @@ namespace HexaSort.Scripts.Core.Entities
         
         public int PiecesCount => IsOccupied ? currStack.PiecesCount : 0;
 
+        #region Unity APIs
+
         private void Awake()
         {
             selfTransform = transform;
             meshRenderer = GetComponentInChildren<MeshRenderer>();
         }
 
+        #endregion
+        
+        #region Object Pooling Callbacks
+
         public void OnGetFromPool()
         {
             transform.Reset();
             meshRenderer.SetVertexLitColor(SelectionController.Instance.normalCellColor);
+            Selectable = true;
         }
 
         public void OnReturnToPool()
         {
-            if(currStack)
+            if (currStack)
+            {
                 ObjectPooler.ReturnToPool(PoolingType.HexStack, currStack, destroyCancellationToken);
+                CurrentStack = null;
+            }
         }
+
+        #endregion
+
+        #region Class Methods
 
         public void SetMaterialState(Color color)
         {
@@ -81,28 +95,31 @@ namespace HexaSort.Scripts.Core.Entities
         {
             
         }
+        
+        #endregion
 
         #region Spawn Objects
 
+        // TODO : Spawn Objects
         public void SpawnObjects(CellData cellData)
         {
-            if (cellData.HasWood) 
+            if (cellData.HasWood)
                 SpawnWoods();
             else if (cellData.UnlockValue > 0) 
                 SpawnLock(cellData.UnlockValue).Forget();
-            else if(cellData.HidenColorBelowIce != ColorType.None)
-                SpawnIce(cellData.HidenColorBelowIce);
+            else if(cellData.LockedStack.IsValid())
+                SpawnLockedStack(cellData.LockedStack);
         }
 
-        private void SpawnIce(ColorType cellDataHidenColorBelowIce)
+        private void SpawnLockedStack(LockedStackData lockedStackData)
         {
             
         }
 
         private async UniTask SpawnLock(int unlockValue)
         {
-            cellLock = await ObjectPooler.GetFromPool<CellLock>(PoolingType.CellLock, destroyCancellationToken, selfTransform);
-            cellLock.Setup(unlockValue, this);
+            // cellLock = await ObjectPooler.GetFromPool<CellLock>(PoolingType.CellLock, destroyCancellationToken, selfTransform);
+            // cellLock.Setup(unlockValue, this);
         }
 
         private void SpawnWoods()

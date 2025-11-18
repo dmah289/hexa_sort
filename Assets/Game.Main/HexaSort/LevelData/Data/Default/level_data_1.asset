@@ -12,7 +12,159 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc337a58b29403ba82d3f8b68d11fda, type: 3}
   m_Name: level_data_1
   m_EditorClassIdentifier: 
-  GridLayoutID: 1
+  Width: 5
+  Height: 5
+  cells:
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 0
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 0
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - IsActive: 1
+    UnlockValue: 0
+    HasWood: 0
+    LockedStack:
+      UnlockValue: 0
+      ColorLayers: []
   Goal:
   - type: 0
     targetAmount: 300

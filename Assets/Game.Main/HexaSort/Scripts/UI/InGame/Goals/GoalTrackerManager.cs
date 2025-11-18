@@ -55,14 +55,9 @@ namespace HexaSort.UI.Gameplay.Goals
             RegisterCallbacks();
         }
 
-        private void OnEnable()
+        public async UniTask PlayStartLevelAnim(LevelGoalData[] goalData)
         {
-            PlayStartLevelAnim().Forget();
-        }
-
-        private async UniTask PlayStartLevelAnim()
-        {
-            SetLevelGoalData();
+            SetLevelGoalData(goalData);
             await ResetUIStates();
             await AnimateSlidingIn();
         }
@@ -79,7 +74,6 @@ namespace HexaSort.UI.Gameplay.Goals
             
             panelRt.anchoredPosition = new Vector2((int)(Screen.width / 2) + panelRt.rect.width / 2f + 155f,
                 (int)(-Screen.height / 2) + panelRt.rect.height / 2 + 31f);
-            //Debug.Log(panelRt.anchoredPosition);
             panelRt.sizeDelta = new Vector2(1000f, panelRt.sizeDelta.y);
             panelRt.GetComponent<Image>().SetAlpha(1);
             
@@ -108,6 +102,10 @@ namespace HexaSort.UI.Gameplay.Goals
             panelRt.GetComponent<Image>().DOFade(0, duration);
             panelRt.DOSizeDelta(new Vector2(containerRt.sizeDelta.x, panelRt.anchoredPosition.y), duration);
             
+            // Piece Bg Collapse Animation
+            PieceTrackerPanel piecePanel = goalTrackerPanels[0] as PieceTrackerPanel;
+            piecePanel?.AnimateExpansion(duration);
+            
             titleTxt.DOFade(0, duration);
             titleTxt.transform.DOScale(0, 0.2f * duration).OnComplete(() =>
             {
@@ -118,9 +116,15 @@ namespace HexaSort.UI.Gameplay.Goals
                 containerRt.GetComponent<Image>().DOFade(0, duration);
         }
 
-        private void SetLevelGoalData()
+        private void SetLevelGoalData(LevelGoalData[] goalData)
         {
             // TODO : Set from Level Data
+            Array.Sort(goalData, (a, b) => a.type.CompareTo(b.type));
+            
+            for (int i = 0; i < goalData.Length; i++)
+            {
+                goalTrackerPanels[i].SetUp(goalData[i]);
+            }
             
             Canvas.ForceUpdateCanvases();
         }

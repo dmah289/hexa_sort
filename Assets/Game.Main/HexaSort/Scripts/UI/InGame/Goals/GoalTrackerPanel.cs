@@ -1,5 +1,6 @@
 using DG.Tweening;
 using LevelEditor.LevelData;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ namespace HexaSort.UI.Gameplay.Goals
         [SerializeField] protected int totalCollectedAmount;
         
         [Header("Self Components")]
-        [SerializeField] protected Text counter;
+        [SerializeField] protected TextMeshProUGUI counter;
         [SerializeField] protected RectTransform icon;
 
         public abstract void SetUp(LevelGoalData goalData);

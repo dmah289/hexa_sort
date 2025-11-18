@@ -76,7 +76,6 @@ namespace HexaSort.Scripts.Managers
         public async UniTask CleanUpLevel()
         {
             levelLoader.CleanUpLevel(grid, tray);
-            
         }
 
         public async UniTask FailLevel()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LevelEditor.LevelData
 {
-    public enum eLevelGoalType
+    public enum eLevelGoalType : byte
     {
         Piece,
         Wood
@@ -16,6 +16,22 @@ namespace LevelEditor.LevelData
         public eLevelGoalType type;
         public int targetAmount;
     }
+    
+    [Serializable]
+    public struct ColorLayerData
+    {
+        public ColorType colorType;
+        public int amount;
+    }
+    
+    [Serializable]
+    public struct LockedStackData
+    {
+        public int UnlockValue;
+        public ColorLayerData[] ColorLayers;
+        
+        public bool IsValid() => UnlockValue > 0;
+    }
 
     [Serializable]
     public struct CellData
@@ -23,7 +39,7 @@ namespace LevelEditor.LevelData
         public bool IsActive;
         public int UnlockValue;
         public bool HasWood;
-        public ColorType HidenColorBelowIce;
+        public LockedStackData LockedStack;
     }
     
     [CreateAssetMenu(fileName = "lv_", menuName = "Level Editor/Level Data", order = 3)]

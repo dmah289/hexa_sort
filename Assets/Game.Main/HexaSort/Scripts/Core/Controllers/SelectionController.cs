@@ -165,7 +165,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
             if (currTargetCell)
             {
-                currTargetCell?.SetMaterialState(normalCellColor);
+                currTargetCell.SetMaterialState(normalCellColor);
                 EventBus<LaidDownStackDTO>.RaiseBoth(new LaidDownStackDTO(currTargetCell));
             }
             

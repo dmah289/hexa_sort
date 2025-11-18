@@ -110,7 +110,6 @@ namespace HexaSort.Core.Entities
                 parentCell = targetCell;
                 
                 targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
-                Selectable = false;
                 targetCell.CurrentStack = this;
             }
             else targetLocalPos = Vector3.zero;

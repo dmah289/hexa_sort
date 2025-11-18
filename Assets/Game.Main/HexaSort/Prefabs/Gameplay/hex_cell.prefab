@@ -104,6 +104,8 @@ MonoBehaviour:
   meshRenderer: {fileID: 1964905478952394985}
   collider: {fileID: 656965501315963300}
   currStack: {fileID: 0}
+  cellLock: {fileID: 0}
+  cellWood: {fileID: 0}
 --- !u!1 &6523974011424245196
 GameObject:
   m_ObjectHideFlags: 0

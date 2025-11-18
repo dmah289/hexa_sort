@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
+using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Helpers;
@@ -13,6 +14,10 @@ namespace HexaSort.Scripts.Managers
 {
     public class LevelLoader : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField] private GoalTrackerManager goalTrackerManager;
+        
+        [Header("Level Data")]
         [SerializeField] private LevelCurveVersion currLevelCurveVersion;
         
         public async UniTask<LevelDataSO> GetCurrLevelData()
@@ -30,6 +35,7 @@ namespace HexaSort.Scripts.Managers
         {
             LevelDataSO currLevelData = await GetCurrLevelData();
             grid.SetupLevel(currLevelData);
+            goalTrackerManager.PlayStartLevelAnim(currLevelData.Goal).Forget();
         }
 
         public void CleanUpLevel(GridController grid, TrayController tray)
