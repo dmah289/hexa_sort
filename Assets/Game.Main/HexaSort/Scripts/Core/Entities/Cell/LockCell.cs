@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Entities
 {
-    public class CellLock : MonoBehaviour, IEventBusListener
+    public class LockCell : MonoBehaviour, IEventBusListener
     {
         [Header("Self Components")]
         [SerializeField] private TextMeshPro unlockValueText;
@@ -22,15 +22,22 @@ namespace HexaSort.Scripts.Core.Entities
         [Header("Config")]
         [SerializeField] private int unlockValue;
 
+        public int UnlockValue
+        {
+            get => unlockValue;
+            set
+            {
+                unlockValue = value;
+                unlockValueText.text = unlockValue.ToString();
+            }
+        }
+
         public void Setup(int unlockValue)
         {
-            // TODO : Reset states
             gameObject.SetActive(true);
             
-            this.unlockValue = unlockValue;
+            UnlockValue = unlockValue;
             parentCell.Selectable = false;
-            transform.localPosition = ConstantKey.STACK_LOCAL_POS_ON_CELL;
-            unlockValueText.text = unlockValue.ToString();
         }
 
         #region Unity APIs
@@ -58,7 +65,7 @@ namespace HexaSort.Scripts.Core.Entities
         {
             if(data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= unlockValue)
             {
-                lockIcon.DOShakeRotation(0.5f, 5f, 20)
+                lockIcon.DOShakeRotation(0.5f, 5f, 15)
                     .SetEase(Ease.InOutSine)
                     .OnComplete(() => gameObject.SetActive(false));
             }

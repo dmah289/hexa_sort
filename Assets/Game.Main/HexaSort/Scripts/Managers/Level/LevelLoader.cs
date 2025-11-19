@@ -20,6 +20,12 @@ namespace HexaSort.Scripts.Managers
         [Header("Level Data")]
         [SerializeField] private LevelCurveVersion currLevelCurveVersion;
         
+        public async UniTask<int> GetLevelGoalCount()
+        {
+            LevelDataSO currLevelData = currLevelCurveVersion.levelDatas[LocalDataManager.LevelIndex];
+            return currLevelData.Goal.Length;
+        }
+        
         public async UniTask<LevelDataSO> GetCurrLevelData()
         {
             if (currLevelCurveVersion == null)

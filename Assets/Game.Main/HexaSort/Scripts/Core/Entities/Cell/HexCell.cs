@@ -22,13 +22,11 @@ namespace HexaSort.Scripts.Core.Entities
         private (int row, int col) gridPos;
         
         [Header("Mechanics")]
-        [SerializeField] private CellLock cellLock;
-        [SerializeField] private CellWood cellWood;
+        [SerializeField] private WoodCell woodCell;
         [SerializeField] private PackedCell packedCell;
 
-        public bool IsMergable => IsOccupied && !cellWood.gameObject.activeSelf
-                                             && !packedCell.gameObject.activeSelf
-                                             && !cellLock.gameObject.activeSelf;
+        public bool IsMergable => IsOccupied && !woodCell.gameObject.activeSelf
+                                             && !packedCell.gameObject.activeSelf;
         
         public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
@@ -127,18 +125,15 @@ namespace HexaSort.Scripts.Core.Entities
         {
             DisableAllMechanics();
 
-            if (cellData.HasWood)
-                cellWood.Setup();
-            else if (cellData.UnlockCellValue > 0)
-                cellLock.Setup(cellData.UnlockCellValue);
-            else if(cellData.packedStack.IsValid())
-                packedCell.Setup(cellData.packedStack);
+            if (cellData.MechanicsType == eMechanicsType.Wood && cellData.HasWood)
+                woodCell.Setup();
+            else if(cellData.MechanicsType == eMechanicsType.Packed && cellData.packedStack.IsValid())
+                packedCell.Setup(cellData.packedStack).Forget();
         }
 
         private void DisableAllMechanics()
         {
-            cellLock.gameObject.SetActive(false);
-            cellWood.gameObject.SetActive(false);
+            woodCell.gameObject.SetActive(false);
             packedCell.gameObject.SetActive(false);
         }
 

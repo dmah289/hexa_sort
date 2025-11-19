@@ -4,6 +4,7 @@ using DG.Tweening;
 using LevelEditor.LevelData;
 using manhnd_sdk.ExtensionMethods;
 using HexaSort.Scripts.Managers;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
@@ -57,11 +58,16 @@ namespace HexaSort.UI.Gameplay.Goals
             RegisterCallbacks();
         }
 
+        // private void Start()
+        // {
+        //     RegisterCallbacks();
+        // }
+
         public async UniTask PlayStartLevelAnim(LevelGoalData[] goalData)
         {
             SetLevelGoalData(goalData);
             await ResetUIStates();
-            await AnimateSlidingIn();
+            await AnimateSlidingIn(goalData.Length);
         }
 
         #endregion
@@ -85,12 +91,12 @@ namespace HexaSort.UI.Gameplay.Goals
             
             containerRt.GetComponent<Image>().SetAlpha(1);
             
-            await UniTask.DelayFrame(1);
+            // await UniTask.DelayFrame(1);
             
             panelRt.GetComponent<CanvasGroup>().alpha = 1;
         }
 
-        private async UniTask AnimateSlidingIn()
+        private async UniTask AnimateSlidingIn(int goalCount)
         {
             await panelRt.DOAnchorPosX(0, panelRt.anchoredPosition.x / 900f)
                 .SetEase(Ease.OutBack)
@@ -114,13 +120,12 @@ namespace HexaSort.UI.Gameplay.Goals
                 titleTxt.gameObject.SetActive(false);
             });
 
-            if (LevelManager.Instance.LevelGoalCount <= 1)
+            if (goalCount <= 1)
                 containerRt.GetComponent<Image>().DOFade(0, duration);
         }
 
         private void SetLevelGoalData(LevelGoalData[] goalData)
         {
-            // TODO : Set from Level Data
             Array.Sort(goalData, (a, b) => a.type.CompareTo(b.type));
             
             for (int i = 0; i < goalData.Length; i++)
@@ -128,7 +133,7 @@ namespace HexaSort.UI.Gameplay.Goals
                 goalTrackerPanels[i].SetUp(goalData[i]);
             }
             
-            Canvas.ForceUpdateCanvases();
+            //Canvas.ForceUpdateCanvases();
         }
 
         #endregion
@@ -137,6 +142,7 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public void RegisterCallbacks()
         {
+            Debug.Log("Registering Goal Collected Callbacks" + gameObject.Path());
             EventBus<GoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
         }
 
@@ -147,10 +153,10 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public void DeregisterCallbacks()
         {
+            Debug.Log("Deregistering Goal Collected Callbacks");
             EventBus<GoalCollectedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
         }
 
         #endregion
-        
     }
 }

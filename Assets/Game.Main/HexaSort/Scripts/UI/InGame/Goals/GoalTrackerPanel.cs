@@ -13,17 +13,22 @@ namespace HexaSort.UI.Gameplay.Goals
         
         [Header("Config")]
         [SerializeField] protected LevelGoalData goalData;
-        [SerializeField] protected int totalCollectedAmount;
+        [SerializeField] protected int counter;
         
         [Header("Self Components")]
-        [SerializeField] protected TextMeshProUGUI counter;
-        [SerializeField] protected RectTransform icon;
+        [SerializeField] protected TextMeshProUGUI counterTxt;
+        [SerializeField] protected RectTransform iconRt;
 
-        public abstract void SetUp(LevelGoalData goalData);
+        public abstract int Counter { get; set; }
+
+        public virtual void SetUp(LevelGoalData goalData)
+        {
+            this.goalData = goalData;
+        }
 
         public virtual void OnGoalCollected(int collectedAmount)
         {
-            icon.DOScale(TargetScale, ScaleDuration).SetEase(Ease.Linear);
+            iconRt.DOScale(TargetScale, ScaleDuration).SetEase(Ease.Linear);
         }
     }
 }

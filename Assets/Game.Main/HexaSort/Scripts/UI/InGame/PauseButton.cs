@@ -6,12 +6,9 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class PauseButton : ScaleAnimButton
     {
-        [Header("References")]
-        [SerializeField] private MergeController mergeController;
-        
         protected override void OnButtonClicked()
         {
-            if (!mergeController.IsCheckingMergeSequence)
+            if (!MergeController.Instance.IsCheckingMergeSequence)
             {
                 base.OnButtonClicked();
             }

@@ -30,14 +30,22 @@ namespace LevelEditor.LevelData
         public int UnlockValue;
         public ColorLayerData[] ColorLayers;
         
-        public bool IsValid() => UnlockValue > 0 && ColorLayers != null && ColorLayers.Length > 0;
+        public bool IsValid() => UnlockValue > 0;
+    }
+    
+    [Serializable]
+    public enum eMechanicsType : byte
+    {
+        None,
+        Wood,
+        Packed
     }
 
     [Serializable]
     public struct CellData
     {
+        public eMechanicsType MechanicsType;
         public bool IsActive;
-        public int UnlockCellValue;
         public bool HasWood;
         public PackedStackData packedStack;
     }

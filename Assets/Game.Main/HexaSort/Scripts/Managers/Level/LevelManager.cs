@@ -45,8 +45,6 @@ namespace HexaSort.Scripts.Managers
                 }
             }
         }
-        
-        public int LevelGoalCount => 2;
 
         protected override void Awake()
         {

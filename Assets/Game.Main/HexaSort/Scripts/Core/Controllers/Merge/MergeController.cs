@@ -6,12 +6,13 @@ using HexaSort.Core.Entities;
 using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ExtensionMethods;
+using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Scripts.Core.Controllers
 {
-    public class MergeController : MonoBehaviour, IEventBusListener
+    public class MergeController : MonoSingleton<MergeController>, IEventBusListener
     {
         [Header("Self Components")]
         [SerializeField] private MergeSequenceExecutor mergeSequenceExecutor;
@@ -66,7 +67,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Class Mehtods
 
-        private async UniTask HandleCheckingMerge(HexCell cell)
+        public async UniTask HandleCheckingMerge(HexCell cell)
         {
             await UniTask.WaitUntil(() => !mergeSequenceExecutor.IsBusy);
             
