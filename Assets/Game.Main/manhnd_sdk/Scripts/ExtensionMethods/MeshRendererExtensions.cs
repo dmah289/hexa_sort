@@ -1,4 +1,4 @@
-using HexaSort.Scripts.Core.Entities.Piece;
+using HexaSort.Core.Entities.Grid.Piece;
 using UnityEngine;
 
 namespace manhnd_sdk.Scripts.ExtensionMethods

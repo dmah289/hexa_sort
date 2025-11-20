@@ -8,7 +8,7 @@ using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class TrayController : MonoSingleton<TrayController>, IEventBusListener
     {

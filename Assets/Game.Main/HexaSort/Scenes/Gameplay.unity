@@ -214,6 +214,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1260401762416307765, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 2206492339919864544, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -289,6 +293,34 @@ PrefabInstance:
     - target: {fileID: 4301698478078145806, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 46.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 39.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175859674826771710, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5198891335319447490, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: mergeController
@@ -383,11 +415,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
---- !u!224 &97043686 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8501784958968850051, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-  m_PrefabInstance: {fileID: 97043685}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &154602005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,8 +1040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2036602c9e924cbfb80198a0fbd0138c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piecesGoalTargetPanel: {fileID: 97043686}
-  mainCam: {fileID: 963194227}
   isCheckingMerging: 0
   isPairMerging: 0
   isCheckingCollecting: 0

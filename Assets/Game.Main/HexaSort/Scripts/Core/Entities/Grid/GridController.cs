@@ -1,14 +1,12 @@
-﻿using System;
-using System.Linq;
-using HexaSort.Scripts.Core.Entities;
+﻿using System.Linq;
+using HexaSort.Core.Entities.Grid;
 using HexaSort.Scripts.Managers;
 using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
-using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
-namespace HexaSort.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class GridController : MonoBehaviour, IEventBusListener
     {

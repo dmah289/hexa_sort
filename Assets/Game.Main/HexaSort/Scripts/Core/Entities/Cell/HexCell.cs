@@ -1,14 +1,14 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
+using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Scripts.Core.Controllers;
-using HexaSort.Scripts.Core.Entities.Piece;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class HexCell : MonoBehaviour, IPoolableObject
     {

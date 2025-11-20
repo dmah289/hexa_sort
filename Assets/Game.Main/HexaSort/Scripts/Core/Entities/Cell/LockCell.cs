@@ -8,7 +8,7 @@ using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class LockCell : MonoBehaviour, IEventBusListener
     {

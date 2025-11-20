@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using HexaSort.Scripts.Core.Entities;
-using HexaSort.Scripts.Core.Entities.Piece;
+using HexaSort.Core.Entities.Grid;
+using HexaSort.Core.Entities.Grid.Piece;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -148,6 +148,8 @@ namespace HexaSort.Core.Entities
                 
                 targetLocalPos = ConstantKey.STACK_LOCAL_POS_ON_CELL;
                 targetCell.CurrentStack = this;
+
+                Selectable = false;
             }
             else targetLocalPos = Vector3.zero;
             

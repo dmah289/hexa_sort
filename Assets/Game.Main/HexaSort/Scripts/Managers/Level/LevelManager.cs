@@ -1,8 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities;
-using HexaSort.Scripts.Core.Entities;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.BaseSystem;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;

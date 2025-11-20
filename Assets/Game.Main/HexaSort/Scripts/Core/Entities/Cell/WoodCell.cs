@@ -1,13 +1,14 @@
 ﻿using System;
+using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
-    public class WoodCell : MonoBehaviour
+    public class WoodCell : MonoBehaviour, IEventBusListener
     {
         [Header("Components")]
         [SerializeField] private int counter;
@@ -27,11 +28,25 @@ namespace HexaSort.Scripts.Core.Entities
                     gameObject.SetActive(false);
                     counter = 0;
                     parentCell.Selectable = true;
+                    VFXManager.Instance.PlayVFXToPieceGoalPanel(parentCell,
+                        eLevelGoalType.Wood,
+                        1,
+                        destroyCancellationToken);
                 }
                 else counterTxt.text = counter.ToString();
             }
         }
-        
+
+        private void OnEnable()
+        {
+            RegisterCallbacks();
+        }
+
+        private void OnDisable()
+        {
+            DeregisterCallbacks();
+        }
+
         public void Setup()
         {
             gameObject.SetActive(true);
@@ -39,12 +54,22 @@ namespace HexaSort.Scripts.Core.Entities
             Counter = 3;
         }
 
+        public void RegisterCallbacks()
+        {
+            EventBus<GoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
+        }
+        
         private void OnGoalCollected(GoalCollectedDTO data)
         {
             if (data.GoalType == eLevelGoalType.Piece && parentCell.IsNeighborOf(data.SourceCellGridPos))
             {
                 Counter--;
             }
+        }
+
+        public void DeregisterCallbacks()
+        {
+            EventBus<GoalCollectedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using HexaSort.Core.Entities.Grid;
 using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities;
-using HexaSort.Scripts.Core.Entities;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;

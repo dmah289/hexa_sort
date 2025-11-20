@@ -6,7 +6,7 @@ using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities.Piece
+namespace HexaSort.Core.Entities.Grid.Piece
 {
     public enum ColorType : byte
     {

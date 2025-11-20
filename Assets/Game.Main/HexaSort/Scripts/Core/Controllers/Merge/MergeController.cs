@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities;
-using HexaSort.Scripts.Core.Entities;
 using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
@@ -28,8 +28,10 @@ namespace HexaSort.Scripts.Core.Controllers
         
         #region Unity APIs
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             mergeSequenceExecutor = GetComponent<MergeSequenceExecutor>();
             pathFinder = GetComponent<PathFinder>();
         }

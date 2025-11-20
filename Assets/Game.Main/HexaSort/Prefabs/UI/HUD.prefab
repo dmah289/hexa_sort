@@ -3347,6 +3347,7 @@ RectTransform:
   - {fileID: 6203567725177753595}
   - {fileID: 3870162066314579418}
   - {fileID: 7195970641268992175}
+  - {fileID: 1881636483620265497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3539,7 +3540,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  mergeController: {fileID: 0}
 --- !u!1 &7095816844517900585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4408,6 +4408,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &8538739173739938473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1881636483620265497}
+  - component: {fileID: 1260401762416307765}
+  m_Layer: 5
+  m_Name: vfx_manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1881636483620265497
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538739173739938473}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 196750370794148275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1260401762416307765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538739173739938473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd4566918634a5b884360f336fa85b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 0}
+  goalVFXTargetPanels:
+  - {fileID: 8501784958968850051}
+  - {fileID: 6033467687477065417}
 --- !u!1 &8798710762260104250
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,6 +6290,16 @@ PrefabInstance:
 --- !u!224 &1028669531517724296 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7488309924821878254, guid: 286e824f133119b4cba1ae4f56d8d976, type: 3}
+  m_PrefabInstance: {fileID: 7614816549595767654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6033467687477065417 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4185653487842219439, guid: 286e824f133119b4cba1ae4f56d8d976, type: 3}
+  m_PrefabInstance: {fileID: 7614816549595767654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &8501784958968850051 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2040459585838581221, guid: 286e824f133119b4cba1ae4f56d8d976, type: 3}
   m_PrefabInstance: {fileID: 7614816549595767654}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8339175223280957776

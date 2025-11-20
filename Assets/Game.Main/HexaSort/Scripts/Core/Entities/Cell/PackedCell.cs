@@ -11,7 +11,7 @@ using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class PackedCell : MonoBehaviour, IEventBusListener
     {
@@ -69,18 +69,21 @@ namespace HexaSort.Scripts.Core.Entities
 
         #endregion
 
-        #region Goal Collected Callbacks
+        #region Total Goal Collected Callbacks
 
         public void RegisterCallbacks()
         {
-            EventBus<TotalGoalGainedDTO>.Register(onEventWithArgs: OnGoalCollected);
+            Debug.Log("Registered - " + gameObject.Path());
+            EventBus<TotalGoalGainedDTO>.Register(onEventWithArgs: OnTotalGoalCollected);
         }
         
-        public void OnGoalCollected(TotalGoalGainedDTO data)
+        public void OnTotalGoalCollected(TotalGoalGainedDTO data)
         {
-            Debug.Log("Received");
-            if (data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= unlockValue)
+            Debug.Log($"Received - {data.totalCollectedAmount}");
+            if (data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= UnlockValue)
             {
+                // gameObject.SetActive(false);
+                
                 lockIcon.DOShakeRotation(0.5f, 5f, 20)
                     .SetEase(Ease.InOutSine)
                     .OnComplete(() =>
@@ -96,7 +99,8 @@ namespace HexaSort.Scripts.Core.Entities
 
         public void DeregisterCallbacks()
         {
-            EventBus<TotalGoalGainedDTO>.Deregister(onEventWithArgs: OnGoalCollected);
+            Debug.Log("Deregistered - " + gameObject.Path());
+            EventBus<TotalGoalGainedDTO>.Deregister(onEventWithArgs: OnTotalGoalCollected);
         }
 
         #endregion

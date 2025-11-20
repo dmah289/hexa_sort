@@ -2,8 +2,9 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using LevelEditor.LevelData;
-using HexaSort.Scripts.Core.Entities;
-using HexaSort.Scripts.Core.Entities.Piece;
+using HexaSort.Core.Entities.Grid;
+using HexaSort.Core.Entities.Grid.Piece;
+using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Gameplay.Goals;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -18,10 +19,6 @@ namespace HexaSort.Scripts.Core.Controllers
         private const int MergeDelayBeforeNewExecution = 300;
         private const int MergeDelayBetween2PairMerge = 500;
         private const int CheckCollectingDelay = 300;
-        
-        [Header("References")]
-        [SerializeField] private RectTransform piecesGoalTargetPanel;
-        [SerializeField] private Camera mainCam;
         
         [Header("Merge Tracking")]
         [SerializeField] private bool isCheckingMerging;
@@ -134,7 +131,10 @@ namespace HexaSort.Scripts.Core.Controllers
                     cell.CurrentStack.CollectLastPiece();
                     
                     if(i == sameColorCount-2)
-                        await PlayVFXToPieceGoalPanel(cell, sameColorCount);
+                        await VFXManager.Instance.PlayVFXToPieceGoalPanel(cell,
+                            eLevelGoalType.Piece,
+                            sameColorCount,
+                            destroyCancellationToken);
                     
                     await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
                 }
@@ -143,33 +143,6 @@ namespace HexaSort.Scripts.Core.Controllers
             }
             
             isCheckingCollecting = false;
-        }
-
-        private async UniTask PlayVFXToPieceGoalPanel(HexCell cell, int sameColorCount)
-        {
-            RectTransform starTrail = await ObjectPooler.GetFromPool<RectTransform>(PoolingType.StarTrail, destroyCancellationToken, piecesGoalTargetPanel);
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(piecesGoalTargetPanel,
-                mainCam.WorldToScreenPoint(cell.selfTransform.position),
-                null,
-                out Vector2 localPos);
-            starTrail.anchoredPosition = localPos;
-
-            GoalCollectedDTO piecesCollectedDTO = new GoalCollectedDTO(eLevelGoalType.Piece, sameColorCount, cell.GridPos);
-                
-            for (int i = 0; i < starTrail.childCount; i++)
-            {
-                Image image = starTrail.GetChild(i).GetComponent<Image>();
-                if (image != null)
-                    image.enabled = i == (int)piecesCollectedDTO.GoalType;
-            }
-
-            await UniTask.Delay(155);
-                
-            starTrail.DOAnchorPos(Vector2.zero, 0.7f).SetEase(Ease.OutSine).OnComplete(() =>
-            {
-                ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
-                EventBus<GoalCollectedDTO>.Raise(piecesCollectedDTO);
-            });
         }
     }
 }

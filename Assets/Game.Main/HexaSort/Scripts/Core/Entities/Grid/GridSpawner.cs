@@ -7,11 +7,14 @@ using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Entities
+namespace HexaSort.Core.Entities.Grid
 {
     public class GridSpawner : MonoBehaviour
     {
         public HexCell[,] gridCells;
+        private Vector2 centerPos;
+        
+        public Vector2 CenterPos => centerPos;
         
         public async UniTaskVoid SetupBoardLayout(TrayController tray, LevelDataSO levelData)
         {
@@ -22,7 +25,7 @@ namespace HexaSort.Scripts.Core.Entities
             int activeTile = 0;
             float minCellY = int.MaxValue;
             float maxCellX = int.MinValue;
-            Vector2 centerPos = Vector2.zero;
+            centerPos = Vector2.zero;
             
             // Root of the grid is the bottom left corner
             for (int i = 0; i < height; i++)

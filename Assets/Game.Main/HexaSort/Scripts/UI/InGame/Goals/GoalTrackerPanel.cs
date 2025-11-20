@@ -9,7 +9,7 @@ namespace HexaSort.UI.Gameplay.Goals
     public abstract class GoalTrackerPanel : MonoBehaviour
     {
         private const float TargetScale = 1.1f;
-        private const float ScaleDuration = 0.05f;
+        private const float ScaleDuration = 0.07f;
         
         [Header("Config")]
         [SerializeField] protected LevelGoalData goalData;
@@ -28,7 +28,9 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public virtual void OnGoalCollected(int collectedAmount)
         {
-            iconRt.DOScale(TargetScale, ScaleDuration).SetEase(Ease.Linear);
+            iconRt.DOScale(TargetScale, ScaleDuration)
+                .SetEase(Ease.OutSine)
+                .SetLoops(2, LoopType.Yoyo);
         }
     }
 }

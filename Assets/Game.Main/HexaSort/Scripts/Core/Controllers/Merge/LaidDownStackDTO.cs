@@ -1,4 +1,4 @@
-using HexaSort.Scripts.Core.Entities;
+using HexaSort.Core.Entities.Grid;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 
 namespace HexaSort.Scripts.Core.Controllers

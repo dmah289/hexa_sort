@@ -1,5 +1,5 @@
 ﻿using System;
-using HexaSort.Scripts.Core.Entities.Piece;
+using HexaSort.Core.Entities.Grid.Piece;
 using UnityEngine;
 
 namespace LevelEditor.LevelData
