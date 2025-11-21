@@ -1,18 +1,24 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities.Grid;
-using HexaSort.Core.Entities;
-using HexaSort.UI.Loading;
-using HexaSort.UI.Loading.BaseSystem;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Managers
+namespace HexaSort.Managers.Level
 {
+    public enum eLevelState : byte
+    {
+        None = 0,
+        Playing = 1,
+        OutOfSpace = 2,
+        Win = 3,
+        Failed = 4
+    }
+    
     public struct LevelFailEventDTO : IEventDTO { }
     public struct OutOfSpaceEventDTO : IEventDTO { }
     
@@ -25,6 +31,7 @@ namespace HexaSort.Scripts.Managers
         [SerializeField] private Camera gameplayCam;
         [SerializeField] private GridController grid;
         [SerializeField] private TrayController tray;
+        [SerializeField] private LoosePanel loosePanel;
         
         [Header("State Management")]
         [SerializeField] private eLevelState currentLevelState;
@@ -40,6 +47,7 @@ namespace HexaSort.Scripts.Managers
                 switch (currentLevelState)
                 {
                     case eLevelState.OutOfSpace:
+                        // TODO : Show revive options + notify to all gridController to show out of space effect
                         EventBus<OutOfSpaceEventDTO>.Raise();
                         break;
                 }

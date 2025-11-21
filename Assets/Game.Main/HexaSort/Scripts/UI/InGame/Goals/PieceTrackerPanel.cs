@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -16,18 +17,18 @@ namespace HexaSort.UI.Gameplay.Goals
         [SerializeField] private RectTransform fillRt;
         [SerializeField] private RectTransform progressBg;
 
-        public override int Counter
+        public override bool IsCompleted 
+            => counter >= goalData.targetAmount;
+
+        private async UniTask SetCounter(int value)
         {
-            get => counter;
-            set
-            {
-                counter = value;
-                counterTxt.text = $"{counter}/{goalData.targetAmount}";
-                float newFillWidth = Counter / (float)goalData.targetAmount * MaxFillWidth;
-                float duration = Mathf.Abs(fillRt.sizeDelta.x - newFillWidth) / 100f;
-                Vector2 targetSize = new Vector2(newFillWidth, FillHeight);
-                fillRt.DOSizeDelta(targetSize, duration).SetEase(Ease.OutSine);
-            }
+            value = Mathf.Clamp(value, 0, goalData.targetAmount);
+            counter = value;
+            counterTxt.text = $"{counter}/{goalData.targetAmount}";
+            float newFillWidth = counter / (float)goalData.targetAmount * MaxFillWidth;
+            float duration = Mathf.Abs(fillRt.sizeDelta.x - newFillWidth) / 100f;
+            Vector2 targetSize = new Vector2(newFillWidth, FillHeight);
+            await fillRt.DOSizeDelta(targetSize, duration).SetEase(Ease.OutSine);
         }
 
         public override void SetUp(LevelGoalData goalData)
@@ -37,24 +38,24 @@ namespace HexaSort.UI.Gameplay.Goals
             fillRt.sizeDelta = new Vector2(0, FillHeight);
             progressBg.sizeDelta = new Vector2(0, BgHeight);
             
-            Counter = 0;
+            SetCounter(0).Forget();
             counterTxt.gameObject.SetActive(false);
         }
 
         public void AnimateExpansion(float duration)
         {
-            progressBg.DOSizeDelta(new Vector2(MaxBgWidth, BgHeight), duration).OnComplete(() =>
-            {
-                counterTxt.gameObject.SetActive(true);
-            });
+            progressBg.DOSizeDelta(new Vector2(MaxBgWidth, BgHeight), duration)
+                .OnComplete(() => counterTxt.gameObject.SetActive(true));
         }
         
-        public override void OnGoalCollected(int collectedAmount)
+        public override async UniTask OnGoalCollected(int collectedAmount)
         {
             base.OnGoalCollected(collectedAmount);
 
-            Counter += collectedAmount;
-            EventBus<TotalGoalGainedDTO>.Raise(new TotalGoalGainedDTO(eLevelGoalType.Piece, Counter));
+            EventBus<TotalGoalGainedDTO>.Raise(
+                new TotalGoalGainedDTO(eLevelGoalType.Piece,
+                    counter + collectedAmount));
+            await SetCounter(counter + collectedAmount);
         }
     }
 }

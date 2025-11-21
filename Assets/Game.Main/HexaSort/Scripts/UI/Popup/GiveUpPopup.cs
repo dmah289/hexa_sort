@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
-using HexaSort.Scripts.Managers;
+using HexaSort.Managers.Level;
 using HexaSort.UI.Loading.BaseSystem;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading.MainMenu.Home;

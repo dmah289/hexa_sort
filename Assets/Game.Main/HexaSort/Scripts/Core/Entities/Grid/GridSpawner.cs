@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Cysharp.Threading.Tasks;
-using HexaSort.Scripts.Managers;
+using HexaSort.Managers.Level;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;

@@ -4,6 +4,7 @@ using DG.Tweening;
 using LevelEditor.LevelData;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities.Grid.Piece;
+using HexaSort.Managers.Level;
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Gameplay.Goals;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -30,6 +31,9 @@ namespace HexaSort.Scripts.Core.Controllers
         
         // TODO : dynammic threshold base on level progress
         [SerializeField] private int dynamicThresholdForCollectingPieces = 10;
+        
+        [Header("----- References -----")]
+        [SerializeField] private PieceTrackerPanel pieceTrackerPanel;
         
         
         public List<HexCell> WaitingMergableCells => waitingMergableCells;
@@ -59,6 +63,9 @@ namespace HexaSort.Scripts.Core.Controllers
                     return;
                 }
                 
+                if(LevelManager.Instance.CurrentLevelState != eLevelState.Playing)
+                    return;
+                
                 HexCell parent = parents[connectedCells[i].GridPos.row, connectedCells[i].GridPos.col];
                 await DoPairMerge(connectedCells[i], parent);
                 
@@ -75,6 +82,9 @@ namespace HexaSort.Scripts.Core.Controllers
                 await UniTask.Delay(MergeDelayBeforeNewExecution);
                 return;
             }
+            
+            if(LevelManager.Instance.CurrentLevelState != eLevelState.Playing)
+                return;
 
             await CheckCollectingPieces(connectedCells[0]);
         }
@@ -130,7 +140,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 {
                     cell.CurrentStack.CollectLastPiece();
                     
-                    if(i == sameColorCount-2)
+                    if(i == sameColorCount-2 && !pieceTrackerPanel.IsCompleted)
                         await VFXManager.Instance.PlayVFXToPieceGoalPanel(cell,
                             eLevelGoalType.Piece,
                             sameColorCount,

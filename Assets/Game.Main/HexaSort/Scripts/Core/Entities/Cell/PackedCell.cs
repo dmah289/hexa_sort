@@ -79,7 +79,6 @@ namespace HexaSort.Core.Entities.Grid
         
         public void OnTotalGoalCollected(TotalGoalGainedDTO data)
         {
-            Debug.Log($"Received - {data.totalCollectedAmount}");
             if (data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= UnlockValue)
             {
                 // gameObject.SetActive(false);

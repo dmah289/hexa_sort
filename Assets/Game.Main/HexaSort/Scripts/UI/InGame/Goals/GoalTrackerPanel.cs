@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using LevelEditor.LevelData;
 using TMPro;
@@ -18,15 +19,16 @@ namespace HexaSort.UI.Gameplay.Goals
         [Header("Self Components")]
         [SerializeField] protected TextMeshProUGUI counterTxt;
         [SerializeField] protected RectTransform iconRt;
-
-        public abstract int Counter { get; set; }
+        
+        public abstract bool IsCompleted { get; }
+        
 
         public virtual void SetUp(LevelGoalData goalData)
         {
             this.goalData = goalData;
         }
 
-        public virtual void OnGoalCollected(int collectedAmount)
+        public virtual async UniTask OnGoalCollected(int collectedAmount)
         {
             iconRt.DOScale(TargetScale, ScaleDuration)
                 .SetEase(Ease.OutSine)

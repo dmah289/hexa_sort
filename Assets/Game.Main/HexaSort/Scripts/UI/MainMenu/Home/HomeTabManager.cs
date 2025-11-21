@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Framework.UI;
 using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.Managers.Level;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.BaseSystem;
@@ -36,7 +37,10 @@ namespace HexaSort.UI.MainMenu.Home
         public void OnPlayBtnClicked()
         {
             if (lifeSystem.CanPlay)
+            {
+                LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
+            }
             else
             {
                 lifeSystem.FlashOnOutOfLife();

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using HexaSort.Managers.Level;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities;
-using HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -57,7 +57,10 @@ namespace HexaSort.Scripts.Core.Controllers
         
         private void OnStackLaidDown(LaidDownStackDTO dto)
         {
-            HandleCheckingMerge(dto.cell).Forget();
+            if (LevelManager.Instance.CurrentLevelState == eLevelState.Playing)
+            {
+                HandleCheckingMerge(dto.cell).Forget();
+            }
         }
 
         public void DeregisterCallbacks()
@@ -101,6 +104,8 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private async UniTask HandleMergeSequence(HexCell cell)
         {
+            
+            
             pathFinder.GetConnectedCells(cell, grid);
             await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
         }

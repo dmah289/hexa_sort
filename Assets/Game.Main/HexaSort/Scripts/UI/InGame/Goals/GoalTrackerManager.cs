@@ -1,9 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Managers.Level;
 using LevelEditor.LevelData;
 using manhnd_sdk.ExtensionMethods;
-using HexaSort.Scripts.Managers;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
@@ -49,6 +50,21 @@ namespace HexaSort.UI.Gameplay.Goals
         [SerializeField] private RectTransform panelRt;
         [SerializeField] private TextMeshProUGUI titleTxt;
         public GoalTrackerPanel[] goalTrackerPanels;
+        [SerializeField] private WinPanel winPanel;
+        
+        public bool IsAllGoalsCompleted
+        {
+            get
+            {
+                for(int i = 0; i < goalTrackerPanels.Length; i++)
+                {
+                    if (goalTrackerPanels[i].gameObject.activeSelf && !goalTrackerPanels[i].IsCompleted)
+                        return false;
+                }
+
+                return true;
+            }
+        }
 
         #region Unity APIs
 
@@ -57,11 +73,6 @@ namespace HexaSort.UI.Gameplay.Goals
             goalTrackerPanels = GetComponentsInChildren<GoalTrackerPanel>();
             RegisterCallbacks();
         }
-
-        // private void Start()
-        // {
-        //     RegisterCallbacks();
-        // }
 
         public async UniTask PlayStartLevelAnim(LevelGoalData[] goalData)
         {
@@ -148,7 +159,19 @@ namespace HexaSort.UI.Gameplay.Goals
 
         private void OnGoalCollected(GoalCollectedDTO dto)
         {
-            goalTrackerPanels[(int)dto.GoalType].OnGoalCollected(dto.CollectedAmount);
+            OnGoalCollectedAsync(dto).Forget();
+        }
+
+        private async UniTask OnGoalCollectedAsync(GoalCollectedDTO dto)
+        {
+            await goalTrackerPanels[(int)dto.GoalType].OnGoalCollected(dto.CollectedAmount);
+            
+            if (IsAllGoalsCompleted)
+            {
+                LevelManager.Instance.CurrentLevelState = eLevelState.Win;
+                await UniTask.Delay(500);
+                winPanel.Show().Forget();
+            }
         }
 
         public void DeregisterCallbacks()

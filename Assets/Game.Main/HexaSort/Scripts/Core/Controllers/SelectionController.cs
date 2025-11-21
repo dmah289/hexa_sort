@@ -1,4 +1,5 @@
-﻿using HexaSort.Core.Entities;
+﻿using HexaSort.Managers.Level;
+using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -39,11 +40,14 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private void Update()
         {
+            if (LevelManager.Instance.CurrentLevelState == eLevelState.Playing)
+            {
 #if UNITY_EDITOR
-            HandleEditorSelection();
+                HandleEditorSelection();
 #else
-            HandleMobileSelection();
+                HandleMobileSelection();
 #endif
+            }
         }
 
         #endregion

@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using HexaSort.Scripts.Managers;
+using HexaSort.Managers.Level;
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Loading.BaseSystem;
 

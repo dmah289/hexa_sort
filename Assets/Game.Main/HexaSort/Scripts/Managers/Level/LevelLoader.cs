@@ -1,16 +1,13 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using HexaSort.Core.Entities.Grid;
+﻿using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
-using HexaSort.Core.Entities;
+using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
-using manhnd_sdk.Scripts.Helpers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace HexaSort.Scripts.Managers
+namespace HexaSort.Managers.Level
 {
     public class LevelLoader : MonoBehaviour
     {

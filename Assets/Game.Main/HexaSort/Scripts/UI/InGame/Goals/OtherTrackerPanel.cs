@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using LevelEditor.LevelData;
 using UnityEngine;
@@ -8,43 +9,36 @@ namespace HexaSort.UI.Gameplay.Goals
     {
         [Header("Child Components")]
         [SerializeField] private RectTransform doneIconRt;
-        
-        public override int Counter
-        {
-            get => counter;
-            set
-            {
-                counter = value;
-                
-                if (counter <= 0)
-                {
-                    counter = 0;
-                    counterTxt.gameObject.SetActive(false);
-                    doneIconRt.gameObject.SetActive(true);
-                    
-                    doneIconRt.DOScale(1.1f, 0.3f)
-                        .SetEase(Ease.OutSine)
-                        .SetLoops(1, LoopType.Yoyo);
-                }
-                else counterTxt.text = $"{counter}";
-            }
-        }
+
+        public override bool IsCompleted => counter <= 0;
 
         public override void SetUp(LevelGoalData goalData)
         {
             base.SetUp(goalData);
             
             doneIconRt.gameObject.SetActive(false);
-            Counter = goalData.targetAmount;
+            SetCounter(goalData.targetAmount);
         }
 
-        public override void OnGoalCollected(int collectedAmount)
+        public void SetCounter(int value)
         {
-            base.OnGoalCollected(collectedAmount);
+            value = Mathf.Clamp(value, 0, goalData.targetAmount);
+            counter = value;
+                
+            if (counter <= 0)
+            {
+                counter = 0;
+                counterTxt.gameObject.SetActive(false);
+                doneIconRt.gameObject.SetActive(true);
+            }
+            else counterTxt.text = $"{counter}";
+        }
+
+        public override async UniTask OnGoalCollected(int collectedAmount)
+        {
+            base.OnGoalCollected(collectedAmount).Forget();
             
-            Counter -= collectedAmount;
-            
-            
+            SetCounter(counter - collectedAmount);
         }
     }
 }
