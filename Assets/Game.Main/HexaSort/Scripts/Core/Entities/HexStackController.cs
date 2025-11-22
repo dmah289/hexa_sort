@@ -25,6 +25,7 @@ namespace HexaSort.Core.Entities
         
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
         public List<HexPieceController> Pieces => pieces;
+        public HexPieceController TopPiece => pieces[^1];
         public bool IsOnGrid => isOnGrid;
         public float Height => pieces.Count * ConstantKey.HEX_PIECE_THICKNESS;
         public int PiecesCount => pieces.Count;
@@ -57,7 +58,7 @@ namespace HexaSort.Core.Entities
                     selfTransform
                 );
                 
-                int colorIdx = Random.Range(0, 3);
+                int colorIdx = Random.Range(0, 6);
                 piece.ColorType = (ColorType)colorIdx;
 
                 Vector3 spawnedPos = (i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);

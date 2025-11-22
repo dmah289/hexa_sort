@@ -21,9 +21,8 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
             {PoolingType.Toast, "pooling_toast"},
             {PoolingType.CoinFly, "pooling_coin_fly"},
             {PoolingType.LifeFly, "pooling_life_fly"},
-            {PoolingType.StarTrail, "pooling_star_trail"}
+            {PoolingType.StarTrail, "pooling_star_trail"},
+            {PoolingType.SightingTarget, "pooling_sighting_target"},
         };
-        
-        
     }
 }

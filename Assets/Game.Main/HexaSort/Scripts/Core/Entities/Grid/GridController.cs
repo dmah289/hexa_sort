@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using HexaSort.Managers.Level;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Loading.InGame;
@@ -8,13 +9,14 @@ using UnityEngine;
 
 namespace HexaSort.Core.Entities.Grid
 {
-    public class GridController : MonoBehaviour, IEventBusListener
+    public class GridController : MonoBehaviour
     {
         [Header("Self Components")]
         [SerializeField] private GridSpawner gridSpawner;
         
         [Header("References")]
         [SerializeField] private TrayController trayController;
+        [SerializeField] private Camera mainCam;
         
         [Header("UI References")]
         [SerializeField] private WinPanel winPanel;
@@ -50,8 +52,6 @@ namespace HexaSort.Core.Entities.Grid
         private void Awake()
         {
             gridSpawner = GetComponent<GridSpawner>();
-            
-            RegisterCallbacks();
         }
 
         #endregion
@@ -65,12 +65,7 @@ namespace HexaSort.Core.Entities.Grid
         
         #endregion
 
-        public void RegisterCallbacks()
-        {
-            EventBus<OutOfSpaceEventDTO>.Register(onEventWithoutArgs: OnGridOutOfSpace);
-        }
-
-        private void OnGridOutOfSpace()
+        public void FinDestroyableStacks(LoosePanel loosePanel)
         {
             var top3HighestCells = GridCells
                 .Cast<HexCell>()
@@ -81,13 +76,9 @@ namespace HexaSort.Core.Entities.Grid
 
             for (int i = 0; i < top3HighestCells.Count; i++)
             {
-                top3HighestCells[i].ShowSightingTarget();
+                top3HighestCells[i].ShowSightingTarget(loosePanel.GetComponent<RectTransform>(), mainCam)
+                    .Forget();
             }
-        }
-
-        public void DeregisterCallbacks()
-        {
-            EventBus<OutOfSpaceEventDTO>.Register(onEventWithoutArgs: OnGridOutOfSpace);
         }
 
         public void CleanUp()

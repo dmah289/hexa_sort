@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Scripts.Core.Controllers;
+using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -93,10 +94,16 @@ namespace HexaSort.Core.Entities.Grid
             meshRenderer.SetVertexLitColor(color);
         }
 
-        // TODO : Show sighting target effect on top of stack
-        public void ShowSightingTarget()
+        public async UniTask ShowSightingTarget(RectTransform loosePanel, Camera mainCam)
         {
-            
+            RectTransform sightingTarget = await ObjectPooler.GetFromPool<RectTransform>
+                (PoolingType.SightingTarget, destroyCancellationToken, loosePanel);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                loosePanel,
+                mainCam.WorldToScreenPoint(CurrentStack.TopPiece.selfTransform.position),
+                null,
+                out Vector2 localPos);
+            sightingTarget.anchoredPosition = localPos;
         }
         
         public bool IsNeighborOf((int row, int col) sourceCellGridPos)

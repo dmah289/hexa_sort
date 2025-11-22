@@ -1,6 +1,8 @@
 using HexaSort.UI.Loading.BaseSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Framework.UI;
+using HexaSort.Managers.Level;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading.MainMenu.Home;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -9,10 +11,6 @@ using UnityEngine;
 
 namespace HexaSort.UI.Loading.InGame
 {
-    public enum eLooseReason
-    {
-        OutOfSpace
-    }
     
     public class LoosePanel : MonoBehaviour
     {
@@ -23,19 +21,24 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] private GameObject revievePanel;
         [SerializeField] private RectTransform failLevelPanel;
         
+        [Header("References")]
+        [SerializeField] private ScaleAnimButton pauseBtn;
+        
 
-        public async UniTaskVoid Show(eLooseReason reason)
+        public async UniTaskVoid ShowRevivePanel()
         {
             await UniTask.Delay(500);
             
             gameObject.SetActive(true);
-            
-            revievePanel.SetActive(reason == eLooseReason.OutOfSpace);
-            failLevelPanel.gameObject.SetActive(reason != eLooseReason.OutOfSpace);
+            revievePanel.SetActive(true);
+            failLevelPanel.gameObject.SetActive(false);
         }
 
         public void OnCloseRevivePopupClicked()
         {
+            LevelManager.Instance.CurrentLevelState = eLevelState.Failed;
+            EventBus<LifeChangedEventDTO>.Raise(new  LifeChangedEventDTO(-1));
+            
             revievePanel.SetActive(false);
             failLevelPanel.gameObject.SetActive(true);
             
@@ -45,10 +48,9 @@ namespace HexaSort.UI.Loading.InGame
 
         public void OnContinueBtnFailClicked()
         {
-            // TODO : review this logic
-            EventBus<LifeChangedEventDTO>.Raise(new  LifeChangedEventDTO(-1));
             //LevelManager.Instance.FailLevel().Forget();
             gameObject.SetActive(false);
+            LevelManager.Instance.CurrentLevelState = eLevelState.None;
         }
     }
 }

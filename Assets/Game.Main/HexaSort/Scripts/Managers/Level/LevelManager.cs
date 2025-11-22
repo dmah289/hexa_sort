@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Loading.InGame;
@@ -6,6 +7,7 @@ using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
+using manhnd_sdk.UITools.Toast;
 using UnityEngine;
 
 namespace HexaSort.Managers.Level
@@ -47,8 +49,11 @@ namespace HexaSort.Managers.Level
                 switch (currentLevelState)
                 {
                     case eLevelState.OutOfSpace:
-                        // TODO : Show revive options + notify to all gridController to show out of space effect
-                        EventBus<OutOfSpaceEventDTO>.Raise();
+                        // TODO : Notify to gridController to show out of space effect
+                        ToastManager.Instance.Show(ConstantKey.TOAST_OUT_OF_SPACE);
+                        grid.FinDestroyableStacks(loosePanel);
+                        loosePanel.ShowRevivePanel().Forget();
+                        
                         break;
                 }
             }
@@ -59,6 +64,7 @@ namespace HexaSort.Managers.Level
             base.Awake();
             
             levelLoader = GetComponent<LevelLoader>();
+            CurrentLevelState = eLevelState.None;
         }
 
         public void EnterGameplay()
