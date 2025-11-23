@@ -1,6 +1,8 @@
 using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.UI.BaseSystem;
+using HexaSort.UI.Gameplay.Goals;
 using HexaSort.UI.Loading.BaseSystem;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
@@ -13,6 +15,8 @@ namespace HexaSort.UI.Loading
         
         [Header("References")]
         [SerializeField] private LoadingLevel loadingLevel;
+        public PieceTrackerPanel pieceTrackerPanel;
+        public LoosePanel loosePanel;
         
         [Header("State Management")]
         [SerializeField] private eScreenType curScreen;

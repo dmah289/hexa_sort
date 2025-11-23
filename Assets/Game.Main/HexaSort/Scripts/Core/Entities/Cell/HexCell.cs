@@ -3,6 +3,8 @@ using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Scripts.Core.Controllers;
+using HexaSort.UI.BaseSystem;
+using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -26,12 +28,15 @@ namespace HexaSort.Core.Entities.Grid
         [SerializeField] private WoodCell woodCell;
         [SerializeField] private PackedCell packedCell;
 
+        
         public bool IsMergable => IsOccupied && !woodCell.gameObject.activeSelf
                                              && !packedCell.gameObject.activeSelf;
         
         public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
-        public bool IsOccupied => currStack != null;
+        public bool IsOccupied => currStack != null 
+                                  || woodCell.gameObject.activeSelf
+                                  || packedCell.gameObject.activeSelf;
         
         public (int row, int col) GridPos
         {
@@ -93,18 +98,6 @@ namespace HexaSort.Core.Entities.Grid
         {
             meshRenderer.SetVertexLitColor(color);
         }
-
-        public async UniTask ShowSightingTarget(RectTransform loosePanel, Camera mainCam)
-        {
-            RectTransform sightingTarget = await ObjectPooler.GetFromPool<RectTransform>
-                (PoolingType.SightingTarget, destroyCancellationToken, loosePanel);
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                loosePanel,
-                mainCam.WorldToScreenPoint(CurrentStack.TopPiece.selfTransform.position),
-                null,
-                out Vector2 localPos);
-            sightingTarget.anchoredPosition = localPos;
-        }
         
         public bool IsNeighborOf((int row, int col) sourceCellGridPos)
         {
@@ -122,6 +115,33 @@ namespace HexaSort.Core.Entities.Grid
             }
 
             return false;
+        }
+        
+        public async UniTask CollectAllPieces(bool withCollectingGoal = true)
+        {
+            if (!IsOccupied) return;
+            
+            for (int i = 0; i < PiecesCount; i++)
+            {
+                CurrentStack.CollectLastPiece();
+                
+                if(i == PiecesCount-2 && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
+                    await VFXManager.Instance.PlayVFXToPieceGoalPanel(this,
+                        eLevelGoalType.Piece,
+                        PiecesCount,
+                        destroyCancellationToken,
+                        withCollectingGoal);
+                    
+                await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
+            }
+            
+            if (CurrentStack.Pieces.Count == 0)
+            {
+                ObjectPooler.ReturnToPool(PoolingType.HexStack, CurrentStack, destroyCancellationToken);
+                CurrentStack = null;
+            }
+            
+            
         }
         
         #endregion
@@ -142,6 +162,22 @@ namespace HexaSort.Core.Entities.Grid
         {
             woodCell.gameObject.SetActive(false);
             packedCell.gameObject.SetActive(false);
+        }
+        
+        public async UniTask<SightingTarget> SpawnSightingTarget(RectTransform loosePanel, Camera mainCam)
+        {
+            SightingTarget sightingTarget = await ObjectPooler.GetFromPool<SightingTarget>
+                (PoolingType.SightingTarget, destroyCancellationToken, loosePanel);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                loosePanel,
+                mainCam.WorldToScreenPoint(CurrentStack.TopPiece.selfTransform.position),
+                null,
+                out Vector2 localPos);
+
+            sightingTarget.ParentCell = this;
+            sightingTarget.GetComponent<RectTransform>().anchoredPosition = localPos;
+
+            return sightingTarget;
         }
 
         #endregion

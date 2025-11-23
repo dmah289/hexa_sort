@@ -73,7 +73,6 @@ namespace HexaSort.Core.Entities.Grid
 
         public void RegisterCallbacks()
         {
-            Debug.Log("Registered - " + gameObject.Path());
             EventBus<TotalGoalGainedDTO>.Register(onEventWithArgs: OnTotalGoalCollected);
         }
         
@@ -98,7 +97,6 @@ namespace HexaSort.Core.Entities.Grid
 
         public void DeregisterCallbacks()
         {
-            Debug.Log("Deregistered - " + gameObject.Path());
             EventBus<TotalGoalGainedDTO>.Deregister(onEventWithArgs: OnTotalGoalCollected);
         }
 

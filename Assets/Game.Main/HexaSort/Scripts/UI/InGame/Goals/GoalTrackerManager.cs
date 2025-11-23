@@ -153,7 +153,6 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public void RegisterCallbacks()
         {
-            Debug.Log("Registering Goal Collected Callbacks" + gameObject.Path());
             EventBus<GoalCollectedDTO>.Register(onEventWithArgs: OnGoalCollected);
         }
 

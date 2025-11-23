@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using HexaSort.Managers.Level;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
@@ -65,19 +67,31 @@ namespace HexaSort.Core.Entities.Grid
         
         #endregion
 
-        public void FinDestroyableStacks(LoosePanel loosePanel)
+        public async UniTask FindDestroyableStacks(LoosePanel loosePanel)
         {
-            var top3HighestCells = GridCells
-                .Cast<HexCell>()
-                .Where(cell => cell.IsOccupied)
-                .OrderByDescending(cell => cell.PiecesCount)
-                .Take(3)
-                .ToList();
-
-            for (int i = 0; i < top3HighestCells.Count; i++)
+            var occupiedCells = new List<HexCell>();
+    
+            for (int i = 0; i < GridSize.height; i++)
             {
-                top3HighestCells[i].ShowSightingTarget(loosePanel.GetComponent<RectTransform>(), mainCam)
-                    .Forget();
+                for (int j = 0; j < GridSize.width; j++)
+                {
+                    if (GridCells[i, j] != null && GridCells[i, j].IsOccupied)
+                    {
+                        occupiedCells.Add(GridCells[i, j]);
+                    }
+                }
+            }
+
+            var topHighestCells = occupiedCells
+                .OrderByDescending(cell => cell.PiecesCount)
+                .Take(ConstantKey.MaxDestroyableStackOnLoose)
+                .ToList();
+            
+            for (int i = 0; i < topHighestCells.Count; i++)
+            {
+                loosePanel.sightingTargets[i] = await topHighestCells[i].SpawnSightingTarget(
+                        loosePanel.GetComponent<RectTransform>()
+                        , mainCam);
             }
         }
 

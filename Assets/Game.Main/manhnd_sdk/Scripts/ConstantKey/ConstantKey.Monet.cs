@@ -2,6 +2,7 @@
 {
     public static partial class ConstantKey
     {
-        public static float LIVE_PRICE = 100f;
+        public static int BuyLivePrice = 100;
+        public const int RevivePrice = 100;
     }
 }

@@ -22,10 +22,10 @@ namespace HexaSort.UI.MainMenu.SharedUI
         
         public void OnBuyLiveBtnClicked()
         {
-            if (LocalDataManager.CoinAmount >= ConstantKey.LIVE_PRICE)
+            if (LocalDataManager.CoinAmount >= ConstantKey.BuyLivePrice)
             {
                 EventBus<CoinChangedEventDTO>.Raise(
-                    new CoinChangedEventDTO(-ConstantKey.LIVE_PRICE));
+                    new CoinChangedEventDTO(-ConstantKey.BuyLivePrice));
                 EventBus<LifeChangedEventDTO>.Raise(
                     new LifeChangedEventDTO(1));
                 

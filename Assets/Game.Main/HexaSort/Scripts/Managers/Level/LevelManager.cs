@@ -49,9 +49,8 @@ namespace HexaSort.Managers.Level
                 switch (currentLevelState)
                 {
                     case eLevelState.OutOfSpace:
-                        // TODO : Notify to gridController to show out of space effect
                         ToastManager.Instance.Show(ConstantKey.TOAST_OUT_OF_SPACE);
-                        grid.FinDestroyableStacks(loosePanel);
+                        grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
                         
                         break;
@@ -88,11 +87,6 @@ namespace HexaSort.Managers.Level
         public async UniTask CleanUpLevel()
         {
             levelLoader.CleanUpLevel(grid, tray);
-        }
-
-        public async UniTask FailLevel()
-        {
-            
         }
     }
 }

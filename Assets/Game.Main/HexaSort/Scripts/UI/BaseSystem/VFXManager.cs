@@ -21,7 +21,8 @@ namespace HexaSort.UI.BaseSystem
         public async UniTask PlayVFXToPieceGoalPanel(HexCell cell, 
             eLevelGoalType goalType,
             int amount,
-            CancellationToken destroyCancellationToken)
+            CancellationToken destroyCancellationToken,
+            bool withCollectingGoal = true)
         {
             RectTransform starTrail = await ObjectPooler.GetFromPool<RectTransform>
                 (PoolingType.StarTrail, destroyCancellationToken, goalVFXTargetPanels[(int)goalType]);
@@ -32,7 +33,7 @@ namespace HexaSort.UI.BaseSystem
             starTrail.anchoredPosition = localPos;
 
             GoalCollectedDTO piecesCollectedDTO = new GoalCollectedDTO(goalType, amount, cell.GridPos);
-                
+            
             for (int i = 0; i < starTrail.childCount; i++)
             {
                 Image image = starTrail.GetChild(i).GetComponent<Image>();
@@ -45,7 +46,8 @@ namespace HexaSort.UI.BaseSystem
             starTrail.DOAnchorPos(Vector2.zero, 0.7f).SetEase(Ease.OutSine).OnComplete(() =>
             {
                 ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
-                EventBus<GoalCollectedDTO>.Raise(piecesCollectedDTO);
+                if(withCollectingGoal)
+                    EventBus<GoalCollectedDTO>.Raise(piecesCollectedDTO);
             });
         }
     }

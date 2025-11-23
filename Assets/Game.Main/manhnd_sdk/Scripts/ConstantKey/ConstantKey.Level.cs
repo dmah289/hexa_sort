@@ -19,5 +19,8 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         #endregion
 
         public const string LevelCurveVersion = "level_curve_default";
+        
+        public const int MaxDestroyableStackOnLoose = 2;
+        public const float BottomRevivePanelOffsetY = -300f;
     }
 }
