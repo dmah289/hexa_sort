@@ -49,7 +49,7 @@ namespace HexaSort.Managers.Level
                 switch (currentLevelState)
                 {
                     case eLevelState.OutOfSpace:
-                        ToastManager.Instance.Show(ConstantKey.TOAST_OUT_OF_SPACE);
+                        ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
                         grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
                         

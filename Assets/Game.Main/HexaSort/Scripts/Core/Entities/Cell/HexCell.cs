@@ -34,7 +34,7 @@ namespace HexaSort.Core.Entities.Grid
         
         public ColorType ColorOnTop => IsOccupied ? currStack.ColorOnTop : default;
         
-        public bool IsOccupied => currStack != null 
+        public bool IsOccupied => currStack != null
                                   || woodCell.gameObject.activeSelf
                                   || packedCell.gameObject.activeSelf;
         
@@ -60,7 +60,7 @@ namespace HexaSort.Core.Entities.Grid
             set => collider.enabled = value;
         }
         
-        public int PiecesCount => IsOccupied ? currStack.PiecesCount : 0;
+        public int PiecesCount => currStack ? currStack.PiecesCount : 0;
 
         #region Unity APIs
 
@@ -121,6 +121,7 @@ namespace HexaSort.Core.Entities.Grid
         {
             if (!IsOccupied) return;
             
+            Debug.Log($"{gameObject.name} - {PiecesCount}");
             for (int i = 0; i < PiecesCount; i++)
             {
                 CurrentStack.CollectLastPiece();

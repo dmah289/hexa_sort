@@ -26,7 +26,7 @@ namespace HexaSort.UI.Loading.InGame
                 }
                 else
                 {
-                    ToastManager.Instance.Show(ConstantKey.InsufficentLives);
+                    ToastManager.Instance.Show(ConstantKey.Toast_InsufficentLives);
                     return;
                 }
             }

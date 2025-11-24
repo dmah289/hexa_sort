@@ -18,11 +18,11 @@ namespace HexaSort.UI.Loading.InGame
         private void OnEnable()
         {
             arrow.gameObject.SetActive(false);
-            transform.localScale = Vector3.zero;
         }
 
         public void ShootArrowToTarget()
         {
+            Debug.Log("Arrow Shooted");
             arrow.gameObject.SetActive(true);
         }
 

@@ -343,7 +343,19 @@ MonoBehaviour:
   actionDelay: 0
   OnScaleAnimDone:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 720008106043488131}
+        m_TargetAssemblyTypeName: HexaSort.UI.Loading.InGame.LoosePanel, Assembly-CSharp
+        m_MethodName: OnReviveByCoinBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2741045594081586811
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,7 +949,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7393043778077917684}
-  - component: {fileID: 9115780738999771916}
   m_Layer: 5
   m_Name: revieve_panel
   m_TagString: Untagged
@@ -957,8 +968,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4369285968484147461}
   - {fileID: 1230863746990246602}
+  - {fileID: 4369285968484147461}
   m_Father: {fileID: 8941854992337353607}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -966,26 +977,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &9115780738999771916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269336564904708768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb8b3a701d84f798fc331204e4a084b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selfRectTransform: {fileID: 0}
-  targetScale: 1.1
-  animDuration: 0.1
-  clickIntervalThreshold: 0
-  actionDelay: 0
-  OnScaleAnimDone:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &6443986088657917497
 GameObject:
   m_ObjectHideFlags: 0

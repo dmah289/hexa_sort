@@ -317,6 +317,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6003561952474964790, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: sightingTargets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6033467687477065417, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

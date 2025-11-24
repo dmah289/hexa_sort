@@ -35,7 +35,7 @@ namespace HexaSort.UI.MainMenu.SharedUI
             }
             else
             {
-                ToastManager.Instance.Show(ConstantKey.InsufficentCoins);
+                ToastManager.Instance.Show(ConstantKey.Toast_InsufficentCoins);
             }
         }
 

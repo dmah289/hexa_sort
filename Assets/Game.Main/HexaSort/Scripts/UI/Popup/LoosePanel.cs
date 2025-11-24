@@ -8,6 +8,7 @@ using HexaSort.UI.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
+using manhnd_sdk.UITools.Toast;
 using TMPro;
 using UnityEngine;
 
@@ -77,15 +78,21 @@ namespace HexaSort.UI.Loading.InGame
 
         public async UniTask OnReviveByCoinBtnClickedAsync()
         {
-            if (LocalDataManager.CoinAmount >= ConstantKey.RevivePrice)
+            for(int i = 0; i < sightingTargets.Length; i++)
             {
-                LocalDataManager.CoinAmount -= ConstantKey.RevivePrice;
-                
-                for(int i = 0; i < sightingTargets.Length; i++)
-                {
-                    sightingTargets[i].ShootArrowToTarget();
-                }
+                sightingTargets[i].ShootArrowToTarget();
             }
+            
+            // if (LocalDataManager.CoinAmount >= ConstantKey.RevivePrice)
+            // {
+            //     LocalDataManager.CoinAmount -= ConstantKey.RevivePrice;
+            //     
+            //     for(int i = 0; i < sightingTargets.Length; i++)
+            //     {
+            //         sightingTargets[i].ShootArrowToTarget();
+            //     }
+            // }
+            // else ToastManager.Instance.Show(ConstantKey.Toast_InsufficentCoins);
         }
     }
 }

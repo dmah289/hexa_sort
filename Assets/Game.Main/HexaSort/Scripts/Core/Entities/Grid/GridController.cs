@@ -75,7 +75,7 @@ namespace HexaSort.Core.Entities.Grid
             {
                 for (int j = 0; j < GridSize.width; j++)
                 {
-                    if (GridCells[i, j] != null && GridCells[i, j].IsOccupied)
+                    if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null)
                     {
                         occupiedCells.Add(GridCells[i, j]);
                     }
@@ -83,6 +83,7 @@ namespace HexaSort.Core.Entities.Grid
             }
 
             var topHighestCells = occupiedCells
+                .Where(c => c != null) 
                 .OrderByDescending(cell => cell.PiecesCount)
                 .Take(ConstantKey.MaxDestroyableStackOnLoose)
                 .ToList();
