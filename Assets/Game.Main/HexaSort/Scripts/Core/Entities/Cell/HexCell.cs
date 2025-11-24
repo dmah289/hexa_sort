@@ -121,28 +121,26 @@ namespace HexaSort.Core.Entities.Grid
         {
             if (!IsOccupied) return;
             
-            Debug.Log($"{gameObject.name} - {PiecesCount}");
-            for (int i = 0; i < PiecesCount; i++)
+            int totalPieces = PiecesCount;
+            for (int i = 0; i < totalPieces; i++)
             {
                 CurrentStack.CollectLastPiece();
                 
                 if(i == PiecesCount-2 && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
                     await VFXManager.Instance.PlayVFXToPieceGoalPanel(this,
                         eLevelGoalType.Piece,
-                        PiecesCount,
+                        totalPieces,
                         destroyCancellationToken,
                         withCollectingGoal);
                     
                 await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
             }
             
-            if (CurrentStack.Pieces.Count == 0)
+            if (PiecesCount == 0)
             {
                 ObjectPooler.ReturnToPool(PoolingType.HexStack, CurrentStack, destroyCancellationToken);
                 CurrentStack = null;
             }
-            
-            
         }
         
         #endregion

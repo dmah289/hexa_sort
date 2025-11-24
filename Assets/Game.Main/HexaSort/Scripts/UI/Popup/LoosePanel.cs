@@ -4,6 +4,7 @@ using DG.Tweening;
 using Framework.UI;
 using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Managers.Level;
+using HexaSort.UI.Loading.BaseSystem;
 using HexaSort.UI.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -24,16 +25,14 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] private RectTransform failLevelPanel;
 
         [Header("Revive Panel References")]
-        [SerializeField] private GameObject revievePanel;
+        [SerializeField] private GameObject revivePanel;
         [SerializeField] public SightingTarget[] sightingTargets;
-        [SerializeField] private RectTransform revieveCoinBtn;
+        [SerializeField] private RectTransform reviveCoinBtn;
         [SerializeField] private RectTransform bottomRevivePanel;
 
-        private void OnEnable()
+        private void Awake()
         {
-            revieveCoinBtn.GetComponentInChildren<TextMeshProUGUI>().text = $"{ConstantKey.RevivePrice}";
-            revieveCoinBtn.localScale = Vector3.zero;
-            bottomRevivePanel.anchoredPosition = new Vector2(0, ConstantKey.BottomRevivePanelOffsetY);
+            reviveCoinBtn.GetComponentInChildren<TextMeshProUGUI>().text = $"{ConstantKey.RevivePrice}";
         }
 
         private void OnApplicationQuit()
@@ -48,8 +47,16 @@ namespace HexaSort.UI.Loading.InGame
             await UniTask.Delay(500);
 
             gameObject.SetActive(true);
-            revievePanel.SetActive(true);
+            revivePanel.SetActive(true);
             failLevelPanel.gameObject.SetActive(false);
+            
+            reviveCoinBtn.localScale = Vector3.zero;
+            bottomRevivePanel.anchoredPosition = new Vector2(0, ConstantKey.BottomRevivePanelOffsetY);
+            
+            reviveCoinBtn.DOScale(1f, 0.4f)
+                .SetEase(Ease.OutQuad);
+            bottomRevivePanel.DOAnchorPos(Vector2.zero, 0.4f)
+                .SetEase(Ease.OutQuad);
         }
 
         public void OnCloseRevivePopupClicked()
@@ -57,7 +64,7 @@ namespace HexaSort.UI.Loading.InGame
             LevelManager.Instance.CurrentLevelState = eLevelState.Failed;
             EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
 
-            revievePanel.SetActive(false);
+            revivePanel.SetActive(false);
             failLevelPanel.gameObject.SetActive(true);
 
             failLevelPanel.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -67,8 +74,10 @@ namespace HexaSort.UI.Loading.InGame
         public void OnContinueBtnFailClicked()
         {
             LevelManager.Instance.CleanUpLevel().Forget();
-            gameObject.SetActive(false);
             LevelManager.Instance.CurrentLevelState = eLevelState.None;
+            
+            CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
+            gameObject.SetActive(false);
         }
 
         public void OnReviveByCoinBtnClicked()
@@ -78,10 +87,29 @@ namespace HexaSort.UI.Loading.InGame
 
         public async UniTask OnReviveByCoinBtnClickedAsync()
         {
+            UniTask[] shootTasks = new UniTask[sightingTargets.Length];
             for(int i = 0; i < sightingTargets.Length; i++)
             {
-                sightingTargets[i].ShootArrowToTarget();
+                shootTasks[i] = sightingTargets[i].ShootArrowToTarget();
             }
+            await UniTask.WhenAll(shootTasks);
+            
+            LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
+            
+            await UniTask.Delay(500);
+            
+            reviveCoinBtn.localScale = Vector3.one;
+            bottomRevivePanel.anchoredPosition = Vector2.zero;
+            
+            
+            reviveCoinBtn.DOScale(0f, 0.4f)
+                .SetEase(Ease.OutQuad);
+            bottomRevivePanel.DOAnchorPos(new Vector2(0, ConstantKey.BottomRevivePanelOffsetY), 0.5f)
+                .SetEase(Ease.OutQuad).OnComplete(() =>
+                {
+                    gameObject.SetActive(false);
+                    CanvasManager.Instance.loosePanel.gameObject.SetActive(false);
+                });
             
             // if (LocalDataManager.CoinAmount >= ConstantKey.RevivePrice)
             // {
