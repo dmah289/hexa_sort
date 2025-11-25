@@ -1,4 +1,5 @@
-﻿using HexaSort.Managers.Level;
+﻿using Cysharp.Threading.Tasks;
+using HexaSort.Managers.Level;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -178,5 +179,11 @@ namespace HexaSort.Scripts.Core.Controllers
         }
 
         #endregion
+
+        public void ReturnSelectedStackToTray()
+        {
+            currStack?.OnDropped(null);
+            currStack = null;
+        }
     }
 }

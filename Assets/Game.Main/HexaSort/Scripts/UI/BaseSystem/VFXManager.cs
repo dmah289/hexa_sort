@@ -45,9 +45,9 @@ namespace HexaSort.UI.BaseSystem
                 
             starTrail.DOAnchorPos(Vector2.zero, 0.7f).SetEase(Ease.OutSine).OnComplete(() =>
             {
-                ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
-                if(withCollectingGoal)
+                if(withCollectingGoal) 
                     EventBus<GoalCollectedDTO>.Raise(piecesCollectedDTO);
+                ObjectPooler.ReturnToPool(PoolingType.StarTrail, starTrail, destroyCancellationToken);
             });
         }
     }

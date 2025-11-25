@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities.Grid;
+using HexaSort.Scripts.Core.Controllers;
 using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -35,6 +36,7 @@ namespace HexaSort.Managers.Level
         [SerializeField] private TrayController tray;
         [SerializeField] private LoosePanel loosePanel;
         
+        
         [Header("State Management")]
         [SerializeField] private eLevelState currentLevelState;
         
@@ -52,7 +54,7 @@ namespace HexaSort.Managers.Level
                         ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
                         grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
-                        
+                        SelectionController.Instance.ReturnSelectedStackToTray();
                         break;
                 }
             }
