@@ -113,7 +113,5 @@ namespace HexaSort.Core.Entities.Grid
         }
 
         #endregion
-
-        
     }
 }

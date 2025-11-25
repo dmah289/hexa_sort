@@ -13,7 +13,6 @@
         Toast,
         CoinFly,
         LifeFly,
-        StarTrail,
-        SightingTarget
+        StarTrail
     }
 }

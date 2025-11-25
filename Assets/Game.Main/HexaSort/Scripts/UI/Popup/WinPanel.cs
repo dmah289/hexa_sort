@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.UI.Loading.MainMenu.SharedUI;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,22 +13,21 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class WinPanel : MonoBehaviour
     {
-        [Header("UI Elements")]
+        [Header("----- UI Elements -----")]
         [SerializeField] private RectTransform selfRect;
         [SerializeField] private RectTransform visualRect;
         [SerializeField] private RectTransform target;
         [SerializeField] private ParticleSystem[] confetti;
         
         
-        [Header("Claim Button Elements")]
+        [Header("----- Claim Button Elements -----")]
         [SerializeField] private Text coinAmountTxt;
         [SerializeField] private RectTransform coinIcon;
         [SerializeField] private RectTransform claimBtn;
         
-        [Header("Manager")]
+        [Header("----- Manager -----")]
         [SerializeField] private RectTransform coinPrefabs;
         [SerializeField] private RectTransform[] coins;
-        [SerializeField] private float coinAmount;
 
         private void Awake()
         {
@@ -42,16 +42,13 @@ namespace HexaSort.UI.Loading.InGame
 
         public async UniTask Show()
         {
-            //LevelManager.Instance.StopGameplay();
-            
-            await UniTask.Delay(1500);
+            await UniTask.Delay(1000);
             
             for(int i = 0; i < confetti.Length; i++)
                 confetti[i].Play();
             
             gameObject.SetActive(true);
-            //coinAmount = LevelManager.Instance.levelLoader.currLevelData.coinAmount;
-            coinAmountTxt.text = $"{coinAmount}";
+            coinAmountTxt.text = $"{ConstantKey.WinCoinReward}";
             visualRect.localScale = Vector3.zero;
             visualRect.DOScale(Vector3.one, 0.75f)
                 .SetEase(Ease.OutBack);
@@ -61,13 +58,12 @@ namespace HexaSort.UI.Loading.InGame
         
         public async UniTask OnClaimBtnClickedAsync()
         {
-            EventBus<CoinChangedEventDTO>.Raise(new CoinChangedEventDTO(coinAmount));
+            EventBus<CoinChangedEventDTO>.Raise(new CoinChangedEventDTO(ConstantKey.WinCoinReward));
             
             SpawnCoins();
             await CollectCoins();
-            await UniTask.Delay(1000);
             
-            //LevelManager.Instance.WinLevel().Forget();
+            await UniTask.Delay(1000);
             gameObject.SetActive(false);
         }
 

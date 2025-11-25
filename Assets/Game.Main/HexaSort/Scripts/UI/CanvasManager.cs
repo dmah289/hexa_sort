@@ -36,7 +36,6 @@ namespace HexaSort.UI.Loading
             base.Awake();
 
             pages = GetComponentsInChildren<IPage>();
-            Debug.Log(pages.Length);
             CurScreen = eScreenType.MainMenu;
         }
 

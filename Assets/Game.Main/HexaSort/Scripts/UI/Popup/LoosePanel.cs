@@ -41,7 +41,6 @@ namespace HexaSort.UI.Loading.InGame
                 EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
         }
 
-
         public async UniTaskVoid ShowRevivePanel()
         {
             await UniTask.Delay(500);

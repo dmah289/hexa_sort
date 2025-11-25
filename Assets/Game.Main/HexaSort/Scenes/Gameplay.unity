@@ -229,6 +229,22 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2206492339919864544, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -388,6 +404,10 @@ PrefabInstance:
     - target: {fileID: 7913317353543460784, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441329132072808932, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 454.6341
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -701,6 +721,7 @@ MonoBehaviour:
   grid: {fileID: 1160128950}
   tray: {fileID: 2091194406}
   loosePanel: {fileID: 2019013150}
+  winPanel: {fileID: 1601707389}
   currentLevelState: 0
 --- !u!4 &1017770902
 Transform:

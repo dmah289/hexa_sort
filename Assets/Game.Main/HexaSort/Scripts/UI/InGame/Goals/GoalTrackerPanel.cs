@@ -12,11 +12,11 @@ namespace HexaSort.UI.Gameplay.Goals
         private const float TargetScale = 1.1f;
         private const float ScaleDuration = 0.07f;
         
-        [Header("Config")]
+        [Header("----- Config -----")]
         [SerializeField] protected LevelGoalData goalData;
         [SerializeField] protected int counter;
         
-        [Header("Self Components")]
+        [Header("----- Self Components -----")]
         [SerializeField] protected TextMeshProUGUI counterTxt;
         [SerializeField] protected RectTransform iconRt;
         

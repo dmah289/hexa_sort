@@ -98,8 +98,6 @@ namespace HexaSort.Scripts.Core.Controllers
 
             if (grid.IsOutOfSpace)
                 LevelManager.Instance.CurrentLevelState = eLevelState.OutOfSpace;
-            
-            Debug.Log(LevelManager.Instance.CurrentLevelState.ToString());
 
             isCheckingMergeSequence = false;
         }

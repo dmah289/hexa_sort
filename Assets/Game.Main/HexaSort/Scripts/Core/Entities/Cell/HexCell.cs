@@ -162,22 +162,6 @@ namespace HexaSort.Core.Entities.Grid
             woodCell.gameObject.SetActive(false);
             packedCell.gameObject.SetActive(false);
         }
-        
-        public async UniTask<SightingTarget> SpawnSightingTarget(RectTransform loosePanel, Camera mainCam)
-        {
-            SightingTarget sightingTarget = await ObjectPooler.GetFromPool<SightingTarget>
-                (PoolingType.SightingTarget, destroyCancellationToken, loosePanel);
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                loosePanel,
-                mainCam.WorldToScreenPoint(CurrentStack.TopPiece.selfTransform.position),
-                null,
-                out Vector2 localPos);
-
-            sightingTarget.ParentCell = this;
-            sightingTarget.GetComponent<RectTransform>().anchoredPosition = localPos;
-
-            return sightingTarget;
-        }
 
         #endregion
     }

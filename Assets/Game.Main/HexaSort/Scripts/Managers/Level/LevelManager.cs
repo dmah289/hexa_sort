@@ -27,17 +27,18 @@ namespace HexaSort.Managers.Level
     
     public class LevelManager : MonoSingleton<LevelManager>
     {
-        [Header("Self Components")]
+        [Header("----- Self Components -----")]
         [SerializeField] private LevelLoader levelLoader;
         
-        [Header("References")]
+        [Header("----- References -----")]
         [SerializeField] private Camera gameplayCam;
         [SerializeField] private GridController grid;
         [SerializeField] private TrayController tray;
         [SerializeField] private LoosePanel loosePanel;
+        [SerializeField] private WinPanel winPanel;
         
         
-        [Header("State Management")]
+        [Header("----- State Management -----")]
         [SerializeField] private eLevelState currentLevelState;
         
         public eLevelState CurrentLevelState
@@ -55,6 +56,9 @@ namespace HexaSort.Managers.Level
                         grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
                         SelectionController.Instance.ReturnSelectedStackToTray();
+                        break;
+                    case eLevelState.Win:
+                        winPanel.Show().Forget();
                         break;
                 }
             }

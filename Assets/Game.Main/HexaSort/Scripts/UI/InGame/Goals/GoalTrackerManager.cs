@@ -164,13 +164,11 @@ namespace HexaSort.UI.Gameplay.Goals
         private async UniTask OnGoalCollectedAsync(GoalCollectedDTO dto)
         {
             await goalTrackerPanels[(int)dto.GoalType].OnGoalCollected(dto.CollectedAmount);
+
+            await UniTask.Delay(500);
             
             if (IsAllGoalsCompleted)
-            {
                 LevelManager.Instance.CurrentLevelState = eLevelState.Win;
-                await UniTask.Delay(500);
-                winPanel.Show().Forget();
-            }
         }
 
         public void DeregisterCallbacks()

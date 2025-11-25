@@ -90,9 +90,14 @@ namespace HexaSort.Core.Entities.Grid
             
             for (int i = 0; i < topHighestCells.Count; i++)
             {
-                loosePanel.sightingTargets[i] = await topHighestCells[i].SpawnSightingTarget(
-                        loosePanel.GetComponent<RectTransform>()
-                        , mainCam);
+                loosePanel.sightingTargets[i].ParentCell = topHighestCells[i]; 
+                
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    loosePanel.GetComponent<RectTransform>(),
+                    mainCam.WorldToScreenPoint(topHighestCells[i].CurrentStack.TopPiece.selfTransform.position),
+                    null,
+                    out Vector2 sightingTargetlocalPos);
+                loosePanel.sightingTargets[i].GetComponent<RectTransform>().anchoredPosition = sightingTargetlocalPos;
             }
         }
 
