@@ -103,7 +103,7 @@ RectTransform:
   m_GameObject: {fileID: 3241265237434695285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5826490860747075353}
@@ -197,7 +197,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0.3
-  duration: 1
+  duration: 2
   easeType: 27
   easeCurve:
     serializedVersion: 2

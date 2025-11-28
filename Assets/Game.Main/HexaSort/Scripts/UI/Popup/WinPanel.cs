@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.Managers.Level;
+using HexaSort.UI.Loading.BaseSystem;
 using HexaSort.UI.Loading.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -18,6 +21,7 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] private RectTransform visualRect;
         [SerializeField] private RectTransform target;
         [SerializeField] private ParticleSystem[] confetti;
+        [SerializeField] private GameObject containerGroup;
         
         
         [Header("----- Claim Button Elements -----")]
@@ -40,17 +44,28 @@ namespace HexaSort.UI.Loading.InGame
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+                Show().Forget();
+        }
+
         public async UniTask Show()
         {
-            await UniTask.Delay(1000);
-            
-            for(int i = 0; i < confetti.Length; i++)
-                confetti[i].Play();
-            
             gameObject.SetActive(true);
+            containerGroup.SetActive(false);
+            
+            await UniTask.Delay(300);
+
+            for (int i = 0; i < confetti.Length; i++)
+            {
+                confetti[i].Play();
+            }
+            
+            containerGroup.SetActive(true);
             coinAmountTxt.text = $"{ConstantKey.WinCoinReward}";
             visualRect.localScale = Vector3.zero;
-            visualRect.DOScale(Vector3.one, 0.75f)
+            visualRect.DOScale(Vector3.one, 1f)
                 .SetEase(Ease.OutBack);
         }
         
@@ -62,8 +77,14 @@ namespace HexaSort.UI.Loading.InGame
             
             SpawnCoins();
             await CollectCoins();
+            LocalDataManager.LevelIndex++;
             
             await UniTask.Delay(1000);
+            
+            LevelManager.Instance.CleanUpLevel();
+            CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
+            
+            containerGroup.SetActive(false);
             gameObject.SetActive(false);
         }
 

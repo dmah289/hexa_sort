@@ -229,22 +229,6 @@ PrefabInstance:
       propertyPath: mainCam
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054270111429658337, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2206492339919864544, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -333,10 +317,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6003561952474964790, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: sightingTargets.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6033467687477065417, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -404,10 +384,6 @@ PrefabInstance:
     - target: {fileID: 7913317353543460784, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441329132072808932, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 454.6341
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

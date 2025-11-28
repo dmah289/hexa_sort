@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Scripts.Core.Controllers;
 using HexaSort.UI.Loading.InGame;
@@ -74,7 +75,8 @@ namespace HexaSort.Managers.Level
 
         public void EnterGameplay()
         {
-            levelLoader.SetupLevel(grid);
+            CurrentLevelState = eLevelState.Playing;
+            levelLoader.SetupLevel(grid).Forget();
         }
 
         public void ZoomInCamera(int width, Vector2 centerPos)
@@ -90,8 +92,9 @@ namespace HexaSort.Managers.Level
                 .OnKill(() => gameplayCam.orthographicSize = targetOrthoSize);
         }
 
-        public async UniTask CleanUpLevel()
+        public void CleanUpLevel()
         {
+            CurrentLevelState = eLevelState.None;
             levelLoader.CleanUpLevel(grid, tray);
         }
     }

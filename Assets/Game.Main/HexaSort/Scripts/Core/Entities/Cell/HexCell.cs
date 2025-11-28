@@ -127,7 +127,7 @@ namespace HexaSort.Core.Entities.Grid
                 CurrentStack.CollectLastPiece();
                 
                 if(i == PiecesCount-2 && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
-                    await VFXManager.Instance.PlayVFXToPieceGoalPanel(this,
+                    await VFXManager.Instance.PlayVFXToGoalPanel(this,
                         eLevelGoalType.Piece,
                         totalPieces,
                         destroyCancellationToken,

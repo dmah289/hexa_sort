@@ -2,6 +2,7 @@
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using TMPro;
 using UnityEngine;
@@ -25,32 +26,25 @@ namespace HexaSort.Core.Entities.Grid
                 counter = value;
                 if(counter <= 0)
                 {
-                    gameObject.SetActive(false);
                     counter = 0;
                     parentCell.Selectable = true;
-                    VFXManager.Instance.PlayVFXToPieceGoalPanel(parentCell,
+                    VFXManager.Instance.PlayVFXToGoalPanel(parentCell,
                         eLevelGoalType.Wood,
                         1,
                         destroyCancellationToken);
+                    DeregisterCallbacks();
+                    gameObject.SetActive(false);
                 }
                 else counterTxt.text = counter.ToString();
             }
         }
 
-        private void OnEnable()
-        {
-            RegisterCallbacks();
-        }
-
-        private void OnDisable()
-        {
-            DeregisterCallbacks();
-        }
-
         public void Setup()
         {
             gameObject.SetActive(true);
+            RegisterCallbacks();
             parentCell.Selectable = false;
+            
             Counter = 3;
         }
 

@@ -38,7 +38,6 @@ namespace HexaSort.UI.MainMenu.Home
         {
             if (lifeSystem.CanPlay)
             {
-                LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
             }
             else

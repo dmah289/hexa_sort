@@ -18,7 +18,7 @@ namespace HexaSort.UI.BaseSystem
         [SerializeField] private Camera mainCam;
         [SerializeField] private RectTransform[] goalVFXTargetPanels;
         
-        public async UniTask PlayVFXToPieceGoalPanel(HexCell cell, 
+        public async UniTask PlayVFXToGoalPanel(HexCell cell, 
             eLevelGoalType goalType,
             int amount,
             CancellationToken destroyCancellationToken,

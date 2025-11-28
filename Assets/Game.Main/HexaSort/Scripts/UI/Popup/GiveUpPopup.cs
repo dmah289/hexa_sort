@@ -22,7 +22,7 @@ namespace HexaSort.UI.Loading.InGame
                 {
                     EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
                     CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
-                    LevelManager.Instance.CleanUpLevel().Forget();
+                    LevelManager.Instance.CleanUpLevel();
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace HexaSort.UI.Loading.InGame
             {
                 EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
-                LevelManager.Instance.CleanUpLevel().Forget();
+                LevelManager.Instance.CleanUpLevel();
             }
             
             bgClickHandler.OnBackgroundHiden?.Invoke();

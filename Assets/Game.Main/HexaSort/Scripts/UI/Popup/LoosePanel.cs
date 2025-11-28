@@ -72,7 +72,7 @@ namespace HexaSort.UI.Loading.InGame
 
         public void OnContinueBtnFailClicked()
         {
-            LevelManager.Instance.CleanUpLevel().Forget();
+            LevelManager.Instance.CleanUpLevel();
             LevelManager.Instance.CurrentLevelState = eLevelState.None;
             
             CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
