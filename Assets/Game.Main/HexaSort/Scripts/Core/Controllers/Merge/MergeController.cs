@@ -34,16 +34,8 @@ namespace HexaSort.Scripts.Core.Controllers
             
             mergeSequenceExecutor = GetComponent<MergeSequenceExecutor>();
             pathFinder = GetComponent<PathFinder>();
-        }
-
-        private void OnEnable()
-        {
+            
             RegisterCallbacks();
-        }
-
-        private void OnDisable()
-        {
-            DeregisterCallbacks();
         }
 
         #endregion

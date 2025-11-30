@@ -15,19 +15,21 @@ namespace HexaSort.Core.Entities.Grid
 {
     public class HexCell : MonoBehaviour, IPoolableObject
     {
-        [Header("Self Components")]
+        [Header("----- Self Components -----")]
         public Transform selfTransform;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private Collider collider;
         
-        [Header("Managers")]
+        [Header("----- Managers -----")]
         [SerializeField] private HexStackController currStack;
         private (int row, int col) gridPos;
         
-        [Header("Mechanics")]
+        [Header("----- Mechanics -----")]
+        
         [SerializeField] private WoodCell woodCell;
         [SerializeField] private PackedCell packedCell;
 
+        #region Properties
         
         public bool IsMergable => IsOccupied && !woodCell.gameObject.activeSelf
                                              && !packedCell.gameObject.activeSelf;
@@ -61,6 +63,8 @@ namespace HexaSort.Core.Entities.Grid
         }
         
         public int PiecesCount => currStack ? currStack.PiecesCount : 0;
+        
+        #endregion
 
         #region Unity APIs
 
@@ -76,7 +80,8 @@ namespace HexaSort.Core.Entities.Grid
 
         public void OnGetFromPool()
         {
-            transform.Reset();
+            DisableAllMechanics();
+            selfTransform.Reset();
             meshRenderer.SetVertexLitColor(SelectionController.Instance.normalCellColor);
             Selectable = true;
         }
@@ -147,10 +152,8 @@ namespace HexaSort.Core.Entities.Grid
 
         #region Spawn Objects
         
-        public void SpawnObjects(CellData cellData)
+        public void SetupMechanics(CellData cellData)
         {
-            DisableAllMechanics();
-
             if (cellData.MechanicsType == eMechanicsType.Wood && cellData.HasWood)
                 woodCell.Setup();
             else if(cellData.MechanicsType == eMechanicsType.Packed && cellData.packedStack.IsValid())

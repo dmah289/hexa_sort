@@ -42,7 +42,7 @@ namespace HexaSort.Core.Entities.Grid
                     cell.gameObject.name = $"cell_[{i}][{j}]";
 #endif
                     cell.GridPos = (i,j);
-                    cell.SpawnObjects(cellData);
+                    cell.SetupMechanics(cellData);
                     gridCells[i, j] = cell;
 
                     Vector2 pos = new Vector2(1.5f * j * ConstantKey.BOARD_CELL_R, 2 * (i+1) * ConstantKey.BOARD_CELL_r);

@@ -20,7 +20,8 @@ namespace Game.Main.HexaSort.Scripts.Managers
         
         public static int CurrentLife
         {
-            get => PlayerPrefs.GetInt(ConstantKey.CurLifeKey, LifeSystem.MAX_LIVES);
+            // get => PlayerPrefs.GetInt(ConstantKey.CurLifeKey, LifeSystem.MAX_LIVES);
+            get => 5;
             set => PlayerPrefs.SetInt(ConstantKey.CurLifeKey, value);
         }
         

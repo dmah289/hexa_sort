@@ -23,9 +23,6 @@ namespace HexaSort.Managers.Level
         Failed = 4
     }
     
-    public struct LevelFailEventDTO : IEventDTO { }
-    public struct OutOfSpaceEventDTO : IEventDTO { }
-    
     public class LevelManager : MonoSingleton<LevelManager>
     {
         [Header("----- Self Components -----")]

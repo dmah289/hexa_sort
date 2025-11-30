@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities.Grid;
@@ -22,6 +23,9 @@ namespace HexaSort.Core.Entities
         [SerializeField] private List<HexPieceController> pieces = new();
         [SerializeField] private HexCell parentCell;
         [SerializeField] private bool isOnGrid;
+        [SerializeField] private int idxOnTray;
+        
+        #region Properties
         
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
         public List<HexPieceController> Pieces => pieces;
@@ -29,12 +33,11 @@ namespace HexaSort.Core.Entities
         public bool IsOnGrid => isOnGrid;
         public float Height => pieces.Count * ConstantKey.HEX_PIECE_THICKNESS;
         public int PiecesCount => pieces.Count;
-
-        private void Awake()
+        public int IdxOnTray
         {
-            selfTransform = transform;
+            get => idxOnTray;
+            set => idxOnTray = value;
         }
-
         public bool Selectable
         {
             get => pieces[0].Selectable && pieces[^1].Selectable && pieces[pieces.Count/2];
@@ -45,11 +48,24 @@ namespace HexaSort.Core.Entities
                 pieces[pieces.Count/2].Selectable = value;
             }
         }
+        
+        #endregion
+        
+
+        #region Unity Callbacks
+
+        private void Awake()
+        {
+            selfTransform = transform;
+        }
+
+        #endregion
 
         #region Spawning Methods
 
         public async UniTaskVoid OnSpawningOnTray(int idx, Vector2 spawnMidStackPos)
         {
+            idxOnTray = idx;
             int pieceAmount = Random.Range(3, 8);
             for(int i = 0; i < pieceAmount; i++)
             {
@@ -113,13 +129,16 @@ namespace HexaSort.Core.Entities
 
         public void OnGetFromPool()
         {
+            idxOnTray = -1;
             parentCell = null;
             isOnGrid = false;
+            
             selfTransform.Reset();
         }
 
         public void OnReturnToPool()
         {
+            idxOnTray = -1;
             parentCell = null;
             isOnGrid = false;
             

@@ -177,13 +177,14 @@ namespace HexaSort.Scripts.Core.Controllers
             currStack = null;
             currTargetCell = null;
         }
-
-        #endregion
-
+        
         public void ReturnSelectedStackToTray()
         {
+            currTargetCell = null;
             currStack?.OnDropped(null);
             currStack = null;
         }
+
+        #endregion
     }
 }

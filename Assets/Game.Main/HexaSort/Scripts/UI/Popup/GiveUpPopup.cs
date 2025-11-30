@@ -21,8 +21,8 @@ namespace HexaSort.UI.Loading.InGame
                 if (LocalDataManager.IsEnoughLives)
                 {
                     EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
-                    CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
                     LevelManager.Instance.CleanUpLevel();
+                    CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
                 }
                 else
                 {
@@ -33,8 +33,8 @@ namespace HexaSort.UI.Loading.InGame
             else if (giveUpPanel.FiredButton == eGiveUpButton.BackHome)
             {
                 EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
-                CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
                 LevelManager.Instance.CleanUpLevel();
+                CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
             }
             
             bgClickHandler.OnBackgroundHiden?.Invoke();

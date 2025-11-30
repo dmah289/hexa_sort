@@ -17,7 +17,7 @@ namespace HexaSort.Core.Entities.Grid
         
         [Header("Self references")]
         [SerializeField] private Transform[] hexStackHolders;
-        [SerializeField] private HexStackController[] hexStacks = new HexStackController[3];
+        [SerializeField] private HexStackController[] hexStacks;
         
         [Header("Configurations")]
         [SerializeField] private Vector2 spawnMidStackPos;
@@ -29,16 +29,7 @@ namespace HexaSort.Core.Entities.Grid
         {
             base.Awake();
             selfTransform = transform;
-        }
-
-        private void OnEnable()
-        {
             RegisterCallbacks();
-        }
-
-        private void OnDisable()
-        {
-            DeregisterCallbacks();
         }
 
         #endregion
@@ -65,11 +56,14 @@ namespace HexaSort.Core.Entities.Grid
         
         public void CleanUp()
         {
-            for (int i = 0; i < hexStackHolders.Length; i++)
+            for (int i = 0; i < hexStacks.Length; i++)
             {
-                ObjectPooler.ReturnToPool(PoolingType.HexStack, hexStacks[i], destroyCancellationToken);
+                if (hexStacks[i])
+                {
+                    ObjectPooler.ReturnToPool(PoolingType.HexStack, hexStacks[i], destroyCancellationToken);
+                    hexStacks[i] = null;
+                }
             }
-            
             gameObject.SetActive(false);
         }
 
@@ -96,11 +90,14 @@ namespace HexaSort.Core.Entities.Grid
 
         public void RegisterCallbacks()
         {
-            EventBus<LaidDownStackDTO>.Register(onEventWithoutArgs: OnStackLaidDown);
+            EventBus<LaidDownStackDTO>.Register(onEventWithArgs: OnStackLaidDown);
         }
 
-        private void OnStackLaidDown()
+        private void OnStackLaidDown(LaidDownStackDTO data)
         {
+            hexStacks[data.cell.CurrentStack.IdxOnTray] = null;
+            data.cell.CurrentStack.IdxOnTray = -1;
+            
             remainStackAmount--;
             
             if (remainStackAmount == 0)
@@ -109,7 +106,7 @@ namespace HexaSort.Core.Entities.Grid
 
         public void DeregisterCallbacks()
         {
-            EventBus<LaidDownStackDTO>.Deregister(onEventWithoutArgs: OnStackLaidDown);
+            EventBus<LaidDownStackDTO>.Deregister(onEventWithArgs: OnStackLaidDown);
         }
 
         #endregion

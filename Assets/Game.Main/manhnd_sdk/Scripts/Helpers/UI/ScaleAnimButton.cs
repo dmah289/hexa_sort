@@ -63,7 +63,6 @@ namespace Framework.UI
                 {
                     selfRectTransform.localScale = Vector3.one;
                     DOVirtual.DelayedCall(actionDelay, () => OnScaleAnimDone?.Invoke());
-
                 });
         }
     }
