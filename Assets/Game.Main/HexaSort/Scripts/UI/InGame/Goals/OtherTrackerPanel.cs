@@ -17,12 +17,13 @@ namespace HexaSort.UI.Gameplay.Goals
             base.SetUp(goalData);
             
             doneIconRt.gameObject.SetActive(false);
+            counterTxt.gameObject.SetActive(true);
             SetCounter(goalData.targetAmount);
         }
 
         public void SetCounter(int value)
         {
-            value = Mathf.Clamp(value, 0, goalData.targetAmount);
+            value = Mathf.Clamp(value, 0, m_GoalData.targetAmount);
             counter = value;
                 
             if (counter <= 0)

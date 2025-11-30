@@ -13,7 +13,7 @@ namespace HexaSort.UI.Gameplay.Goals
         private const float ScaleDuration = 0.07f;
         
         [Header("----- Config -----")]
-        [SerializeField] protected LevelGoalData goalData;
+        [SerializeField] protected LevelGoalData m_GoalData;
         [SerializeField] protected int counter;
         
         [Header("----- Self Components -----")]
@@ -25,7 +25,7 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public virtual void SetUp(LevelGoalData goalData)
         {
-            this.goalData = goalData;
+            m_GoalData = goalData;
         }
 
         public virtual async UniTask OnGoalCollected(int collectedAmount)

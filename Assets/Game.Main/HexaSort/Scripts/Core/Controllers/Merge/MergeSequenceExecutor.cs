@@ -140,7 +140,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 {
                     cell.CurrentStack.CollectLastPiece();
                     
-                    if(i == sameColorCount-2 && !pieceTrackerPanel.IsCompleted)
+                    if(i == sameColorCount-2 /* && !pieceTrackerPanel.IsCompleted */)
                         await VFXManager.Instance.PlayVFXToGoalPanel(cell,
                             eLevelGoalType.Piece,
                             sameColorCount,

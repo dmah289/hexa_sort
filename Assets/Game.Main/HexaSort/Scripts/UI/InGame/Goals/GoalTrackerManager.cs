@@ -121,7 +121,6 @@ namespace HexaSort.UI.Gameplay.Goals
             panelRt.GetComponent<Image>().DOFade(0, duration);
             panelRt.DOSizeDelta(new Vector2(containerRt.sizeDelta.x, panelRt.anchoredPosition.y), duration);
             
-            // Piece Bg Collapse Animation
             PieceTrackerPanel piecePanel = goalTrackerPanels[0] as PieceTrackerPanel;
             piecePanel?.AnimateExpansion(duration);
             
@@ -143,8 +142,6 @@ namespace HexaSort.UI.Gameplay.Goals
             {
                 goalTrackerPanels[i].SetUp(goalData[i]);
             }
-            
-            //Canvas.ForceUpdateCanvases();
         }
 
         #endregion
