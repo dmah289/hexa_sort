@@ -13,11 +13,6 @@ namespace HexaSort.Audio
         public GameObject gameplayAudio;
         [SerializeField] private AudioSource bgSource;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         // private void Start()
         // {
         //     for (int i = 0; i < Enum.GetValues(typeof(SettingType)).Length; i++)

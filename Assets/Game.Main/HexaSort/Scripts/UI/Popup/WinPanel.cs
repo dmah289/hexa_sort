@@ -84,6 +84,11 @@ namespace HexaSort.UI.Loading.InGame
             LevelManager.Instance.CleanUpLevel();
             CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
             
+            Hide();
+        }
+
+        private void Hide()
+        {
             containerGroup.SetActive(false);
             gameObject.SetActive(false);
         }

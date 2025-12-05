@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.UI;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
 {
     public class PopupManager : MonoSingleton<PopupManager>
     {
+        [SerializeField] private WinPanel winPanel;
+        [SerializeField] private LoosePanel loosePanel;
         [SerializeField] private List<BackgroundClickHandler> popups;
 
         protected override void Awake()
@@ -24,6 +27,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         
         public void DisableAllPopups()
         {
+            loosePanel.gameObject.SetActive(false);
             for (int i = 0; i < popups.Count; i++)
             {
                 popups[i].gameObject.SetActive(false);
