@@ -1,7 +1,10 @@
 ﻿using Cysharp.Threading.Tasks;
 using Framework;
 using Framework.UI;
+using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.Audio;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,23 +13,22 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
     public class SettingButton : ScaleAnimButton
     {
         [SerializeField] private GameObject onImg;
-        [SerializeField] private int selfIndex;
+        [SerializeField] private eSettingType settingType;
 
         protected override void Awake()
         {
             base.Awake();
             
-            int curState = PlayerPrefs.GetInt(ConstantKey.SettingsKeys[selfIndex], 1);
-            onImg.SetActive(curState == 1);
+            onImg.SetActive(LocalDataManager.GetSettingState(settingType));
         }
 
         protected override void OnButtonClicked()
         {
-            int curState = PlayerPrefs.GetInt(ConstantKey.SettingsKeys[selfIndex], 1);
-            int newState = 1 - curState;
-            PlayerPrefs.SetInt(ConstantKey.SettingsKeys[selfIndex], newState);
-            print(PlayerPrefs.GetInt(ConstantKey.SettingsKeys[selfIndex]));
-            onImg.SetActive(newState == 1);
+            bool curState = LocalDataManager.GetSettingState(settingType);
+            bool newState = !curState;
+            LocalDataManager.SetSettingState(settingType, newState);
+            onImg.SetActive(newState);
+            EventBus<OnSettingButtonClicked>.Raise(new OnSettingButtonClicked(settingType, newState));
             
             base.OnButtonClicked();
         }

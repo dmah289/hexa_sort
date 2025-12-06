@@ -1,4 +1,5 @@
-﻿using HexaSort.UI.MainMenu.SharedUI;
+﻿using HexaSort.Audio;
+using HexaSort.UI.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
 
@@ -38,5 +39,15 @@ namespace Game.Main.HexaSort.Scripts.Managers
         }
 
         public static bool IsEnoughLives => CurrentLife > 0;
+        
+        public static bool GetSettingState(eSettingType type)
+        {
+            return PlayerPrefs.GetInt($"Setting_{type}", 1) == 1;
+        }
+
+        public static void SetSettingState(eSettingType type, bool isActive)
+        {
+            PlayerPrefs.SetInt($"Setting_{type}", isActive ? 1 : 0);
+        }
     }
 }
