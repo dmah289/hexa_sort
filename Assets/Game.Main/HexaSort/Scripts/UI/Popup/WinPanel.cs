@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.Audio;
 using HexaSort.Managers.Level;
 using HexaSort.UI.Loading.BaseSystem;
 using HexaSort.UI.Loading.MainMenu.SharedUI;
@@ -42,12 +43,6 @@ namespace HexaSort.UI.Loading.InGame
                 coins[i].transform.SetParent(claimBtn);
                 coins[i].gameObject.SetActive(false);
             }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                Show().Forget();
         }
 
         public async UniTask Show()

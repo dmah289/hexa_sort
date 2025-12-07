@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -29,21 +31,21 @@ namespace HexaSort.Audio
     
     public class AudioManager : MonoSingleton<AudioManager>
     {
+        [Header("----- References -----")]
         [SerializeField] private AudioMixer audioMixer;
-
-        public GameObject gameplayAudio;
         [SerializeField] private AudioSource sfxSource;
-
+        
+        // Fields
+        private Dictionary<string,AudioClip> cachedSfxClips;
+            
         protected override void Awake()
         {
             base.Awake();
-            
-            EventBus<OnSettingButtonClicked>.Register(onEventWithArgs: OnSettingButtonClicked);
-        }
 
-        private void Start()
-        {
-            for (int i = 0; i < Enum.GetValues(typeof(eSettingType)).Length; i++)
+            cachedSfxClips = new Dictionary<string, AudioClip>();
+            EventBus<OnSettingButtonClicked>.Register(onEventWithArgs: OnSettingButtonClicked);
+
+			for (int i = 0; i < Enum.GetValues(typeof(eSettingType)).Length; i++)
             {
                 eSettingType type = (eSettingType)i;
                 bool isActive = LocalDataManager.GetSettingState(type);
@@ -71,6 +73,27 @@ namespace HexaSort.Audio
                 && LocalDataManager.GetSettingState(eSettingType.Vibration))
             {
                 Handheld.Vibrate();
+            }
+        }
+
+        public async UniTask PlaySfx(string key)
+        {
+            AudioClip clip;
+            
+            if (cachedSfxClips.TryGetValue(key, out clip))
+            {
+                sfxSource.PlayOneShot(clip);
+                return;
+            }
+
+            clip = await Addressables.LoadAssetAsync<AudioClip>(key).ToUniTask();
+            if (clip != null)
+            {
+                if (!cachedSfxClips.ContainsKey(key))
+                {
+                    cachedSfxClips[key] = clip;
+                }
+                sfxSource.PlayOneShot(clip);
             }
         }
     }

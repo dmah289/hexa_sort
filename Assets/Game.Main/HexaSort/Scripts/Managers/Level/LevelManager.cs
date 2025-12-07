@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.Audio;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Scripts.Core.Controllers;
 using HexaSort.UI.Loading.InGame;
@@ -51,11 +52,13 @@ namespace HexaSort.Managers.Level
                 {
                     case eLevelState.OutOfSpace:
                         ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
+                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_OUT_OF_SPACE);
                         grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
                         SelectionController.Instance.ReturnSelectedStackToTray();
                         break;
                     case eLevelState.Win:
+                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_LEVEL_COMPLETED);
                         winPanel.Show().Forget();
                         break;
                 }

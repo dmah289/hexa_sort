@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Audio;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities.Grid.Piece;
 using LevelEditor.LevelData;
@@ -24,6 +25,7 @@ namespace HexaSort.Core.Entities
         [SerializeField] private HexCell parentCell;
         [SerializeField] private bool isOnGrid;
         [SerializeField] private int idxOnTray;
+        [SerializeField] private bool sfxSpawnedPlayed;
         
         #region Properties
         
@@ -91,7 +93,15 @@ namespace HexaSort.Core.Entities
             selfTransform.DOLocalMove(Vector3.zero, duration)
                 .SetEase(Ease.OutFlash)
                 .SetDelay(idx * 0.3f)
-                .OnKill(() => selfTransform.localPosition = Vector3.zero);
+                .OnKill(() => selfTransform.localPosition = Vector3.zero)
+                .OnUpdate(() =>
+                {
+                    if(!sfxSpawnedPlayed && Vector3.Distance(selfTransform.localPosition, Vector3.zero) < 2f)
+                    {
+                        sfxSpawnedPlayed = true;
+                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_SPAWNED);
+                    }
+                });
         }
         
         public async UniTask OnSpawningOnCell(HexCell targetCell, PackedStackData packedStackData)
@@ -132,6 +142,7 @@ namespace HexaSort.Core.Entities
             idxOnTray = -1;
             parentCell = null;
             isOnGrid = false;
+            sfxSpawnedPlayed = false;
             
             selfTransform.Reset();
         }
@@ -163,6 +174,7 @@ namespace HexaSort.Core.Entities
             Vector3 targetLocalPos;
             if (targetCell)
             {
+                AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_DROPPED);
                 selfTransform.SetParent(targetCell.selfTransform);
                 parentCell = targetCell;
                 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Audio;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -106,6 +107,7 @@ namespace HexaSort.Core.Entities.Grid.Piece
         
         public void OnCollected()
         {
+            AudioManager.Instance.PlaySfx(ConstantKey.SFX_PIECE_COLLECTED);
             selfTransform.DOKill();
             selfTransform.DOScale(Vector3.one * 0.2f, ScaleDuration)
                 .SetEase(Ease.InBack)

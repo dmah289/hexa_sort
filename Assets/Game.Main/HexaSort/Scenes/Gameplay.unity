@@ -289,6 +289,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4197436509627614646, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199096960749102386, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199597535360314005, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4301698478078145806, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -337,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6448726423899781660, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7582905684266438513, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -385,6 +401,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8321648033823221048, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: winPanel
+      value: 
+      objectReference: {fileID: 1601707389}
+    - target: {fileID: 8321648033823221048, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: loosePanel
+      value: 
+      objectReference: {fileID: 2019013150}
     - target: {fileID: 8441329132072808932, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_SizeDelta.x
       value: 503.1159
@@ -532,6 +556,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5802775768423601665, guid: fd4d43b948af2ea448ce9b60adc616f9, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 438778207}
     - target: {fileID: 5974478391742330487, guid: fd4d43b948af2ea448ce9b60adc616f9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -545,6 +573,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd4d43b948af2ea448ce9b60adc616f9, type: 3}
+--- !u!82 &438778207 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8773856839678772116, guid: fd4d43b948af2ea448ce9b60adc616f9, type: 3}
+  m_PrefabInstance: {fileID: 438778206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using HexaSort.Audio;
 using HexaSort.Managers.Level;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid;
@@ -105,6 +106,7 @@ namespace HexaSort.Scripts.Core.Controllers
             int hitCount = Physics.RaycastNonAlloc(ray, pickingHits, 100f, pieceLayer);
             if (hitCount > 0)
             {
+                AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_PICKED);
                 currStack = pickingHits[0].transform.GetComponentInParent<HexStackController>();
                 catchingRay.origin = currStack.transform.position;
             }

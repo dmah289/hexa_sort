@@ -64,9 +64,9 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 5aa4b6ca793db7a4188c9eb35828ca79
-    name: SFXVolume
+    name: SFX
   - guid: b80466f3f99d5b44b90622315ca97768
-    name: BackgroundVolume
+    name: Music
   m_AudioMixerGroupViews:
   - guids:
     - c442db62dd5159348a630a123b668f68
@@ -128,7 +128,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Background
+  m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 61817623c6905a642bebf3ce76221e64
   m_Children: []

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HexaSort.Audio;
 using LevelEditor.LevelData;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Managers.Level;
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Gameplay.Goals;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -103,6 +105,7 @@ namespace HexaSort.Scripts.Core.Controllers
                 
                 float maxHeight = Mathf.Max(startCell.CurrentStack.Height, endCell.CurrentStack.Height);
 
+                AudioManager.Instance.PlaySfx(ConstantKey.SFX_PIECE_MOVE);
                 endCell.CurrentStack.AttractPiece(startCell.CurrentStack.Pieces.RemoveLast(), overturnDir, maxHeight);
                 await UniTask.Delay((int)(0.07f * HexPieceController.OverturnDuration * 1000f));
             }
@@ -141,10 +144,10 @@ namespace HexaSort.Scripts.Core.Controllers
                     cell.CurrentStack.CollectLastPiece();
                     
                     if(i == sameColorCount-2 /* && !pieceTrackerPanel.IsCompleted */)
-                        await VFXManager.Instance.PlayVFXToGoalPanel(cell,
+                        VFXManager.Instance.PlayVFXToGoalPanel(cell,
                             eLevelGoalType.Piece,
                             sameColorCount,
-                            destroyCancellationToken);
+                            destroyCancellationToken).Forget();
                     
                     await UniTask.Delay((int)(HexPieceController.ScaleDuration * 0.2f * 1000f));
                 }

@@ -16,7 +16,42 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 82c0e379e07a01145827b3db826465e3
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0b118917a6d5deb42a4106106b8e2412
+    m_Address: sfx_piece_move
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ac8e7f84c42dd44dac18041f3443323
+    m_Address: sfx_block_picked
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 607a675153ddc97488e83f17f147c397
+    m_Address: sfx_out_of_space
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b28deb95c9ea344c83c4e31e8ac6bd7
+    m_Address: sfx_block_dropped
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b11243f03c4471144990fe7e232e08f9
+    m_Address: sfx_level_completed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce43e0a9b10ea2f448cd59fed50c8cb1
+    m_Address: sfx_block_spawned
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed452f8a5f54d6b4589db72e0c5ece04
+    m_Address: sfx_piece_collected
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3e564bd4aa7618f44b0c6d5b3e2d2e13, type: 2}
   m_SchemaSet:
