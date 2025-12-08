@@ -1,10 +1,6 @@
-using HexaSort.UI.Loading.BaseSystem;
-using Framework;
-using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.BaseSystem;
-using manhnd_sdk.Scripts.ConstantKeyNamespace;
+using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace HexaSort.UI.Loading.InGame
 {
@@ -25,5 +21,7 @@ namespace HexaSort.UI.Loading.InGame
                 gameObject.SetActive(false);
             }
         }
+
+        
     }
 }

@@ -21,7 +21,8 @@ namespace HexaSort.Managers.Level
         Playing = 1,
         OutOfSpace = 2,
         Win = 3,
-        Failed = 4
+        Failed = 4,
+        IsUsingBooster = 5
     }
     
     public class LevelManager : MonoSingleton<LevelManager>
@@ -35,6 +36,7 @@ namespace HexaSort.Managers.Level
         [SerializeField] private TrayController tray;
         [SerializeField] private LoosePanel loosePanel;
         [SerializeField] private WinPanel winPanel;
+        [SerializeField] private BoosterManager boosterManager;
         
         
         [Header("----- State Management -----")]
@@ -50,9 +52,14 @@ namespace HexaSort.Managers.Level
 
                 switch (currentLevelState)
                 {
+                    case eLevelState.Playing:
+                        boosterManager.ShowBoosterButtons();
+                        levelLoader.SetupLevel(grid).Forget();
+                        break;
                     case eLevelState.OutOfSpace:
                         ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
                         AudioManager.Instance.PlaySfx(ConstantKey.SFX_OUT_OF_SPACE);
+                        boosterManager.HideBoosterButtons();
                         grid.FindDestroyableStacks(loosePanel).Forget();
                         loosePanel.ShowRevivePanel().Forget();
                         SelectionController.Instance.ReturnSelectedStackToTray();
@@ -76,7 +83,6 @@ namespace HexaSort.Managers.Level
         public void EnterGameplay()
         {
             CurrentLevelState = eLevelState.Playing;
-            levelLoader.SetupLevel(grid).Forget();
         }
 
         public void ZoomInCamera(int width, Vector2 centerPos)

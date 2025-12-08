@@ -289,18 +289,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4197436509627614646, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4199096960749102386, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4199597535360314005, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4301698478078145806, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -349,10 +337,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 6448726423899781660, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7582905684266438513, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -400,18 +384,6 @@ PrefabInstance:
     - target: {fileID: 7913317353543460784, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8321648033823221048, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: winPanel
-      value: 
-      objectReference: {fileID: 1601707389}
-    - target: {fileID: 8321648033823221048, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: loosePanel
-      value: 
-      objectReference: {fileID: 2019013150}
-    - target: {fileID: 8441329132072808932, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 503.1159
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -800,6 +772,7 @@ MonoBehaviour:
   tray: {fileID: 2091194406}
   loosePanel: {fileID: 2019013150}
   winPanel: {fileID: 1601707389}
+  boosterManager: {fileID: 0}
   currentLevelState: 0
 --- !u!4 &1017770902
 Transform:

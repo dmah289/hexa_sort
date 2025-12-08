@@ -44,7 +44,7 @@ namespace HexaSort.Managers.Level
         public void CleanUpLevel(GridController grid, TrayController tray)
         {
             grid.CleanUp();
-            tray.CleanUp();
+            tray.CleanUpTray();
         }
     }
 }

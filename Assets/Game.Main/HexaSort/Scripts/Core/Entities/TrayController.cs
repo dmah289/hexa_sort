@@ -54,7 +54,13 @@ namespace HexaSort.Core.Entities.Grid
             SpawnHexStacks().Forget();
         }
         
-        public void CleanUp()
+        public void CleanUpTray()
+        {
+            CleanUpCurrentStacks();
+            gameObject.SetActive(false);
+        }
+        
+        public void CleanUpCurrentStacks()
         {
             for (int i = 0; i < hexStacks.Length; i++)
             {
@@ -64,7 +70,6 @@ namespace HexaSort.Core.Entities.Grid
                     hexStacks[i] = null;
                 }
             }
-            gameObject.SetActive(false);
         }
 
         #endregion
@@ -110,5 +115,11 @@ namespace HexaSort.Core.Entities.Grid
         }
 
         #endregion
+
+        public void RespawnCurrentStacks()
+        {
+            CleanUpCurrentStacks();
+            SpawnHexStacks().Forget();
+        }
     }
 }

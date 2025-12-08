@@ -9,7 +9,7 @@ namespace Framework.UI
     public class ScaleAnimButton : MonoBehaviour, IPointerClickHandler
     {
         [Header("Self Components")]
-        [SerializeField] protected RectTransform selfRectTransform;
+        [SerializeField] protected RectTransform selfRT;
         
         [Header("Scale Animation Settings")]
         [SerializeField] protected float targetScale = 1.1f;
@@ -38,7 +38,7 @@ namespace Framework.UI
 
         protected virtual void Awake()
         {
-            selfRectTransform = GetComponent<RectTransform>();
+            selfRT = GetComponent<RectTransform>();
         }
 
         private void OnEnable()
@@ -56,12 +56,12 @@ namespace Framework.UI
 
         protected virtual void OnButtonClicked()
         {
-            selfRectTransform.DOKill();
-            selfRectTransform.DOScale(targetScale, animDuration)
-                .OnStart(() => selfRectTransform.localScale = Vector3.one)
+            selfRT.DOKill();
+            selfRT.DOScale(targetScale, animDuration)
+                .OnStart(() => selfRT.localScale = Vector3.one)
                 .OnComplete(() =>
                 {
-                    selfRectTransform.localScale = Vector3.one;
+                    selfRT.localScale = Vector3.one;
                     DOVirtual.DelayedCall(actionDelay, () => OnScaleAnimDone?.Invoke());
                 });
         }
