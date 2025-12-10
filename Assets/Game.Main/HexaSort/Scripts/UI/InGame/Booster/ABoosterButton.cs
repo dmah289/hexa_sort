@@ -1,0 +1,68 @@
+using DG.Tweening;
+using Framework.UI;
+using Game.Main.HexaSort.Scripts.Managers;
+using manhnd_sdk.Scripts.ExtensionMethods;
+using TMPro;
+using UnityEngine;
+
+namespace HexaSort.UI.Loading.InGame
+{
+    public enum eBoosterType
+    {
+        Respawn,
+        DestroyStack
+    }
+    
+    public abstract class ABoosterButton : ScaleAnimButton
+    {
+        [Header("----- Self References -----")]
+        [SerializeField] protected TextMeshProUGUI amountTxt;
+        [SerializeField] protected ScaleAnimButton plusBtn;
+        
+        [Header("----- Configs -----")]
+        [SerializeField] protected float shownPosX;
+        [SerializeField] protected float moveDuration = 0.2f;
+        
+        public abstract int Amount { get; set; }
+        public abstract void OnBoosterButtonClicked();
+        public abstract void OnAddBoosterButtonClicked();
+        protected abstract void Init();
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Init();
+        }
+
+        protected void SetAmountText(int amount)
+        {
+            if (amount > 0)
+            {
+                plusBtn.gameObject.SetActive(false);
+                amountTxt.gameObject.SetActive(true);
+                
+                amountTxt.text = amount.ToString();
+            }
+            else
+            {
+                plusBtn.gameObject.SetActive(true);
+                amountTxt.gameObject.SetActive(false);
+            }
+        }
+
+        public void Show()
+        {
+            selfRT.anchoredPosition = selfRT.anchoredPosition.With(x: -shownPosX);
+            selfRT.DOLocalMoveX(shownPosX, moveDuration)
+                .SetEase(Ease.OutBack);
+        }
+
+        public void Hide()
+        {
+            selfRT.anchoredPosition = selfRT.anchoredPosition.With(x: shownPosX);
+            selfRT.DOLocalMoveX(-shownPosX, moveDuration)
+                .SetEase(Ease.InBack);
+        }
+    }
+}

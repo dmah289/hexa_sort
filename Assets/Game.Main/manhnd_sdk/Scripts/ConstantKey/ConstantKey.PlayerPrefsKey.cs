@@ -16,6 +16,10 @@
             "SFX",
             "Vibration"
         };
+
+        // Booster keys
+        public static string BoosterRespawnKey = "BoosterRespawn";
+        public static string BoosterDestroyStack = "BoosterDestroyStack";
     }
     
 }

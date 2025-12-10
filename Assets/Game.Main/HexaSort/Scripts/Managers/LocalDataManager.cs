@@ -41,6 +41,18 @@ namespace Game.Main.HexaSort.Scripts.Managers
             set => PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, value);
         }
 
+        public static int BoosterRespawnAmount
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.BoosterRespawnKey, 0);
+            set => PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
+        }
+        
+        public static int BoosterDestroyStackAmount
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.BoosterDestroyStack, 0);
+            set => PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStack, value);
+        }
+        
         public static bool IsEnoughLives => CurrentLife > 0;
         
         public static bool GetSettingState(eSettingType type)
