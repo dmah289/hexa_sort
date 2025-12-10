@@ -22,7 +22,8 @@ namespace HexaSort.Managers.Level
         OutOfSpace = 2,
         Win = 3,
         Failed = 4,
-        IsUsingBooster = 5
+        IsUsingRespawnBooster = 5,
+        IsUsingDestroyStackBooster = 6
     }
     
     public class LevelManager : MonoSingleton<LevelManager>

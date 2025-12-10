@@ -19,6 +19,10 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] protected TextMeshProUGUI amountTxt;
         [SerializeField] protected ScaleAnimButton plusBtn;
         
+        
+        [SerializeField] protected RectTransform groupBtnRt;
+        //TODO : Disable btn, enable after used
+        
         [Header("----- Configs -----")]
         [SerializeField] protected float shownPosX;
         [SerializeField] protected float moveDuration = 0.2f;
@@ -26,14 +30,6 @@ namespace HexaSort.UI.Loading.InGame
         public abstract int Amount { get; set; }
         public abstract void OnBoosterButtonClicked();
         public abstract void OnAddBoosterButtonClicked();
-        protected abstract void Init();
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            Init();
-        }
 
         protected void SetAmountText(int amount)
         {
@@ -53,15 +49,15 @@ namespace HexaSort.UI.Loading.InGame
 
         public void Show()
         {
-            selfRT.anchoredPosition = selfRT.anchoredPosition.With(x: -shownPosX);
-            selfRT.DOLocalMoveX(shownPosX, moveDuration)
+            groupBtnRt.anchoredPosition = groupBtnRt.anchoredPosition.With(x: -shownPosX);
+            groupBtnRt.DOAnchorPosX(shownPosX, moveDuration)
                 .SetEase(Ease.OutBack);
         }
 
         public void Hide()
         {
-            selfRT.anchoredPosition = selfRT.anchoredPosition.With(x: shownPosX);
-            selfRT.DOLocalMoveX(-shownPosX, moveDuration)
+            groupBtnRt.anchoredPosition = groupBtnRt.anchoredPosition.With(x: shownPosX);
+            groupBtnRt.DOAnchorPosX(-shownPosX, moveDuration)
                 .SetEase(Ease.InBack);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
+using HexaSort.Managers.Level;
 using HexaSort.Scripts.Core.Controllers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
@@ -76,14 +77,21 @@ namespace HexaSort.Core.Entities.Grid
 
         #region Class Methods
 
-        private async UniTaskVoid SpawnHexStacks()
+        private async UniTask SpawnHexStacks(bool allowWaitingSliding = false)
         {
             for (int i = 0; i < 3; i++)
             {
                 hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
                     PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
-                
-                hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos).Forget();
+
+                if (allowWaitingSliding)
+                {
+                    await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding);
+                }
+                else 
+                {
+                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding).Forget();
+                }
             }
 
             remainStackAmount = 3;
@@ -116,10 +124,11 @@ namespace HexaSort.Core.Entities.Grid
 
         #endregion
 
-        public void RespawnCurrentStacks()
+        public async UniTask RespawnCurrentStacks()
         {
             CleanUpCurrentStacks();
-            SpawnHexStacks().Forget();
+            await SpawnHexStacks();
+            LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
         }
     }
 }

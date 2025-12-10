@@ -19,27 +19,15 @@ namespace HexaSort.UI.Loading.InGame
                 SetAmountText(value);
             }
         }
-        
-        protected override void Init()
-        {
-            if (LocalDataManager.BoosterRespawnAmount > 0)
-            {
-                plusBtn.gameObject.SetActive(false);
-                amountTxt.gameObject.SetActive(true);
-                
-                amountTxt.text = LocalDataManager.BoosterRespawnAmount.ToString();
-            }
-            else
-            {
-                plusBtn.gameObject.SetActive(true);
-                amountTxt.gameObject.SetActive(false);
-            }
-        }
 
         public override void OnBoosterButtonClicked()
         {
-            LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingBooster;
+            if (LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingRespawnBooster)
+                return;
             
+            //TODO : Show tut
+            
+            LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingRespawnBooster;
             tray.RespawnCurrentStacks();
         }
 

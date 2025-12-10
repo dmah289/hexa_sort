@@ -65,7 +65,7 @@ namespace HexaSort.Core.Entities
 
         #region Spawning Methods
 
-        public async UniTaskVoid OnSpawningOnTray(int idx, Vector2 spawnMidStackPos)
+        public async UniTask OnSpawningOnTray(int idx, Vector2 spawnMidStackPos, bool allowWaitingSliding = false)
         {
             idxOnTray = idx;
             int pieceAmount = Random.Range(3, 8);
@@ -90,7 +90,7 @@ namespace HexaSort.Core.Entities
 
             selfTransform.DOKill();
             float duration = selfTransform.localPosition.x / ConstantKey.SLIDE_IN_VELOCITY;
-            selfTransform.DOLocalMove(Vector3.zero, duration)
+            UniTask slidingUniTask =  selfTransform.DOLocalMove(Vector3.zero, duration)
                 .SetEase(Ease.OutFlash)
                 .SetDelay(idx * 0.3f)
                 .OnKill(() => selfTransform.localPosition = Vector3.zero)
@@ -101,7 +101,11 @@ namespace HexaSort.Core.Entities
                         sfxSpawnedPlayed = true;
                         AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_SPAWNED);
                     }
-                });
+                }).ToUniTask();
+            
+            if (allowWaitingSliding)
+                await slidingUniTask;
+            else slidingUniTask.Forget();
         }
         
         public async UniTask OnSpawningOnCell(HexCell targetCell, PackedStackData packedStackData)
