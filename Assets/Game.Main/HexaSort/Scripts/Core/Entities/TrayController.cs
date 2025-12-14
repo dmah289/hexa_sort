@@ -128,7 +128,6 @@ namespace HexaSort.Core.Entities.Grid
         {
             CleanUpCurrentStacks();
             await SpawnHexStacks();
-            LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
         }
     }
 }

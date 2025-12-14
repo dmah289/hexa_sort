@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: clickIntervalThreshold
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.size

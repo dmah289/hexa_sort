@@ -1,4 +1,5 @@
-﻿using Game.Main.HexaSort.Scripts.Managers;
+﻿using Cysharp.Threading.Tasks;
+using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Managers.Level;
 using UnityEngine;
@@ -22,13 +23,10 @@ namespace HexaSort.UI.Loading.InGame
 
         public override void OnBoosterButtonClicked()
         {
-            if (LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingRespawnBooster)
+            if (LocalDataManager.BoosterRespawnAmount <= 0)
                 return;
             
-            //TODO : Show tut
-            
-            LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingRespawnBooster;
-            tray.RespawnCurrentStacks();
+            tray.RespawnCurrentStacks().Forget();
         }
 
         public override void OnAddBoosterButtonClicked()
