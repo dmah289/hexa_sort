@@ -40,18 +40,6 @@ namespace Game.Main.HexaSort.Scripts.Managers
             get => PlayerPrefs.GetFloat(ConstantKey.LastCountdownRemainingKey, 0);
             set => PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, value);
         }
-
-        public static int BoosterRespawnAmount
-        {
-            get => PlayerPrefs.GetInt(ConstantKey.BoosterRespawnKey, 0);
-            set => PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
-        }
-        
-        public static int BoosterDestroyStackAmount
-        {
-            get => PlayerPrefs.GetInt(ConstantKey.BoosterDestroyStack, 0);
-            set => PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStack, value);
-        }
         
         public static bool IsEnoughLives => CurrentLife > 0;
         
@@ -64,5 +52,33 @@ namespace Game.Main.HexaSort.Scripts.Managers
         {
             PlayerPrefs.SetInt($"Setting_{type}", isActive ? 1 : 0);
         }
+
+        #region Booster
+
+        public static int BoosterRespawnAmount
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.BoosterRespawnKey, 0);
+            set => PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
+        }
+        
+        public static int BoosterDestroyStackAmount
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.BoosterDestroyStackKey, 0);
+            set => PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStackKey, value);
+        }
+        
+        public static bool HasShownAndClaimedRespawnBoosterTutorial
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.HasShownAndClaimedRespawnBoosterTutorialKey, 0) == 1;
+            set => PlayerPrefs.SetInt(ConstantKey.HasShownAndClaimedRespawnBoosterTutorialKey, value ? 1 : 0);
+        }
+
+        public static bool HasShownAndClaimedDestroyBoosterTutorial
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.HasShownAndClaimedDestroyBoosterTutorialKey, 0) == 1;
+            set => PlayerPrefs.SetInt(ConstantKey.HasShownAndClaimedDestroyBoosterTutorialKey, value ? 1 : 0);
+        }
+
+        #endregion
     }
 }

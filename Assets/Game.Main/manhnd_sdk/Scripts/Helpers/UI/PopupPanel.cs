@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Framework.UI
 {
-    public class BackgroundClickHandler : MonoBehaviour, IPointerClickHandler
+    public class PopupPanel : MonoBehaviour, IPointerClickHandler
     {
         private const float FadeDuration = 0.2f;
         private const float TargetAlpha = 200/255f;
@@ -50,10 +50,10 @@ namespace Framework.UI
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.pointerCurrentRaycast.gameObject == gameObject && CanClick)
-                HideBackground();
+                HidePanel();
         }
         
-        public virtual void ShowBackground()
+        public virtual void ShowPanel()
         {
             if (!gameObject.activeSelf)
             {
@@ -63,7 +63,7 @@ namespace Framework.UI
             }
         }
         
-        public void HideBackground()
+        public void HidePanel()
         {
             if (gameObject.activeSelf)
             {

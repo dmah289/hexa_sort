@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Framework.UI
 {
-    public class ScaleAnimButton : MonoBehaviour, IPointerClickHandler
+    public class MButton : MonoBehaviour, IPointerClickHandler
     {
         [Header("Self Components")]
         [SerializeField] protected RectTransform selfRT;
@@ -14,7 +14,7 @@ namespace Framework.UI
         [Header("Scale Animation Settings")]
         [SerializeField] protected float targetScale = 1.1f;
         [SerializeField] protected float animDuration = 0.1f;
-        [SerializeField] protected float clickIntervalThreshold;
+        [SerializeField] protected float clickIntervalThreshold = 0.5f;
         [SerializeField] protected float actionDelay;
         protected float lastClickTime;
         
@@ -48,10 +48,7 @@ namespace Framework.UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (CanClick)
-            {
-                OnButtonClicked();
-            }
+            OnButtonClicked();
         }
 
         protected virtual void OnButtonClicked()
@@ -62,7 +59,8 @@ namespace Framework.UI
                 .OnComplete(() =>
                 {
                     selfRT.localScale = Vector3.one;
-                    DOVirtual.DelayedCall(actionDelay, () => OnScaleAnimDone?.Invoke());
+                    if(CanClick)
+                        DOVirtual.DelayedCall(actionDelay, () => OnScaleAnimDone?.Invoke());
                 });
         }
     }

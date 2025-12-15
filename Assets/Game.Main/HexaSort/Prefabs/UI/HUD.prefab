@@ -3640,7 +3640,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2995649078231473030}
         m_TargetAssemblyTypeName: Framework.UI.BackgroundClickHandler, Assembly-CSharp
-        m_MethodName: ShowBackground
+        m_MethodName: ShowPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4080,7 +4080,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5635474651482579636}
         m_TargetAssemblyTypeName: Framework.UI.BackgroundClickHandler, Assembly-CSharp
-        m_MethodName: ShowBackground
+        m_MethodName: ShowPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

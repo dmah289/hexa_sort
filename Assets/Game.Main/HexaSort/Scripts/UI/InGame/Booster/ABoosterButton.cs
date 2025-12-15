@@ -13,11 +13,11 @@ namespace HexaSort.UI.Loading.InGame
         DestroyStack
     }
     
-    public abstract class ABoosterButton : ScaleAnimButton
+    public abstract class ABoosterButton : MButton
     {
         [Header("----- Self References -----")]
         [SerializeField] protected TextMeshProUGUI amountTxt;
-        [SerializeField] protected ScaleAnimButton plusBtn;
+        [SerializeField] protected MButton plusBtn;
         
         
         [SerializeField] protected RectTransform groupBtnRt;

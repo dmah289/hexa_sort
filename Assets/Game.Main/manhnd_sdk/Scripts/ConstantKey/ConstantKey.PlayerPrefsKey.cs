@@ -19,7 +19,11 @@
 
         // Booster keys
         public static string BoosterRespawnKey = "BoosterRespawn";
-        public static string BoosterDestroyStack = "BoosterDestroyStack";
+        public static string BoosterDestroyStackKey = "BoosterDestroyStack";
+        public static string HasShownAndClaimedRespawnBoosterTutorialKey = "HasShownAndClaimedRespawnBoosterTutorial";
+        public static string HasShownAndClaimedDestroyBoosterTutorialKey = "HasShownAndClaimedDestroyBoosterTutorial";
+        
+        
     }
     
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace HexaSort.UI.Loading.InGame
 {
-    public class PauseButton : ScaleAnimButton
+    public class PauseButton : MButton
     {
         protected override void OnButtonClicked()
         {

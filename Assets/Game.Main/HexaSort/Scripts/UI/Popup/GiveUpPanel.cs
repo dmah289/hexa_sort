@@ -10,14 +10,14 @@ namespace HexaSort.UI.Loading.InGame
         BackHome
     }
     
-    public class GiveUpPanel : BackgroundClickHandler
+    public class GiveUpPanel : PopupPanel
     {
         [SerializeField] private eGiveUpButton firedButton;
         public eGiveUpButton FiredButton => firedButton;
 
         public void ShowBackgroundByButton(eGiveUpButton btnType)
         {
-            base.ShowBackground();
+            base.ShowPanel();
             
             firedButton = btnType;
         }

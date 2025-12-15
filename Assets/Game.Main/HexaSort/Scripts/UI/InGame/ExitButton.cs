@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace HexaSort.UI.Loading.InGame
 {
-    public class ExitButton : ScaleAnimButton
+    public class ExitButton : MButton
     {
         [SerializeField] private eGiveUpButton btnType;
         public UnityEvent<eGiveUpButton> OnExitButtonClicked;

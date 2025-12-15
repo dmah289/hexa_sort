@@ -18,7 +18,7 @@ namespace HexaSort.UI.MainMenu.Home
         [Header("References")]
         [SerializeField] private LoadingLevel loadingLevel;
         [SerializeField] private LifeSystem lifeSystem;
-        [SerializeField] private BackgroundClickHandler getMoreLifePanel;
+        [SerializeField] private PopupPanel getMoreLifePanel;
 
         private void OnEnable()
         {
@@ -43,7 +43,7 @@ namespace HexaSort.UI.MainMenu.Home
             else
             {
                 lifeSystem.FlashOnOutOfLife();
-                getMoreLifePanel.ShowBackground();
+                getMoreLifePanel.ShowPanel();
             }
         }
     }

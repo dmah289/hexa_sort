@@ -10,7 +10,8 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
     {
         [SerializeField] private WinPanel winPanel;
         [SerializeField] private LoosePanel loosePanel;
-        [SerializeField] private List<BackgroundClickHandler> popups;
+        [SerializeField] private PopupPanel unlockBoosterPanel;
+        [SerializeField] private List<PopupPanel> popups;
 
         protected override void Awake()
         {
@@ -19,7 +20,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
             popups = new();
             for (int i = 0; i < transform.childCount; i++)
             {
-                BackgroundClickHandler panel;
+                PopupPanel panel;
                 if (transform.GetChild(i).TryGetComponent(out panel))
                     popups.Add(panel);
             }
@@ -32,6 +33,11 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
             {
                 popups[i].gameObject.SetActive(false);
             }
+        }
+
+        public void ShowUnlockBoosterPanel()
+        {
+            unlockBoosterPanel.ShowPanel();
         }
     }
 }

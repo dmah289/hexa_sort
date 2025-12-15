@@ -10,7 +10,7 @@ using UnityEngine.Events;
 
 namespace HexaSort.UI.Loading.MainMenu.SharedUI
 {
-    public class SettingButton : ScaleAnimButton
+    public class SettingButton : MButton
     {
         [SerializeField] private GameObject onImg;
         [SerializeField] private eSettingType settingType;

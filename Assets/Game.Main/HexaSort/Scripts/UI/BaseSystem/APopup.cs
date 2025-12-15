@@ -15,7 +15,7 @@ namespace HexaSort.UI.Loading.MainMenu.Home
         public const float MoveSpeed = 2870f;
         
         [Header("UI Elements")]
-        [SerializeField] protected BackgroundClickHandler bgClickHandler;
+        [SerializeField] protected PopupPanel bgClickHandler;
         [SerializeField] protected RectTransform selfRectTransform;
         [SerializeField] protected Image popUpImg;
 
@@ -27,7 +27,7 @@ namespace HexaSort.UI.Loading.MainMenu.Home
 
         private void Awake()
         {
-            bgClickHandler = GetComponentInParent<BackgroundClickHandler>();
+            bgClickHandler = GetComponentInParent<PopupPanel>();
             selfRectTransform = GetComponent<RectTransform>();
             popUpImg = GetComponent<Image>();
             
