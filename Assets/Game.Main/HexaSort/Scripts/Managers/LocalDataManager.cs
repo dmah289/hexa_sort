@@ -1,6 +1,8 @@
 ﻿using HexaSort.Audio;
+using HexaSort.UI.Loading.InGame;
 using HexaSort.UI.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace Game.Main.HexaSort.Scripts.Managers
@@ -58,13 +60,21 @@ namespace Game.Main.HexaSort.Scripts.Managers
         public static int BoosterRespawnAmount
         {
             get => PlayerPrefs.GetInt(ConstantKey.BoosterRespawnKey, 0);
-            set => PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
+            set
+            {
+                PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
+                EventBus<BoosterUpdatedDTO>.Raise(new BoosterUpdatedDTO(eBoosterType.Respawn, value));
+            }
         }
         
         public static int BoosterDestroyStackAmount
         {
             get => PlayerPrefs.GetInt(ConstantKey.BoosterDestroyStackKey, 0);
-            set => PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStackKey, value);
+            set
+            {
+                PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStackKey, value);
+                EventBus<BoosterUpdatedDTO>.Raise(new BoosterUpdatedDTO(eBoosterType.DestroyStack, value));
+            }
         }
         
         public static bool HasShownAndClaimedRespawnBoosterTutorial

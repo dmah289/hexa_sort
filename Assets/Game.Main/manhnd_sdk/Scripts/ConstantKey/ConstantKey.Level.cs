@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using HexaSort.UI.Loading.InGame;
 using UnityEngine;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
@@ -22,5 +24,11 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         
         public const int MaxDestroyableStackOnLoose = 2;
         public const float BottomRevivePanelOffsetY = -300f;
+        
+        public static Dictionary<eBoosterType, int> BoosterUnlockLevel = new()
+        {
+            { eBoosterType.Respawn, 0 },
+            { eBoosterType.DestroyStack, 1 }
+        };
     }
 }

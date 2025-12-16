@@ -249,10 +249,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -233
       objectReference: {fileID: 0}
-    - target: {fileID: 2264425877706036630, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2461538537148174778, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -281,46 +277,6 @@ PrefabInstance:
       propertyPath: tray
       value: 
       objectReference: {fileID: 2091194406}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: groupBtnRt
-      value: 
-      objectReference: {fileID: 1554216643}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: targetScale
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: clickIntervalThreshold
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 769636854}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnBoosterButtonClicked
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: HexaSort.UI.Loading.InGame.RespawnBoosterButton, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-      propertyPath: OnScaleAnimDone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3599163385257985848, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -703,17 +659,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &769636854 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3003431605819129411, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-  m_PrefabInstance: {fileID: 97043685}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa5dd7b76ef744369574421ede776c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,11 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb9deb581a64625838d0b4b58c9c119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1554216643 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2284342456845294545, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
-  m_PrefabInstance: {fileID: 97043685}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1601707389 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8184454924003216330, guid: a0041d10febb60742b3ee306f7e611be, type: 3}

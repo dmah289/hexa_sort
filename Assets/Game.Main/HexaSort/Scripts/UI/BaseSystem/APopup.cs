@@ -15,9 +15,9 @@ namespace HexaSort.UI.Loading.MainMenu.Home
         public const float MoveSpeed = 2870f;
         
         [Header("UI Elements")]
-        [SerializeField] protected PopupPanel bgClickHandler;
-        [SerializeField] protected RectTransform selfRectTransform;
-        [SerializeField] protected Image popUpImg;
+        [SerializeField] protected PopupPanel popupPanel;
+        [SerializeField] protected RectTransform selfRT;
+        [SerializeField] protected Image popupImg;
 
         [Header("Movement Settings")]
         [SerializeField] protected Vector2 shownPos;
@@ -25,43 +25,43 @@ namespace HexaSort.UI.Loading.MainMenu.Home
         private float animDuration;
         
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            bgClickHandler = GetComponentInParent<PopupPanel>();
-            selfRectTransform = GetComponent<RectTransform>();
-            popUpImg = GetComponent<Image>();
+            popupPanel = GetComponentInParent<PopupPanel>();
+            selfRT = GetComponent<RectTransform>();
+            popupImg = GetComponent<Image>();
             
-            hidenPos = new Vector2(0, -(Screen.height / 2f + selfRectTransform.rect.height / 2f + 50f));
+            hidenPos = new Vector2(0, -(Screen.height / 2f + selfRT.rect.height / 2f + 50f));
             animDuration = Vector2.Distance(shownPos, hidenPos) / MoveSpeed;
         }
 
         public virtual void ShowPopup()
         {
-            popUpImg.DOKill();
-            if (popUpImg == null)
+            popupImg.DOKill();
+            if (popupImg == null)
             {
                 Debug.Log(gameObject.Path());
             }
-            else popUpImg.SetAlpha(1);
-            selfRectTransform.localScale = Vector3.one;
+            else popupImg.SetAlpha(1);
+            selfRT.localScale = Vector3.one;
             
-            selfRectTransform.DOKill();
-            selfRectTransform.anchoredPosition = hidenPos;
-            selfRectTransform.DOAnchorPos(shownPos, animDuration)
+            selfRT.DOKill();
+            selfRT.anchoredPosition = hidenPos;
+            selfRT.DOAnchorPos(shownPos, animDuration)
                 .SetEase(Ease.OutElastic, 0.01f, 0.5f);
         }
 
         public void HidePopup() => HidePopupAsync().Forget();
         protected virtual async UniTaskVoid HidePopupAsync()
         {
-            popUpImg.DOKill();
-            popUpImg.SetAlpha(1);
-            popUpImg.DOFade(0.8f, animDuration);
+            popupImg.DOKill();
+            popupImg.SetAlpha(1);
+            popupImg.DOFade(0.8f, animDuration);
             
-            selfRectTransform.DOKill();
-            selfRectTransform.DOScale(0f, 0.85f * animDuration)
+            selfRT.DOKill();
+            selfRT.DOScale(0f, 0.85f * animDuration)
                 .SetEase(Ease.InBack)
-                .OnComplete(() => bgClickHandler.gameObject.SetActive(false));
+                .OnComplete(() => popupPanel.gameObject.SetActive(false));
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Framework.UI;
+using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.Loading.InGame;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign;
 using UnityEngine;
 
@@ -10,8 +12,9 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
     {
         [SerializeField] private WinPanel winPanel;
         [SerializeField] private LoosePanel loosePanel;
-        [SerializeField] private PopupPanel unlockBoosterPanel;
         [SerializeField] private List<PopupPanel> popups;
+        
+        [SerializeField] private UnlockBoosterPanel unlockBoosterPanel;
 
         protected override void Awake()
         {
@@ -35,9 +38,16 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
             }
         }
 
-        public void ShowUnlockBoosterPanel()
+        public void CheckShowUnlockBoosterPopup()
         {
-            unlockBoosterPanel.ShowPanel();
+            foreach(var milestone in ConstantKey.BoosterUnlockLevel)
+            {
+                if (milestone.Value == LocalDataManager.LevelIndex)
+                {
+                    unlockBoosterPanel.ShowUnlockBoosterPanel(milestone.Key);
+                    break;
+                }
+            }
         }
     }
 }

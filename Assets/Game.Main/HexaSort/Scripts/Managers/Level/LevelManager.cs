@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Main.HexaSort.Scripts.Managers;
+using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.Audio;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Scripts.Core.Controllers;
@@ -83,6 +84,7 @@ namespace HexaSort.Managers.Level
 
         public void EnterGameplay()
         {
+            PopupManager.Instance.CheckShowUnlockBoosterPopup();
             CurrentLevelState = eLevelState.Playing;
         }
 

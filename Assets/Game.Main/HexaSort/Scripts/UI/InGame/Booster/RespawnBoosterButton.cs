@@ -10,22 +10,26 @@ namespace HexaSort.UI.Loading.InGame
     {
         [Header("----- Gameplay Components -----")]
         [SerializeField] private TrayController tray;
-        
-        public override int Amount
+
+        public override int Amount => LocalDataManager.BoosterRespawnAmount;
+
+        protected override void Awake()
         {
-            get => LocalDataManager.BoosterRespawnAmount;
-            set
-            {
-                LocalDataManager.BoosterRespawnAmount = value;
-                SetAmountText(value);
-            }
+            base.Awake();
+            
+            SetAmountText(Amount);
+        }
+
+        protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
+        {
+            SetAmountText(data.NewAmount);
         }
 
         public override void OnBoosterButtonClicked()
         {
-            if (LocalDataManager.BoosterRespawnAmount <= 0)
-                return;
+            if (Amount <= 0) return;
             
+            LocalDataManager.BoosterRespawnAmount--;
             tray.RespawnCurrentStacks().Forget();
         }
 

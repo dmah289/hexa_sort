@@ -15,7 +15,7 @@ namespace HexaSort.UI.Loading.InGame
     {
         public void OnGiveUpClicked()
         {
-            GiveUpPanel giveUpPanel = bgClickHandler as GiveUpPanel;
+            GiveUpPanel giveUpPanel = popupPanel as GiveUpPanel;
             if (giveUpPanel.FiredButton == eGiveUpButton.Replay)
             {
                 if (LocalDataManager.IsEnoughLives)
@@ -37,7 +37,7 @@ namespace HexaSort.UI.Loading.InGame
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
             }
             
-            bgClickHandler.OnBackgroundHiden?.Invoke();
+            popupPanel.OnBackgroundHiden?.Invoke();
         }
     }
 }

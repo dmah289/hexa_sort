@@ -1,6 +1,7 @@
 ﻿using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Managers.Level;
+using manhnd_sdk.UITools.Toast;
 using UnityEngine;
 
 namespace HexaSort.UI.Loading.InGame
@@ -9,25 +10,27 @@ namespace HexaSort.UI.Loading.InGame
     {
         [Header("----- Gameplay Components -----")]
         [SerializeField] private GridController grid;
-        
-        public override int Amount
+
+        public override int Amount => LocalDataManager.BoosterDestroyStackAmount;
+
+        protected override void Awake()
         {
-            get => LocalDataManager.BoosterDestroyStackAmount;
-            set
-            {
-                LocalDataManager.BoosterDestroyStackAmount = value;
-                SetAmountText(value);
-            }
+            base.Awake();
+            
+            SetAmountText(Amount);
+        }
+
+        protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
+        {
+            SetAmountText(data.NewAmount);
         }
 
         public override void OnBoosterButtonClicked()
         {
-            if (LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingDestroyStackBooster)
-                return;
+            if (Amount <= 0) return;
             
-            LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingDestroyStackBooster;
             Debug.Log("Destroy Stack Booster Used");
-            // TODO : Enable stack selection + OnSelect stack
+            ToastManager.Instance.Show("Choose a stack to destroy");
         }
 
         public override void OnAddBoosterButtonClicked()
