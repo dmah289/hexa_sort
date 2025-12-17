@@ -1,6 +1,7 @@
 ﻿using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Managers.Level;
+using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.UITools.Toast;
 using UnityEngine;
 
@@ -12,13 +13,6 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] private GridController grid;
 
         public override int Amount => LocalDataManager.BoosterDestroyStackAmount;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            
-            SetAmountText(Amount);
-        }
 
         protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
         {
@@ -38,6 +32,26 @@ namespace HexaSort.UI.Loading.InGame
             
         }
 
-        
+        public override void CheckUnlockBoosterButton()
+        {
+            if (LocalDataManager.LevelIndex >= ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack])
+            {
+                lockBoosterGroup.SetActive(false);
+                SetAmountText(Amount);
+            }
+            else
+            {
+                amountTxtGroup.SetActive(false);
+                plusBtn.gameObject.SetActive(false);
+                
+                lockBoosterGroup.SetActive(true);
+                unlockLevelTxt.text = $"Lv.{ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack]}";
+            }
+        }
+
+        public override void OnLockBoosterButtonClicked()
+        {
+            ToastManager.Instance.Show($"Unlock at level {ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack]}");
+        }
     }
 }

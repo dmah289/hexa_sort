@@ -27,7 +27,11 @@ namespace HexaSort.UI.Loading.InGame
             for (int i = 0; i < boosterButtons.Length; i++)
                 boosterButtons[i].Hide();
         }
-        
-        
+
+        public void CheckUnlockBoosterButtons()
+        {
+            for(int i = 0; i < boosterButtons.Length; i++)
+                boosterButtons[i].CheckUnlockBoosterButton();
+        }
     }
 }

@@ -33,10 +33,11 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] protected TextMeshProUGUI amountTxt;
         [SerializeField] protected GameObject amountTxtGroup;
         [SerializeField] protected MButton plusBtn;
-        
-        
         [SerializeField] protected RectTransform groupBtnRt;
-        //TODO : Disable btn, enable after used
+        
+        [Header("----- Lock Booster -----")]
+        [SerializeField] protected GameObject lockBoosterGroup;
+        [SerializeField] protected TextMeshProUGUI unlockLevelTxt;
         
         [Header("----- Configs -----")]
         [SerializeField] protected float shownPosX;
@@ -53,6 +54,8 @@ namespace HexaSort.UI.Loading.InGame
         public abstract int Amount { get; }
         public abstract void OnBoosterButtonClicked();
         public abstract void OnAddBoosterButtonClicked();
+        public abstract void CheckUnlockBoosterButton();
+        public abstract void OnLockBoosterButtonClicked();
 
         protected void SetAmountText(int amount)
         {

@@ -84,7 +84,7 @@ namespace HexaSort.Managers.Level
 
         public void EnterGameplay()
         {
-            PopupManager.Instance.CheckShowUnlockBoosterPopup();
+            InGamePage.Instance.CheckUnlockBoosters();
             CurrentLevelState = eLevelState.Playing;
         }
 
