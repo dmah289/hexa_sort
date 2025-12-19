@@ -105,5 +105,19 @@ namespace HexaSort.Core.Entities.Grid
         {
             gridSpawner.CleanUp();
         }
+
+        public void SetStacksOnGridSelectableState(bool selectable)
+        {
+            for(int i = 0; i < GridSize.height; i++)
+            {
+                for(int j = 0; j < GridSize.width; j++)
+                {
+                    if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null)
+                    {
+                        GridCells[i, j].CurrentStack.Selectable = selectable;
+                    }
+                }
+            }
+        }
     }
 }

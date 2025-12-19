@@ -8,7 +8,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
 {
     public static partial class ConstantKey
     {
-        public const int MAX_LEVEL = 2;
+        public const int MAX_LEVEL = 5;
 
         #region Camera
 
@@ -27,8 +27,8 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         
         public static Dictionary<eBoosterType, int> BoosterUnlockLevel = new()
         {
-            { eBoosterType.Respawn, 0 },
-            { eBoosterType.DestroyStack, 1 }
+            { eBoosterType.Respawn, 1 },
+            { eBoosterType.DestroyStack, 3 }
         };
     }
 }

@@ -18,7 +18,8 @@ namespace HexaSort.UI.Loading.InGame
 
         protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
         {
-            SetAmountText(data.NewAmount);
+            if(data.BoosterType == eBoosterType.Respawn)
+                SetAmountText(data.NewAmount);
         }
 
         public override void OnBoosterButtonClicked()
@@ -38,22 +39,25 @@ namespace HexaSort.UI.Loading.InGame
         {
             if (LocalDataManager.LevelIndex >= ConstantKey.BoosterUnlockLevel[eBoosterType.Respawn])
             {
+                unlockBoosterGroup.alpha = 1;
+                
                 lockBoosterGroup.SetActive(false);
                 SetAmountText(Amount);
             }
             else
             {
+                unlockBoosterGroup.alpha = 0;
                 amountTxtGroup.SetActive(false);
                 plusBtn.gameObject.SetActive(false);
                 
                 lockBoosterGroup.SetActive(true);
-                unlockLevelTxt.text = $"Lv.{ConstantKey.BoosterUnlockLevel[eBoosterType.Respawn]}";
+                unlockLevelTxt.text = $"Lv.{ConstantKey.BoosterUnlockLevel[eBoosterType.Respawn] + 1}";
             }
         }
 
         public override void OnLockBoosterButtonClicked()
         {
-            ToastManager.Instance.Show($"Unlock at level {ConstantKey.BoosterUnlockLevel[eBoosterType.Respawn]}");
+            ToastManager.Instance.Show($"Unlock at level {ConstantKey.BoosterUnlockLevel[eBoosterType.Respawn]+1}");
         }
     }
 }

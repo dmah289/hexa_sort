@@ -47,7 +47,6 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
                     && !LocalDataManager.GetHasShownAndClaimedBoosterTutorial(milestone.Key))
                 {
                     unlockBoosterPanel.ShowUnlockBoosterPanel(milestone.Key);
-                    break;
                 }
             }
         }

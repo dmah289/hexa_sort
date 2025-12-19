@@ -142,6 +142,11 @@ namespace HexaSort.UI.Gameplay.Goals
             {
                 goalTrackerPanels[i].SetUp(goalData[i]);
             }
+            
+            for(int i = goalData.Length; i < goalTrackerPanels.Length; i++)
+            {
+                goalTrackerPanels[i].gameObject.SetActive(false);
+            }
         }
 
         #endregion

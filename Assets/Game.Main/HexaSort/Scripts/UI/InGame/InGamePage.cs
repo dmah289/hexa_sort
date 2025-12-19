@@ -30,5 +30,16 @@ namespace HexaSort.UI.Loading.InGame
             PopupManager.Instance.CheckShowUnlockBoosterPopup();
             boosterManager.CheckUnlockBoosterButtons();
         }
+
+        public void HideBoosterButtons()
+        {
+            boosterManager.HideBoosterButtons();
+        }
+
+
+        public void ShowBoosterButtons()
+        {
+            boosterManager.ShowBoosterButtons();
+        }
     }
 }

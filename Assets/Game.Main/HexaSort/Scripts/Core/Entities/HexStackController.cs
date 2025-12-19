@@ -213,7 +213,6 @@ namespace HexaSort.Core.Entities
                 .Add(y: (pieces.Count - 1) * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
             
             newPiece.OverturnToLocalPos(targetLocalPos, overturnDir, maxHeight);
-            
         }
 
         public void CollectLastPiece()

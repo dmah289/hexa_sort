@@ -23,7 +23,6 @@ namespace HexaSort.Managers.Level
         OutOfSpace = 2,
         Win = 3,
         Failed = 4,
-        IsUsingRespawnBooster = 5,
         IsUsingDestroyStackBooster = 6
     }
     
@@ -38,7 +37,6 @@ namespace HexaSort.Managers.Level
         [SerializeField] private TrayController tray;
         [SerializeField] private LoosePanel loosePanel;
         [SerializeField] private WinPanel winPanel;
-        [SerializeField] private BoosterManager boosterManager;
         
         
         [Header("----- State Management -----")]
@@ -50,27 +48,36 @@ namespace HexaSort.Managers.Level
             set
             {
                 if (currentLevelState == value) return;
-                currentLevelState = value;
+                SetLevelState(value);
+                OnLevelStateChanged();
+            }
+        }
+        
+        public void SetLevelState(eLevelState value)
+        {
+            currentLevelState = value;
+        }
 
-                switch (currentLevelState)
-                {
-                    case eLevelState.Playing:
-                        boosterManager.ShowBoosterButtons();
-                        levelLoader.SetupLevel(grid).Forget();
-                        break;
-                    case eLevelState.OutOfSpace:
-                        ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
-                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_OUT_OF_SPACE);
-                        boosterManager.HideBoosterButtons();
-                        grid.FindDestroyableStacks(loosePanel).Forget();
-                        loosePanel.ShowRevivePanel().Forget();
-                        SelectionController.Instance.ReturnSelectedStackToTray();
-                        break;
-                    case eLevelState.Win:
-                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_LEVEL_COMPLETED);
-                        winPanel.Show().Forget();
-                        break;
-                }
+        private void OnLevelStateChanged()
+        {
+            switch (currentLevelState)
+            {
+                case eLevelState.Playing:
+                    InGamePage.Instance.ShowBoosterButtons();
+                    levelLoader.SetupLevel(grid).Forget();
+                    break;
+                case eLevelState.OutOfSpace:
+                    ToastManager.Instance.Show(ConstantKey.Toast_OutOfSpace);
+                    AudioManager.Instance.PlaySfx(ConstantKey.SFX_OUT_OF_SPACE);
+                    InGamePage.Instance.HideBoosterButtons();
+                    grid.FindDestroyableStacks(loosePanel).Forget();
+                    loosePanel.ShowRevivePanel().Forget();
+                    SelectionController.Instance.ReturnSelectedStackToTray();
+                    break;
+                case eLevelState.Win:
+                    AudioManager.Instance.PlaySfx(ConstantKey.SFX_LEVEL_COMPLETED);
+                    winPanel.Show().Forget();
+                    break;
             }
         }
 

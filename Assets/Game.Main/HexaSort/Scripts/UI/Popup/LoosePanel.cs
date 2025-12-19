@@ -93,7 +93,7 @@ namespace HexaSort.UI.Loading.InGame
             }
             await UniTask.WhenAll(shootTasks);
             
-            LevelManager.Instance.CurrentLevelState = eLevelState.Playing;
+            LevelManager.Instance.SetLevelState(eLevelState.Playing);
             
             await UniTask.Delay(500);
             

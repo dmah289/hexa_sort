@@ -3,6 +3,7 @@ using HexaSort.Audio;
 using HexaSort.Managers.Level;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid;
+using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.SystemDesign;
@@ -18,6 +19,7 @@ namespace HexaSort.Scripts.Core.Controllers
         
         [Header("References")]
         [SerializeField] private Camera gameplayCam;
+        [SerializeField] private GridController grid;
         
         [Header("Raycast Picking Config")]
         [SerializeField] private LayerMask pieceLayer;
@@ -42,7 +44,8 @@ namespace HexaSort.Scripts.Core.Controllers
 
         private void Update()
         {
-            if (LevelManager.Instance.CurrentLevelState == eLevelState.Playing)
+            if (LevelManager.Instance.CurrentLevelState == eLevelState.Playing
+                || LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingDestroyStackBooster)
             {
 #if UNITY_EDITOR
                 HandleEditorSelection();
@@ -106,9 +109,21 @@ namespace HexaSort.Scripts.Core.Controllers
             int hitCount = Physics.RaycastNonAlloc(ray, pickingHits, 100f, pieceLayer);
             if (hitCount > 0)
             {
-                AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_PICKED);
-                currStack = pickingHits[0].transform.GetComponentInParent<HexStackController>();
-                catchingRay.origin = currStack.transform.position;
+                if (LevelManager.Instance.CurrentLevelState == eLevelState.Playing)
+                {
+                    AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_PICKED);
+                    currStack = pickingHits[0].transform.GetComponentInParent<HexStackController>();
+                    catchingRay.origin = currStack.transform.position;
+                }
+                else if (LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingDestroyStackBooster)
+                {
+                    HexCell cell = pickingHits[0].transform.GetComponentInParent<HexCell>();
+                    cell.CollectAllPieces().Forget();
+                    
+                    LevelManager.Instance.SetLevelState(eLevelState.Playing);
+                    InGamePage.Instance.ShowBoosterButtons();
+                    grid.SetStacksOnGridSelectableState(false);
+                }
             }
         }
 

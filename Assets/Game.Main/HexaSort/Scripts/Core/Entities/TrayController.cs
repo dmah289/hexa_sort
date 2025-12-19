@@ -95,7 +95,6 @@ namespace HexaSort.Core.Entities.Grid
             }
 
             await UniTask.DelayFrame(5);
-            Debug.Break();
 
             remainStackAmount = 3;
         }

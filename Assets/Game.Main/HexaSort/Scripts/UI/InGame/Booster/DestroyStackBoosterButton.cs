@@ -17,15 +17,19 @@ namespace HexaSort.UI.Loading.InGame
 
         protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
         {
-            SetAmountText(data.NewAmount);
+            if(data.BoosterType == eBoosterType.DestroyStack)
+                SetAmountText(data.NewAmount);
         }
 
         public override void OnBoosterButtonClicked()
         {
             if (Amount <= 0) return;
             
-            Debug.Log("Destroy Stack Booster Used");
+            LocalDataManager.BoosterDestroyStackAmount--;
             ToastManager.Instance.Show("Choose a stack to destroy");
+            LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingDestroyStackBooster;
+            InGamePage.Instance.HideBoosterButtons();
+            grid.SetStacksOnGridSelectableState(true);
         }
 
         public override void OnAddBoosterButtonClicked()
@@ -37,22 +41,25 @@ namespace HexaSort.UI.Loading.InGame
         {
             if (LocalDataManager.LevelIndex >= ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack])
             {
+                unlockBoosterGroup.alpha = 1;
+                
                 lockBoosterGroup.SetActive(false);
                 SetAmountText(Amount);
             }
             else
             {
+                unlockBoosterGroup.alpha = 0;
                 amountTxtGroup.SetActive(false);
                 plusBtn.gameObject.SetActive(false);
                 
                 lockBoosterGroup.SetActive(true);
-                unlockLevelTxt.text = $"Lv.{ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack]}";
+                unlockLevelTxt.text = $"Lv.{ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack] + 1}";
             }
         }
 
         public override void OnLockBoosterButtonClicked()
         {
-            ToastManager.Instance.Show($"Unlock at level {ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack]}");
+            ToastManager.Instance.Show($"Unlock at level {ConstantKey.BoosterUnlockLevel[eBoosterType.DestroyStack]+1}");
         }
     }
 }

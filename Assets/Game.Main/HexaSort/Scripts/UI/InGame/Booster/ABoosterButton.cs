@@ -40,8 +40,9 @@ namespace HexaSort.UI.Loading.InGame
         [SerializeField] protected TextMeshProUGUI unlockLevelTxt;
         
         [Header("----- Configs -----")]
+        [SerializeField] protected CanvasGroup unlockBoosterGroup;
         [SerializeField] protected float shownPosX;
-        [SerializeField] protected float moveDuration = 0.2f;
+        [SerializeField] protected float moveDuration = 0.5f;
 
         protected override void Awake()
         {
@@ -75,15 +76,17 @@ namespace HexaSort.UI.Loading.InGame
 
         public void Show()
         {
-            groupBtnRt.anchoredPosition = groupBtnRt.anchoredPosition.With(x: -shownPosX);
+            float hidenPosX = -Mathf.Sign(shownPosX) * 200 + shownPosX;
+            groupBtnRt.anchoredPosition = groupBtnRt.anchoredPosition.With(x: hidenPosX);
             groupBtnRt.DOAnchorPosX(shownPosX, moveDuration)
                 .SetEase(Ease.OutBack);
         }
 
         public void Hide()
         {
+            float hidenPosX = -Mathf.Sign(shownPosX) * 200 + shownPosX;
             groupBtnRt.anchoredPosition = groupBtnRt.anchoredPosition.With(x: shownPosX);
-            groupBtnRt.DOAnchorPosX(-shownPosX, moveDuration)
+            groupBtnRt.DOAnchorPosX(hidenPosX, moveDuration)
                 .SetEase(Ease.InBack);
         }
     }

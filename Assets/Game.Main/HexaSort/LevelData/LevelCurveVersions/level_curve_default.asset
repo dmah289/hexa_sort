@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: level_curve_default
   m_EditorClassIdentifier: 
   levelDatas:
-  - {fileID: 11400000, guid: 4d800355c24ff4149afb7f12301e5ff8, type: 2}
+  - {fileID: 11400000, guid: 318843c0f22e6c8488cdd3664f6e7e93, type: 2}
+  - {fileID: 11400000, guid: 378b2a156f97b394d8cd82db898388dc, type: 2}
   - {fileID: 11400000, guid: fce12ed2325972542b9d8c5bb34bcf70, type: 2}
+  - {fileID: 11400000, guid: 68b50d4b6abe0754fbc4287393a803c2, type: 2}
+  - {fileID: 11400000, guid: 4d800355c24ff4149afb7f12301e5ff8, type: 2}
