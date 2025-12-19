@@ -1,4 +1,5 @@
 ﻿using Game.Main.HexaSort.Scripts.Managers;
+using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Managers.Level;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -29,7 +30,7 @@ namespace HexaSort.UI.Loading.InGame
 
         public override void OnAddBoosterButtonClicked()
         {
-            
+            PopupManager.Instance.ShowBuyBoosterPopup(eBoosterType.DestroyStack);
         }
 
         public override void CheckUnlockBoosterButton()

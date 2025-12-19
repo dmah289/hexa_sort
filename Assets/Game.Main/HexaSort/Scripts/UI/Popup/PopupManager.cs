@@ -15,6 +15,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         [SerializeField] private List<PopupPanel> popups;
         
         [SerializeField] private UnlockBoosterPanel unlockBoosterPanel;
+        [SerializeField] private BuyBoosterPanel buyBoosterPanel;
 
         protected override void Awake()
         {
@@ -42,12 +43,17 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         {
             foreach(var milestone in ConstantKey.BoosterUnlockLevel)
             {
-                if (milestone.Value == LocalDataManager.LevelIndex)
+                if (milestone.Value == LocalDataManager.LevelIndex
+                    && !LocalDataManager.GetHasShownAndClaimedBoosterTutorial(milestone.Key))
                 {
                     unlockBoosterPanel.ShowUnlockBoosterPanel(milestone.Key);
                     break;
                 }
             }
+        }
+        public void ShowBuyBoosterPopup(eBoosterType boosterType)
+        {
+            buyBoosterPanel.ShowBuyBoosterPanel(boosterType);
         }
     }
 }

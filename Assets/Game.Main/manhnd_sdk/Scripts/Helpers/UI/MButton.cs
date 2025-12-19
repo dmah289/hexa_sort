@@ -18,7 +18,7 @@ namespace Framework.UI
         [SerializeField] protected float actionDelay;
         protected float lastClickTime;
         
-        [SerializeField] protected UnityEvent OnScaleAnimDone;
+        public UnityEvent OnScaleAnimDone;
 
         
         protected bool CanClick

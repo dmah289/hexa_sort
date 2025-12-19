@@ -1,4 +1,5 @@
 ﻿using Framework.UI;
+using Game.Main.HexaSort.Scripts.Managers;
 using HexaSort.UI.Loading.InGame;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
             ShowPanel();
             
             unlockBoosterPopup.SetupBoosterType(boosterType);
+            unlockBoosterPopup.ShowPopup();
         }
     }
 }

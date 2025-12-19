@@ -88,6 +88,19 @@ namespace Game.Main.HexaSort.Scripts.Managers
             get => PlayerPrefs.GetInt(ConstantKey.HasShownAndClaimedDestroyBoosterTutorialKey, 0) == 1;
             set => PlayerPrefs.SetInt(ConstantKey.HasShownAndClaimedDestroyBoosterTutorialKey, value ? 1 : 0);
         }
+        
+        public static bool GetHasShownAndClaimedBoosterTutorial(eBoosterType boosterType)
+        {
+            switch (boosterType)
+            {
+                case eBoosterType.Respawn:
+                    return HasShownAndClaimedRespawnBoosterTutorial;
+                case eBoosterType.DestroyStack:
+                    return HasShownAndClaimedDestroyBoosterTutorial;
+                default:
+                    return true;
+            }
+        }
 
         #endregion
     }

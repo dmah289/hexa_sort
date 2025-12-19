@@ -22,11 +22,20 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
 
         public void SetupBoosterType(eBoosterType boosterType)
         {
-            ShowPopup();
-            
             _boosterType = boosterType;
-            respawnGroup.SetActive(_boosterType == eBoosterType.Respawn);
-            destroyStackGroup.SetActive(_boosterType == eBoosterType.DestroyStack);
+            respawnGroup.SetActive(false);
+            destroyStackGroup.SetActive(false);
+            
+            if (_boosterType == eBoosterType.Respawn)
+            {
+                respawnGroup.SetActive(true);
+                LocalDataManager.HasShownAndClaimedRespawnBoosterTutorial = true;
+            }
+            else if (_boosterType == eBoosterType.DestroyStack)
+            {
+                destroyStackGroup.SetActive(true);
+                LocalDataManager.HasShownAndClaimedDestroyBoosterTutorial = true;
+            }
         }
 
         protected override UniTaskVoid HidePopupAsync()
