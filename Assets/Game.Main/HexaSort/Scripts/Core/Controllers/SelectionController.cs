@@ -6,9 +6,11 @@ using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
+using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace HexaSort.Scripts.Core.Controllers
 {
@@ -98,7 +100,7 @@ namespace HexaSort.Scripts.Core.Controllers
 
         #region Pick
 
-        private void HandlePicking()
+        private async UniTask HandlePicking()
         {
             Vector3 screenTouchPos = Input.touchCount > 0 
                 ? Input.GetTouch(0).position
@@ -118,11 +120,8 @@ namespace HexaSort.Scripts.Core.Controllers
                 else if (LevelManager.Instance.CurrentLevelState == eLevelState.IsUsingDestroyStackBooster)
                 {
                     HexCell cell = pickingHits[0].transform.GetComponentInParent<HexCell>();
-                    cell.CollectAllPieces().Forget();
-                    
-                    LevelManager.Instance.SetLevelState(eLevelState.Playing);
-                    InGamePage.Instance.ShowBoosterButtons();
-                    grid.SetStacksOnGridSelectableState(false);
+
+                    if(cell) OnDestroyStackBoosterUsed(cell).Forget();
                 }
             }
         }
@@ -200,6 +199,38 @@ namespace HexaSort.Scripts.Core.Controllers
             currTargetCell = null;
             currStack?.OnDropped(null);
             currStack = null;
+        }
+
+        #endregion
+
+        #region Destroy Stack Booster
+
+        private async UniTask OnDestroyStackBoosterUsed(HexCell cell)
+        {
+            await SpawnMagicWand(cell);
+            
+            await UniTask.Delay(1000);
+
+            cell.CollectAllPieces().Forget();
+                    
+            LevelManager.Instance.SetLevelState(eLevelState.Playing);
+            InGamePage.Instance.ShowBoosterButtons();
+            grid.SetStacksOnGridSelectableState(false);
+        }
+
+        private async UniTask SpawnMagicWand(HexCell cell)
+        {
+            MagicWand magicWand = await ObjectPooler.GetFromPool<MagicWand>
+                (PoolingType.MagicWand, destroyCancellationToken,InGamePage.Instance.selfRT);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                InGamePage.Instance.selfRT,
+                gameplayCam.WorldToScreenPoint(cell.CurrentStack.TopPiece.selfTransform.position),
+                null,
+                out Vector2 wandSpawnedPos);
+            magicWand.selfRT.anchoredPosition = wandSpawnedPos.Add(x:50, y:50);
+            magicWand.PlayAnim();
+            
+            Debug.Break();
         }
 
         #endregion

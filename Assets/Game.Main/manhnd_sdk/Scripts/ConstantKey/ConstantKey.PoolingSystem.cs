@@ -15,13 +15,14 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         
         public static readonly Dictionary<PoolingType, string> ADRESSABLE_POOLING_KEY = new()
         {
-            {PoolingType.HexCell, "pooling_hex_cell"},
-            {PoolingType.HexStack, "pooling_hex_stack"},
-            {PoolingType.HexPiece, "pooling_hex_piece"},
-            {PoolingType.Toast, "pooling_toast"},
-            {PoolingType.CoinFly, "pooling_coin_fly"},
-            {PoolingType.LifeFly, "pooling_life_fly"},
-            {PoolingType.StarTrail, "pooling_star_trail"}
+            { PoolingType.HexCell, "pooling_hex_cell" },
+            { PoolingType.HexStack, "pooling_hex_stack" },
+            { PoolingType.HexPiece, "pooling_hex_piece" },
+            { PoolingType.Toast, "pooling_toast" },
+            { PoolingType.CoinFly, "pooling_coin_fly" },
+            { PoolingType.LifeFly, "pooling_life_fly" },
+            { PoolingType.StarTrail, "pooling_star_trail" },
+            { PoolingType.MagicWand, "pooling_magic_wand" }
         };
     }
 }

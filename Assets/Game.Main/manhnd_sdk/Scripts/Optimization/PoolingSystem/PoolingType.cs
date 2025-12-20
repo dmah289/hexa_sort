@@ -13,6 +13,7 @@
         Toast,
         CoinFly,
         LifeFly,
-        StarTrail
+        StarTrail,
+        MagicWand
     }
 }

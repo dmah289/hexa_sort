@@ -24,7 +24,11 @@ namespace HexaSort.UI.Loading.InGame
 
         public override void OnBoosterButtonClicked()
         {
-            if (Amount <= 0) return;
+            if (Amount <= 0)
+            {
+                ToastManager.Instance.Show("Not enough Respawn booster!");
+                return;
+            }
             
             LocalDataManager.BoosterRespawnAmount--;
             tray.RespawnCurrentStacks().Forget();

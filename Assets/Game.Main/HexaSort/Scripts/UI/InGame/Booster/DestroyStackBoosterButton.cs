@@ -23,7 +23,11 @@ namespace HexaSort.UI.Loading.InGame
 
         public override void OnBoosterButtonClicked()
         {
-            if (Amount <= 0) return;
+            if (Amount <= 0)
+            {
+                ToastManager.Instance.Show("Not enough Destroy Stack booster!");
+                return;
+            }
             
             LocalDataManager.BoosterDestroyStackAmount--;
             ToastManager.Instance.Show("Choose a stack to destroy");

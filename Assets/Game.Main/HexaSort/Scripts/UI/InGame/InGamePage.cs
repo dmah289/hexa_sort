@@ -7,8 +7,16 @@ namespace HexaSort.UI.Loading.InGame
 {
     public class InGamePage : MonoSingleton<InGamePage>, IPage
     {
-        [SerializeField] private BoosterManager boosterManager;
+        public RectTransform selfRT;
         
+        [SerializeField] private BoosterManager boosterManager;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            selfRT = GetComponent<RectTransform>();
+        }
+
         public void Show()
         {
             if (!gameObject.activeSelf)
