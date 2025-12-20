@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using DG.Tweening;
 using Game.Main.HexaSort.Scripts.Managers;
+using HexaSort.UI.Loading.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -19,11 +20,8 @@ namespace HexaSort.UI.MainMenu.SharedUI
         }
     }
     
-    public class LifeSystem : MonoBehaviour, IEventBusListener
+    public class LifeSystem : MonoBehaviour
     {
-        public const int MAX_LIVES = 5;
-        private static string MaxLifeKey = "MAX";
-        
         [Header("Self Components")]
         [SerializeField] private Text counter;
         [SerializeField] private Text timer;
@@ -40,16 +38,6 @@ namespace HexaSort.UI.MainMenu.SharedUI
         [SerializeField] private bool isTimerRunning;
         [SerializeField] private float timeForOneLife;
         
-        public int CurLife
-        {
-            get => LocalDataManager.CurrentLife;
-            set
-            {
-                LocalDataManager.CurrentLife = Mathf.Clamp(value, 0, MAX_LIVES);
-                UpdateLifeCounterDisplay();
-            }
-        }
-        
         public float CurCountdown
         {
             get => countdownRemaining;
@@ -60,15 +48,13 @@ namespace HexaSort.UI.MainMenu.SharedUI
             }
         }
         
-        public bool CanPlay => CurLife > 0;
-        
         public RectTransform TargetRectTransform => counter.rectTransform;
 
         #region Unity APIs
 
         private void Awake()
         {
-            RegisterCallbacks();
+            EventBus<ResourceChangedEventDTO>.Register(onEventWithArgs: OnLifeCounterChanged);
         }
 
         private void OnEnable()
@@ -82,10 +68,11 @@ namespace HexaSort.UI.MainMenu.SharedUI
             {
                 CurCountdown -= Time.deltaTime;
 
-                if (countdownRemaining <= 0)
+                if (CurCountdown <= 0)
                 {
-                    CurLife++;
-                    if(CurLife < MAX_LIVES) CurCountdown = timeForOneLife;
+                    LocalDataManager.CurrentLife++;
+                    if(LocalDataManager.CurrentLife < ConstantKey.MAX_LIFE)
+                        CurCountdown = timeForOneLife;
                 }
             }
         }
@@ -108,46 +95,59 @@ namespace HexaSort.UI.MainMenu.SharedUI
         {
             if (!PlayerPrefs.HasKey(ConstantKey.LastSaveTimeKey))
             {
-                CurLife = MAX_LIVES;
                 CurCountdown = 0;
             }
             else
             {
-                DateTime savedTime = DateTime.Parse(LocalDataManager.LastLifeSaveTime);
-                TimeSpan elapsedTime = DateTime.Now - savedTime;
-                countdownRemaining = LocalDataManager.LastCountdownRemaining;
+                // Restore last countdown
+                CurCountdown = LocalDataManager.LastCountdownRemaining;
                 
+                // Calculate elapsed time
+                TimeSpan elapsedTime = DateTime.Now - DateTime.Parse(LocalDataManager.LastLifeSaveTime);
                 float totalSecondsElapsed = (float)elapsedTime.TotalSeconds;
-                int livesToAdd = Mathf.FloorToInt(totalSecondsElapsed / timeForOneLife);
-
-                CurLife = LocalDataManager.CurrentLife;
-                if (livesToAdd > 0)
-                {
-                    CurLife += livesToAdd;
-                    CurCountdown = timeForOneLife - totalSecondsElapsed % timeForOneLife;
-                }
-                else
+                
+                if (totalSecondsElapsed < CurCountdown)
                 {
                     CurCountdown -= totalSecondsElapsed;
                 }
+                else
+                {
+                    totalSecondsElapsed -= LocalDataManager.LastCountdownRemaining;
+                    LocalDataManager.CurrentLife++;
+                    
+                    int livesToAdd = Mathf.FloorToInt(totalSecondsElapsed / timeForOneLife);
+                    if (livesToAdd > 0)
+                    {
+                        LocalDataManager.CurrentLife += livesToAdd;
+                        CurCountdown = timeForOneLife - totalSecondsElapsed % timeForOneLife;
+                    }
+                    else
+                    {
+                        CurCountdown = timeForOneLife - totalSecondsElapsed;
+                    }
+                }
+                
             }
+            
+            UpdateLifeCounterDisplay();
         }
 
         private void UpdateLifeCounterDisplay()
         {
             counter.text = $"{LocalDataManager.CurrentLife}";
 
-            if (LocalDataManager.CurrentLife == MAX_LIVES)
+            if (LocalDataManager.CurrentLife == ConstantKey.MAX_LIFE)
             {
                 isTimerRunning = false;
-                timer.text = MaxLifeKey;
+                timer.text = "Max";
+                CurCountdown = timeForOneLife;
             }
             else isTimerRunning = true;
         }
 
         private void UpdateTimerDisplay()
         {
-            if (LocalDataManager.CurrentLife < MAX_LIVES)
+            if (LocalDataManager.CurrentLife < ConstantKey.MAX_LIFE)
             {
                 int minutes = Mathf.FloorToInt(countdownRemaining / 60);
                 int seconds = Mathf.FloorToInt(countdownRemaining % 60);
@@ -173,26 +173,11 @@ namespace HexaSort.UI.MainMenu.SharedUI
         {
             coinHitEffect.Play();
         }
-
-        #endregion
         
-        #region Event Bus
-
-        public void RegisterCallbacks()
+        public void OnLifeCounterChanged(ResourceChangedEventDTO dto)
         {
-            EventBus<LifeChangedEventDTO>.Register(onEventWithArgs: OnLifeChanged);
-        }
-        
-        public void OnLifeChanged(LifeChangedEventDTO dto)
-        {
-            CurLife += dto.amount;
-            
-            if(dto.amount < 0) CurCountdown = timeForOneLife;
-        }
-
-        public void DeregisterCallbacks()
-        {
-            EventBus<LifeChangedEventDTO>.Deregister(onEventWithArgs: OnLifeChanged);
+            if(dto.ResourceType == eResourceType.Life)
+                UpdateLifeCounterDisplay();
         }
 
         #endregion

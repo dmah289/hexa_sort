@@ -15,7 +15,7 @@ namespace HexaSort.UI.Loading.InGame
 
         public override int Amount => LocalDataManager.BoosterDestroyStackAmount;
 
-        protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
+        protected override void OnBoosterChanged(BoosterChangedDTO data)
         {
             if(data.BoosterType == eBoosterType.DestroyStack)
                 SetAmountText(data.NewAmount);

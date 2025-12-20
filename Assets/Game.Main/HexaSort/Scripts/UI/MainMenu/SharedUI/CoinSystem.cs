@@ -10,35 +10,33 @@ using UnityEngine.UI;
 
 namespace HexaSort.UI.Loading.MainMenu.SharedUI
 {
-    public struct CoinChangedEventDTO : IEventDTO
+    public enum eResourceType
     {
-        public float amount;
-        public CoinChangedEventDTO(float amount)
+        Coin,
+        Life
+    }
+    public struct ResourceChangedEventDTO : IEventDTO
+    {
+        public eResourceType ResourceType;
+        public float Amount;
+        
+        public ResourceChangedEventDTO(eResourceType resourceType, float amount)
         {
-            this.amount = amount;
+            ResourceType = resourceType;
+            Amount = amount;
         }
     }
     
-    public class CoinSystem : MonoBehaviour, IEventBusListener
+    public class CoinSystem : MonoBehaviour
     {
         [SerializeField] private Text counterTxt;
         [SerializeField] private FooterManager footer;
-        
-        public float CoinCounter
-        {
-            get => LocalDataManager.CoinAmount;
-            set
-            {
-                LocalDataManager.CoinAmount = value;
-                counterTxt.text = $"{LocalDataManager.CoinAmount}";
-            }
-        }
 
         #region Unity APIs
 
         private void Awake()
         {
-            RegisterCallbacks();
+            EventBus<ResourceChangedEventDTO>.Register(onEventWithArgs: OnCoinChanged);
         }
 
         private void OnEnable()
@@ -48,25 +46,14 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
 
         #endregion
         
-        #region Coin Change Event
+        #region Class Methods
 
-        public void RegisterCallbacks()
+        private void OnCoinChanged(ResourceChangedEventDTO data)
         {
-            EventBus<CoinChangedEventDTO>.Register(onEventWithArgs: OnCoinChanged);
+            if(data.ResourceType == eResourceType.Coin)
+                counterTxt.text = $"{data.Amount}";
         }
-
-        private void OnCoinChanged(CoinChangedEventDTO data)
-        {
-            CoinCounter += data.amount;
-        }
-
-        public void DeregisterCallbacks()
-        {
-            EventBus<CoinChangedEventDTO>.Deregister(onEventWithArgs: OnCoinChanged);
-        }
-
-        #endregion
-
+        
         public void OnCoinBtnClicked()
         {
             if (CanvasManager.Instance.CurScreen == eScreenType.MainMenu)
@@ -74,5 +61,9 @@ namespace HexaSort.UI.Loading.MainMenu.SharedUI
                 footer.ShowMenuShop();
             }
         }
+
+        #endregion
+
+        
     }
 }

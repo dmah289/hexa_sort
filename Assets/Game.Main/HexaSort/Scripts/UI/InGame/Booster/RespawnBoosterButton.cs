@@ -16,7 +16,7 @@ namespace HexaSort.UI.Loading.InGame
 
         public override int Amount => LocalDataManager.BoosterRespawnAmount;
 
-        protected override void OnBoosterUpdated(BoosterUpdatedDTO data)
+        protected override void OnBoosterChanged(BoosterChangedDTO data)
         {
             if(data.BoosterType == eBoosterType.Respawn)
                 SetAmountText(data.NewAmount);

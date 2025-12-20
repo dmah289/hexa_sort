@@ -18,9 +18,9 @@ namespace HexaSort.UI.Loading.InGame
             GiveUpPanel giveUpPanel = popupPanel as GiveUpPanel;
             if (giveUpPanel.FiredButton == eGiveUpButton.Replay)
             {
-                if (LocalDataManager.IsEnoughLives)
+                if (LocalDataManager.CanPlay)
                 {
-                    EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
+                    LocalDataManager.CurrentLife--;
                     LevelManager.Instance.CleanUpLevel();
                     CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
                 }
@@ -32,7 +32,7 @@ namespace HexaSort.UI.Loading.InGame
             }
             else if (giveUpPanel.FiredButton == eGiveUpButton.BackHome)
             {
-                EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
+                LocalDataManager.CurrentLife--;
                 LevelManager.Instance.CleanUpLevel();
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
             }

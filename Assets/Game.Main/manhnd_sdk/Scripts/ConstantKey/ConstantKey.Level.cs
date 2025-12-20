@@ -9,6 +9,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
     public static partial class ConstantKey
     {
         public const int MAX_LEVEL = 5;
+        public const int MAX_LIFE = 5;
 
         #region Camera
 

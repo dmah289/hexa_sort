@@ -38,7 +38,7 @@ namespace HexaSort.UI.Loading.InGame
         private void OnApplicationQuit()
         {
             if (LevelManager.Instance.CurrentLevelState == eLevelState.OutOfSpace)
-                EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
+                LocalDataManager.CurrentLife--;
         }
 
         public async UniTaskVoid ShowRevivePanel()
@@ -61,7 +61,7 @@ namespace HexaSort.UI.Loading.InGame
         public void OnCloseRevivePopupClicked()
         {
             LevelManager.Instance.CurrentLevelState = eLevelState.Failed;
-            EventBus<LifeChangedEventDTO>.Raise(new LifeChangedEventDTO(-1));
+            LocalDataManager.CurrentLife--;
 
             revivePanel.SetActive(false);
             failLevelPanel.gameObject.SetActive(true);
@@ -73,7 +73,6 @@ namespace HexaSort.UI.Loading.InGame
         public void OnContinueBtnFailClicked()
         {
             LevelManager.Instance.CleanUpLevel();
-            LevelManager.Instance.CurrentLevelState = eLevelState.None;
             
             CanvasManager.Instance.ShowLoadingScreen(eScreenType.MainMenu);
             gameObject.SetActive(false);

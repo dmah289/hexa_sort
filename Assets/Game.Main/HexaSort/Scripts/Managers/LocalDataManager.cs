@@ -1,5 +1,6 @@
 ﻿using HexaSort.Audio;
 using HexaSort.UI.Loading.InGame;
+using HexaSort.UI.Loading.MainMenu.SharedUI;
 using HexaSort.UI.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
@@ -9,26 +10,33 @@ namespace Game.Main.HexaSort.Scripts.Managers
 {
     public static class LocalDataManager
     {
-        public static float CoinAmount
+        public static int CoinAmount
         {
-            // TODO : restore coin count
-            //get => PlayerPrefs.GetFloat(ConstantKey.CoinCountKey, 0);
-            get => 1000;
-            set => PlayerPrefs.SetFloat(ConstantKey.CoinCountKey, value);
+            get => PlayerPrefs.GetInt(ConstantKey.CoinCountKey, 0);
+            set
+            {
+                PlayerPrefs.SetInt(ConstantKey.CoinCountKey, value);
+                EventBus<ResourceChangedEventDTO>
+                    .Raise(new ResourceChangedEventDTO(eResourceType.Coin, value));
+            }
+        }
+        
+        public static int CurrentLife
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.CurLifeKey, ConstantKey.MAX_LIFE);
+            set
+            {
+                value = Mathf.Min(value, ConstantKey.MAX_LIFE);
+                PlayerPrefs.SetInt(ConstantKey.CurLifeKey, value);
+                EventBus<ResourceChangedEventDTO>
+                    .Raise(new ResourceChangedEventDTO(eResourceType.Life, value));
+            }
         }
         
         public static int LevelIndex
         {
             get => PlayerPrefs.GetInt(ConstantKey.LevelIndexKey, 0) % ConstantKey.MAX_LEVEL;
             set => PlayerPrefs.SetInt(ConstantKey.LevelIndexKey, value % ConstantKey.MAX_LEVEL);
-        }
-        
-        public static int CurrentLife
-        {
-            // TODO : restore life system
-            // get => PlayerPrefs.GetInt(ConstantKey.CurLifeKey, LifeSystem.MAX_LIVES);
-            get => 5;
-            set => PlayerPrefs.SetInt(ConstantKey.CurLifeKey, value);
         }
         
         public static string LastLifeSaveTime
@@ -43,8 +51,8 @@ namespace Game.Main.HexaSort.Scripts.Managers
             set => PlayerPrefs.SetFloat(ConstantKey.LastCountdownRemainingKey, value);
         }
         
-        public static bool IsEnoughLives => CurrentLife > 0;
-        
+        public static bool CanPlay => CurrentLife > 0;
+
         public static bool GetSettingState(eSettingType type)
         {
             return PlayerPrefs.GetInt($"Setting_{type}", 1) == 1;
@@ -63,7 +71,7 @@ namespace Game.Main.HexaSort.Scripts.Managers
             set
             {
                 PlayerPrefs.SetInt(ConstantKey.BoosterRespawnKey, value);
-                EventBus<BoosterUpdatedDTO>.Raise(new BoosterUpdatedDTO(eBoosterType.Respawn, value));
+                EventBus<BoosterChangedDTO>.Raise(new BoosterChangedDTO(eBoosterType.Respawn, value));
             }
         }
         
@@ -73,7 +81,7 @@ namespace Game.Main.HexaSort.Scripts.Managers
             set
             {
                 PlayerPrefs.SetInt(ConstantKey.BoosterDestroyStackKey, value);
-                EventBus<BoosterUpdatedDTO>.Raise(new BoosterUpdatedDTO(eBoosterType.DestroyStack, value));
+                EventBus<BoosterChangedDTO>.Raise(new BoosterChangedDTO(eBoosterType.DestroyStack, value));
             }
         }
         

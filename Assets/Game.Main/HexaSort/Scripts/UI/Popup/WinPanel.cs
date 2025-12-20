@@ -68,7 +68,7 @@ namespace HexaSort.UI.Loading.InGame
         
         public async UniTask OnClaimBtnClickedAsync()
         {
-            EventBus<CoinChangedEventDTO>.Raise(new CoinChangedEventDTO(ConstantKey.WinCoinReward));
+            LocalDataManager.CoinAmount += ConstantKey.WinCoinReward;
             
             SpawnCoins();
             await CollectCoins();

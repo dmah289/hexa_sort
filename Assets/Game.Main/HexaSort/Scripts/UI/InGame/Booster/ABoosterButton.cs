@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace HexaSort.UI.Loading.InGame
 {
-    public struct BoosterUpdatedDTO : IEventDTO
+    public struct BoosterChangedDTO : IEventDTO
     {
         public eBoosterType BoosterType;
         public int NewAmount;
 
-        public BoosterUpdatedDTO(eBoosterType boosterType, int newAmount)
+        public BoosterChangedDTO(eBoosterType boosterType, int newAmount)
         {
             BoosterType = boosterType;
             NewAmount = newAmount;
@@ -48,10 +48,10 @@ namespace HexaSort.UI.Loading.InGame
         {
             base.Awake();
             
-            EventBus<BoosterUpdatedDTO>.Register(onEventWithArgs: OnBoosterUpdated);
+            EventBus<BoosterChangedDTO>.Register(onEventWithArgs: OnBoosterChanged);
         }
 
-        protected abstract void OnBoosterUpdated(BoosterUpdatedDTO data);
+        protected abstract void OnBoosterChanged(BoosterChangedDTO data);
         public abstract int Amount { get; }
         public abstract void OnBoosterButtonClicked();
         public abstract void OnAddBoosterButtonClicked();

@@ -36,7 +36,7 @@ namespace HexaSort.UI.MainMenu.Home
         
         public void OnPlayBtnClicked()
         {
-            if (lifeSystem.CanPlay)
+            if (LocalDataManager.CanPlay)
             {
                 CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
             }

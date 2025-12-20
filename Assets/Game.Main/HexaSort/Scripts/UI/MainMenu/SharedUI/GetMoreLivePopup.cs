@@ -3,10 +3,8 @@ using DG.Tweening;
 using Game.Main.HexaSort.Scripts.Managers;
 using manhnd_sdk.UITools.Toast;
 using HexaSort.UI.Loading.MainMenu.Home;
-using HexaSort.UI.Loading.MainMenu.SharedUI;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
-using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.UI.MainMenu.SharedUI
@@ -24,10 +22,8 @@ namespace HexaSort.UI.MainMenu.SharedUI
         {
             if (LocalDataManager.CoinAmount >= ConstantKey.BuyLivePrice)
             {
-                EventBus<CoinChangedEventDTO>.Raise(
-                    new CoinChangedEventDTO(-ConstantKey.BuyLivePrice));
-                EventBus<LifeChangedEventDTO>.Raise(
-                    new LifeChangedEventDTO(1));
+                LocalDataManager.CoinAmount -= ConstantKey.BuyLivePrice;
+                LocalDataManager.CurrentLife++;
                 
                 HidePopup();
                 
