@@ -63,7 +63,8 @@ namespace HexaSort.Core.Entities.Grid
                     PoolingType.HexStack, destroyCancellationToken, parentCell.selfTransform);
                 await hexStack.OnSpawningOnCell(parentCell, packedStackData);
                 
-                transform.localPosition = transform.localPosition.With(z: -hexStack.Height - 0.1f);
+                transform.position = hexStack.TopPiece.selfTransform.position
+                    .With(z: -hexStack.Height - 0.1f);
             }
         }
 

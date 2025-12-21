@@ -15,23 +15,20 @@ MonoBehaviour:
   bundles:
   - bundleType: 0
     title: Life Bundle
-    price: 39
+    price: 29
     items:
     - itemInBundleType: 0
       sprite: {fileID: 21300000, guid: e4a9f23adb221cf41bf9476f6313d8ce, type: 3}
       amount: 3
   - bundleType: 1
     title: Small Bundle
-    price: 49
+    price: 39
     items:
     - itemInBundleType: 0
       sprite: {fileID: 21300000, guid: e4a9f23adb221cf41bf9476f6313d8ce, type: 3}
       amount: 2
     - itemInBundleType: 1
       sprite: {fileID: 21300000, guid: d54a17f221f94ee408fc4c42dc4ff443, type: 3}
-      amount: 2
-    - itemInBundleType: 2
-      sprite: {fileID: 21300000, guid: d7665190fe6d7ad4281ec0df5cf4d91d, type: 3}
       amount: 2
   - bundleType: 2
     title: Big Bundle
