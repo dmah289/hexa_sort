@@ -34,6 +34,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         public void DisableAllPopups()
         {
             loosePanel.gameObject.SetActive(false);
+            winPanel.gameObject.SetActive(false);
             for (int i = 0; i < popups.Count; i++)
             {
                 popups[i].gameObject.SetActive(false);
@@ -51,6 +52,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
                 }
             }
         }
+        
         public void ShowBuyBoosterPopup(eBoosterType boosterType)
         {
             buyBoosterPanel.ShowBuyBoosterPanel(boosterType);

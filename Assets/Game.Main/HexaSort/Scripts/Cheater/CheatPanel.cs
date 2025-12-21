@@ -11,8 +11,12 @@ namespace Game.Main.HexaSort.Scripts.Cheater
         public void OnCheatLevelEntered(string value)
         {
             LocalDataManager.LevelIndex = int.Parse(value);
-            LevelManager.Instance.CleanUpLevel();
-            CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
+            
+            if(LevelManager.Instance.CurrentLevelState != eLevelState.None)
+            {
+                LevelManager.Instance.CleanUpLevel();
+                CanvasManager.Instance.ShowLoadingScreen(eScreenType.InGame);
+            }
         }
         
         public void OnCheatLifeEntered(string value)

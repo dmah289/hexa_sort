@@ -9,7 +9,7 @@ namespace HexaSort.UI.MainMenu.Shop
 {
     public enum eItemInBundleType
     {
-        Life,
+        Lives,
         Respawn,
         DestroyStack
     }
@@ -70,7 +70,7 @@ namespace HexaSort.UI.MainMenu.Shop
         }
     }
     
-    [CreateAssetMenu(fileName = "shop_bundles", menuName = "Shop/Shop Bundles Data")]
+    [CreateAssetMenu(fileName = "shop_bundles_data", menuName = "Shop/Shop Bundles Data")]
     public class ShopBundlesData : ScriptableObject
     {
         public ShopBundleData[] bundles;
