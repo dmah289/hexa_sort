@@ -308,11 +308,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835f3ca6e896466690bc701fb115ba96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgClickHandler: {fileID: 0}
-  selfRectTransform: {fileID: 0}
-  popUpImg: {fileID: 0}
+  popupPanel: {fileID: 0}
+  selfRT: {fileID: 0}
+  popupImg: {fileID: 0}
   shownPos: {x: 0, y: 0}
   lifeIcon: {fileID: 5094362461508929544}
+  lifePriceText: {fileID: 6834745202171703931}
   lifeSystem: {fileID: 0}
 --- !u!1 &874078510954975811
 GameObject:
@@ -1292,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb8b3a701d84f798fc331204e4a084b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfRectTransform: {fileID: 0}
+  selfRT: {fileID: 0}
   targetScale: 1.1
   animDuration: 0.1
   clickIntervalThreshold: 0
@@ -1939,7 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb8b3a701d84f798fc331204e4a084b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfRectTransform: {fileID: 0}
+  selfRT: {fileID: 0}
   targetScale: 1.1
   animDuration: 0.1
   clickIntervalThreshold: 0

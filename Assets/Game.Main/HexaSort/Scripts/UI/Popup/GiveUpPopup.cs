@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
+using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.Managers.Level;
 using HexaSort.UI.Loading.BaseSystem;
 using HexaSort.UI.MainMenu.SharedUI;
@@ -27,6 +28,7 @@ namespace HexaSort.UI.Loading.InGame
                 else
                 {
                     ToastManager.Instance.Show(ConstantKey.Toast_InsufficentLives);
+                    PopupManager.Instance.ShowGetMoreLifePopup();
                     return;
                 }
             }

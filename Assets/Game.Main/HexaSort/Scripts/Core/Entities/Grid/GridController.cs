@@ -49,6 +49,23 @@ namespace HexaSort.Core.Entities.Grid
             }
         }
         
+        public bool IsEmptyGrid
+        {
+            get
+            {
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (GridCells[i, j] && GridCells[i, j].IsOccupied)
+                            return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+        
         #region Unity APIs
 
         private void Awake()

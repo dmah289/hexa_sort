@@ -29,6 +29,12 @@ namespace HexaSort.UI.Loading.InGame
                 return;
             }
             
+            if (grid.IsEmptyGrid)
+            {
+                ToastManager.Instance.Show("No stacks to destroy!");
+                return;
+            }
+            
             LocalDataManager.BoosterDestroyStackAmount--;
             ToastManager.Instance.Show("Choose a stack to destroy");
             LevelManager.Instance.CurrentLevelState = eLevelState.IsUsingDestroyStackBooster;

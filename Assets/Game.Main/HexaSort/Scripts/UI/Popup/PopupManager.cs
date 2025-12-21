@@ -16,6 +16,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         
         [SerializeField] private UnlockBoosterPanel unlockBoosterPanel;
         [SerializeField] private BuyBoosterPanel buyBoosterPanel;
+        [SerializeField] private PopupPanel getMoreLifePanel;
 
         protected override void Awake()
         {
@@ -53,6 +54,11 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         public void ShowBuyBoosterPopup(eBoosterType boosterType)
         {
             buyBoosterPanel.ShowBuyBoosterPanel(boosterType);
+        }
+        
+        public void ShowGetMoreLifePopup()
+        {
+            getMoreLifePanel.ShowPanel();
         }
     }
 }

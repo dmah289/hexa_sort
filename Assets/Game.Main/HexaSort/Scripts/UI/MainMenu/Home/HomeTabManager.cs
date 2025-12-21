@@ -1,10 +1,13 @@
+using System;
 using DG.Tweening;
 using Framework.UI;
 using Game.Main.HexaSort.Scripts.Managers;
+using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.Managers.Level;
 using HexaSort.UI.MainMenu.SharedUI;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.BaseSystem;
+using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +19,8 @@ namespace HexaSort.UI.MainMenu.Home
         [SerializeField] private Text[] levelIndexTexts;
         
         [Header("References")]
-        [SerializeField] private LoadingLevel loadingLevel;
         [SerializeField] private LifeSystem lifeSystem;
-        [SerializeField] private PopupPanel getMoreLifePanel;
-
+        
         private void OnEnable()
         {
             SetupLevelPath();
@@ -43,7 +44,7 @@ namespace HexaSort.UI.MainMenu.Home
             else
             {
                 lifeSystem.FlashOnOutOfLife();
-                getMoreLifePanel.ShowPanel();
+                PopupManager.Instance.ShowGetMoreLifePopup();
             }
         }
     }

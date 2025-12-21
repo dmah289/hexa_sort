@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 2882469266977654601}
   - component: {fileID: 5973887742963269717}
   m_Layer: 5
-  m_Name: buy_booster_respawn_popup
+  m_Name: buy_booster_popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
