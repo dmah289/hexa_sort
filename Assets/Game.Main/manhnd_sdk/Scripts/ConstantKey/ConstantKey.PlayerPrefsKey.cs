@@ -2,6 +2,9 @@
 {
     public static partial class ConstantKey
     {
+        public const string HasShownWoodMechanicTutorialKey = "HasShownWoodMechanicTutorialKey";
+        public const string HasShownPackedMechanicTutorialKey = "HasShownPackedMechanicTutorialKey";
+
         public static string LevelIndexKey = "LevelIndex";
         public static string CoinCountKey = "CoinCount";
         

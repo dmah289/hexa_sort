@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HexaSort.UI.Loading.InGame;
+using LevelEditor.LevelData;
 using UnityEngine;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
@@ -8,7 +9,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
 {
     public static partial class ConstantKey
     {
-        public const int MAX_LEVEL = 5;
+        public const int MAX_LEVEL = 10;
         public const int MAX_LIFE = 5;
 
         #region Camera
@@ -30,6 +31,12 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         {
             { eBoosterType.Respawn, 1 },
             { eBoosterType.DestroyStack, 3 }
+        };
+        
+        public static Dictionary<eMechanicsType, int> MechanicsUnlockLevel = new()
+        {
+            { eMechanicsType.Wood, 4 },
+            { eMechanicsType.Packed, 9 }
         };
     }
 }

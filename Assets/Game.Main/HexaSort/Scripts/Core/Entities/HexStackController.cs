@@ -76,7 +76,7 @@ namespace HexaSort.Core.Entities
                     selfTransform
                 );
                 
-                int colorIdx = Random.Range(0, 5);
+                int colorIdx = Random.Range(2, 4);
                 piece.ColorType = (ColorType)colorIdx;
 
                 Vector3 spawnedPos = (i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);

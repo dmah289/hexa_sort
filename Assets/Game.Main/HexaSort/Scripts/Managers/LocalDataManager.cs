@@ -2,6 +2,7 @@
 using HexaSort.UI.Loading.InGame;
 using HexaSort.UI.Loading.MainMenu.SharedUI;
 using HexaSort.UI.MainMenu.SharedUI;
+using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
@@ -97,6 +98,18 @@ namespace Game.Main.HexaSort.Scripts.Managers
             set => PlayerPrefs.SetInt(ConstantKey.HasShownAndClaimedDestroyBoosterTutorialKey, value ? 1 : 0);
         }
         
+        public static bool HasShownWoodMechanicTutorial
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.HasShownWoodMechanicTutorialKey, 0) == 1;
+            set => PlayerPrefs.SetInt(ConstantKey.HasShownWoodMechanicTutorialKey, value ? 1 : 0);
+        }
+        
+        public static bool HasShownPackedMechanicTutorial
+        {
+            get => PlayerPrefs.GetInt(ConstantKey.HasShownPackedMechanicTutorialKey, 0) == 1;
+            set => PlayerPrefs.SetInt(ConstantKey.HasShownPackedMechanicTutorialKey, value ? 1 : 0);
+        }
+        
         public static bool GetHasShownAndClaimedBoosterTutorial(eBoosterType boosterType)
         {
             switch (boosterType)
@@ -105,6 +118,19 @@ namespace Game.Main.HexaSort.Scripts.Managers
                     return HasShownAndClaimedRespawnBoosterTutorial;
                 case eBoosterType.DestroyStack:
                     return HasShownAndClaimedDestroyBoosterTutorial;
+                default:
+                    return true;
+            }
+        }
+        
+        public static bool GetHasShownMechanicTutorial(eMechanicsType mechanicType)
+        {
+            switch (mechanicType)
+            {
+                case eMechanicsType.Wood:
+                    return HasShownWoodMechanicTutorial;
+                case eMechanicsType.Packed:
+                    return HasShownPackedMechanicTutorial;
                 default:
                     return true;
             }

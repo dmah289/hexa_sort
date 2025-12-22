@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3402505215116063111}
   m_Layer: 5
-  m_Name: destroy_stack_group
+  m_Name: packed_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3402505215116063111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3422935059846421811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -57}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &302732242721700382
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Destroy stack
+  m_text: Packed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3a1f5825265889b4e815b51e882ce1a4, type: 2}
@@ -130,8 +130,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5608365805992263718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -237,9 +237,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Respawn
-
-'
+  m_text: Wood
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 3a1f5825265889b4e815b51e882ce1a4, type: 2}
@@ -266,8 +264,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -319,7 +317,7 @@ GameObject:
   - component: {fileID: 1349100820670530037}
   - component: {fileID: 1536281591974785962}
   - component: {fileID: 3534498506803228311}
-  - component: {fileID: 3791902797901761272}
+  - component: {fileID: 6713249298633247832}
   m_Layer: 5
   m_Name: popup
   m_TagString: Untagged
@@ -387,7 +385,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3791902797901761272
+--- !u!114 &6713249298633247832
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -396,16 +394,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2552133726804348657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4b956230bb545d6b0b4a5ec563d7fae, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e6b275f59cc4219960ea34b812247a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   popupPanel: {fileID: 0}
   selfRT: {fileID: 0}
   popupImg: {fileID: 0}
   shownPos: {x: 0, y: 44}
-  _boosterType: 0
-  respawnGroup: {fileID: 5098336171348795840}
-  destroyStackGroup: {fileID: 497831157998991422}
+  _mechanicType: 0
+  title: {fileID: 2648857690035635014}
+  woodGroup: {fileID: 5098336171348795840}
+  packedGroup: {fileID: 497831157998991422}
 --- !u!1 &2877056270911621783
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,9 +417,9 @@ GameObject:
   - component: {fileID: 1981111957029534679}
   - component: {fileID: 8374783056694879757}
   - component: {fileID: 4440011998641965095}
-  - component: {fileID: 2395303935465318701}
+  - component: {fileID: 2462723865883648129}
   m_Layer: 5
-  m_Name: unlock_respawn_booster_popup
+  m_Name: unlock_mechanic_popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +495,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2395303935465318701
+--- !u!114 &2462723865883648129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -505,14 +504,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2877056270911621783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03106a1d4032407487de4b31256a147b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e146342aceb45ab883b6b7aaa6a98f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selfImg: {fileID: 0}
   OnBackgroundHiden:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3791902797901761272}
+      - m_Target: {fileID: 6713249298633247832}
         m_TargetAssemblyTypeName: HexaSort.UI.Loading.MainMenu.Home.APopup, Assembly-CSharp
         m_MethodName: HidePopup
         m_Mode: 1
@@ -527,7 +526,7 @@ MonoBehaviour:
   OnBackgroundShown:
     m_PersistentCalls:
       m_Calls: []
-  unlockBoosterPopup: {fileID: 0}
+  unlockMechanicPopup: {fileID: 6713249298633247832}
 --- !u!1 &3353754363301698074
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,8 +561,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: -100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8626941700895804003
 CanvasRenderer:
@@ -593,7 +592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Clear tray and respawn stacks
+  m_text: Collect stacks on neighboring cells to break wooden blocks
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: -610807876864112549, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
@@ -620,7 +619,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.9
+  m_fontSize: 43.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -727,7 +726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Claim
+  m_text: Confirm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e262fa5429423e746bbf6a4ce8b16725, type: 2}
@@ -809,7 +808,7 @@ GameObject:
   - component: {fileID: 4638090545157981581}
   - component: {fileID: 813619769330533921}
   m_Layer: 5
-  m_Name: ClaimButton
+  m_Name: confirm_btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -893,7 +892,7 @@ MonoBehaviour:
   OnScaleAnimDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2395303935465318701}
+      - m_Target: {fileID: 2462723865883648129}
         m_TargetAssemblyTypeName: Framework.UI.PopupPanel, Assembly-CSharp
         m_MethodName: HidePanel
         m_Mode: 1
@@ -915,12 +914,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5135173005665475976}
   m_Layer: 5
-  m_Name: respawn_group
+  m_Name: wood_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5135173005665475976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -977,8 +976,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 59}
+  m_SizeDelta: {x: -200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8083258106482429997
 CanvasRenderer:
@@ -1008,7 +1007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose a stack to destroy
+  m_text: Collect enough required pieces to unlock the cell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: -610807876864112549, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
@@ -1035,7 +1034,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.9
+  m_fontSize: 43.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1111,8 +1110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -30}
-  m_SizeDelta: {x: -200, y: 100}
+  m_AnchoredPosition: {x: -20, y: -30}
+  m_SizeDelta: {x: -240, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3251688010305737212
 CanvasRenderer:
@@ -1142,7 +1141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Booster Unlocked
+  m_text: Mechanic Packed Unlock
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
   m_sharedMaterial: {fileID: -610807876864112549, guid: 846464aa5b69a0542b9e67f44f0ca175, type: 2}
@@ -1169,15 +1168,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85
+  m_fontSize: 62.85
   m_fontSizeBase: 85
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 85
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 4096
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -4
   m_wordSpacing: 0
@@ -1305,7 +1304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5294570412637283015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1315,15 +1314,15 @@ RectTransform:
   m_GameObject: {fileID: 8048276554817851381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5135173005665475976}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 693, y: 358}
+  m_AnchoredPosition: {x: 0, y: 56}
+  m_SizeDelta: {x: 321, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7897551765390601565
 CanvasRenderer:
@@ -1353,7 +1352,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c89b7765975fe145ab205fde0f73e74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 068d3f63ddfbf6f489f1446ee57d8948, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1459,7 +1458,7 @@ MonoBehaviour:
   OnScaleAnimDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2395303935465318701}
+      - m_Target: {fileID: 2462723865883648129}
         m_TargetAssemblyTypeName: Framework.UI.PopupPanel, Assembly-CSharp
         m_MethodName: HidePanel
         m_Mode: 1
@@ -1488,7 +1487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6604089834588345726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1498,15 +1497,15 @@ RectTransform:
   m_GameObject: {fileID: 8564216777800911367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3402505215116063111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 693, y: 358}
+  m_AnchoredPosition: {x: 0, y: 53}
+  m_SizeDelta: {x: 471, y: 379}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5204763887814095260
 CanvasRenderer:
@@ -1536,7 +1535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c89b7765975fe145ab205fde0f73e74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a3f014be2765bd4391cddb2dff75688, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

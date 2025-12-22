@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bc337a58b29403ba82d3f8b68d11fda, type: 3}
-  m_Name: lv_1
+  m_Name: lv_8
   m_EditorClassIdentifier: 
   Width: 5
   Height: 5
@@ -22,7 +22,19 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
+    IsActive: 0
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
     IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -87,12 +99,6 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 50
-      ColorLayers: []
   - MechanicsType: 0
     IsActive: 1
     HasWood: 0
@@ -111,15 +117,9 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 0
+  - MechanicsType: 1
     IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
+    HasWood: 1
     packedStack:
       UnlockValue: 0
       ColorLayers: []
@@ -168,3 +168,5 @@ MonoBehaviour:
   Goal:
   - type: 0
     targetAmount: 50
+  - type: 1
+    targetAmount: 1

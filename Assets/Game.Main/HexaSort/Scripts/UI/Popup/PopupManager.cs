@@ -15,6 +15,7 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
         [SerializeField] private List<PopupPanel> popups;
         
         [SerializeField] private UnlockBoosterPanel unlockBoosterPanel;
+        [SerializeField] private UnlockMechanicPanel unlockMechanicPanel;
         [SerializeField] private BuyBoosterPanel buyBoosterPanel;
         [SerializeField] private PopupPanel getMoreLifePanel;
 
@@ -49,6 +50,18 @@ namespace Game.Main.HexaSort.Scripts.UI.Popup
                     && !LocalDataManager.GetHasShownAndClaimedBoosterTutorial(milestone.Key))
                 {
                     unlockBoosterPanel.ShowUnlockBoosterPanel(milestone.Key);
+                }
+            }
+        }
+        
+        public void CheckShowUnlockMechanicPopup()
+        {
+            foreach(var milestone in ConstantKey.MechanicsUnlockLevel)
+            {
+                if (milestone.Value == LocalDataManager.LevelIndex
+                    && !LocalDataManager.GetHasShownMechanicTutorial(milestone.Key))
+                {
+                    unlockMechanicPanel.ShowUnlockMechanicPanel(milestone.Key);
                 }
             }
         }
