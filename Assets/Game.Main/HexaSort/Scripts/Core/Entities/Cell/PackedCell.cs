@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities;
+using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Scripts.Core.Controllers;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
@@ -81,15 +82,13 @@ namespace HexaSort.Core.Entities.Grid
         {
             if (data.goalType == eLevelGoalType.Piece && data.totalCollectedAmount >= UnlockValue)
             {
-                // gameObject.SetActive(false);
-                
-                lockIcon.DOShakeRotation(0.5f, 5f, 20)
-                    .SetEase(Ease.InOutSine)
+                lockIcon.DOShakeRotation(1f, new Vector3(0,0,28f), 31)
+                    .SetEase(Ease.OutFlash)
                     .OnComplete(() =>
                     {
-                        if(!parentCell.IsOccupied)
-                            parentCell.Selectable = true;
-                        else MergeController.Instance.HandleCheckingMerge(parentCell).Forget();
+                        parentCell.Selectable = true;
+                        if(parentCell.IsOccupied)
+                            MergeController.Instance.HandleCheckingMerge(parentCell).Forget();
                         
                         gameObject.SetActive(false);
                     });

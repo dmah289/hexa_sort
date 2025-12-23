@@ -27,6 +27,10 @@ namespace HexaSort.Core.Entities
         [SerializeField] private int idxOnTray;
         [SerializeField] private bool sfxSpawnedPlayed;
         
+        // Cache for smooth dragging - avoid allocation
+        private Vector3 _dragVelocity;
+        private const float DRAG_SMOOTH_TIME = 0.05f; // Điều chỉnh để mượt hơn (0.05-0.1f)
+        
         #region Properties
         
         public ColorType ColorOnTop => pieces.Count > 0 ? pieces[^1].ColorType : default;
@@ -147,6 +151,7 @@ namespace HexaSort.Core.Entities
             parentCell = null;
             isOnGrid = false;
             sfxSpawnedPlayed = false;
+            _dragVelocity = Vector3.zero; // Reset velocity
             
             selfTransform.Reset();
         }
@@ -156,6 +161,7 @@ namespace HexaSort.Core.Entities
             idxOnTray = -1;
             parentCell = null;
             isOnGrid = false;
+            _dragVelocity = Vector3.zero; // Reset velocity
             
             for (int i = pieces.Count - 1; i >= 0; i--)
             {
@@ -170,7 +176,12 @@ namespace HexaSort.Core.Entities
 
         public void OnDragged(Vector3 targetPos)
         {
-            selfTransform.position = Vector3.Lerp(selfTransform.position, targetPos, Time.deltaTime * 20);
+            selfTransform.position = Vector3.SmoothDamp(
+                selfTransform.position, 
+                targetPos, 
+                ref _dragVelocity, 
+                DRAG_SMOOTH_TIME
+            );
         }
 
         public void OnDropped(HexCell targetCell)

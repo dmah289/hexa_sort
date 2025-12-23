@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Audio;
@@ -24,6 +26,19 @@ namespace HexaSort.Core.Entities.Grid.Piece
         None
     }
     
+    // Cache animation state
+    public struct OverturnAnimationState
+    {
+        public Vector3 startPos;
+        public Vector3 targetPos;
+        public Vector3 rotationAxis;
+        public float jumpHeight;
+        public float elapsedTime;
+        public float moveDuration;
+        public float rotationDuration;
+        public float rotationDelay;
+    }
+    
     public class HexPieceController : MonoBehaviour, IPoolableObject
     {
         public static float ScaleDuration = 0.2f;
@@ -37,6 +52,10 @@ namespace HexaSort.Core.Entities.Grid.Piece
         
         [Header("Config")]
         [SerializeField] private ColorType colorType;
+        
+        [Header("----- Anim State -----")]
+        [SerializeField] private bool _isOverturnAnimating;
+        private OverturnAnimationState _overturnState;
 
         public bool Selectable
         {
@@ -61,52 +80,83 @@ namespace HexaSort.Core.Entities.Grid.Piece
             // Not all pieces are selectable when spawned
             selfTransform.localScale = Vector3.one * ConstantKey.INITIAL_PIECE_SCALE;
             Selectable = false;
+
+            _isOverturnAnimating = false;
         }
 
-        public void OnReturnToPool() { }
+        public void OnReturnToPool()
+        {
+            _isOverturnAnimating = false;
+        }
 
         #endregion
-
-        // TODO : Using DOTS + dynamic parabola height base on max height of 2 stacks
+        
+        private static float EaseOutFlash(float t)
+        {
+            // Tương tự Ease.OutFlash của DOTween
+            return Mathf.Sin(t * Mathf.PI * 0.5f);
+        }
+        
         public void OverturnToLocalPos(Vector3 targetLocalPos, Vector3 overturnDirection, float maxHeight)
         {
-            selfTransform.DOKill();
-    
-            Sequence sequence = DOTween.Sequence();
+            _overturnState.startPos = selfTransform.localPosition;
+            _overturnState.targetPos = targetLocalPos;
+            _overturnState.rotationAxis = Vector3.Cross(Vector3.back, overturnDirection).normalized;
+            _overturnState.jumpHeight = maxHeight + JumpOffset;
+            _overturnState.elapsedTime = 0f;
+            _overturnState.moveDuration = OverturnDuration;
+            _overturnState.rotationDuration = 0.9f * OverturnDuration;
+            _overturnState.rotationDelay = 0.1f * OverturnDuration;
 
-            Vector3 start = selfTransform.localPosition;
-            Vector3 rotationAxis = Vector3.Cross(Vector3.back, overturnDirection).normalized;
-            float jumpHeight = maxHeight + JumpOffset;
-
-            // Parabola movement
-            sequence.Join(DOTween.To(() => 0f, t =>
-            {
-                Vector3 posOnLinearPath = Vector3.Lerp(start, targetLocalPos, t);
-                
-                // Parabola formula: 4h * t * (1 - t) - max at height h when t = 0.5
-                float parabola = 4f * jumpHeight * t * (1f - t);
-                selfTransform.localPosition = posOnLinearPath + Vector3.back * parabola;
-            }, 1f, OverturnDuration).SetEase(Ease.OutFlash));
-
-            // Rotation movement
-            sequence.Join(DOTween.To(() => 0f, angle =>
-            {
-                selfTransform.localRotation = Quaternion.AngleAxis(angle, rotationAxis);
-            }, 180f, 0.9f * OverturnDuration)
-                .SetEase(Ease.OutFlash)
-                .SetDelay(0.1f * OverturnDuration));
-
-            void SetEndState()
-            {
-                selfTransform.localPosition = targetLocalPos;
-                selfTransform.localRotation = Quaternion.identity;
-            }
-            sequence.OnComplete(SetEndState).OnKill(SetEndState);
+            _isOverturnAnimating = true;
         }
+        
+        private void Update()
+        {
+            if (!_isOverturnAnimating) return;
 
+            OverturnAnimationState state = _overturnState;
+            state.elapsedTime += Time.deltaTime;
+
+            float normalizedTime = Mathf.Clamp01(state.elapsedTime / state.moveDuration);
+            float easedT = EaseOutFlash(normalizedTime);
+
+            // Optimized interpolation: manual per-component lerp to avoid extra Mathf calls inside Vector3.Lerp
+            // Cache locals to reduce struct field access
+            Vector3 start = state.startPos;
+            Vector3 target = state.targetPos;
+            Vector3 delta = target - start;
+            Vector3 currentPos;
+            currentPos.x = start.x + delta.x * easedT;
+            currentPos.y = start.y + delta.y * easedT;
+            currentPos.z = start.z + delta.z * easedT;
+
+            float parabola = 4f * state.jumpHeight * easedT * (1f - easedT);
+            currentPos += Vector3.back * parabola;
+            selfTransform.localPosition = currentPos;
+
+            if (state.elapsedTime > state.rotationDelay)
+            {
+                float rotationNormalizedTime = Mathf.Clamp01((state.elapsedTime - state.rotationDelay) / state.rotationDuration);
+                float angle = EaseOutFlash(rotationNormalizedTime) * 180f;
+                Quaternion currentRot = Quaternion.AngleAxis(angle, state.rotationAxis);
+                selfTransform.localRotation = currentRot;
+            }
+
+            if (state.elapsedTime >= state.moveDuration)
+            {
+                selfTransform.localPosition = state.targetPos;
+                selfTransform.localRotation = Quaternion.identity;
+                _isOverturnAnimating = false;
+            }
+
+            _overturnState = state;
+        }
         
         public void OnCollected()
         {
+            _isOverturnAnimating = false;
+            
             AudioManager.Instance.PlaySfx(ConstantKey.SFX_PIECE_COLLECTED);
             selfTransform.DOKill();
             selfTransform.DOScale(Vector3.one * 0.2f, ScaleDuration)
@@ -115,3 +165,4 @@ namespace HexaSort.Core.Entities.Grid.Piece
         }
     }
 }
+

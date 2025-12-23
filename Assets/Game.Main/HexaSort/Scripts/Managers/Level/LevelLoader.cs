@@ -15,23 +15,23 @@ namespace HexaSort.Managers.Level
         [SerializeField] private GoalTrackerManager goalTrackerManager;
         
         [Header("Level Data")]
-        [SerializeField] private LevelCurveVersion currLevelCurveVersion;
+        [SerializeField] private LevelOrderVersion currLevelOrderVersion;
         
         public async UniTask<int> GetLevelGoalCount()
         {
-            LevelDataSO currLevelData = currLevelCurveVersion.levelDatas[LocalDataManager.LevelIndex];
+            LevelDataSO currLevelData = currLevelOrderVersion.levelDatas[LocalDataManager.LevelIndex];
             return currLevelData.Goal.Length;
         }
         
         public async UniTask<LevelDataSO> GetCurrLevelData()
         {
-            if (currLevelCurveVersion == null)
+            if (currLevelOrderVersion == null)
             {
-                currLevelCurveVersion = await Addressables.LoadAssetAsync<LevelCurveVersion>(ConstantKey.LevelCurveVersion)
+                currLevelOrderVersion = await Addressables.LoadAssetAsync<LevelOrderVersion>(ConstantKey.LevelCurveVersion)
                     .ToUniTask(cancellationToken: destroyCancellationToken);
             }
 
-            return currLevelCurveVersion.levelDatas[LocalDataManager.LevelIndex];
+            return currLevelOrderVersion.levelDatas[LocalDataManager.LevelIndex];
         }
         
         public async UniTask SetupLevel(GridController grid)

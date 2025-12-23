@@ -14,7 +14,6 @@ namespace manhnd_sdk.Scripts.ExtensionMethods
         {
             Vector2 margin = viewportMargin ?? Vector2.zero;
             
-            // TODO : Rewrite logic for 2 camera cases
             if (camera.orthographic)
             {
                 float height = 2f * camera.orthographicSize + margin.y;
