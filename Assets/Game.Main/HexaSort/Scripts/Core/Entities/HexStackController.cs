@@ -79,17 +79,17 @@ namespace HexaSort.Core.Entities
                     destroyCancellationToken,
                     selfTransform
                 );
-                
+
                 int colorIdx = Random.Range(2, 4);
                 piece.ColorType = (ColorType)colorIdx;
 
                 Vector3 spawnedPos = (i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
                 piece.transform.localPosition = spawnedPos;
-                
+
                 pieces.Add(piece);
             }
             Selectable = true;
-            
+
             selfTransform.position = spawnMidStackPos + (idx-1) * new Vector2(ConstantKey.HEX_STACK_SPACING, 0);
 
             selfTransform.DOKill();
@@ -106,7 +106,7 @@ namespace HexaSort.Core.Entities
                         AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_SPAWNED);
                     }
                 }).ToUniTask();
-            
+
             if (allowWaitingSliding)
                 await slidingUniTask;
             else slidingUniTask.Forget();

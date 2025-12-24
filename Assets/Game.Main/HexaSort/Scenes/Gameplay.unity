@@ -1300,6 +1300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalTrackerManager: {fileID: 1659490684}
   currLevelOrderVersion: {fileID: 0}
+  currLevelData: {fileID: 0}
 --- !u!1001 &1083937321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1556,6 +1557,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e284fda8c64b2991625d1b9efc2688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currLevelCurveVersion: {fileID: 0}
+  currLevelDifficultyType: 0
+  currLevelDifficultyConfigVersion: {fileID: 0}
+  currLevelDifficultyConfig:
+    levelDifficultyType: 0
+    levelDifficultyThresholds: []
+  spawnCycle: 0
+  spawnCycleCounter: 0
 --- !u!1 &1944974759
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,9 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
 
         #endregion
 
+        public const string LevelOrderVersion = "level_order_default";
         public const string LevelCurveVersion = "level_curve_default";
+        public const string LevelDifficultyConfigVersion = "level_difficulty_config_default";
         
         public const int MaxDestroyableStackOnLoose = 2;
         public const float BottomRevivePanelOffsetY = -300f;

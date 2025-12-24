@@ -56,6 +56,7 @@ namespace LevelEditor.LevelData
         public int Width, Height;
         public CellData[] cells;
         public LevelGoalData[] Goal;
+        // Always have at least 3 colors
         public ColorType[] AvailableColors;
 
         public CellData GetCellData(int i, int j)

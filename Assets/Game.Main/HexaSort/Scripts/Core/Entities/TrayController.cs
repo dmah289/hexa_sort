@@ -79,6 +79,22 @@ namespace HexaSort.Core.Entities.Grid
 
         private async UniTask SpawnHexStacks(bool allowWaitingSliding = false)
         {
+            GameDifficultyController.Instance.ContinuousRescueSpawnCounter++;
+            
+            await SpawnStacksRandomly(allowWaitingSliding);
+            
+            // if(GameDifficultyController.Instance.IsRandomSpawnTurn)
+            //     await SpawnStacksRandomly(allowWaitingSliding);
+            // else
+            //     await SpawnStacksToRescue(allowWaitingSliding);
+
+            await UniTask.DelayFrame(5);
+
+            remainStackAmount = 3;
+        }
+
+        private async UniTask SpawnStacksRandomly(bool allowWaitingSliding)
+        {
             for (int i = 0; i < 3; i++)
             {
                 hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
@@ -93,10 +109,24 @@ namespace HexaSort.Core.Entities.Grid
                     hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding).Forget();
                 }
             }
+        }
+        
+        private async UniTask SpawnStacksToRescue(bool allowWaitingSliding)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
+                    PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
 
-            await UniTask.DelayFrame(5);
-
-            remainStackAmount = 3;
+                if (allowWaitingSliding)
+                {
+                    await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding);
+                }
+                else 
+                {
+                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding).Forget();
+                }
+            }
         }
 
         #endregion

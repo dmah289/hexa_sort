@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fb3cbf1b1d249b8b927b13575381b61, type: 3}
-  m_Name: level_curve_default
+  m_Name: level_order_default
   m_EditorClassIdentifier: 
   levelDatas:
   - {fileID: 11400000, guid: 318843c0f22e6c8488cdd3664f6e7e93, type: 2}

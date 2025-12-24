@@ -175,6 +175,7 @@ MonoBehaviour:
       ColorLayers: []
   Goal:
   - type: 0
-    targetAmount: 300
+    targetAmount: 50
   - type: 1
     targetAmount: 2
+  AvailableColors: 0001020304

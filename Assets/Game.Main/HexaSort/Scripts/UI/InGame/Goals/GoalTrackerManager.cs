@@ -31,11 +31,13 @@ namespace HexaSort.UI.Gameplay.Goals
     {
         public eLevelGoalType goalType;
         public int totalCollectedAmount;
+        public float levelProgress;
         
-        public TotalGoalGainedDTO(eLevelGoalType goalType, int totalCollectedAmount)
+        public TotalGoalGainedDTO(eLevelGoalType goalType, int totalCollectedAmount, float levelProgress)
         {
             this.goalType = goalType;
             this.totalCollectedAmount = totalCollectedAmount;
+            this.levelProgress = levelProgress;
         }
     }
     
@@ -74,16 +76,16 @@ namespace HexaSort.UI.Gameplay.Goals
             RegisterCallbacks();
         }
 
+        #endregion
+
+        #region Class Methods
+        
         public async UniTask PlayStartLevelAnim(LevelGoalData[] goalData)
         {
             SetLevelGoalData(goalData);
             await ResetUIStates();
             await AnimateSlidingIn(goalData.Length);
         }
-
-        #endregion
-
-        #region Class Methods
 
         private async UniTask ResetUIStates()
         {

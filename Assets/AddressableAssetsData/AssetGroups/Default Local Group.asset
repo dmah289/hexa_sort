@@ -28,7 +28,17 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6cdaa1774cf89da4b9363412e8aee8b0
+    m_Address: level_order_default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1e170dc1e737de44b2ee11d9dc936f0
     m_Address: level_curve_default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe438127f36763a4ebbe278ab13ac067
+    m_Address: level_difficulty_config_default
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

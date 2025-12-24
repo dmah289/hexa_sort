@@ -59,7 +59,10 @@ namespace HexaSort.UI.Gameplay.Goals
 
             int totalGained = Mathf.Clamp(counter + collectedAmount, 0, m_GoalData.targetAmount);
             EventBus<TotalGoalGainedDTO>.Raise(
-                new TotalGoalGainedDTO(eLevelGoalType.Piece, totalGained));
+                new TotalGoalGainedDTO(eLevelGoalType.Piece
+                    ,totalGained
+                    ,(float)totalGained / m_GoalData.targetAmount));
+            
             await SetCounter(totalGained);
         }
     }
