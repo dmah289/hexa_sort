@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid.Piece;
-using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Controllers.DifficultyAlgorithm;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;

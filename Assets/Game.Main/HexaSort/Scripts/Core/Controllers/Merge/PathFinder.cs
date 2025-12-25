@@ -7,7 +7,7 @@ using HexaSort.Core.Entities.Grid.Piece;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Controllers
+namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     public class PathFinder : MonoBehaviour
     {

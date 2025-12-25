@@ -15,7 +15,7 @@ using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HexaSort.Scripts.Core.Controllers
+namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     public class MergeSequenceExecutor : MonoBehaviour
     {

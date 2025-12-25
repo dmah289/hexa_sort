@@ -40,5 +40,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
             { eMechanicsType.Wood, 4 },
             { eMechanicsType.Packed, 9 }
         };
+
+        public static int MaxSpawnedColorPerStack = 3;
     }
 }

@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using HexaSort.Core.Entities;
 using HexaSort.Core.Entities.Grid.Piece;
-using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Controllers.DifficultyAlgorithm;
 using HexaSort.UI.BaseSystem;
 using HexaSort.UI.Loading;
 using HexaSort.UI.Loading.InGame;

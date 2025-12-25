@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using HexaSort.Core.Entities;
+using HexaSort.Controllers.DifficultyAlgorithm;
+using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.Managers.Level;
-using HexaSort.Scripts.Core.Controllers;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
+using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
 using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HexaSort.Core.Entities.Grid
 {
@@ -97,37 +100,42 @@ namespace HexaSort.Core.Entities.Grid
         {
             for (int i = 0; i < 3; i++)
             {
+                int colorAmount = Random.Range(1, GameDifficultyController.Instance.MaxColorPerStack+1);
+                Debug.Log($"Stack {i} - color amount: {colorAmount}");
+                List<ColorType> chosenColors = LevelManager.Instance.SpawnableColors.GetRandomElements(colorAmount);
+                
                 hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
                     PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
 
                 if (allowWaitingSliding)
                 {
-                    await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding);
+                    await hexStacks[i].OnSpawningOnTray(i, 
+                        spawnMidStackPos, chosenColors, true);
                 }
-                else 
+                else
                 {
-                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding).Forget();
+                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, chosenColors).Forget();
                 }
             }
         }
         
-        private async UniTask SpawnStacksToRescue(bool allowWaitingSliding)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
-                    PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
-
-                if (allowWaitingSliding)
-                {
-                    await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding);
-                }
-                else 
-                {
-                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding).Forget();
-                }
-            }
-        }
+        // private async UniTask SpawnStacksToRescue(bool allowWaitingSliding)
+        // {
+        //     for (int i = 0; i < 3; i++)
+        //     {
+        //         hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
+        //             PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
+        //
+        //         if (allowWaitingSliding)
+        //         {
+        //             await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding: allowWaitingSliding);
+        //         }
+        //         else 
+        //         {
+        //             hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding: allowWaitingSliding).Forget();
+        //         }
+        //     }
+        // }
 
         #endregion
 

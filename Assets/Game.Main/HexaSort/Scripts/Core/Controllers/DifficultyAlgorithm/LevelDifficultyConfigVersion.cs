@@ -2,13 +2,14 @@
 using Game.Main.LevelEditor.Scripts;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Controllers
+namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     [Serializable]
     public class LevelDifficultyThreshold
     {
         public int progressThreshold;
         public int continuousRescueSpawnTimes;
+        public int maxColorPerStack;
     }
 
     [Serializable]

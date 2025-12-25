@@ -10,7 +10,7 @@ using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
-namespace HexaSort.Scripts.Core.Controllers
+namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     public class MergeController : MonoSingleton<MergeController>, IEventBusListener
     {

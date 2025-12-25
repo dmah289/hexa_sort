@@ -17,33 +17,46 @@ MonoBehaviour:
     levelDifficultyThresholds:
     - progressThreshold: 0
       continuousRescueSpawnTimes: 4
+      maxColorPerStack: 2
     - progressThreshold: 50
       continuousRescueSpawnTimes: 3
+      maxColorPerStack: 2
     - progressThreshold: 80
       continuousRescueSpawnTimes: 2
+      maxColorPerStack: 2
   - levelDifficultyType: 1
     levelDifficultyThresholds:
     - progressThreshold: 0
       continuousRescueSpawnTimes: 4
+      maxColorPerStack: 2
     - progressThreshold: 30
       continuousRescueSpawnTimes: 3
+      maxColorPerStack: 2
     - progressThreshold: 50
       continuousRescueSpawnTimes: 4
+      maxColorPerStack: 3
     - progressThreshold: 80
       continuousRescueSpawnTimes: 2
+      maxColorPerStack: 2
   - levelDifficultyType: 2
     levelDifficultyThresholds:
     - progressThreshold: 0
       continuousRescueSpawnTimes: 3
+      maxColorPerStack: 2
     - progressThreshold: 20
       continuousRescueSpawnTimes: 2
+      maxColorPerStack: 2
     - progressThreshold: 50
       continuousRescueSpawnTimes: 3
+      maxColorPerStack: 3
     - progressThreshold: 80
       continuousRescueSpawnTimes: 2
+      maxColorPerStack: 2
   - levelDifficultyType: 2
     levelDifficultyThresholds:
     - progressThreshold: 0
       continuousRescueSpawnTimes: 2
+      maxColorPerStack: 2
     - progressThreshold: 70
       continuousRescueSpawnTimes: 3
+      maxColorPerStack: 2

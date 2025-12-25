@@ -1301,6 +1301,11 @@ MonoBehaviour:
   goalTrackerManager: {fileID: 1659490684}
   currLevelOrderVersion: {fileID: 0}
   currLevelData: {fileID: 0}
+  availableColors: 
+  spawnableColors: 
+  maxColorIdx: 0
+  currColorIdx: 0
+  rangeUnitToNextColor: 0
 --- !u!1001 &1083937321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1523,6 +1528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1754079267}
   - component: {fileID: 1754079268}
+  - component: {fileID: 1754079269}
   m_Layer: 0
   m_Name: game_difficulty_controller
   m_TagString: Untagged
@@ -1565,6 +1571,23 @@ MonoBehaviour:
     levelDifficultyThresholds: []
   spawnCycle: 0
   spawnCycleCounter: 0
+  maxColorPerStack: 0
+  colorSpawner: {fileID: 1754079269}
+--- !u!114 &1754079269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1754079266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d1b476ce8342d5b960eaf488659b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weights: 
+  cumulativeWeights: 
+  totalWeight: 0
 --- !u!1 &1944974759
 GameObject:
   m_ObjectHideFlags: 0

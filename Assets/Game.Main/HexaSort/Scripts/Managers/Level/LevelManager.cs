@@ -5,7 +5,8 @@ using Game.Main.HexaSort.Scripts.Managers;
 using Game.Main.HexaSort.Scripts.UI.Popup;
 using HexaSort.Audio;
 using HexaSort.Core.Entities.Grid;
-using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Controllers.DifficultyAlgorithm;
+using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.UI.Loading.InGame;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using manhnd_sdk.Scripts.ExtensionMethods;
@@ -52,6 +53,8 @@ namespace HexaSort.Managers.Level
                 OnLevelStateChanged();
             }
         }
+        
+        public List<ColorType> SpawnableColors => levelLoader.SpawnableColors;
         
         public void SetLevelState(eLevelState value)
         {

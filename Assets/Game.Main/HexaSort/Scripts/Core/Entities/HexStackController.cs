@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HexaSort.Audio;
+using HexaSort.Controllers.DifficultyAlgorithm;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Core.Entities.Grid.Piece;
 using LevelEditor.LevelData;
@@ -20,12 +21,13 @@ namespace HexaSort.Core.Entities
         [Header("Self Components")]
         public Transform selfTransform;
         
-        [Header("Managers")]
+        [Header("----- Managers -----")]
         [SerializeField] private List<HexPieceController> pieces = new();
         [SerializeField] private HexCell parentCell;
         [SerializeField] private bool isOnGrid;
         [SerializeField] private int idxOnTray;
         [SerializeField] private bool sfxSpawnedPlayed;
+        [SerializeField] private int[] colorDistribution;
         
         // Cache for smooth dragging - avoid allocation
         private Vector3 _dragVelocity;
@@ -56,7 +58,6 @@ namespace HexaSort.Core.Entities
         }
         
         #endregion
-        
 
         #region Unity Callbacks
 
@@ -69,25 +70,50 @@ namespace HexaSort.Core.Entities
 
         #region Spawning Methods
 
-        public async UniTask OnSpawningOnTray(int idx, Vector2 spawnMidStackPos, bool allowWaitingSliding = false)
+        /// <summary>
+        /// Spawn stack on tray with random piece's amount per colors
+        /// </summary>
+        /// <param name="idx">Stack order on tray</param>
+        /// <param name="spawnMidStackPos">Center of the stacks on tray</param>
+        /// <param name="chosenColors">Max 3 colors randomly or sorted by descending pieces amount per colors on board</param>
+        public async UniTask OnSpawningOnTray(int idx,
+            Vector2 spawnMidStackPos,
+            List<ColorType> chosenColors,
+            bool allowWaitingSliding = false)
         {
             idxOnTray = idx;
-            int pieceAmount = Random.Range(3, 8);
-            for(int i = 0; i < pieceAmount; i++)
+            
+            int totalPieces = Random.Range(chosenColors.Count, 9);
+            
+            colorDistribution = DistributeColorsToLayers(totalPieces, chosenColors.Count);
+                
+            // spawn layer by layer
+            int currentPieceIndex = 0;
+            for (int colorLayerIdx = 0; colorLayerIdx < chosenColors.Count; colorLayerIdx++)
             {
-                HexPieceController piece = await ObjectPooler.GetFromPool<HexPieceController>(PoolingType.HexPiece,
-                    destroyCancellationToken,
-                    selfTransform
-                );
+                ColorType currentColor = chosenColors[colorLayerIdx];
+                int piecesForThisColor = colorDistribution[colorLayerIdx];
+                    
+                // Sinh các mảnh cùng màu liên tiếp
+                for (int j = 0; j < piecesForThisColor; j++)
+                {
+                    HexPieceController piece = await ObjectPooler.GetFromPool<HexPieceController>(
+                        PoolingType.HexPiece,
+                        destroyCancellationToken,
+                        selfTransform
+                    );
 
-                int colorIdx = Random.Range(2, 4);
-                piece.ColorType = (ColorType)colorIdx;
+                    piece.ColorType = currentColor;
 
-                Vector3 spawnedPos = (i * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back).Add(y: i * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
-                piece.transform.localPosition = spawnedPos;
+                    Vector3 spawnedPos = (currentPieceIndex * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back)
+                        .Add(y: currentPieceIndex * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
+                    piece.transform.localPosition = spawnedPos;
 
-                pieces.Add(piece);
+                    pieces.Add(piece);
+                    currentPieceIndex++;
+                }
             }
+            
             Selectable = true;
 
             selfTransform.position = spawnMidStackPos + (idx-1) * new Vector2(ConstantKey.HEX_STACK_SPACING, 0);
@@ -112,6 +138,50 @@ namespace HexaSort.Core.Entities
             else slidingUniTask.Forget();
         }
         
+        /// <summary>
+        /// Allocate number of pieces per color layer based on weights
+        /// </summary>
+        private int[] DistributeColorsToLayers(int totalPieces, int colorCount)
+        {
+            int[] distribution = new int[colorCount];
+            
+            if (colorCount == 1)
+            {
+                distribution[0] = totalPieces;
+                return distribution;
+            }
+            
+            // Allocate min one piece per layer
+            int minPerColor = 1;
+            int remaining = totalPieces - (colorCount * minPerColor);
+            for (int i = 0; i < colorCount; i++)
+            {
+                distribution[i] = minPerColor;
+            }
+
+            // allocate remaining pieces based on weights
+            // color with higher index (less pieces on board) has higher chance to get more spawned pieces
+            while (remaining > 0)
+            {
+                int randomValue = Random.Range(0, GameDifficultyController.Instance.TotalWeight);
+                int selectedColorIdx = colorCount - 1;
+                
+                for (int i = 0; i < colorCount; i++)
+                {
+                    if (randomValue < GameDifficultyController.Instance.CumulativeWeights[i])
+                    {
+                        selectedColorIdx = i;
+                        break;
+                    }
+                }
+                
+                distribution[selectedColorIdx]++;
+                remaining--;
+            }
+            
+            return distribution;
+        }
+
         public async UniTask OnSpawningOnCell(HexCell targetCell, PackedStackData packedStackData)
         {
             parentCell = targetCell;
@@ -151,7 +221,7 @@ namespace HexaSort.Core.Entities
             parentCell = null;
             isOnGrid = false;
             sfxSpawnedPlayed = false;
-            _dragVelocity = Vector3.zero; // Reset velocity
+            _dragVelocity = Vector3.zero;
             
             selfTransform.Reset();
         }
@@ -161,7 +231,7 @@ namespace HexaSort.Core.Entities
             idxOnTray = -1;
             parentCell = null;
             isOnGrid = false;
-            _dragVelocity = Vector3.zero; // Reset velocity
+            _dragVelocity = Vector3.zero;
             
             for (int i = pieces.Count - 1; i >= 0; i--)
             {
@@ -232,7 +302,5 @@ namespace HexaSort.Core.Entities
         }
 
         #endregion
-
-        
     }
 }

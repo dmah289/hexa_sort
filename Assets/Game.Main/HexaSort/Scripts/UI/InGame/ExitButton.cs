@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Framework.UI;
 using HexaSort.Managers.Level;
-using HexaSort.Scripts.Core.Controllers;
+using HexaSort.Controllers.DifficultyAlgorithm;
 using UnityEngine;
 using UnityEngine.Events;
 
