@@ -29,6 +29,27 @@ namespace HexaSort.Core.Entities.Grid
             set => gridSpawner.gridCells = value;
         }
         
+        public List<HexStackController> StacksOnGrid
+        {
+            get
+            {
+                var stacksOnGrid = new List<HexStackController>();
+                
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null)
+                        {
+                            stacksOnGrid.Add(GridCells[i, j].CurrentStack);
+                        }
+                    }
+                }
+
+                return stacksOnGrid;
+            }
+        }
+        
         public (int width, int height) GridSize
             => (GridCells.GetLength(1), GridCells.GetLength(0));
         

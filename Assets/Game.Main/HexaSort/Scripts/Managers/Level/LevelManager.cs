@@ -39,7 +39,6 @@ namespace HexaSort.Managers.Level
         [SerializeField] private LoosePanel loosePanel;
         [SerializeField] private WinPanel winPanel;
         
-        
         [Header("----- State Management -----")]
         [SerializeField] private eLevelState currentLevelState;
         

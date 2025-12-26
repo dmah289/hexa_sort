@@ -39,24 +39,22 @@ namespace manhnd_sdk.Scripts.ExtensionMethods
                 return new List<T>();
             }
 
-            // Số phần tử thực sự lấy ra không vượt quá số phần tử trong list
             int count = System.Math.Min(n, list.Count);
             List<T> result = new List<T>(count);
             
-            // Tạo danh sách index để shuffle
+            // indices list to shuffle
             List<int> indices = new List<int>(list.Count);
             for (int i = 0; i < list.Count; i++)
             {
                 indices.Add(i);
             }
             
-            // Fisher-Yates shuffle để lấy n phần tử ngẫu nhiên
+            // Fisher-Yates shuffle
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = UnityEngine.Random.Range(i, indices.Count);
                 result.Add(list[indices[randomIndex]]);
                 
-                // Swap
                 (indices[randomIndex], indices[i]) = (indices[i], indices[randomIndex]);
             }
             

@@ -51,7 +51,7 @@ namespace HexaSort.Managers.Level
                 if(!spawnableColors.Contains(availableColors[currColorIdx]))
                     spawnableColors.Add(availableColors[currColorIdx]);
             }
-            Debug.Log($"currColorIdx: {currColorIdx} at {data.levelProgress}");
+            // Debug.Log($"currColorIdx: {currColorIdx} at {data.levelProgress}");
         }
 
 

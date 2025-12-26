@@ -1,7 +1,11 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Main.HexaSort.Scripts.Managers;
 using Game.Main.LevelEditor.Scripts;
 using HexaSort.Controllers.DifficultyAlgorithm;
+using HexaSort.Core.Entities;
+using HexaSort.Core.Entities.Grid;
+using HexaSort.Core.Entities.Grid.Piece;
 using HexaSort.UI.Gameplay.Goals;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -9,11 +13,15 @@ using manhnd_sdk.Scripts.SystemDesign;
 using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using HexaSort.Managers.Level;
 
 namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     public class GameDifficultyController : MonoSingleton<GameDifficultyController>
     {
+        [Header("----- References -----")]
+        [SerializeField] private GridController gridController;
+        
         [Header("----- Level Curve -----")]
         [SerializeField] private LevelCurveVersion currLevelCurveVersion;
         [SerializeField] private eLevelDifficultyType currLevelDifficultyType;
@@ -27,7 +35,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         [SerializeField] private int maxColorPerStack;
         
         [Header("----- Self References -----")]
-        [SerializeField] private ColorSpawner colorSpawner;
+        [SerializeField] private ColorDifficultySpawner colorDifficultySpawner;
 
         public int ContinuousRescueSpawnCounter
         {
@@ -40,8 +48,8 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         public bool IsRandomSpawnTurn => spawnCycleCounter % spawnCycle == 0;
 
         #region Extracted Properties
-        public int TotalWeight => colorSpawner.TotalWeight;
-        public int[] CumulativeWeights => colorSpawner.CumulativeWeights;
+        public int TotalWeight => colorDifficultySpawner.TotalWeight;
+        public int[] CumulativeWeights => colorDifficultySpawner.CumulativeWeights;
         #endregion
 
         #region Unity Callbacks
@@ -50,7 +58,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         {
             base.Awake();
             
-            colorSpawner = GetComponent<ColorSpawner>();
+            colorDifficultySpawner = GetComponent<ColorDifficultySpawner>();
             
             EventBus<TotalGoalGainedDTO>.Register(onEventWithArgs: OnTotalPieceCollected);
         }
@@ -98,7 +106,6 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
             currLevelDifficultyConfig = await GetCurrLevelDifficultyConfig();
             
             UpdateProgressBasedLevelConfigs(0);
-            spawnCycleCounter = 0;
         }
         
         private void OnTotalPieceCollected(TotalGoalGainedDTO data)
@@ -122,7 +129,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
                     maxColorPerStack = currLevelDifficultyConfig.levelDifficultyThresholds[i]
                         .maxColorPerStack;
                         
-                    Debug.Log($"maxColorPerStack: {maxColorPerStack} at {levelProgress}");
+                    // Debug.Log($"maxColorPerStack: {maxColorPerStack} at {levelProgress}");
                     
                     break;
                 }
@@ -154,7 +161,60 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         }
         
         #endregion
-        
-        
+
+
+        public List<ColorType> GetRescuedColor()
+        {
+            List<HexStackController> stacks = gridController.StacksOnGrid;
+            
+            // calculate total pieces count per color across entire grid
+            var colorsAmountStat = new Dictionary<ColorType, int>();
+            for (int i = 0; i < stacks.Count; i++)
+            {
+                if (colorsAmountStat.ContainsKey(stacks[i].ColorOnTop))
+                    colorsAmountStat[stacks[i].ColorOnTop] += stacks[i].TopColorAmount;
+                else
+                    colorsAmountStat[stacks[i].ColorOnTop] = stacks[i].TopColorAmount;
+            }
+            
+            // collect unique top colors from all stacks
+            var topColorSet = new HashSet<ColorType>(colorsAmountStat.Keys);
+            // sort top colors by total count descending (most pieces first)
+            var sortedTopColors = new List<ColorType>(topColorSet);
+            sortedTopColors.Sort((a, b) 
+                => colorsAmountStat[b].CompareTo(colorsAmountStat[a]));
+            
+            // fill remaining slots with random colors from SpawnableColors if needed
+            if (sortedTopColors.Count < maxColorPerStack)
+            {
+                var spawnableColors = LevelManager.Instance.SpawnableColors;
+                var rand = new System.Random();
+                int maxIterations = 10; // safety to prevent infinite loop
+                
+                for(int i1 = 0; i1 < maxIterations; i1++)
+                {
+                    if (sortedTopColors.Count >= maxColorPerStack)
+                        break;
+                    
+                    // try to get colors not yet in result
+                    var candidates = new List<ColorType>();
+                    for (int i = 0; i < spawnableColors.Count; i++)
+                    {
+                        if (!sortedTopColors.Contains(spawnableColors[i]))
+                            candidates.Add(spawnableColors[i]);
+                    }
+                    
+                    // pick from candidates (not yet in result)
+                    if (candidates.Count > 0)
+                    {
+                        ColorType pickedColor = candidates[rand.Next(candidates.Count)];
+                        sortedTopColors.Add(pickedColor);
+                    }
+                    else break;
+                }
+            }
+            
+            return sortedTopColors;
+        }
     }
 }

@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e284fda8c64b2991625d1b9efc2688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridController: {fileID: 1160128950}
   currLevelCurveVersion: {fileID: 0}
   currLevelDifficultyType: 0
   currLevelDifficultyConfigVersion: {fileID: 0}
@@ -1572,7 +1573,7 @@ MonoBehaviour:
   spawnCycle: 0
   spawnCycleCounter: 0
   maxColorPerStack: 0
-  colorSpawner: {fileID: 1754079269}
+  colorDifficultySpawner: {fileID: 1754079269}
 --- !u!114 &1754079269
 MonoBehaviour:
   m_ObjectHideFlags: 0

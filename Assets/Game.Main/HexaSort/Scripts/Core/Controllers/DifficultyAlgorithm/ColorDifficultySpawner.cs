@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HexaSort.Controllers.DifficultyAlgorithm
 {
-    public class ColorSpawner : MonoBehaviour
+    public class ColorDifficultySpawner : MonoBehaviour
     {
         [Header("----- Cached Weights for Color Distribution -----")]
         [SerializeField] private int[] weights;

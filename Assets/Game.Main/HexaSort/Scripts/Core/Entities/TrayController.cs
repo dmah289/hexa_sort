@@ -27,12 +27,23 @@ namespace HexaSort.Core.Entities.Grid
         [SerializeField] private Vector2 spawnMidStackPos;
         [SerializeField] private int remainStackAmount;
 
+        [Header("----- Spawn Configurations -----")]
+        [SerializeField] private List<ColorType> rescuedColorsThisTurn;
+        [SerializeField] private bool minAmountColorPicked;
+
         #region Unity Callbacks
         
         protected override void Awake()
         {
             base.Awake();
             selfTransform = transform;
+            
+            // Initialize hexStacks array with size 3
+            if (hexStacks == null || hexStacks.Length != 3)
+            {
+                hexStacks = new HexStackController[3];
+            }
+            
             RegisterCallbacks();
         }
 
@@ -43,6 +54,12 @@ namespace HexaSort.Core.Entities.Grid
         public void SetupTray(float centerPosX, float minCellY, float maxCellX, int height)
         {
             gameObject.SetActive(true);
+            
+            // Ensure hexStacks array is properly initialized
+            if (hexStacks == null || hexStacks.Length != 3)
+            {
+                hexStacks = new HexStackController[3];
+            }
             
             float trayToGridOffsetY = 0.157f * height + 0.314f;
             
@@ -84,12 +101,10 @@ namespace HexaSort.Core.Entities.Grid
         {
             GameDifficultyController.Instance.ContinuousRescueSpawnCounter++;
             
-            await SpawnStacksRandomly(allowWaitingSliding);
-            
-            // if(GameDifficultyController.Instance.IsRandomSpawnTurn)
-            //     await SpawnStacksRandomly(allowWaitingSliding);
-            // else
-            //     await SpawnStacksToRescue(allowWaitingSliding);
+            if(GameDifficultyController.Instance.IsRandomSpawnTurn)
+                await SpawnStacksRandomly(allowWaitingSliding);
+            else
+                await SpawnStacksToRescue(allowWaitingSliding);
 
             await UniTask.DelayFrame(5);
 
@@ -98,11 +113,12 @@ namespace HexaSort.Core.Entities.Grid
 
         private async UniTask SpawnStacksRandomly(bool allowWaitingSliding)
         {
+            List<ColorType> spawnableColors = LevelManager.Instance.SpawnableColors;
+            
             for (int i = 0; i < 3; i++)
             {
                 int colorAmount = Random.Range(1, GameDifficultyController.Instance.MaxColorPerStack+1);
-                Debug.Log($"Stack {i} - color amount: {colorAmount}");
-                List<ColorType> chosenColors = LevelManager.Instance.SpawnableColors.GetRandomElements(colorAmount);
+                List<ColorType> chosenColors = spawnableColors.GetRandomElements(colorAmount);
                 
                 hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
                     PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
@@ -119,23 +135,44 @@ namespace HexaSort.Core.Entities.Grid
             }
         }
         
-        // private async UniTask SpawnStacksToRescue(bool allowWaitingSliding)
-        // {
-        //     for (int i = 0; i < 3; i++)
-        //     {
-        //         hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
-        //             PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
-        //
-        //         if (allowWaitingSliding)
-        //         {
-        //             await hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding: allowWaitingSliding);
-        //         }
-        //         else 
-        //         {
-        //             hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, allowWaitingSliding: allowWaitingSliding).Forget();
-        //         }
-        //     }
-        // }
+        private async UniTask SpawnStacksToRescue(bool allowWaitingSliding)
+        {
+            rescuedColorsThisTurn = GameDifficultyController.Instance.GetRescuedColor();
+            ColorType minAmountColor = rescuedColorsThisTurn[^1];
+            minAmountColorPicked = false;
+            
+            for (int i = 0; i < 3; i++)
+            {
+                int colorAmount = Random.Range(1, GameDifficultyController.Instance.MaxColorPerStack+1);
+                List<ColorType> chosenColors = rescuedColorsThisTurn.GetRandomElements(colorAmount);
+
+                if (chosenColors.Contains(minAmountColor))
+                {
+                    Debug.Log("Picked min amount color");
+                    minAmountColorPicked = true;
+                }
+
+                if (i == 2 && !minAmountColorPicked)
+                {
+                    Debug.Log("Force add min amount color");
+                    chosenColors.RemoveFirst();
+                    chosenColors.Add(minAmountColor);
+                }
+                
+                hexStacks[i] = await ObjectPooler.GetFromPool<HexStackController>(
+                    PoolingType.HexStack, destroyCancellationToken, hexStackHolders[i]);
+        
+                if (allowWaitingSliding)
+                {
+                    await hexStacks[i].OnSpawningOnTray(i, 
+                        spawnMidStackPos, chosenColors, true);
+                }
+                else 
+                {
+                    hexStacks[i].OnSpawningOnTray(i, spawnMidStackPos, chosenColors).Forget();
+                }
+            }
+        }
 
         #endregion
 

@@ -56,6 +56,23 @@ namespace HexaSort.Core.Entities
                 pieces[pieces.Count/2].Selectable = value;
             }
         }
+        public int TopColorAmount
+        {
+            get
+            {
+                if (pieces.Count == 0) return 0;
+                
+                ColorType topColor = ColorOnTop;
+                int count = 0;
+                for (int i = pieces.Count - 1; i >= 0; i--)
+                {
+                    if (pieces[i].ColorType == topColor)
+                        count++;
+                    else break;
+                }
+                return count;
+            }
+        }
         
         #endregion
 
@@ -83,7 +100,7 @@ namespace HexaSort.Core.Entities
         {
             idxOnTray = idx;
             
-            int totalPieces = Random.Range(chosenColors.Count, 9);
+            int totalPieces = Random.Range(chosenColors.Count, 7);
             
             colorDistribution = DistributeColorsToLayers(totalPieces, chosenColors.Count);
                 
