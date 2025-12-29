@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using HexaSort.Managers.Level;
-using HexaSort.Core.Entities.Grid;
 using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
-using manhnd_sdk.Scripts.SystemDesign.EventBus;
 using UnityEngine;
 
 namespace HexaSort.Core.Entities.Grid

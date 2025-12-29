@@ -76,7 +76,6 @@ namespace HexaSort.UI.Loading.MainMenu.Footer
         
         public void SyncFromPage(float ratio)
         {
-            // Chặn giá trị ratio trong khoảng [0, 1]
             curRatio = Mathf.Clamp01(ratio);
             UpdateSelectionPosition();
     

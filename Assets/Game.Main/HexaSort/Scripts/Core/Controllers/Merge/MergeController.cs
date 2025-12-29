@@ -96,8 +96,6 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
 
         private async UniTask HandleMergeSequence(HexCell cell)
         {
-            
-            
             pathFinder.GetConnectedCells(cell, grid);
             await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
         }

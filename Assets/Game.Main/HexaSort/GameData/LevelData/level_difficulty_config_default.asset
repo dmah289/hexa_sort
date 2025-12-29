@@ -52,7 +52,7 @@ MonoBehaviour:
     - progressThreshold: 80
       continuousRescueSpawnTimes: 2
       maxColorPerStack: 2
-  - levelDifficultyType: 2
+  - levelDifficultyType: 3
     levelDifficultyThresholds:
     - progressThreshold: 0
       continuousRescueSpawnTimes: 2

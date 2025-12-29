@@ -144,7 +144,7 @@ namespace HexaSort.Core.Entities.Grid
             for (int i = 0; i < 3; i++)
             {
                 int colorAmount = Random.Range(1, GameDifficultyController.Instance.MaxColorPerStack+1);
-                List<ColorType> chosenColors = rescuedColorsThisTurn.GetRandomElements(colorAmount);
+                List<ColorType> chosenColors = rescuedColorsThisTurn.GetRandomElementsPreserveOrder(colorAmount);
 
                 if (chosenColors.Contains(minAmountColor))
                 {
