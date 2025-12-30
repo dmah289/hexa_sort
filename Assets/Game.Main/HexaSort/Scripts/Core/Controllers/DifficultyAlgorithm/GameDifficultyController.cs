@@ -165,7 +165,10 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
 
         public List<ColorType> GetRescuedColor()
         {
-            List<HexStackController> stacks = gridController.StacksOnGrid;
+            List<HexStackController> stacks = gridController.NonSurroundedStacksOnGrid;
+            
+            // DOAN Debug
+            // Debug.LogError("NonSurroundedStacksOnGrid Count: " + stacks.Count);
             
             // calculate total pieces count per color across entire grid
             var colorsAmountStat = new Dictionary<ColorType, int>();
@@ -208,7 +211,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
                     if (candidates.Count > 0)
                     {
                         ColorType pickedColor = candidates[rand.Next(candidates.Count)];
-                        sortedTopColors.Add(pickedColor);
+                        sortedTopColors.Insert(0, pickedColor);
                     }
                     else break;
                 }

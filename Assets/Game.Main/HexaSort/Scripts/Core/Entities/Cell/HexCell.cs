@@ -9,6 +9,7 @@ using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ExtensionMethods;
 using manhnd_sdk.Scripts.Optimization.PoolingSystem;
+using TMPro;
 using UnityEngine;
 
 namespace HexaSort.Core.Entities.Grid
@@ -25,9 +26,10 @@ namespace HexaSort.Core.Entities.Grid
         private (int row, int col) gridPos;
         
         [Header("----- Mechanics -----")]
-        
         [SerializeField] private WoodCell woodCell;
         [SerializeField] private PackedCell packedCell;
+        
+        [SerializeField] private TextMeshPro idxTxt;
 
         #region Properties
         
@@ -121,6 +123,29 @@ namespace HexaSort.Core.Entities.Grid
 
             return false;
         }
+
+        public bool HasAtLeastOneUnoccupiedNeighbor(GridController grid)
+        {
+            int startIdx = (gridPos.col & 1) == 1 ? 0 : 6;
+
+            for (int i = startIdx; i < startIdx + 6; i++)
+            {
+                int newCol = gridPos.col + PathFinder.colOffsets[i % 6];
+                int newRow = gridPos.row + PathFinder.rowOffsets[i];
+                
+                if (newCol < 0 || newCol >= grid.GridSize.width || newRow < 0 || newRow >= grid.GridSize.height)
+                    continue;
+                
+                HexCell neighbor = grid.GridCells[newRow, newCol];
+                
+                if (neighbor && !neighbor.IsOccupied)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
         
         public async UniTask CollectAllPieces(bool withCollectingGoal = true)
         {
@@ -167,5 +192,10 @@ namespace HexaSort.Core.Entities.Grid
         }
 
         #endregion
+
+        public void SetIdx(int i, int j)
+        {
+            idxTxt.text = $"[{i},{j}]";
+        }
     }
 }

@@ -5,6 +5,7 @@ using HexaSort.UI.Loading.InGame;
 using LevelEditor.LevelData;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
 using UnityEngine;
+using HexaSort.Controllers.DifficultyAlgorithm;
 
 namespace HexaSort.Core.Entities.Grid
 {
@@ -26,11 +27,11 @@ namespace HexaSort.Core.Entities.Grid
             set => gridSpawner.gridCells = value;
         }
         
-        public List<HexStackController> StacksOnGrid
+        public List<HexStackController> NonSurroundedStacksOnGrid
         {
             get
             {
-                var stacksOnGrid = new List<HexStackController>();
+                var nonSurroundedStacks = new List<HexStackController>();
                 
                 for(int i = 0; i < GridSize.height; i++)
                 {
@@ -38,12 +39,15 @@ namespace HexaSort.Core.Entities.Grid
                     {
                         if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null)
                         {
-                            stacksOnGrid.Add(GridCells[i, j].CurrentStack);
+                            if (GridCells[i, j].HasAtLeastOneUnoccupiedNeighbor(this))
+                            {
+                                nonSurroundedStacks.Add(GridCells[i, j].CurrentStack);
+                            }
                         }
                     }
                 }
 
-                return stacksOnGrid;
+                return nonSurroundedStacks;
             }
         }
         

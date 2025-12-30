@@ -40,6 +40,7 @@ namespace HexaSort.Core.Entities.Grid
                         PoolingType.HexCell, destroyCancellationToken, transform);
 #if UNITY_EDITOR
                     cell.gameObject.name = $"cell_[{i}][{j}]";
+                    cell.SetIdx(i, j);
 #endif
                     cell.GridPos = (i,j);
                     cell.SetupMechanics(cellData);
