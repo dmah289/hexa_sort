@@ -51,6 +51,49 @@ namespace HexaSort.Core.Entities.Grid
             }
         }
         
+        public List<HexCell> EmptyCells
+        {
+            get
+            {
+                List<HexCell> emptyCells = new List<HexCell>();
+                
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (GridCells[i, j] != null && !GridCells[i, j].IsOccupied)
+                            emptyCells.Add(GridCells[i, j]);
+                    }
+                }
+
+                return emptyCells;
+            }
+        }
+        
+        public List<HexCell> GetNeighbors(HexCell cell)
+        {
+            List<HexCell> neighbors = new List<HexCell>();
+            var gridPos = cell.GridPos;
+            int startIdx = (gridPos.col & 1) == 1 ? 0 : 6;
+
+            for (int i = startIdx; i < startIdx + 6; i++)
+            {
+                int newCol = gridPos.col + PathFinder.colOffsets[i % 6];
+                int newRow = gridPos.row + PathFinder.rowOffsets[i];
+
+                if (newCol < 0 || newCol >= GridSize.width || newRow < 0 || newRow >= GridSize.height)
+                    continue;
+
+                HexCell neighbor = GridCells[newRow, newCol];
+                if (neighbor != null)
+                {
+                    neighbors.Add(neighbor);
+                }
+            }
+
+            return neighbors;
+        }
+        
         public (int width, int height) GridSize
             => (GridCells.GetLength(1), GridCells.GetLength(0));
         

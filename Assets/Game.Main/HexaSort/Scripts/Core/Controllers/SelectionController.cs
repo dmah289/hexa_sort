@@ -230,7 +230,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
             magicWand.selfRT.anchoredPosition = wandSpawnedPos.Add(x:50, y:50);
             magicWand.PlayAnim();
             
-            Debug.Break();
+            // Debug.Break();
         }
 
         #endregion

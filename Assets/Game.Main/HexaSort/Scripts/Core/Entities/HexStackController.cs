@@ -156,6 +156,75 @@ namespace HexaSort.Core.Entities
         }
         
         /// <summary>
+        /// Spawn stack on tray with random piece's amount per colors
+        /// </summary>
+        /// <param name="idx">Stack order on tray</param>
+        /// <param name="spawnMidStackPos">Center of the stacks on tray</param>
+        /// <param name="chosenColors">Max 3 colors randomly or sorted by descending pieces amount per colors on board</param>
+        public async UniTask OnSpawningOnTray2(int idx,
+            Vector2 spawnMidStackPos,
+            List<ColorType> chosenColors,
+            int[] colorDistribution,
+            bool allowWaitingSliding = false)
+        {
+            idxOnTray = idx;
+            
+            int totalPieces = Random.Range(chosenColors.Count, 7);
+            
+            colorDistribution = DistributeColorsToLayers(totalPieces, chosenColors.Count);
+                
+            // spawn layer by layer
+            int currentPieceIndex = 0;
+            for (int colorLayerIdx = 0; colorLayerIdx < chosenColors.Count; colorLayerIdx++)
+            {
+                ColorType currentColor = chosenColors[colorLayerIdx];
+                int piecesForThisColor = colorDistribution[colorLayerIdx];
+                    
+                // Sinh các mảnh cùng màu liên tiếp
+                for (int j = 0; j < piecesForThisColor; j++)
+                {
+                    HexPieceController piece = await ObjectPooler.GetFromPool<HexPieceController>(
+                        PoolingType.HexPiece,
+                        destroyCancellationToken,
+                        selfTransform
+                    );
+
+                    piece.ColorType = currentColor;
+
+                    Vector3 spawnedPos = (currentPieceIndex * ConstantKey.HEX_PIECE_THICKNESS * Vector3.back)
+                        .Add(y: currentPieceIndex * ConstantKey.BACKWARD_PIECE_OFFSET_Y);
+                    piece.transform.localPosition = spawnedPos;
+
+                    pieces.Add(piece);
+                    currentPieceIndex++;
+                }
+            }
+            
+            Selectable = true;
+
+            selfTransform.position = spawnMidStackPos + (idx-1) * new Vector2(ConstantKey.HEX_STACK_SPACING, 0);
+
+            selfTransform.DOKill();
+            float duration = selfTransform.localPosition.x / ConstantKey.SLIDE_IN_VELOCITY;
+            UniTask slidingUniTask =  selfTransform.DOLocalMove(Vector3.zero, duration)
+                .SetEase(Ease.OutFlash)
+                .SetDelay(idx * 0.3f)
+                .OnKill(() => selfTransform.localPosition = Vector3.zero)
+                .OnUpdate(() =>
+                {
+                    if(!sfxSpawnedPlayed && Vector3.Distance(selfTransform.localPosition, Vector3.zero) < 2f)
+                    {
+                        sfxSpawnedPlayed = true;
+                        AudioManager.Instance.PlaySfx(ConstantKey.SFX_BLOCK_SPAWNED);
+                    }
+                }).ToUniTask();
+
+            if (allowWaitingSliding)
+                await slidingUniTask;
+            else slidingUniTask.Forget();
+        }
+        
+        /// <summary>
         /// Allocate number of pieces per color layer based on weights
         /// </summary>
         private int[] DistributeColorsToLayers(int totalPieces, int colorCount)

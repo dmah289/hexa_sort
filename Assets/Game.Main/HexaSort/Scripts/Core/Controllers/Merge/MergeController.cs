@@ -98,16 +98,17 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         {
             pathFinder.GetConnectedCells(cell, grid);
 
-            if(pathFinder.ConnectedCells.Count >= 3)
-            {
-                for (int i = 0; i < pathFinder.ConnectedCells.Count; i++)
-                {
-                    pathFinder.ConnectedCells[i].selfTransform.position =
-                        pathFinder.ConnectedCells[i].selfTransform.position.With(z: -1f);
-                }
-
-                Debug.Break();
-            }
+            // if(pathFinder.ConnectedCells.Count >= 3)
+            // {
+            //     for (int i = 0; i < pathFinder.ConnectedCells.Count; i++)
+            //     {
+            //         pathFinder.ConnectedCells[i].selfTransform.position =
+            //             pathFinder.ConnectedCells[i].selfTransform.position.With(z: -1f);
+            //     }
+            //
+            //     Debug.Break();
+            // }
+            
             await mergeSequenceExecutor.ExecuteMergeSequence(pathFinder.ConnectedCells, pathFinder.Parents);
         }
 
