@@ -105,7 +105,7 @@ namespace HexaSort.Core.Entities.Grid
 
         private async UniTask SpawnHexStacks(bool allowWaitingSliding = false)
         {
-            GameDifficultyController.Instance.ContinuousRescueSpawnCounter++;
+            GameDifficultyController.Instance.SpawnCycleCounter++;
 
             // 5 : if 6 empty -> spawn new 3 stacks
             // -> after that remains 3 empty cells respectively 3 new spawned stacks

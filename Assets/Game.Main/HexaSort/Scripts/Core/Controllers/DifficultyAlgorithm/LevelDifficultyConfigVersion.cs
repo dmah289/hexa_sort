@@ -9,6 +9,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
     {
         public int progressThreshold;
         public int continuousRescueSpawnTimes;
+        public int continuousRandomSpawnTimes;
         public int maxColorPerStack;
     }
 

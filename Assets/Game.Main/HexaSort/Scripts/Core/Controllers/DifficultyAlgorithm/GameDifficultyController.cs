@@ -32,12 +32,14 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         [Tooltip("First spawn is random, n-1 last rescue spawns")]
         [SerializeField] private int spawnCycle;
         [SerializeField] private int spawnCycleCounter;
+        [SerializeField] private int currContinuousRescueSpawnTimes;
+        [SerializeField] private int currContinuousRandomSpawnTimes;
         [SerializeField] private int maxColorPerStack;
         
         [Header("----- Self References -----")]
         [SerializeField] private ColorDifficultySpawner colorDifficultySpawner;
 
-        public int ContinuousRescueSpawnCounter
+        public int SpawnCycleCounter
         {
             get => spawnCycleCounter;
             set => spawnCycleCounter = value % spawnCycle;
@@ -45,7 +47,15 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         public int MaxColorPerStack => maxColorPerStack;
 
         // If it's first time in cycle to spawn random
-        public bool IsRandomSpawnTurn => spawnCycleCounter % spawnCycle == 0;
+        public bool IsRandomSpawnTurn
+        {
+            get
+            {
+                int modulo = spawnCycleCounter % spawnCycle;
+                Debug.Log($"Is random turn : {modulo < currContinuousRandomSpawnTimes}");
+                return modulo < currContinuousRandomSpawnTimes;
+            }
+        }
 
         #region Extracted Properties
         public int TotalWeight => colorDifficultySpawner.TotalWeight;
@@ -116,7 +126,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
 
         private void UpdateProgressBasedLevelConfigs(float levelProgress)
         {
-            UpdateMaxContinuousRescueSpawnTimes(levelProgress * 100);
+            UpdateSpawnCycle(levelProgress * 100);
             UpdateMaxColorPerStack(levelProgress * 100);
         }
 
@@ -137,25 +147,28 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         }
 
         // Update the max continuous rescue spawn times based on level progress when pieces are collected
-        public void UpdateMaxContinuousRescueSpawnTimes(float levelProgress)
+        public void UpdateSpawnCycle(float levelProgress)
         {
             for (int i = currLevelDifficultyConfig.levelDifficultyThresholds.Length - 1; i >= 0; i--)
             {
                 if (levelProgress >= currLevelDifficultyConfig.levelDifficultyThresholds[i].progressThreshold)
                 {
-                    if (spawnCycle != currLevelDifficultyConfig.levelDifficultyThresholds[i]
-                            .continuousRescueSpawnTimes+1)
+                    LevelDifficultyThreshold threshold = currLevelDifficultyConfig.levelDifficultyThresholds[i];
+                    
+                    if (currContinuousRescueSpawnTimes != threshold.continuousRescueSpawnTimes 
+                        || currContinuousRandomSpawnTimes != threshold.continuousRandomSpawnTimes)
                     {
-                        // 1 more times for random
-                        spawnCycle = currLevelDifficultyConfig.levelDifficultyThresholds[i]
-                            .continuousRescueSpawnTimes+1;
+                        spawnCycle = threshold.continuousRescueSpawnTimes + threshold.continuousRandomSpawnTimes;
+                        currContinuousRescueSpawnTimes = threshold.continuousRescueSpawnTimes;
+                        currContinuousRandomSpawnTimes = threshold.continuousRandomSpawnTimes;
                         
                         // Reset counter to last rescue spawn to start with random spawn in next spawn turn
                         spawnCycleCounter = spawnCycle - 1;
                         
-                        // Debug.Log($"spawnCycle: {spawnCycle} - spawnCycleCounter: {spawnCycleCounter} at {levelProgress}");
-                        break;
+                        Debug.Log($"spawnCycle: {spawnCycle} - spawnCycleCounter: {spawnCycleCounter} at {levelProgress}");
                     }
+                    
+                    break;
                 }
             }
         }
