@@ -1576,6 +1576,8 @@ MonoBehaviour:
     levelDifficultyThresholds: []
   spawnCycle: 0
   spawnCycleCounter: 0
+  currContinuousRescueSpawnTimes: 0
+  currContinuousRandomSpawnTimes: 0
   maxColorPerStack: 0
   colorDifficultySpawner: {fileID: 1754079269}
 --- !u!114 &1754079269

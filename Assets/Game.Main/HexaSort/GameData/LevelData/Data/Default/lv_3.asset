@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: lv_3
   m_EditorClassIdentifier: 
   Width: 5
-  Height: 5
+  Height: 6
   cells:
   - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
     IsActive: 0
     HasWood: 0
     packedStack:
@@ -40,129 +52,139 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
     IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 1
-    IsActive: 1
-    HasWood: 1
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 1
-    IsActive: 1
-    HasWood: 1
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 30
-      ColorLayers:
-      - colorType: 0
-        amount: 3
-      - colorType: 2
-        amount: 3
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 40
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 30
-      ColorLayers:
-      - colorType: 0
-        amount: 3
-      - colorType: 2
-        amount: 8
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -175,7 +197,5 @@ MonoBehaviour:
       ColorLayers: []
   Goal:
   - type: 0
-    targetAmount: 250
-  - type: 1
-    targetAmount: 2
-  AvailableColors: 0001020304
+    targetAmount: 300
+  AvailableColors: 07030402010009

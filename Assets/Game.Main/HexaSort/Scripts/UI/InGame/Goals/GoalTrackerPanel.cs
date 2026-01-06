@@ -25,6 +25,7 @@ namespace HexaSort.UI.Gameplay.Goals
 
         public virtual void SetUp(LevelGoalData goalData)
         {
+            gameObject.SetActive(true);
             m_GoalData = goalData;
         }
 

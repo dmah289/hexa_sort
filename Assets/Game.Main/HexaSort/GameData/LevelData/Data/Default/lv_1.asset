@@ -16,7 +16,7 @@ MonoBehaviour:
   Height: 5
   cells:
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
     IsActive: 1
     HasWood: 0
     packedStack:
-      UnlockValue: 50
+      UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
     IsActive: 1
@@ -167,5 +167,5 @@ MonoBehaviour:
       ColorLayers: []
   Goal:
   - type: 0
-    targetAmount: 100
-  AvailableColors: 0002030405
+    targetAmount: 250
+  AvailableColors: 00070504030802

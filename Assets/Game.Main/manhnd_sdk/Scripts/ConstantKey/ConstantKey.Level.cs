@@ -32,8 +32,8 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
         
         public static Dictionary<eBoosterType, int> BoosterUnlockLevel = new()
         {
-            { eBoosterType.Respawn, 1 },
-            { eBoosterType.DestroyStack, 3 }
+            { eBoosterType.Respawn, 3 },
+            { eBoosterType.DestroyStack, 6 }
         };
         
         public static Dictionary<eMechanicsType, int> MechanicsUnlockLevel = new()
