@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bc337a58b29403ba82d3f8b68d11fda, type: 3}
-  m_Name: lv_10
+  m_Name: lv_16
   m_EditorClassIdentifier: 
   Width: 5
   Height: 5
@@ -75,12 +75,6 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 50
-      ColorLayers: []
   - MechanicsType: 0
     IsActive: 1
     HasWood: 0
@@ -88,7 +82,7 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -129,20 +123,8 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
+  - MechanicsType: 0
     IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 100
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 0
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -154,13 +136,31 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -168,4 +168,4 @@ MonoBehaviour:
   Goal:
   - type: 0
     targetAmount: 350
-  AvailableColors: 0300070901050806
+  AvailableColors: 05010704030600080209

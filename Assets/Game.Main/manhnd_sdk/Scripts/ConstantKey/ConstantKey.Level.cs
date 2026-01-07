@@ -9,7 +9,7 @@ namespace manhnd_sdk.Scripts.ConstantKeyNamespace
 {
     public static partial class ConstantKey
     {
-        public const int MAX_LEVEL = 11;
+        public const int MAX_LEVEL = 20;
         public const int MAX_LIFE = 5;
         public const int MaxMercySpawnTurnPerLevel = 3;
 

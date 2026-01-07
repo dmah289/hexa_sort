@@ -37,7 +37,7 @@ namespace HexaSort.Core.Entities.Grid
                 {
                     for(int j = 0; j < GridSize.width; j++)
                     {
-                        if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null)
+                        if (GridCells[i, j] != null && GridCells[i, j].CurrentStack != null && GridCells[i, j].IsMergable)
                         {
                             if (GridCells[i, j].HasAtLeastOneUnoccupiedNeighbor(this))
                             {
