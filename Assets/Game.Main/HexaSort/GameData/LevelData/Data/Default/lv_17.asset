@@ -16,7 +16,31 @@ MonoBehaviour:
   Height: 5
   cells:
   - MechanicsType: 0
+    IsActive: 0
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
     IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -64,7 +88,7 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -112,7 +136,13 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -124,43 +154,13 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
+    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0

@@ -849,6 +849,10 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1160128950}
+    - target: {fileID: 8441329132072808932, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8918861650099001756, guid: a0041d10febb60742b3ee306f7e611be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

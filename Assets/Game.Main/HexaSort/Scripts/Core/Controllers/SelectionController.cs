@@ -207,6 +207,9 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
 
         private async UniTask OnDestroyStackBoosterUsed(HexCell cell)
         {
+            if (!cell.IsMergable)
+                return;
+            
             await SpawnMagicWand(cell);
             
             await UniTask.Delay(1000);

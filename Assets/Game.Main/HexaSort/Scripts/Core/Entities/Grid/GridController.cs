@@ -131,6 +131,23 @@ namespace HexaSort.Core.Entities.Grid
             }
         }
         
+        public bool HasNoMergableStacks
+        {
+            get
+            {
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (GridCells[i, j] && GridCells[i, j].IsMergable)
+                            return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+        
         #region Unity APIs
 
         private void Awake()
@@ -165,7 +182,7 @@ namespace HexaSort.Core.Entities.Grid
             }
 
             var topHighestCells = occupiedCells
-                .Where(c => c != null) 
+                .Where(c => c != null && c.IsMergable) 
                 .OrderByDescending(cell => cell.PiecesCount)
                 .Take(ConstantKey.MaxDestroyableStackOnLoose)
                 .ToList();

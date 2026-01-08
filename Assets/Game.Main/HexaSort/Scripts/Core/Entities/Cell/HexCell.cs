@@ -90,6 +90,7 @@ namespace HexaSort.Core.Entities.Grid
 
         public void OnReturnToPool()
         {
+            DisableAllMechanics();
             if (currStack)
             {
                 ObjectPooler.ReturnToPool(PoolingType.HexStack, currStack, destroyCancellationToken);
@@ -155,8 +156,9 @@ namespace HexaSort.Core.Entities.Grid
             for (int i = 0; i < totalPieces; i++)
             {
                 CurrentStack.CollectLastPiece();
-                
-                if(i == PiecesCount-2 && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
+
+                int idxToPlayAnim = Mathf.Max(totalPieces - 2, 0);
+                if(i == idxToPlayAnim && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
                     await VFXManager.Instance.PlayVFXToGoalPanel(this,
                         eLevelGoalType.Piece,
                         totalPieces,
@@ -193,7 +195,7 @@ namespace HexaSort.Core.Entities.Grid
 
         #endregion
 
-        public void SetIdx(int i, int j)
+        public void SetIdxTxt(int i, int j)
         {
             idxTxt.text = $"[{i},{j}]";
         }

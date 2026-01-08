@@ -36,7 +36,7 @@ namespace Game.Main.HexaSort.Scripts.Cheater
         
         public void OnCheatDestroyStackBoosterEntered(string value)
         {
-            LocalDataManager.BoosterRespawnAmount = int.Parse(value);
+            LocalDataManager.BoosterDestroyStackAmount = int.Parse(value);
         }
         
         public void OnCheatLoseLevelBtnClicked()

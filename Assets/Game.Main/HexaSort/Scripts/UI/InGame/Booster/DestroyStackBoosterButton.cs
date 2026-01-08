@@ -29,7 +29,7 @@ namespace HexaSort.UI.Loading.InGame
                 return;
             }
             
-            if (grid.IsEmptyGrid)
+            if (grid.HasNoMergableStacks)
             {
                 ToastManager.Instance.Show("No stacks to destroy!");
                 return;

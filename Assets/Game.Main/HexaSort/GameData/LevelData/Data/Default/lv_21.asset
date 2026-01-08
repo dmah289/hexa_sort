@@ -10,37 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bc337a58b29403ba82d3f8b68d11fda, type: 3}
-  m_Name: lv_14
+  m_Name: lv_21
   m_EditorClassIdentifier: 
   Width: 5
-  Height: 6
+  Height: 5
   cells:
   - MechanicsType: 0
-    IsActive: 0
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
     IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 0
-      ColorLayers: []
-  - MechanicsType: 0
-    IsActive: 0
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -87,22 +63,6 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 100
-      ColorLayers:
-      - colorType: 5
-        amount: 3
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 75
-      ColorLayers:
-      - colorType: 1
-        amount: 3
   - MechanicsType: 0
     IsActive: 1
     HasWood: 0
@@ -115,14 +75,6 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 150
-      ColorLayers:
-      - colorType: 3
-        amount: 3
   - MechanicsType: 0
     IsActive: 1
     HasWood: 0
@@ -135,56 +87,14 @@ MonoBehaviour:
     packedStack:
       UnlockValue: 0
       ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 50
-      ColorLayers:
-      - colorType: 8
-        amount: 3
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 250
-      ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 225
-      ColorLayers: []
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 200
-      ColorLayers:
-      - colorType: 7
-        amount: 4
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 225
-      ColorLayers:
-      - colorType: 3
-        amount: 5
-  - MechanicsType: 2
-    IsActive: 1
-    HasWood: 0
-    packedStack:
-      UnlockValue: 150
-      ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -196,13 +106,61 @@ MonoBehaviour:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
       ColorLayers: []
   - MechanicsType: 0
-    IsActive: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
+    HasWood: 0
+    packedStack:
+      UnlockValue: 0
+      ColorLayers: []
+  - MechanicsType: 0
+    IsActive: 1
     HasWood: 0
     packedStack:
       UnlockValue: 0
@@ -210,4 +168,4 @@ MonoBehaviour:
   Goal:
   - type: 0
     targetAmount: 350
-  AvailableColors: 00080501070403060209
+  AvailableColors: 05010704030600080209
