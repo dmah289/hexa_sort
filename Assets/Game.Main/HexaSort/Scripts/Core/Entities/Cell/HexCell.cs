@@ -157,8 +157,7 @@ namespace HexaSort.Core.Entities.Grid
             {
                 CurrentStack.CollectLastPiece();
 
-                int idxToPlayAnim = Mathf.Max(totalPieces - 2, 0);
-                if(i == idxToPlayAnim && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
+                if(i == totalPieces && !CanvasManager.Instance.pieceTrackerPanel.IsCompleted)
                     await VFXManager.Instance.PlayVFXToGoalPanel(this,
                         eLevelGoalType.Piece,
                         totalPieces,

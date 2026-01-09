@@ -51,9 +51,12 @@ namespace HexaSort.Core.Entities
             get => pieces[0].Selectable && pieces[^1].Selectable && pieces[pieces.Count/2];
             set
             {
-                pieces[0].Selectable = value;
-                pieces[^1].Selectable = value;
-                pieces[pieces.Count/2].Selectable = value;
+                if(pieces != null && pieces.Count > 0)
+                {
+                    pieces[0].Selectable = value;
+                    pieces[^1].Selectable = value;
+                    pieces[pieces.Count/2].Selectable = value;
+                }
             }
         }
         public int TopColorAmount

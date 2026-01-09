@@ -93,6 +93,7 @@ namespace HexaSort.UI.Loading.InGame
             await UniTask.WhenAll(shootTasks);
             
             LevelManager.Instance.SetLevelState(eLevelState.Playing);
+            InGamePage.Instance.ShowBoosterButtons();
             
             await UniTask.Delay(500);
             
