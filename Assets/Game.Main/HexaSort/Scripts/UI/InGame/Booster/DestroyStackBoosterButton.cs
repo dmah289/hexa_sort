@@ -1,5 +1,6 @@
 ﻿using Game.Main.HexaSort.Scripts.Managers;
 using Game.Main.HexaSort.Scripts.UI.Popup;
+using HexaSort.Controllers.DifficultyAlgorithm;
 using HexaSort.Core.Entities.Grid;
 using HexaSort.Managers.Level;
 using manhnd_sdk.Scripts.ConstantKeyNamespace;
@@ -23,6 +24,11 @@ namespace HexaSort.UI.Loading.InGame
 
         public override void OnBoosterButtonClicked()
         {
+            if (MergeController.Instance.IsCheckingMergeSequence)
+            {
+                return;
+            }
+            
             if (Amount <= 0)
             {
                 ToastManager.Instance.Show("Not enough Destroy Stack booster!");

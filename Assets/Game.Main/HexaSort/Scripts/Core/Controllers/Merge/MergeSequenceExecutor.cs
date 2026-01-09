@@ -19,8 +19,8 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
 {
     public class MergeSequenceExecutor : MonoBehaviour
     {
-        private const int MergeDelayBeforeNewExecution = 300;
-        private const int MergeDelayBetween2PairMerge = 500;
+        private const int MergeDelayBeforeNewExecution = 150;
+        private const int MergeDelayBetween2PairMerge = 250;
         private const int CheckCollectingDelay = 300;
         
         [Header("Merge Tracking")]
@@ -31,7 +31,6 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
         [SerializeField] private bool isCheckingCollecting;
         [SerializeField] private bool newStackLaidDown;
         
-        // TODO : dynammic threshold base on level progress
         [SerializeField] private int dynamicThresholdForCollectingPieces = 10;
         
         [Header("----- References -----")]
@@ -61,7 +60,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
                 {
                     newStackLaidDown = false;
                     waitingMergableCells.Add(connectedCells[i]);
-                    await UniTask.Delay(MergeDelayBeforeNewExecution);
+                    // await UniTask.Delay(MergeDelayBeforeNewExecution);
                     return;
                 }
                 
@@ -81,7 +80,7 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
             {
                 newStackLaidDown = false;
                 waitingMergableCells.Add(connectedCells[0]);
-                await UniTask.Delay(MergeDelayBeforeNewExecution);
+                // await UniTask.Delay(MergeDelayBeforeNewExecution);
                 return;
             }
             

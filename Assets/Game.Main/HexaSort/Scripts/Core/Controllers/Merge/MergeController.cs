@@ -88,6 +88,18 @@ namespace HexaSort.Controllers.DifficultyAlgorithm
                 }
             }
 
+            mergeSequenceExecutor.WaitingMergableCells.AddRange(grid.MergeableCells);
+            
+            while (mergeSequenceExecutor.WaitingMergableCells.Count > 0)
+            {
+                HexCell cell = mergeSequenceExecutor.WaitingMergableCells.RemoveFirst();
+                if (cell.IsOccupied)
+                {
+                    await HandleMergeSequence(cell);
+                    await UniTask.Yield();
+                }
+            }
+
             if (grid.IsOutOfSpace)
                 LevelManager.Instance.CurrentLevelState = eLevelState.OutOfSpace;
 

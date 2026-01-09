@@ -70,6 +70,25 @@ namespace HexaSort.Core.Entities.Grid
             }
         }
         
+        public List<HexCell> MergeableCells
+        {
+            get
+            {
+                List<HexCell> emptyCells = new List<HexCell>();
+                
+                for(int i = 0; i < GridSize.height; i++)
+                {
+                    for(int j = 0; j < GridSize.width; j++)
+                    {
+                        if (GridCells[i, j] != null && GridCells[i, j].IsMergable)
+                            emptyCells.Add(GridCells[i, j]);
+                    }
+                }
+
+                return emptyCells;
+            }
+        }
+        
         public List<HexCell> GetNeighbors(HexCell cell)
         {
             List<HexCell> neighbors = new List<HexCell>();
